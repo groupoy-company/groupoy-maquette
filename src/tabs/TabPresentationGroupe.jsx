@@ -70,7 +70,7 @@ export default function TabPresentationGroupe(__props) {
           <div style={{background:$bgSub, marginTop:-10}}>
 
             {/* SECTION 1: HERO */}
-            <div style={{minHeight:'65vh', background:'linear-gradient(180deg, #ffffff 0%, #faf8f5 100%)', display:'flex', alignItems:'center', justifyContent:'center', position:'relative', overflow:'hidden'}}>
+            <div style={{minHeight:'65vh', background:`linear-gradient(180deg, ${$bgCard} 0%, ${$bgSub} 100%)`, display:'flex', alignItems:'center', justifyContent:'center', position:'relative', overflow:'hidden'}}>
               <div style={{position:'absolute', top:'-20%', right:'-10%', width:600, height:600, borderRadius:'50%', background:'radial-gradient(circle, rgba(201,184,150,0.08) 0%, transparent 70%)'}}></div>
               <div style={{position:'absolute', bottom:'-15%', left:'-8%', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle, rgba(139,111,71,0.06) 0%, transparent 70%)'}}></div>
               <div style={{position:'relative', zIndex:2, textAlign:'center', padding:'48px 32px', maxWidth:900}}>
