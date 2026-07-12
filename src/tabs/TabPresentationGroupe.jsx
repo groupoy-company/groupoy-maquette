@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function TabPresentationGroupe(__props) {
-  const { $accent, $bgCard, $bgSub, $border, $text, $textMut, $textSec, ca, chantiers, collaborateurs, crmRd, data, dirigeantDragRef, employes, filialeDragRef, filialesDynamiques, filialesEnrichies, getKpiFiliale, homFilCardSize, isLoggedIn, niveau, ordreDirigeants, ordreFilialesPresentation, resultatNet, setDashboardFiliale, setNavEntreprise, setNavService, setOngletActif, setOrdreDirigeants, setOrdreFilialesPresentation, setShowLoginModal } = __props;
+  const { $accent, $bgCard, $bgSub, $border, $text, $textMut, $textSec, ca, chantiers, collaborateurs, crmRd, dirigeantDragRef, employes, filialeDragRef, filialesDynamiques, filialesEnrichies, getKpiFiliale, homFilCardSize, isLoggedIn, niveau, ordreDirigeants, ordreFilialesPresentation, resultatNet, setDashboardFiliale, setNavEntreprise, setNavService, setOngletActif, setOrdreDirigeants, setOrdreFilialesPresentation, setShowLoginModal } = __props;
           const filialesOp = filialesEnrichies.filter(f => !['GROUP OY','INVEST LOC','INVEST EXE','YILMAZ'].includes(f.nom));
           const allKpis = filialesOp.map(f => ({...f, kpi: getKpiFiliale(f)}));
           const totCA = allKpis.reduce((s,f) => s+f.kpi.ca, 0);

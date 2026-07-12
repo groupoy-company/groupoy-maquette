@@ -3,7 +3,7 @@ import { DollarSign, Search, Target, TrendingUp, Users } from 'lucide-react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 export default function TabSuivi(__props) {
-  const { $accent, $bgCard, $bgSub, $border, $info, $shadowLg, $success, $text, $textMut, $textSec, $warn, baseVariable, ca, calculerObjectifsLies, calculsCollab, coeffResult, coefficient, collabActuel, collabSelectionne, collaborateurs, crmRd, data, donneesFiltrees, ebeValeur, filialesDynamiques, filtreAnnee, formatEuro, formatPercent, grille, margeBrute, niveau, remunerationTotale, setCollabOngletId, setCollabSelectionne, setCollaborateurs, setFiltreAnnee, setOngletActif, setSuiviFilialeFilter, setSuiviFiltreOpen, setSuiviSearch, suiviFilialeFilter, suiviFiltreOpen, suiviSearch, updateCollaborateur, updateObjectifs, variableAjustee } = __props;
+  const { $accent, $bgCard, $bgSub, $border, $info, $shadowLg, $success, $text, $textMut, $textSec, $warn, baseVariable, ca, calculerObjectifsLies, calculsCollab, coeffResult, coefficient, collabActuel, collabSelectionne, collaborateurs, crmRd, donneesFiltrees, ebeValeur, filialesDynamiques, filtreAnnee, formatEuro, formatPercent, grille, margeBrute, niveau, remunerationTotale, setCollabOngletId, setCollabSelectionne, setCollaborateurs, setFiltreAnnee, setOngletActif, setSuiviFilialeFilter, setSuiviFiltreOpen, setSuiviSearch, suiviFilialeFilter, suiviFiltreOpen, suiviSearch, updateCollaborateur, updateObjectifs, variableAjustee } = __props;
   return (
           <>
             <div style={{background:$bgCard, borderRadius:crmRd, padding:20, border:`1px solid ${$border}`, marginBottom:20}}>

@@ -2,7 +2,7 @@
 import React, {  } from 'react';
 
 export default function TabBudget(__props) {
-  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $danger, $shadowLg, $text, $textMut, $textSec, BUDGET_CATS, BUDGET_FILIALES, api, axios, budgetAnnee, budgetApiConfig, budgetCopyPct, budgetData, budgetEditCell, budgetFiliale, budgetImportModal, budgetImportText, budgetRowEdit, budgetTab, crmRd, csvExportText, data, defaultApiConfig, defaultBudgetData, getBudgetForFiliale, mapping, moisCourts, saveBudget, saveBudgetApi, setBudgetAnnee, setBudgetCopyPct, setBudgetEditCell, setBudgetFiliale, setBudgetImportModal, setBudgetImportText, setBudgetRowEdit, setBudgetTab, setCsvExportText } = __props;
+  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $danger, $shadowLg, $text, $textMut, $textSec, BUDGET_CATS, BUDGET_FILIALES, budgetAnnee, budgetApiConfig, budgetCopyPct, budgetData, budgetEditCell, budgetFiliale, budgetImportModal, budgetImportText, budgetRowEdit, budgetTab, crmRd, csvExportText, defaultApiConfig, defaultBudgetData, getBudgetForFiliale, moisCourts, saveBudget, saveBudgetApi, setBudgetAnnee, setBudgetCopyPct, setBudgetEditCell, setBudgetFiliale, setBudgetImportModal, setBudgetImportText, setBudgetRowEdit, setBudgetTab, setCsvExportText } = __props;
         const bd = getBudgetForFiliale(budgetFiliale, budgetAnnee);
         const filInfo = BUDGET_FILIALES.find(f => f.id === budgetFiliale) || BUDGET_FILIALES[0];
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(1).replace('.',',')+' M€' : v >= 1000 ? Math.round(v/1000)+' k€' : v.toLocaleString('fr-FR')+' €';

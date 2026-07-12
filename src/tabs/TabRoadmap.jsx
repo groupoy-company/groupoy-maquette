@@ -2,7 +2,7 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 export default function TabRoadmap(__props) {
-  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $success, $text, $textMut, $textSec, addRoadmapItem, addRoadmapListItem, ca, crmRd, data, employes, filiales, filialesEnrichies, getKpiFiliale, removeRoadmapItem, removeRoadmapListItem, resetRoadmap, roadmapData, roadmapEditMode, roadmapEditTab, saveRoadmap, setRoadmapEditMode, setRoadmapEditTab, updateRoadmapField, updateRoadmapListItem } = __props;
+  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $success, $text, $textMut, $textSec, addRoadmapItem, addRoadmapListItem, ca, crmRd, employes, filiales, filialesEnrichies, getKpiFiliale, removeRoadmapItem, removeRoadmapListItem, resetRoadmap, roadmapData, roadmapEditMode, roadmapEditTab, saveRoadmap, setRoadmapEditMode, setRoadmapEditTab, updateRoadmapField, updateRoadmapListItem } = __props;
         const filialesOp = filialesEnrichies.filter(f => !['GROUP OY','INVEST LOC','INVEST EXE','YILMAZ'].includes(f.nom));
         const currentCA = filialesOp.reduce((s, f) => s + (getKpiFiliale(f)?.ca || 0), 0);
         const currentEBE = filialesOp.reduce((s, f) => s + (getKpiFiliale(f)?.ebe || 0), 0);

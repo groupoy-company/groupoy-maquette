@@ -2,7 +2,7 @@
 import { Area, Line } from 'recharts';
 
 export default function TabTresorerie(__props) {
-  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $text, $textMut, $textSec, crmRd, data, setTresoFiliale, setTresoTab, tresoFiliale, tresoTab } = __props;
+  const { $accent, $bgCard, $bgSub, $border, $borderAlt, $text, $textMut, $textSec, crmRd, setTresoFiliale, setTresoTab, tresoFiliale, tresoTab } = __props;
         const fmt = v => { if (v == null || isNaN(v)) return '—'; return v >= 1000000 ? `${(v/1000000).toFixed(2)}M€` : v <= -1000000 ? `${(v/1000000).toFixed(2)}M€` : v >= 1000 ? `${Math.round(v/1000)}k€` : v <= -1000 ? `${Math.round(v/1000)}k€` : `${Math.round(v)}€`; };
         const TRESO_FILIALES = [{id:'all',label:'Consolidé Group OY'},{id:'yilmaz',label:'Yilmaz SAS'},{id:'ezel',label:'Ezel Bâtiment'},{id:'echafaudage',label:"L'Échafaudage"},{id:'roulotte',label:'La Roulotte'}];
         const moisN = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
