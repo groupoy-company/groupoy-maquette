@@ -2855,13 +2855,13 @@ const SimulateurRuches = () => {
     {/* === MODALE DE CONNEXION === */}
     {showLoginModal && (
       <div style={{position:'fixed', inset:0, zIndex:99999, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'Inter, system-ui, sans-serif'}}>
-        <div onClick={() => { setShowLoginModal(false); setLoginError(''); }} style={{position:'absolute', inset:0, background:'rgba(0,0,0,0.6)', backdropFilter:'blur(8px)'}} />
-        <div style={{position:'relative', background:$bgCard, borderRadius:crmRd, padding:40, width:'100%', maxWidth:420, boxShadow:'0 25px 60px rgba(0,0,0,0.4)', animation:'fadeInUp 0.3s ease'}}>
+        <div onClick={() => { setShowLoginModal(false); setLoginError(''); }} style={{position:'absolute', inset:0, background:'radial-gradient(ellipse at 30% 20%, rgba(201,162,39,0.14), transparent 55%), radial-gradient(ellipse at bottom right, rgba(139,111,71,0.10), transparent 60%), rgba(8,7,5,0.82)', backdropFilter:'blur(14px)'}} />
+        <div style={{position:'relative', background:'linear-gradient(160deg, rgba(28,24,18,0.92), rgba(16,14,10,0.96))', backdropFilter:'blur(30px)', WebkitBackdropFilter:'blur(30px)', border:'1px solid rgba(201,162,39,0.35)', borderRadius:18, padding:'44px 40px', width:'100%', maxWidth:420, boxShadow:'0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.08), inset 0 1px 0 rgba(255,255,255,0.06)', animation:'fadeInUp 0.3s ease'}}>
           <button onClick={() => { setShowLoginModal(false); setLoginError(''); }} style={{position:'absolute', top:16, right:16, background:'none', border:'none', fontSize:'1.3rem', cursor:'pointer', color:'#999'}}>✕</button>
           <div style={{textAlign:'center', marginBottom:30}}>
-            <div style={{fontSize:'3rem', marginBottom:8}}>🐝</div>
-            <h1 style={{fontSize:'1.5rem', fontWeight:800, color:$accent, margin:0}}>Espace de Gestion</h1>
-            <p style={{color:'#999', fontSize:'0.95rem', margin:'4px 0 0'}}>Connectez-vous pour accéder à vos outils</p>
+            <div style={{width:64, height:64, margin:'0 auto 14px', borderRadius:'50%', border:'1.5px solid rgba(201,162,39,0.6)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.35rem', fontWeight:600, letterSpacing:'0.08em', color:'#c9a227', background:'radial-gradient(circle at 35% 30%, rgba(201,162,39,0.16), transparent 70%)'}}>OY</div>
+            <h1 style={{fontSize:'1.45rem', fontWeight:600, color:'#f4efe6', margin:0, letterSpacing:'0.02em'}}>Espace de Gestion</h1>
+            <p style={{color:'#c9b892', fontSize:'0.88rem', margin:'6px 0 0', opacity:0.85}}>Le Grand Rucher — accès privé</p>
           </div>
           <div style={{marginBottom:16}}>
             <label style={{display:'block', fontSize:'0.85rem', color:'#666', marginBottom:4, fontWeight:600}}>Identifiant</label>
@@ -2873,7 +2873,7 @@ const SimulateurRuches = () => {
           </div>
           {loginError && <div style={{background:$danger+'12', border:'1px solid #fecaca', color:'#dc2626', padding:'8px 12px', borderRadius:crmRd, fontSize:'0.9rem', marginBottom:16, fontWeight:600}}>{loginError}</div>}
           <button onClick={handleLogin} style={{width:'100%', padding:'14px', background:`linear-gradient(135deg, ${$accent}, ${$accent}cc)`, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:'pointer'}}>Se connecter</button>
-          <div style={{textAlign:'center', marginTop:20, fontSize:'0.8rem', color:'#bbb'}}>Demo : ozdogan / admin2025</div>
+          
         </div>
       </div>
     )}
