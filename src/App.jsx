@@ -3005,7 +3005,7 @@ const SimulateurRuches = () => {
             <div style={{transform:'scale(1)', transformOrigin:'center center'}}><BeeAnimated /></div>
           </div>
           <div className="wave-trigger" style={{flex:1, textAlign:'center', display:'flex', alignItems:'baseline', justifyContent:'center', gap:10}}>
-            <div style={{ fontSize:'2.4rem', fontWeight:800, letterSpacing:'-0.02em', color:crmAcc, cursor:'default', display:'inline-block' }}>{ greetingLine1 || 'Bonjour !'}</div>
+            <div style={{ fontSize:'clamp(1.15rem, 2.6vw, 1.9rem)', fontWeight:600, letterSpacing:'0.01em', color:crmAcc, cursor:'default', display:'inline-block', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', maxWidth:'100%' }}>{ greetingLine1 || 'Bonjour !'}</div>
             {greetingLine2 && <span style={{fontSize:'2.4rem', fontWeight:800, letterSpacing:'-0.02em', color:crmAcc}}>{' '}{greetingLine2}</span>}
           </div>
           <div style={{display:'flex',alignItems:'center',gap:8,flexShrink:0}}>
