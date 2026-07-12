@@ -31,16 +31,17 @@ def pascal(tab):
     return 'Tab' + ''.join(w.capitalize() for w in tab.split('_'))
 
 def find_block(lines, tab):
+    """Girinti-tabanlı: başlangıç satırının girintisiyle aynı hizada kapanış satırını bul."""
     pat = re.compile(r"\{ongletActif === '" + tab + r"'")
     for i, l in enumerate(lines):
         if pat.search(l):
-            depth = 0; started = False
-            for j in range(i, min(i+7000, len(lines))):
-                for ch in lines[j]:
-                    if ch in '({': depth += 1; started = True
-                    elif ch in ')}': depth -= 1
-                if started and depth <= 0:
+            indent = re.match(r'\s*', l).group(0)
+            closers = (indent + '})()}', indent + ')}', indent + '</>)}')
+            for j in range(i+1, min(i+7000, len(lines))):
+                stripped_r = lines[j].rstrip()
+                if stripped_r in closers:
                     return i, j
+            raise SystemExit(f"kapanış bulunamadı: {tab} (satır {i+1})")
     raise SystemExit(f"bloc introuvable: {tab}")
 
 def harvest_scope(src):
@@ -129,8 +130,9 @@ def main():
 
     first = block_lines[0]
     # form tespiti + ekstra koşullar
-    m_iife = re.search(r"\{ongletActif === '" + tab + r"'((?:\s*&&\s*[\w.!()]+?)*?)\s*&&\s*\(\(\)\s*=>\s*\{\s*$", first)
-    m_simple = re.search(r"\{ongletActif === '" + tab + r"'((?:\s*&&\s*[\w.!()]+?)*?)\s*&&\s*\(\s*$", first)
+    m_iife = re.search(r"\{ongletActif === '" + tab + r"'(.*?)\s*&&\s*\(\(\)\s*=>\s*\{\s*$", first)
+    m_simple = re.search(r"\{ongletActif === '" + tab + r"'(.*?)\s*&&\s*\(\s*$", first)
+    m_frag = re.search(r"\{ongletActif === '" + tab + r"'(.*?)\s*&&\s*\(<>\s*$", first)
     conds = ''
     if m_iife:
         form = 'iife'; conds = m_iife.group(1) or ''
@@ -139,6 +141,11 @@ def main():
         if last.strip(): body_lines = body_lines + [last]
         inner = '\n'.join(body_lines)
         tl_locals = top_level_locals(body_lines)
+    elif m_frag:
+        form = 'frag'; conds = m_frag.group(1) or ''
+        last_stripped = re.sub(r'\)\s*\}\s*$', '', block_lines[-1])
+        inner = '\n'.join([l for l in ['        <>'] + block_lines[1:-1] + [last_stripped] if l.strip() != ''])
+        tl_locals = set()
     elif m_simple:
         form = 'simple'; conds = m_simple.group(1) or ''
         last_stripped = re.sub(r'\)\s*\}\s*$', '', block_lines[-1])
