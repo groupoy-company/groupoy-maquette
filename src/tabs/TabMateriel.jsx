@@ -4,7 +4,7 @@
 export default function TabMateriel(__props) {
   const { $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderAlt, $borderLight, $danger, $info, $selBg, $selText, $shadow, $shadowLg, $success, $text, $textMut, $textSec, $warn, FILIALE_FILTER_OPTIONS, chantiers, collaborateurs, crmRd, empNom, employes, filialeFilter, matAttest, matData, matDetail, matEdit, matFilialeFilter, matFilter, matFilterOpen, matTab, matVisibleCols, navEntreprise, setMatAttest, setMatData, setMatDetail, setMatEdit, setMatFilialeFilter, setMatFilter, setMatFilterOpen, setMatTab, setMatVisibleCols, showBorderAccent } = __props;
         const saveMat = d => { setMatData(d); localStorage.setItem('ruches_mat_data', JSON.stringify(d)); };
-        const MAT_CATS = [{id:'engin',label:'Engin / Machine',color:'#ea580c',icon:'◆'},{id:'echafaudage',label:'Échafaudage',color:'#7c3aed',icon:'🪜'},{id:'outillage_lourd',label:'Outillage lourd',color:'#0891b2',icon:'✱'},{id:'outillage_electro',label:'Outillage électroportatif',color:'#2563eb',icon:'⚡'},{id:'outillage_main',label:'Outillage à main',color:'#16a34a',icon:'🛠️'},{id:'mesure',label:'Mesure / Topographie',color:'#6366f1',icon:'◺'},{id:'securite',label:'Sécurité chantier',color:'#dc2626',icon:'🚧'},{id:'epi',label:'EPI',color:'#be123c',icon:'🦺'},{id:'sanitaire',label:'Sanitaire / Barrière',color:'#db2777',icon:'🚻'},{id:'consommable',label:'Consommable',color:$textSec,icon:'▣'}];
+        const MAT_CATS = [{id:'engin',label:'Engin / Machine',color:'#ea580c',icon:'🏗️'},{id:'echafaudage',label:'Échafaudage',color:'#7c3aed',icon:'🪜'},{id:'outillage_lourd',label:'Outillage lourd',color:'#0891b2',icon:'🔧'},{id:'outillage_electro',label:'Outillage électroportatif',color:'#2563eb',icon:'⚡'},{id:'outillage_main',label:'Outillage à main',color:'#16a34a',icon:'🛠️'},{id:'mesure',label:'Mesure / Topographie',color:'#6366f1',icon:'📐'},{id:'securite',label:'Sécurité chantier',color:'#dc2626',icon:'🚧'},{id:'epi',label:'EPI',color:'#be123c',icon:'🦺'},{id:'sanitaire',label:'Sanitaire / Barrière',color:'#db2777',icon:'🚻'},{id:'consommable',label:'Consommable',color:$textSec,icon:'📦'}];
         const MAT_STATUTS = [{id:'disponible',label:'Disponible',color:'#16a34a'},{id:'en_service',label:'En service',color:'#2563eb'},{id:'affecte',label:'Affecté (nominatif)',color:'#7c3aed'},{id:'maintenance',label:'Maintenance',color:'#ea580c'},{id:'panne',label:'En panne',color:'#dc2626'},{id:'reforme',label:'Réformé',color:$textSec}];
         const Tag = ({label,color,s}) => <span style={{display:'inline-flex',alignItems:'center',gap:4,padding:s?'2px 8px':'3px 10px',background:(color||'#64748b')+'15',color:color||'#64748b',fontWeight:600,fontSize:s?'0.72rem':'0.72rem',borderRadius:crmRd>0?20:2}}><span style={{width:5,height:5,borderRadius:'50%',background:color||'#64748b'}}/>{label}</span>;
         const getLbl = (a,id) => (a.find(x=>x.id===id)||{}).label||id||'—';
@@ -79,7 +79,7 @@ export default function TabMateriel(__props) {
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Parc Matériel & Outillage</h2>
-                        {vgpDepasses.length>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#dc262615',color:'#dc2626',fontWeight:700,border:'1px solid #dc262630'}}>▲ {vgpDepasses.length} VGP dépassée{vgpDepasses.length>1?'s':''}</span>}
+                        {vgpDepasses.length>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#dc262615',color:'#dc2626',fontWeight:700,border:'1px solid #dc262630'}}>⚠ {vgpDepasses.length} VGP dépassée{vgpDepasses.length>1?'s':''}</span>}
                         {vgpProches.filter(d=>daysDiff(d.dateVGP)>=0).length>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#f59e0b15',color:'#d97706',fontWeight:700,border:'1px solid #f59e0b30'}}>{vgpProches.filter(d=>daysDiff(d.dateVGP)>=0).length} VGP proches</span>}
                       </div>
                       <p style={{margin:0,fontSize:'0.8rem',color:$textMut}}>{data.length} équipements · Valeur: {fmt(valeurTotale)} · {affectes} affectés nominativement</p>
@@ -107,7 +107,7 @@ export default function TabMateriel(__props) {
               </div>
               <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
                 <button onClick={()=>setMatFilterOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${matFilterOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:matFilterOpen?$accentSub:'transparent',color:matFilterOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                  ✱ Filtres & Colonnes {matFilialeFilter.length>0&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                  ⚙ Filtres & Colonnes {matFilialeFilter.length>0&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
                 </button>
                 {matFilialeFilter.length>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setMatFilialeFilter([])}>✕ {matFilialeFilter.length} filiale{matFilialeFilter.length>1?'s':''}</span>}
               </div>
@@ -119,7 +119,7 @@ export default function TabMateriel(__props) {
               <div style={{marginBottom:14}}>
                 <div style={{fontSize:'0.7rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:8}}>Filtrer par filiale</div>
                 {(()=>{
-                  const FIL_LIST=[{id:1,label:'▸ La Roulotte',color:'#ea580c'},{id:2,label:'🪜 L\'Échafaudage',color:'#7c3aed'},{id:3,label:'◆ Ezel Bâtiment',color:'#2563eb'},{id:6,label:'◦ L\'Étanchéité',color:'#0891b2'}];
+                  const FIL_LIST=[{id:1,label:'🚛 La Roulotte',color:'#ea580c'},{id:2,label:'🪜 L\'Échafaudage',color:'#7c3aed'},{id:3,label:'🏗️ Ezel Bâtiment',color:'#2563eb'},{id:6,label:'💧 L\'Étanchéité',color:'#0891b2'}];
                   const toggle=(id)=>setMatFilialeFilter(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);
                   const isC=(id)=>matFilialeFilter.includes(id);
                   const rawData=matData.length>0?matData:sampleMat;
@@ -167,8 +167,8 @@ export default function TabMateriel(__props) {
                 const alertes=[];
                 vgpDepasses.forEach(d=>alertes.push({type:'danger',icon:'🔴',text:`VGP DÉPASSÉ — ${d.nom} (${d.id}) · ${Math.abs(daysDiff(d.dateVGP))}j de retard`}));
                 data.filter(d=>d.dateVGP&&daysDiff(d.dateVGP)>=0&&daysDiff(d.dateVGP)<90).forEach(d=>alertes.push({type:'warn',icon:'🟠',text:`VGP < 90j — ${d.nom} (${d.id}) · ${daysDiff(d.dateVGP)}j restants`}));
-                data.filter(d=>d.statut==='panne').forEach(d=>alertes.push({type:'danger',icon:'✱',text:`EN PANNE — ${d.nom} (${d.id})`}));
-                if(attestManquantes>0) alertes.push({type:'warn',icon:'☰',text:`${attestManquantes} attestation(s) manquante(s) — matériels affectés sans signature`});
+                data.filter(d=>d.statut==='panne').forEach(d=>alertes.push({type:'danger',icon:'🔧',text:`EN PANNE — ${d.nom} (${d.id})`}));
+                if(attestManquantes>0) alertes.push({type:'warn',icon:'📋',text:`${attestManquantes} attestation(s) manquante(s) — matériels affectés sans signature`});
                 if(alertes.length===0) return null;
                 return <div style={{background:$danger+'08',border:`1px solid ${$danger}25`,borderRadius:crmRd,padding:'16px 20px',marginBottom:20,borderLeft:`4px solid ${$danger}`}}>
                   <div style={{fontWeight:700,fontSize:'0.78rem',color:$danger,marginBottom:8,textTransform:'uppercase',letterSpacing:'0.04em'}}>Alertes critiques</div>
@@ -252,8 +252,8 @@ export default function TabMateriel(__props) {
                       {matVisibleCols.valeur!==false&&<td style={{padding:'12px 14px',textAlign:'right',fontSize:'0.82rem',color:$textSec}}>{m.valeurAchat>0?fmt(m.valeurAchat):'—'}</td>}
                       {matVisibleCols.vgp!==false&&<td style={{padding:'12px 14px'}}>{m.dateVGP?<span style={{color:gd<0?'#dc2626':gd<90?'#ea580c':$textSec,fontSize:'0.82rem'}}>{m.dateVGP}</span>:'—'}</td>}
                       {matVisibleCols.act!==false&&<td style={{padding:'4px 8px',textAlign:'center',whiteSpace:'nowrap'}}>
-                        <button onClick={e=>{e.stopPropagation();setMatEdit({...m});}} style={{padding:'4px 8px',borderRadius:crmRd,border:`1px solid ${$border}`,background:'transparent',cursor:'pointer',fontSize:'0.78rem',color:$accent,marginRight:3}} title="Modifier">✎</button>
-                        {(m.affecteAId||['outillage_electro','outillage_main','mesure','epi'].includes(m.categorie))&&<button onClick={e=>{e.stopPropagation();setMatAttest({materielId:m.id,salarieId:m.affecteAId||'',date:m.attestation?.date||new Date().toISOString().slice(0,10),observations:m.attestation?.observations||'',signe:m.attestation?.signe||false});}} style={{padding:'2px 6px',border:'1px solid '+(m.attestation?.signe?'#16a34a':'#ea580c'),background:m.attestation?.signe?'#f0fdf4':'#fff7ed',fontSize:'0.75rem',cursor:'pointer',color:m.attestation?.signe?'#16a34a':'#ea580c',fontWeight:700}} title="Attestation">☰{m.attestation?.signe?' ✓':''}</button>}
+                        <button onClick={e=>{e.stopPropagation();setMatEdit({...m});}} style={{padding:'4px 8px',borderRadius:crmRd,border:`1px solid ${$border}`,background:'transparent',cursor:'pointer',fontSize:'0.78rem',color:$accent,marginRight:3}} title="Modifier">✏️</button>
+                        {(m.affecteAId||['outillage_electro','outillage_main','mesure','epi'].includes(m.categorie))&&<button onClick={e=>{e.stopPropagation();setMatAttest({materielId:m.id,salarieId:m.affecteAId||'',date:m.attestation?.date||new Date().toISOString().slice(0,10),observations:m.attestation?.observations||'',signe:m.attestation?.signe||false});}} style={{padding:'2px 6px',border:'1px solid '+(m.attestation?.signe?'#16a34a':'#ea580c'),background:m.attestation?.signe?'#f0fdf4':'#fff7ed',fontSize:'0.75rem',cursor:'pointer',color:m.attestation?.signe?'#16a34a':'#ea580c',fontWeight:700}} title="Attestation">📋{m.attestation?.signe?' ✓':''}</button>}
                       </td>}
                     </tr>;})}
                   </tbody>
@@ -412,7 +412,7 @@ export default function TabMateriel(__props) {
                     {l:'Quantité',v:matDetail.quantite||1},
                     {l:'Filiale',v:FIL_MAP[matDetail.filialeId]||'—'},
                     {l:'Affecté à',v:matDetail.affecteAId?empNom(matDetail.affecteAId):(matDetail.affectation||'Non affecté')},
-                    {l:'Attestation',v:matDetail.attestation?.signe?'✓ Signé':'✕ Non signé'},
+                    {l:'Attestation',v:matDetail.attestation?.signe?'✅ Signé':'❌ Non signé'},
                     {l:'Date achat',v:matDetail.dateAchat||'—'},
                     {l:'Valeur',v:matDetail.valeurAchat>0?fmt(matDetail.valeurAchat):'—'},
                     {l:'Prochain VGP',v:matDetail.dateVGP||'—'},
@@ -421,7 +421,7 @@ export default function TabMateriel(__props) {
                 {matDetail.notes&&<div style={{padding:'12px 20px',fontSize:'0.92rem',color:$textSec,background:$bgSub,borderLeft:showBorderAccent?'3px solid #0891b2':'none',margin:'16px 20px'}}>{matDetail.notes}</div>}
                 {/* Quick attestation button */}
                 {(matDetail.affecteAId||['outillage_electro','outillage_main','mesure','epi'].includes(matDetail.categorie))&&<div style={{padding:'12px 20px'}}>
-                  <button onClick={()=>{setMatAttest({materielId:matDetail.id,salarieId:matDetail.affecteAId||'',date:matDetail.attestation?.date||new Date().toISOString().slice(0,10),observations:matDetail.attestation?.observations||'',signe:matDetail.attestation?.signe||false});setMatDetail(null);}} style={{padding:'8px 16px',border:'2px solid #16a34a',background:'#16a34a',color:'white',fontWeight:700,fontSize:'0.92rem',cursor:'pointer',width:'100%'}}>☰ {matDetail.attestation?.signe?'VOIR ATTESTATION':'CRÉER ATTESTATION'}</button>
+                  <button onClick={()=>{setMatAttest({materielId:matDetail.id,salarieId:matDetail.affecteAId||'',date:matDetail.attestation?.date||new Date().toISOString().slice(0,10),observations:matDetail.attestation?.observations||'',signe:matDetail.attestation?.signe||false});setMatDetail(null);}} style={{padding:'8px 16px',border:'2px solid #16a34a',background:'#16a34a',color:'white',fontWeight:700,fontSize:'0.92rem',cursor:'pointer',width:'100%'}}>📋 {matDetail.attestation?.signe?'VOIR ATTESTATION':'CRÉER ATTESTATION'}</button>
                 </div>}
               </div>
             </div>}

@@ -41,13 +41,13 @@ export default function TabFactExterne(__props) {
             {/* Header */}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20, flexWrap:'wrap', gap:12}}>
               <div>
-                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>↧ Facturation Externe & CRM Prestataires</h1>
+                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>📥 Facturation Externe & CRM Prestataires</h1>
                 <div style={{fontSize:'0.88rem', color:$textMut, marginTop:2}}>Gestion des prestataires, freelances et factures reçues</div>
               </div>
               <div style={{display:'flex', gap:6}}>
                 {['dashboard','factures','prestataires'].map(t => (
                   <button key={t} onClick={() => setFactExtTab(t)} style={{padding:'6px 14px', borderRadius:crmRd, border: factExtTab===t ? '2px solid #dc2626' : `1px solid ${$border}`, background: factExtTab===t ? '#fef2f2' : 'white', color: factExtTab===t ? '#dc2626' : '#6b5d4d', fontWeight:700, fontSize:'0.88rem', cursor:'pointer'}}>
-                    {t==='dashboard'?'▦ Dashboard':t==='factures'?'🧾 Factures':'◉ CRM Prestataires'}
+                    {t==='dashboard'?'📊 Dashboard':t==='factures'?'🧾 Factures':'👥 CRM Prestataires'}
                   </button>
                 ))}
               </div>
@@ -60,10 +60,10 @@ export default function TabFactExterne(__props) {
               {/* Row 1 — Elegant KPI Cards */}
               <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:14, marginBottom:18}}>
                 {[
-                  {label:'Coût mensuel', value:fmt(coutMensuelRecurrent), sub:prestataires.filter(p=>p.statut==='actif').length+' prestataires actifs', icon:'↻', accent:'#8B6F47'},
+                  {label:'Coût mensuel', value:fmt(coutMensuelRecurrent), sub:prestataires.filter(p=>p.statut==='actif').length+' prestataires actifs', icon:'🔄', accent:'#8B6F47'},
                   {label:'En cours', value:String(nbEnCours), sub:fmt(totalAValider)+' à valider', icon:'⏳', accent:'#c5943a'},
-                  {label:'Bon à payer', value:fmt(totalBonAPayer), sub:'Prêt pour paiement', icon:'✓', accent:'#6b8a5e'},
-                  {label:'Total payé', value:fmt(totalPaye), sub:fmt(totalHT)+' HT cumulé', icon:'€', accent:'#5a7d8a'},
+                  {label:'Bon à payer', value:fmt(totalBonAPayer), sub:'Prêt pour paiement', icon:'✅', accent:'#6b8a5e'},
+                  {label:'Total payé', value:fmt(totalPaye), sub:fmt(totalHT)+' HT cumulé', icon:'💰', accent:'#5a7d8a'},
                 ].map((k,i) => (
                   <div key={i} style={{background:$bgCard, borderRadius:crmRd, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', border:`1px solid ${$border}`, overflow:'hidden'}}>
                     <div style={{padding:'18px 20px'}}>
@@ -85,7 +85,7 @@ export default function TabFactExterne(__props) {
               <div style={{display:'grid', gridTemplateColumns:'3fr 2fr', gap:14, marginBottom:18}}>
                 {/* Pipeline visual */}
                 <div style={{background:$bgCard, borderRadius:crmRd, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', overflow:'hidden'}}>
-                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>↻ Pipeline de validation</div>
+                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>🔄 Pipeline de validation</div>
                   <div style={{padding:'18px 16px'}}>
                     <div style={{display:'flex', alignItems:'center', gap:0}}>
                       {['reception','validation_manager','validation_daf','bon_a_payer','payee'].map((st, i) => {
@@ -111,8 +111,8 @@ export default function TabFactExterne(__props) {
                     {/* Rejetées / Litige mini badges */}
                     {(factures.filter(f=>f.statut==='rejetee').length > 0 || factures.filter(f=>f.statut==='litige').length > 0) && (
                       <div style={{display:'flex', gap:8, marginTop:12, justifyContent:'center'}}>
-                        {factures.filter(f=>f.statut==='rejetee').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fecaca', color:'#991b1b', fontWeight:700}}>✕ {factures.filter(f=>f.statut==='rejetee').length} rejetée(s)</span>}
-                        {factures.filter(f=>f.statut==='litige').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fef3c7', color:'#dc2626', fontWeight:700}}>▲ {factures.filter(f=>f.statut==='litige').length} litige(s)</span>}
+                        {factures.filter(f=>f.statut==='rejetee').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fecaca', color:'#991b1b', fontWeight:700}}>❌ {factures.filter(f=>f.statut==='rejetee').length} rejetée(s)</span>}
+                        {factures.filter(f=>f.statut==='litige').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fef3c7', color:'#dc2626', fontWeight:700}}>⚠️ {factures.filter(f=>f.statut==='litige').length} litige(s)</span>}
                       </div>
                     )}
                   </div>
@@ -120,7 +120,7 @@ export default function TabFactExterne(__props) {
 
                 {/* Répartition par catégorie */}
                 <div style={{background:$bgCard, borderRadius:crmRd, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', overflow:'hidden'}}>
-                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>▦ Dépenses par catégorie</div>
+                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>📊 Dépenses par catégorie</div>
                   <div style={{padding:'14px 16px'}}>
                     {(() => {
                       const catTotals = {};
@@ -175,9 +175,9 @@ export default function TabFactExterne(__props) {
                       });
                       // Contrats à préparer
                       prestataires.filter(pr => pr.statut==='actif' && (!pr.contrat || pr.contrat.statut === 'a_preparer')).forEach(pr => {
-                        alerts.push({icon:'✎', text:`Contrat à préparer — ${pr.nom}`, type:'info'});
+                        alerts.push({icon:'📝', text:`Contrat à préparer — ${pr.nom}`, type:'info'});
                       });
-                      if (alerts.length === 0) return <div style={{padding:16, textAlign:'center', color:'#059669', fontWeight:600}}>✓ Aucune alerte — Tout est en ordre !</div>;
+                      if (alerts.length === 0) return <div style={{padding:16, textAlign:'center', color:'#059669', fontWeight:600}}>✅ Aucune alerte — Tout est en ordre !</div>;
                       return alerts.map((a,i) => (
                         <div key={i} style={{padding:'8px 10px', borderRadius:crmRd, background: a.type==='danger'?'#fef2f2':a.type==='warn'?'#fffbeb':'#f8fafc', marginBottom:4, fontSize:'0.84rem', display:'flex', alignItems:'center', gap:6}}>
                           <span>{a.icon}</span>
@@ -190,7 +190,7 @@ export default function TabFactExterne(__props) {
 
                 {/* Quick stats — Donut-like visual */}
                 <div style={{background:$bgCard, borderRadius:crmRd, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', overflow:'hidden'}}>
-                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>◉ Prestataires par statut</div>
+                  <div style={{padding:'14px 20px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.95rem'}}>👥 Prestataires par statut</div>
                   <div style={{padding:'16px', display:'flex', alignItems:'center', gap:20}}>
                     {/* Mini donut-like */}
                     <div style={{position:'relative', width:120, height:120, flexShrink:0}}>
@@ -317,13 +317,13 @@ export default function TabFactExterne(__props) {
                 return (
                   <div style={{...cardS, marginBottom:18, padding:20}}>
                     <div style={{display:'flex', justifyContent:'space-between', marginBottom:14}}>
-                      <span style={{fontWeight:700, color:'#dc2626'}}>{isEdit ? '✎ Modifier' : '➕ Nouvelle facture reçue'}</span>
+                      <span style={{fontWeight:700, color:'#dc2626'}}>{isEdit ? '✏️ Modifier' : '➕ Nouvelle facture reçue'}</span>
                       <button onClick={() => setFactExtForm(null)} style={{background:'none', border:'none', cursor:'pointer', color:$textMut}}>✕</button>
                     </div>
                     <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:10, marginBottom:10}}>
                       <div><label style={lbS}>N° facture fournisseur *</label><input value={fd.ref} onChange={e => setFd(p=>({...p, ref:e.target.value}))} style={inS} placeholder="FC-2026-XXX"/></div>
                       <div><label style={lbS}>Prestataire *</label><select value={fd.prestaId} onChange={e => setFd(p=>({...p, prestaId:e.target.value}))} style={inS}><option value="">— Choisir —</option>{prestataires.filter(p=>p.statut==='actif'||p.statut==='en_veille').map(p => <option key={p.id} value={p.id}>{p.nom} ({(CATS_PRESTA[p.categorie]||{}).label})</option>)}</select></div>
-                      <div><label style={lbS}>Filiale destinataire</label><select value={fd.filialeId} onChange={e => setFd(p=>({...p, filialeId:e.target.value}))} style={inS}><option value="yilmaz">▪ YILMAZ</option>{filialesEnrichies.filter(f=>f.ca>0).map(f => <option key={f.id} value={f.id}>{f.icon} {f.nom}</option>)}</select></div>
+                      <div><label style={lbS}>Filiale destinataire</label><select value={fd.filialeId} onChange={e => setFd(p=>({...p, filialeId:e.target.value}))} style={inS}><option value="yilmaz">🏢 YILMAZ</option>{filialesEnrichies.filter(f=>f.ca>0).map(f => <option key={f.id} value={f.id}>{f.icon} {f.nom}</option>)}</select></div>
                       <div><label style={lbS}>Période</label><input type="month" value={fd.periode} onChange={e => setFd(p=>({...p, periode:e.target.value}))} style={inS}/></div>
                     </div>
                     <div style={{display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:10, marginBottom:10}}>
@@ -393,17 +393,17 @@ export default function TabFactExterne(__props) {
                             <td style={{width:factColW[1], padding:'10px 12px', borderRight:'1px solid #eee8e0'}}><div style={{fontWeight:600, fontSize:'0.92rem'}}>{pr2?.nom || fa.prestaNom || '?'}</div><div style={{fontSize:'0.72rem', color:cat.color}}>{cat.icon} {cat.label}</div></td>
                             <td style={{width:factColW[2], padding:'10px 12px', fontSize:'0.86rem', color:$textSec, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', borderRight:'1px solid #eee8e0'}}>{fa.objet}</td>
                             <td style={{width:factColW[3], padding:'10px 12px', fontSize:'0.86rem', color:$textSec, whiteSpace:'nowrap', borderRight:'1px solid #eee8e0'}}>{fa.dateReception}</td>
-                            <td style={{width:factColW[4], padding:'10px 12px', fontSize:'0.86rem', color: isOverdue?'#dc2626':'#6b5d4d', fontWeight: isOverdue?700:400, whiteSpace:'nowrap', borderRight:'1px solid #eee8e0'}}>{fa.dateEcheance||'—'} {isOverdue&&'▲'}</td>
+                            <td style={{width:factColW[4], padding:'10px 12px', fontSize:'0.86rem', color: isOverdue?'#dc2626':'#6b5d4d', fontWeight: isOverdue?700:400, whiteSpace:'nowrap', borderRight:'1px solid #eee8e0'}}>{fa.dateEcheance||'—'} {isOverdue&&'⚠️'}</td>
                             <td style={{width:factColW[5], padding:'10px 12px', textAlign:'right', fontWeight:600, borderRight:'1px solid #eee8e0'}}>{fa.montantHT.toLocaleString('fr-FR')} €</td>
                             <td style={{width:factColW[6], padding:'10px 12px', textAlign:'right', fontWeight:700, borderRight:'1px solid #eee8e0'}}>{fa.montantTTC.toLocaleString('fr-FR')} €</td>
                             <td style={{width:factColW[7], padding:'10px 12px', borderRight:'1px solid #eee8e0'}}>
                               <select value={fa.statut} onChange={e => updateFactExtStatut(fa.id, e.target.value)} style={{fontSize:'0.78rem', padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:st.bg, color:st.color, fontWeight:600, cursor:'pointer'}}>
                                 {Object.entries(STATUTS_FACTEXT).map(([k,v]) => <option key={k} value={k}>{v.label}</option>)}
                               </select>
-                              {fa.motifRejet && <div style={{fontSize:'0.65rem', color:'#991b1b', marginTop:3, lineHeight:1.3, cursor:'help'}} title={'Rejet du ' + (fa.dateRejet||'') + ' : ' + fa.motifRejet}>✕ {fa.motifRejet.length > 35 ? fa.motifRejet.slice(0,35)+'…' : fa.motifRejet}</div>}
+                              {fa.motifRejet && <div style={{fontSize:'0.65rem', color:'#991b1b', marginTop:3, lineHeight:1.3, cursor:'help'}} title={'Rejet du ' + (fa.dateRejet||'') + ' : ' + fa.motifRejet}>❌ {fa.motifRejet.length > 35 ? fa.motifRejet.slice(0,35)+'…' : fa.motifRejet}</div>}
                             </td>
                             <td style={{padding:'6px 8px', whiteSpace:'nowrap'}}>
-                              <button onClick={() => setFactExtForm({...fa})} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.75rem', color:'#2563eb', marginRight:4}}>✎</button>
+                              <button onClick={() => setFactExtForm({...fa})} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.75rem', color:'#2563eb', marginRight:4}}>✏️</button>
                               <button onClick={() => deleteFactExtEntry(fa.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.75rem', color:'#dc2626'}}>🗑️</button>
                             </td>
                           </tr>
@@ -431,7 +431,7 @@ export default function TabFactExterne(__props) {
             {factExtTab === 'prestataires' && (<>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:10}}>
                 <div style={{display:'flex', gap:10, alignItems:'center'}}>
-                  <span style={{fontWeight:700, color:$text}}>◉ CRM Prestataires ({prestataires.length})</span>
+                  <span style={{fontWeight:700, color:$text}}>👥 CRM Prestataires ({prestataires.length})</span>
                   <div style={{display:'flex', border:`1px solid ${$border}`, borderRadius:crmRd, overflow:'hidden'}}>
                     {[{k:'cards',icon:'▦',label:'Cartes'},{k:'list',icon:'☰',label:'Liste'}].map(v => (
                       <button key={v.k} onClick={() => setFactExtView(v.k)} style={{padding:'4px 10px', border:'none', background: factExtView===v.k ? '#dc2626' : 'white', color: factExtView===v.k ? 'white' : '#6b5d4d', fontWeight:600, fontSize:'0.8rem', cursor:'pointer'}}>{v.icon} {v.label}</button>
@@ -447,7 +447,7 @@ export default function TabFactExterne(__props) {
                 const hasFilters = prestaFilters.type!=='all' || prestaFilters.categorie!=='all' || prestaFilters.statut!=='all' || prestaFilters.modeFact!=='all' || prestaFilters.search;
                 return (
                   <div style={{display:'flex', gap:8, alignItems:'center', marginBottom:14, flexWrap:'wrap', padding:'8px 12px', background:$bgSub, borderRadius:crmRd, border:`1px solid ${$border}`}}>
-                    <span style={{fontSize:'0.75rem', fontWeight:700, color:$textMut}}>⌕</span>
+                    <span style={{fontSize:'0.75rem', fontWeight:700, color:$textMut}}>🔍</span>
                     <input value={prestaFilters.search} onChange={e => setPrestaFilters(p=>({...p, search:e.target.value}))} placeholder="Rechercher nom, spécialité..." style={{...selS, minWidth:160}}/>
                     <select value={prestaFilters.statut} onChange={e => setPrestaFilters(p=>({...p, statut:e.target.value}))} style={selS}><option value="all">Tous statuts</option><option value="actif">● Actif</option><option value="en_veille">● En veille</option><option value="prospect">● Prospect</option><option value="termine">● Terminé</option></select>
                     <select value={prestaFilters.categorie} onChange={e => setPrestaFilters(p=>({...p, categorie:e.target.value}))} style={selS}><option value="all">Toutes catégories</option>{Object.entries(CATS_PRESTA).map(([k,v]) => <option key={k} value={k}>{v.icon} {v.label}</option>)}</select>
@@ -501,7 +501,7 @@ export default function TabFactExterne(__props) {
                 return (
                   <div style={{...cardS, marginBottom:18, padding:20}}>
                     <div style={{display:'flex', justifyContent:'space-between', marginBottom:14}}>
-                      <span style={{fontWeight:700, color:'#dc2626'}}>{isEdit ? '✎ Modifier prestataire' : '➕ Nouveau prestataire'}</span>
+                      <span style={{fontWeight:700, color:'#dc2626'}}>{isEdit ? '✏️ Modifier prestataire' : '➕ Nouveau prestataire'}</span>
                       <button onClick={() => setFactExtPrestaForm(null)} style={{background:'none', border:'none', cursor:'pointer', color:$textMut}}>✕</button>
                     </div>
                     {/* Identity */}
@@ -583,9 +583,9 @@ export default function TabFactExterne(__props) {
                         </div>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:4, marginBottom:8, fontSize:'0.8rem', color:$textSec}}>
                           {p.contactEmail && <div>📧 {p.contactEmail}</div>}
-                          {p.contactTel && <div>✆ {p.contactTel}</div>}
+                          {p.contactTel && <div>📞 {p.contactTel}</div>}
                           {p.ville && <div>📍 {p.ville} {p.cp}</div>}
-                          {p.siret && <div>◆ {p.siret}</div>}
+                          {p.siret && <div>🏛️ {p.siret}</div>}
                         </div>
                         <div style={{padding:8, background:'#f3f4f6', borderRadius:crmRd, marginBottom:8, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                           <div style={{fontSize:'0.82rem'}}>{mode.icon} <strong>{mode.label?.split(' (')[0]}</strong></div>
@@ -607,7 +607,7 @@ export default function TabFactExterne(__props) {
                             <span style={{fontSize:'0.8rem', color:$textMut}}>{pFact.length} fact. · {fmt(pTotal)}</span>
                           </div>
                           <div style={{display:'flex', gap:4}}>
-                            <button onClick={() => setFactExtPrestaForm({...p})} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.75rem', color:'#2563eb'}}>✎</button>
+                            <button onClick={() => setFactExtPrestaForm({...p})} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.75rem', color:'#2563eb'}}>✏️</button>
                             <button onClick={() => { setFactExtFilter({...factExtFilter, prestaId:p.id}); setFactExtTab('factures'); }} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.75rem', color:'#059669'}}>🧾</button>
                             <button onClick={() => deletePresta(p.id)} style={{padding:'3px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.75rem', color:'#dc2626'}}>🗑️</button>
                           </div>
@@ -686,12 +686,12 @@ export default function TabFactExterne(__props) {
                                 {(() => { const c = p.contrat; const cs = c ? (CONTRAT_STATUTS[c.statut] || CONTRAT_STATUTS.a_preparer) : CONTRAT_STATUTS.a_preparer; return (
                                   <div style={{display:'flex', alignItems:'center', gap:3}}>
                                     <span style={{fontSize:'0.65rem', padding:'2px 6px', borderRadius:crmRd, background:cs.bg, color:cs.color, fontWeight:700, whiteSpace:'nowrap', cursor:'pointer'}} onClick={() => { setContratEdit({...(p.contrat || {type:'prestation',statut:'a_preparer',dateDebut:'',dateFin:'',renouvellement:'tacite',ref:''})}); setContratView('edit'); setFactExtContratModal({...p}); }}>{cs.icon} {cs.label}</span>
-                                    {(!c || !c.statut || c.statut === 'a_preparer') && <button onClick={() => { setContratEdit({...(p.contrat || {type:'prestation',statut:'a_preparer',dateDebut:'',dateFin:'',renouvellement:'tacite',ref:''})}); setContratView('edit'); setFactExtContratModal({...p}); }} style={{fontSize:'0.65rem', padding:'1px 4px', borderRadius:3, border:'1px solid #e0e7ff', background:$info+'12', color:'#4338ca', cursor:'pointer', fontWeight:700}} title="Préparer contrat">✎</button>}
+                                    {(!c || !c.statut || c.statut === 'a_preparer') && <button onClick={() => { setContratEdit({...(p.contrat || {type:'prestation',statut:'a_preparer',dateDebut:'',dateFin:'',renouvellement:'tacite',ref:''})}); setContratView('edit'); setFactExtContratModal({...p}); }} style={{fontSize:'0.65rem', padding:'1px 4px', borderRadius:3, border:'1px solid #e0e7ff', background:$info+'12', color:'#4338ca', cursor:'pointer', fontWeight:700}} title="Préparer contrat">📝</button>}
                                   </div>
                                 ); })()}
                               </td>
                               <td style={{padding:'6px 6px', whiteSpace:'nowrap'}} onClick={e => e.stopPropagation()}>
-                                <button onClick={() => setFactExtPrestaForm({...p})} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.72rem', color:'#2563eb', marginRight:2}}>✎</button>
+                                <button onClick={() => setFactExtPrestaForm({...p})} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.72rem', color:'#2563eb', marginRight:2}}>✏️</button>
                                 <button onClick={() => { setFactExtFilter({...factExtFilter, prestaId:p.id}); setFactExtTab('factures'); }} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.72rem', color:'#059669', marginRight:2}}>🧾</button>
                                 <button onClick={() => deletePresta(p.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.72rem', color:'#dc2626'}}>🗑️</button>
                               </td>
@@ -739,12 +739,12 @@ export default function TabFactExterne(__props) {
               const scoreGlobal = Math.round(((evalD.qualite||0) + (evalD.reactivite||0) + (evalD.rapport_qp||0) + (evalD.communication||0)) / 4 * 20 + (pctDelais > 0 ? pctDelais * 0.3 : 0) + (totalBudget > 0 && totalConsomme <= totalBudget ? 20 : 0)) / 10;
 
               const tabDef = [
-                {k:'fiche', label:'Fiche', icon:'☰'},
-                {k:'documents', label:'Documents', icon:'▸', badge: docs.filter(d => d.dateExpiration && new Date(d.dateExpiration) < new Date()).length || null},
+                {k:'fiche', label:'Fiche', icon:'📋'},
+                {k:'documents', label:'Documents', icon:'📁', badge: docs.filter(d => d.dateExpiration && new Date(d.dateExpiration) < new Date()).length || null},
                 {k:'contrats', label:'Contrats', icon:'📜'},
                 {k:'factures', label:'Factures', icon:'🧾', badge: pFact.length || null},
-                {k:'missions', label:'Missions', icon:'◎'},
-                {k:'synthese', label:'Synthèse', icon:'▦'}
+                {k:'missions', label:'Missions', icon:'🎯'},
+                {k:'synthese', label:'Synthèse', icon:'📊'}
               ];
 
               const sLabel = (s,n) => s <= 0 ? '☆'.repeat(n) : '⭐'.repeat(Math.min(s,n)) + '☆'.repeat(Math.max(0,n-s));
@@ -788,13 +788,13 @@ export default function TabFactExterne(__props) {
                           <div style={{padding:14, background:$bgSub, borderRadius:crmRd}}>
                             <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:8}}>Coordonnées</div>
                             <div style={{fontSize:'0.9rem', lineHeight:2}}>
-                              {p.contactNom && <div>◉ <strong>{p.contactNom}</strong></div>}
+                              {p.contactNom && <div>👤 <strong>{p.contactNom}</strong></div>}
                               {p.contactEmail && <div>📧 <a href={'mailto:'+p.contactEmail} style={{color:cat.color}}>{p.contactEmail}</a></div>}
-                              {p.contactTel && <div>✆ {p.contactTel}</div>}
+                              {p.contactTel && <div>📞 {p.contactTel}</div>}
                               {p.ville && <div>📍 {p.adresse ? p.adresse+', ' : ''}{p.cp} {p.ville}</div>}
-                              {p.siret && <div>◆ SIRET: {p.siret}</div>}
+                              {p.siret && <div>🏛️ SIRET: {p.siret}</div>}
                               {p.tvaIntra && <div>🇪🇺 TVA: {p.tvaIntra}</div>}
-                              {p.linkedin && <div>▪ <a href={'https://'+p.linkedin} target="_blank" style={{color:cat.color}}>{p.linkedin}</a></div>}
+                              {p.linkedin && <div>💼 <a href={'https://'+p.linkedin} target="_blank" style={{color:cat.color}}>{p.linkedin}</a></div>}
                               {p.siteWeb && <div>🌐 <a href={'https://'+p.siteWeb} target="_blank" style={{color:cat.color}}>{p.siteWeb}</a></div>}
                             </div>
                             <div style={{marginTop:10, display:'flex', gap:6, flexWrap:'wrap'}}>
@@ -807,9 +807,9 @@ export default function TabFactExterne(__props) {
                             <div style={{fontSize:'0.9rem', lineHeight:2}}>
                               <div>{mode.icon} <strong>{mode.label}</strong></div>
                               <div>💶 {p.tarifBase > 0 ? p.tarifBase.toLocaleString('fr-FR')+' '+p.tarifUnite : 'Sur devis'}</div>
-                              {p.joursParSemaine && <div>◫ {p.joursParSemaine}j/semaine</div>}
+                              {p.joursParSemaine && <div>📅 {p.joursParSemaine}j/semaine</div>}
                               <div>📆 Depuis: {p.dateDebut || '—'}</div>
-                              <div>▪ {(p.filiales||[]).map(f => { const fi = filialesEnrichies.find(x => x.id===f); return fi ? fi.nom : f; }).join(', ')}</div>
+                              <div>🏢 {(p.filiales||[]).map(f => { const fi = filialesEnrichies.find(x => x.id===f); return fi ? fi.nom : f; }).join(', ')}</div>
                             </div>
                           </div>
                         </div>
@@ -818,7 +818,7 @@ export default function TabFactExterne(__props) {
                         <div style={{padding:14, background:$bgSub, borderRadius:crmRd, marginBottom:16}}>
                           <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>Évaluation détaillée</div>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12}}>
-                            {[{k:'qualite',l:'Qualité',e:'◎'},{k:'reactivite',l:'Réactivité',e:'⚡'},{k:'rapport_qp',l:'Rapport Q/P',e:'€'},{k:'communication',l:'Communication',e:'💬'}].map(ev => (
+                            {[{k:'qualite',l:'Qualité',e:'🎯'},{k:'reactivite',l:'Réactivité',e:'⚡'},{k:'rapport_qp',l:'Rapport Q/P',e:'💰'},{k:'communication',l:'Communication',e:'💬'}].map(ev => (
                               <div key={ev.k} style={{textAlign:'center'}}>
                                 <div style={{fontSize:'0.72rem', color:$textSec, marginBottom:4}}>{ev.e} {ev.l}</div>
                                 <div style={{fontSize:'0.95rem', cursor:'pointer'}} onClick={() => {
@@ -851,7 +851,7 @@ export default function TabFactExterne(__props) {
 
                         {/* Bio / Notes */}
                         <div style={{padding:14, background:$accent+'15', borderRadius:crmRd}}>
-                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:'#92400e', fontWeight:700, marginBottom:8}}>✎ Bio / Notes libres</div>
+                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:'#92400e', fontWeight:700, marginBottom:8}}>📝 Bio / Notes libres</div>
                           <textarea value={p.notes||''} onChange={e => saveP({...p, notes:e.target.value})} rows={4} style={{width:'100%', padding:10, borderRadius:crmRd, border:'1px solid #fde68a', fontSize:'0.88rem', background:$bgCard, resize:'vertical', boxSizing:'border-box', lineHeight:1.6}} placeholder="Notes, historique, informations complémentaires..."/>
                         </div>
                       </>)}
@@ -861,7 +861,7 @@ export default function TabFactExterne(__props) {
                         {/* Alertes en haut */}
                         {docs.filter(d => d.dateExpiration && new Date(d.dateExpiration) < new Date(Date.now() + 30*86400000)).length > 0 && (
                           <div style={{marginBottom:16, padding:12, background:$danger+'12', borderRadius:crmRd, border:'1px solid #fca5a5'}}>
-                            <div style={{fontSize:'0.75rem', fontWeight:700, color:'#991b1b', marginBottom:6}}>▲ Alertes documents</div>
+                            <div style={{fontSize:'0.75rem', fontWeight:700, color:'#991b1b', marginBottom:6}}>⚠️ Alertes documents</div>
                             {docs.filter(d => d.dateExpiration && new Date(d.dateExpiration) < new Date(Date.now() + 30*86400000)).map(d => {
                               const isExpired = new Date(d.dateExpiration) < new Date();
                               return <div key={d.id} style={{fontSize:'0.82rem', color: isExpired ? '#dc2626' : '#d97706', marginBottom:2}}>{isExpired ? '▲' : '●'} {(DOC_TYPES[d.type]||DOC_TYPES.autre).label} — {isExpired ? 'Expiré le' : 'Expire le'} {d.dateExpiration}</div>;
@@ -872,7 +872,7 @@ export default function TabFactExterne(__props) {
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:20}}>
                           {/* Documents reçus */}
                           <div>
-                            <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:'#1e40af', fontWeight:700, marginBottom:10}}>↧ Documents reçus ({docs.filter(d => DOC_TYPES[d.type]?.category==='recu').length})</div>
+                            <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:'#1e40af', fontWeight:700, marginBottom:10}}>📥 Documents reçus ({docs.filter(d => DOC_TYPES[d.type]?.category==='recu').length})</div>
                             {docs.filter(d => DOC_TYPES[d.type]?.category==='recu').map(d => {
                               const dt = DOC_TYPES[d.type] || DOC_TYPES.autre;
                               const isExpired = d.dateExpiration && new Date(d.dateExpiration) < new Date();
@@ -883,7 +883,7 @@ export default function TabFactExterne(__props) {
                                     <div style={{fontSize:'0.72rem', color:$textSec}}>Ajouté: {d.dateAjout}{d.dateExpiration ? ` · Exp: ${d.dateExpiration}` : ''}</div>
                                   </div>
                                   <div style={{display:'flex', gap:4, alignItems:'center'}}>
-                                    <span style={{fontSize:'0.65rem', padding:'2px 6px', borderRadius:crmRd, background: isExpired ? '#fecaca' : d.statut==='valide' ? '#dcfce7' : '#f3f4f6', color: isExpired ? '#991b1b' : d.statut==='valide' ? '#166534' : '#6b7280', fontWeight:700}}>{isExpired ? '▲ Expiré' : d.statut==='valide' ? '✓ Valide' : '§ Reçu'}</span>
+                                    <span style={{fontSize:'0.65rem', padding:'2px 6px', borderRadius:crmRd, background: isExpired ? '#fecaca' : d.statut==='valide' ? '#dcfce7' : '#f3f4f6', color: isExpired ? '#991b1b' : d.statut==='valide' ? '#166534' : '#6b7280', fontWeight:700}}>{isExpired ? '⚠️ Expiré' : d.statut==='valide' ? '✅ Valide' : '📎 Reçu'}</span>
                                     <button onClick={() => saveP({...p, documents:docs.filter(x => x.id !== d.id)})} style={{padding:'2px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.65rem', color:'#dc2626'}}>🗑️</button>
                                   </div>
                                 </div>
@@ -893,7 +893,7 @@ export default function TabFactExterne(__props) {
                           </div>
                           {/* Documents émis */}
                           <div>
-                            <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:'#059669', fontWeight:700, marginBottom:10}}>↥ Documents émis ({docs.filter(d => DOC_TYPES[d.type]?.category==='emis').length})</div>
+                            <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:'#059669', fontWeight:700, marginBottom:10}}>📤 Documents émis ({docs.filter(d => DOC_TYPES[d.type]?.category==='emis').length})</div>
                             {docs.filter(d => DOC_TYPES[d.type]?.category==='emis').map(d => {
                               const dt = DOC_TYPES[d.type] || DOC_TYPES.autre;
                               return (
@@ -928,7 +928,7 @@ export default function TabFactExterne(__props) {
 
                         {/* Conformité obligatoire */}
                         <div style={{marginTop:16, padding:14, background:$bgSub, borderRadius:crmRd}}>
-                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>☰ Conformité documents obligatoires</div>
+                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>📋 Conformité documents obligatoires</div>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:8}}>
                             {['urssaf','rc_pro','kbis','decennale','rib','cv'].map(dt => {
                               const d = docs.find(x => x.type === dt);
@@ -938,7 +938,7 @@ export default function TabFactExterne(__props) {
                               return (
                                 <div key={dt} style={{padding:8, background:$bgCard, borderRadius:crmRd, border: isOk ? '1px solid #bbf7d0' : isExpired ? '1px solid #fecaca' : '1px solid #fed7aa', textAlign:'center'}}>
                                   <div style={{fontSize:'0.78rem', fontWeight:600}}>{dInfo.icon} {dInfo.label}</div>
-                                  <div style={{fontSize:'0.68rem', color: isOk ? '#166534' : isExpired ? '#dc2626' : '#d97706', fontWeight:700, marginTop:2}}>{isOk ? '✓ Valide' : isExpired ? '▲ Expiré' : d ? '● À vérifier' : '✕ Manquant'}</div>
+                                  <div style={{fontSize:'0.68rem', color: isOk ? '#166534' : isExpired ? '#dc2626' : '#d97706', fontWeight:700, marginTop:2}}>{isOk ? '✅ Valide' : isExpired ? '▲ Expiré' : d ? '● À vérifier' : '❌ Manquant'}</div>
                                 </div>
                               );
                             })}
@@ -972,13 +972,13 @@ export default function TabFactExterne(__props) {
                               <div style={{fontWeight:700, fontSize:'0.98rem'}}>{ct.label}</div>
                               <div style={{fontSize:'0.8rem', color:$textSec}}>Réf: {c.ref || '—'} · {cs.icon} {cs.label}</div>
                             </div>
-                            <button onClick={() => { setContratEdit({...c}); setContratView('edit'); setFactExtContratModal({...p}); }} style={{padding:'8px 14px', borderRadius:crmRd, border:'none', background:'#1e40af', color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>✎ Gérer</button>
-                            <span style={{fontSize:'0.72rem', padding:'4px 10px', borderRadius:crmRd, background: c.cgv ? '#f0fdf4' : '#fef2f2', color: c.cgv ? '#166534' : '#991b1b', fontWeight:600, border: c.cgv ? '1px solid #bbf7d0' : '1px solid #fecaca'}}>{c.cgv ? '☰ CGV ✓' : '☰ CGV ✕'}</span>
+                            <button onClick={() => { setContratEdit({...c}); setContratView('edit'); setFactExtContratModal({...p}); }} style={{padding:'8px 14px', borderRadius:crmRd, border:'none', background:'#1e40af', color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>✏️ Gérer</button>
+                            <span style={{fontSize:'0.72rem', padding:'4px 10px', borderRadius:crmRd, background: c.cgv ? '#f0fdf4' : '#fef2f2', color: c.cgv ? '#166534' : '#991b1b', fontWeight:600, border: c.cgv ? '1px solid #bbf7d0' : '1px solid #fecaca'}}>{c.cgv ? '📋 CGV ✅' : '📋 CGV ❌'}</span>
                           </div>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:8, fontSize:'0.84rem'}}>
                             <div style={{padding:8, background:$bgCard, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>DÉBUT</div><div style={{fontWeight:700}}>{c.dateDebut || '—'}</div></div>
                             <div style={{padding:8, background:$bgCard, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>FIN</div><div style={{fontWeight:700, color: c.dateFin && new Date(c.dateFin) < new Date() ? '#dc2626' : '#2d2216'}}>{c.dateFin || 'Indéterminée'}</div></div>
-                            <div style={{padding:8, background:$bgCard, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>RENOUVELLEMENT</div><div style={{fontWeight:700}}>{c.renouvellement === 'tacite' ? '♻️ Tacite' : c.renouvellement === 'annuel' ? '◫ Annuel' : '🚫 Non'}</div></div>
+                            <div style={{padding:8, background:$bgCard, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>RENOUVELLEMENT</div><div style={{fontWeight:700}}>{c.renouvellement === 'tacite' ? '♻️ Tacite' : c.renouvellement === 'annuel' ? '📅 Annuel' : '🚫 Non'}</div></div>
                             <div style={{padding:8, background:cs.bg, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>STATUT</div><div style={{fontWeight:700, color:cs.color}}>{cs.icon} {cs.label}</div></div>
                           </div>
                           <div style={{marginTop:8, padding:8, background:$bgCard, borderRadius:crmRd, display:'flex', alignItems:'center', gap:8}}>
@@ -987,12 +987,12 @@ export default function TabFactExterne(__props) {
                           </div>
                           {c.cgv && (
                             <div style={{marginTop:8, padding:10, background:'#fffbf5', borderRadius:crmRd, border:'1px solid #e8dcc8'}}>
-                              <div style={{fontSize:'0.65rem', fontWeight:700, color:$accent, textTransform:'uppercase', marginBottom:4}}>☰ CONDITIONS GÉNÉRALES</div>
+                              <div style={{fontSize:'0.65rem', fontWeight:700, color:$accent, textTransform:'uppercase', marginBottom:4}}>📋 CONDITIONS GÉNÉRALES</div>
                               <div style={{fontSize:'0.72rem', color:$textSec, whiteSpace:'pre-line', lineHeight:1.4, maxHeight:80, overflowY:'auto'}}>{c.cgv.split('\n').slice(0,4).join('\n')}{c.cgv.split('\n').length > 4 ? '\n…' : ''}</div>
                             </div>
                           )}
                           <div style={{marginTop:10, display:'flex', gap:6}}>
-                            <button onClick={() => { setContratEdit({...c}); setContratView('preview'); setFactExtContratModal({...p}); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #dbeafe', background:$bgCard, color:'#1e40af', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>▫ Aperçu A4</button>
+                            <button onClick={() => { setContratEdit({...c}); setContratView('preview'); setFactExtContratModal({...p}); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #dbeafe', background:$bgCard, color:'#1e40af', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📄 Aperçu A4</button>
                           </div>
                         </div>
 
@@ -1005,7 +1005,7 @@ export default function TabFactExterne(__props) {
                               <div style={{fontSize:'0.75rem', color:$textSec}}>Signé: {cr.dateSignature || '—'} · Exp: {cr.dateExpiration || '—'}</div>
                             </div>
                             <div style={{display:'flex', gap:4, alignItems:'center'}}>
-                              <span style={{fontSize:'0.7rem', padding:'2px 8px', borderRadius:crmRd, background: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#fecaca' : '#dcfce7', color: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#991b1b' : '#166534', fontWeight:700}}>{cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '▲ Expiré' : '✓ Actif'}</span>
+                              <span style={{fontSize:'0.7rem', padding:'2px 8px', borderRadius:crmRd, background: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#fecaca' : '#dcfce7', color: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#991b1b' : '#166534', fontWeight:700}}>{cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '⚠️ Expiré' : '✅ Actif'}</span>
                               <button onClick={() => saveP({...p, contrats_recus:contratsRecus.filter(x=>x.id!==cr.id)})} style={{padding:'2px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.65rem', color:'#dc2626'}}>🗑️</button>
                             </div>
                           </div>
@@ -1032,7 +1032,7 @@ export default function TabFactExterne(__props) {
                         {/* Rapprochement contrat */}
                         {c.ref && pFact.length > 0 && (
                           <div style={{padding:12, borderRadius:crmRd, border:'1px solid #dbeafe', background:'#f0f7ff', marginBottom:16}}>
-                            <div style={{fontSize:'0.72rem', fontWeight:700, color:'#1e40af', textTransform:'uppercase', marginBottom:6}}>▦ Rapprochement Contrat ↔ Factures</div>
+                            <div style={{fontSize:'0.72rem', fontWeight:700, color:'#1e40af', textTransform:'uppercase', marginBottom:6}}>📊 Rapprochement Contrat ↔ Factures</div>
                             <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:10, textAlign:'center'}}>
                               <div><div style={{fontSize:'0.65rem', color:$textMut}}>Contrat ref</div><div style={{fontWeight:700, fontSize:'0.92rem'}}>{c.ref}</div></div>
                               <div><div style={{fontSize:'0.65rem', color:$textMut}}>Total facturé TTC</div><div style={{fontWeight:700, fontSize:'0.92rem', color:'#1e40af'}}>{fmt(pTotal)}</div></div>
@@ -1067,9 +1067,9 @@ export default function TabFactExterne(__props) {
                       {prestaDetailTab === 'missions' && (<>
                         {/* View toggle */}
                         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:14}}>
-                          <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:$textMut, fontWeight:700}}>◎ Missions ({missions.length}) · Tâches ({allTaches.length}) · {totalHeuresReelles}h réelles / {totalHeures}h prévues</div>
+                          <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:$textMut, fontWeight:700}}>🎯 Missions ({missions.length}) · Tâches ({allTaches.length}) · {totalHeuresReelles}h réelles / {totalHeures}h prévues</div>
                           <div style={{display:'flex', gap:4}}>
-                            {[{k:'list',l:'☰ Liste'},{k:'kanban',l:'▪ Kanban'},{k:'gantt',l:'▦ Gantt'}].map(v => (
+                            {[{k:'list',l:'📋 Liste'},{k:'kanban',l:'📌 Kanban'},{k:'gantt',l:'📊 Gantt'}].map(v => (
                               <button key={v.k} onClick={() => setMissionViewMode(v.k)} style={{padding:'4px 10px', borderRadius:crmRd, border: missionViewMode===v.k ? `2px solid ${cat.color}` : `1px solid ${$borderAlt}`, background: missionViewMode===v.k ? `${cat.color}10` : 'white', color: missionViewMode===v.k ? cat.color : '#6b5d4d', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>{v.l}</button>
                             ))}
                           </div>
@@ -1087,7 +1087,7 @@ export default function TabFactExterne(__props) {
                                 <div style={{flex:1}}>
                                   <div style={{fontWeight:700, fontSize:'0.98rem'}}>{m.nom}</div>
                                   <div style={{fontSize:'0.75rem', color:$textSec}}>{m.description}</div>
-                                  <div style={{fontSize:'0.7rem', color:$textMut, marginTop:2}}>◫ {(m.dateDebut||'').slice(0,10)} → {(m.dateFinPrevue||'').slice(0,10)}{m.dateFinReelle ? ` (réel: ${m.dateFinReelle})` : ''} · ▪ {(filialesEnrichies.find(f=>f.id===m.filiale)||{}).nom || m.filiale}</div>
+                                  <div style={{fontSize:'0.7rem', color:$textMut, marginTop:2}}>📅 {(m.dateDebut||'').slice(0,10)} → {(m.dateFinPrevue||'').slice(0,10)}{m.dateFinReelle ? ` (réel: ${m.dateFinReelle})` : ''} · 🏢 {(filialesEnrichies.find(f=>f.id===m.filiale)||{}).nom || m.filiale}</div>
                                 </div>
                                 <div style={{display:'flex', gap:6, alignItems:'center'}}>
                                   <select value={m.statut} onChange={e => { const nm = missions.map(x => x.id===m.id ? {...x, statut:e.target.value} : x); saveP({...p, missions:nm}); }} style={{padding:'4px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.76rem', fontWeight:600, background:ms.bg, color:ms.color}}>
@@ -1139,7 +1139,7 @@ export default function TabFactExterne(__props) {
                                           ))}
                                           <div style={{display:'flex', gap:4, marginTop:4}}>
                                             <input value={expandedTache === t.id ? newComment : ''} onChange={e => setNewComment(e.target.value)} placeholder="Ajouter un commentaire..." style={{flex:1, padding:'5px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.8rem'}} onKeyDown={e => { if(e.key==='Enter' && newComment.trim()) { const nc = [...(t.commentaires||[]), {auteur:'Moi', date:new Date().toISOString().slice(0,10), texte:newComment.trim()}]; const nt = mTaches.map(x => x.id===t.id ? {...x, commentaires:nc} : x); const nm = missions.map(x => x.id===m.id ? {...x, taches:nt} : x); saveP({...p, missions:nm}); setNewComment(''); }}}/>
-                                            <button onClick={() => { if(newComment.trim()) { const nc = [...(t.commentaires||[]), {auteur:'Moi', date:new Date().toISOString().slice(0,10), texte:newComment.trim()}]; const nt = mTaches.map(x => x.id===t.id ? {...x, commentaires:nc} : x); const nm = missions.map(x => x.id===m.id ? {...x, taches:nt} : x); saveP({...p, missions:nm}); setNewComment(''); }}} style={{padding:'5px 10px', borderRadius:crmRd, border:'none', background:cat.color, color:'white', fontWeight:700, fontSize:'0.75rem', cursor:'pointer'}}>↥</button>
+                                            <button onClick={() => { if(newComment.trim()) { const nc = [...(t.commentaires||[]), {auteur:'Moi', date:new Date().toISOString().slice(0,10), texte:newComment.trim()}]; const nt = mTaches.map(x => x.id===t.id ? {...x, commentaires:nc} : x); const nm = missions.map(x => x.id===m.id ? {...x, taches:nt} : x); saveP({...p, missions:nm}); setNewComment(''); }}} style={{padding:'5px 10px', borderRadius:crmRd, border:'none', background:cat.color, color:'white', fontWeight:700, fontSize:'0.75rem', cursor:'pointer'}}>📤</button>
                                           </div>
                                         </div>
                                       )}
@@ -1275,10 +1275,10 @@ export default function TabFactExterne(__props) {
                                     {/* KPI Cards */}
                         <div style={{display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:10, marginBottom:18}}>
                           {[
-                            {label:'Total facturé', value:fmt(pTotal), icon:'€', color:'#1e40af', grad:'linear-gradient(135deg,#1e40af,#60a5fa)'},
+                            {label:'Total facturé', value:fmt(pTotal), icon:'💰', color:'#1e40af', grad:'linear-gradient(135deg,#1e40af,#60a5fa)'},
                             {label:'Budget missions', value:fmt(totalBudget), icon:'💶', color:'#7c3aed', grad:'linear-gradient(135deg,#7c3aed,#a78bfa)'},
-                            {label:'Heures réelles', value:totalHeuresReelles+'h / '+totalHeures+'h', icon:'◷', color:'#059669', grad:'linear-gradient(135deg,#059669,#34d399)'},
-                            {label:'Respect délais', value:pctDelais+'%', icon:'◫', color: pctDelais >= 80 ? '#059669' : pctDelais >= 50 ? '#d97706' : '#dc2626', grad: pctDelais >= 80 ? 'linear-gradient(135deg,#059669,#34d399)' : pctDelais >= 50 ? 'linear-gradient(135deg,#d97706,#fbbf24)' : 'linear-gradient(135deg,#dc2626,#f87171)'},
+                            {label:'Heures réelles', value:totalHeuresReelles+'h / '+totalHeures+'h', icon:'⏱️', color:'#059669', grad:'linear-gradient(135deg,#059669,#34d399)'},
+                            {label:'Respect délais', value:pctDelais+'%', icon:'📅', color: pctDelais >= 80 ? '#059669' : pctDelais >= 50 ? '#d97706' : '#dc2626', grad: pctDelais >= 80 ? 'linear-gradient(135deg,#059669,#34d399)' : pctDelais >= 50 ? 'linear-gradient(135deg,#d97706,#fbbf24)' : 'linear-gradient(135deg,#dc2626,#f87171)'},
                             {label:'Score global', value:(scoreGlobal||0).toFixed(1)+'/10', icon:'🏆', color: scoreGlobal >= 7 ? '#059669' : scoreGlobal >= 5 ? '#d97706' : '#dc2626', grad: scoreGlobal >= 7 ? 'linear-gradient(135deg,#059669,#34d399)' : scoreGlobal >= 5 ? 'linear-gradient(135deg,#d97706,#fbbf24)' : 'linear-gradient(135deg,#dc2626,#f87171)'}
                           ].map((kpi,i) => (
                             <div key={i} style={{borderRadius:crmRd, overflow:'hidden', boxShadow:'0 2px 8px rgba(0,0,0,0.06)'}}>
@@ -1307,7 +1307,7 @@ export default function TabFactExterne(__props) {
 
                         {/* Coût ventilé par mois */}
                         <div style={{padding:14, background:$bgSub, borderRadius:crmRd, marginBottom:16}}>
-                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>▦ Ventilation factures par mois</div>
+                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>📊 Ventilation factures par mois</div>
                           {(() => {
                             const byMonth = {};
                             pFact.forEach(f => { const m = (f.dateReception||'').slice(0,7); if(m) byMonth[m] = (byMonth[m]||0) + f.montantTTC; });
@@ -1332,7 +1332,7 @@ export default function TabFactExterne(__props) {
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginBottom:16}}>
                           <div style={{padding:14, background:$bgSub, borderRadius:crmRd}}>
                             <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>Évaluation détaillée</div>
-                            {[{k:'qualite',l:'Qualité',e:'◎'},{k:'reactivite',l:'Réactivité',e:'⚡'},{k:'rapport_qp',l:'Rapport Q/P',e:'€'},{k:'communication',l:'Communication',e:'💬'}].map(ev => (
+                            {[{k:'qualite',l:'Qualité',e:'🎯'},{k:'reactivite',l:'Réactivité',e:'⚡'},{k:'rapport_qp',l:'Rapport Q/P',e:'💰'},{k:'communication',l:'Communication',e:'💬'}].map(ev => (
                               <div key={ev.k} style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:4}}>
                                 <span style={{fontSize:'0.78rem', color:$textSec}}>{ev.e} {ev.l}</span>
                                 <span>{sLabel(evalD[ev.k]||0, 5)}</span>
@@ -1347,16 +1347,16 @@ export default function TabFactExterne(__props) {
                               <div style={{fontSize:'0.75rem', color:$textMut}}>/10</div>
                             </div>
                             <div style={{fontSize:'0.7rem', color:$textSec, lineHeight:1.8}}>
-                              ◎ Qualité: {evalD.qualite||0}/5<br/>
-                              ◫ Respect délais: {pctDelais}%<br/>
-                              € Budget respecté: {totalBudget > 0 && totalConsomme <= totalBudget ? '✓ Oui' : totalBudget > 0 ? '✕ Dépassé' : '—'}
+                              🎯 Qualité: {evalD.qualite||0}/5<br/>
+                              📅 Respect délais: {pctDelais}%<br/>
+                              💰 Budget respecté: {totalBudget > 0 && totalConsomme <= totalBudget ? '✅ Oui' : totalBudget > 0 ? '❌ Dépassé' : '—'}
                             </div>
                           </div>
                         </div>
 
                         {/* Conformité */}
                         <div style={{padding:14, background:$bgSub, borderRadius:crmRd, marginBottom:16}}>
-                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>☰ Conformité documents</div>
+                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>📋 Conformité documents</div>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:6}}>
                             {['urssaf','rc_pro','kbis','decennale'].map(dt => {
                               const d = docs.find(x => x.type === dt);
@@ -1365,7 +1365,7 @@ export default function TabFactExterne(__props) {
                               return (
                                 <div key={dt} style={{padding:8, background:$bgCard, borderRadius:crmRd, border: isOk ? '1px solid #bbf7d0' : '1px solid #fecaca', textAlign:'center'}}>
                                   <div style={{fontSize:'0.75rem', fontWeight:600}}>{dInfo.icon}</div>
-                                  <div style={{fontSize:'0.6rem', color: isOk ? '#166534' : '#dc2626', fontWeight:700}}>{isOk ? '✓' : d ? '▲' : '✕'} {dInfo.label}</div>
+                                  <div style={{fontSize:'0.6rem', color: isOk ? '#166534' : '#dc2626', fontWeight:700}}>{isOk ? '✅' : d ? '⚠️' : '❌'} {dInfo.label}</div>
                                 </div>
                               );
                             })}
@@ -1374,11 +1374,11 @@ export default function TabFactExterne(__props) {
 
                         {/* Timeline */}
                         <div style={{padding:14, background:$bgSub, borderRadius:crmRd}}>
-                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>◫ Historique relation</div>
+                          <div style={{fontSize:'0.7rem', textTransform:'uppercase', color:$textMut, fontWeight:700, marginBottom:10}}>📅 Historique relation</div>
                           <div style={{borderLeft:`2px solid ${$borderAlt}`, paddingLeft:16}}>
                             {p.dateDebut && <div style={{marginBottom:10, position:'relative'}}><div style={{position:'absolute', left:-21, top:2, width:10, height:10, borderRadius:'50%', background:'#059669'}}></div><div style={{fontSize:'0.82rem', fontWeight:700}}>▸ Début collaboration</div><div style={{fontSize:'0.7rem', color:$textMut}}>{p.dateDebut}</div></div>}
                             {c.ref && <div style={{marginBottom:10, position:'relative'}}><div style={{position:'absolute', left:-21, top:2, width:10, height:10, borderRadius:'50%', background:'#1e40af'}}></div><div style={{fontSize:'0.82rem', fontWeight:700}}>📜 Contrat {c.ref}</div><div style={{fontSize:'0.7rem', color:$textMut}}>{c.dateDebut} — {cs.icon} {cs.label}</div></div>}
-                            {missions.map(m => <div key={m.id} style={{marginBottom:10, position:'relative'}}><div style={{position:'absolute', left:-21, top:2, width:10, height:10, borderRadius:'50%', background:'#7c3aed'}}></div><div style={{fontSize:'0.82rem', fontWeight:700}}>☰ {m.nom}</div><div style={{fontSize:'0.7rem', color:$textMut}}>{(m.dateDebut||'').slice(0,10)} — {(MISSION_STATUTS[m.statut]||{}).icon} {(MISSION_STATUTS[m.statut]||{}).label}</div></div>)}
+                            {missions.map(m => <div key={m.id} style={{marginBottom:10, position:'relative'}}><div style={{position:'absolute', left:-21, top:2, width:10, height:10, borderRadius:'50%', background:'#7c3aed'}}></div><div style={{fontSize:'0.82rem', fontWeight:700}}>📋 {m.nom}</div><div style={{fontSize:'0.7rem', color:$textMut}}>{(m.dateDebut||'').slice(0,10)} — {(MISSION_STATUTS[m.statut]||{}).icon} {(MISSION_STATUTS[m.statut]||{}).label}</div></div>)}
                             {pFact.slice(0,5).map(fa => <div key={fa.id} style={{marginBottom:10, position:'relative'}}><div style={{position:'absolute', left:-21, top:2, width:10, height:10, borderRadius:'50%', background:'#d97706'}}></div><div style={{fontSize:'0.82rem', fontWeight:700}}>🧾 {fa.ref} — {fa.montantTTC.toLocaleString('fr-FR')} €</div><div style={{fontSize:'0.7rem', color:$textMut}}>{fa.dateReception}</div></div>)}
                           </div>
                         </div>
@@ -1395,7 +1395,7 @@ export default function TabFactExterne(__props) {
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.5)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:400}} onClick={() => setRejetModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:480, padding:0, borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
                   <div style={{background:'linear-gradient(135deg, #991b1b, #dc2626)', padding:'16px 24px', borderRadius:'16px 16px 0 0', color:'white'}}>
-                    <div style={{fontSize:'1rem', fontWeight:800}}>✕ Rejet de facture</div>
+                    <div style={{fontSize:'1rem', fontWeight:800}}>❌ Rejet de facture</div>
                     <div style={{fontSize:'0.82rem', opacity:0.85}}>Veuillez indiquer le motif du rejet</div>
                   </div>
                   <div style={{padding:24}}>
@@ -1411,7 +1411,7 @@ export default function TabFactExterne(__props) {
                     </div>
                     <div style={{display:'flex', gap:8, marginTop:16, justifyContent:'flex-end'}}>
                       <button onClick={() => setRejetModal(null)} style={{padding:'8px 18px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>Annuler</button>
-                      <button onClick={confirmRejet} disabled={!rejetModal.motif?.trim()} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: rejetModal.motif?.trim() ? '#dc2626' : '#e8e4de', color:'white', fontWeight:700, fontSize:'0.88rem', cursor: rejetModal.motif?.trim() ? 'pointer' : 'not-allowed', opacity: rejetModal.motif?.trim() ? 1 : 0.5}}>✕ Confirmer le rejet</button>
+                      <button onClick={confirmRejet} disabled={!rejetModal.motif?.trim()} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: rejetModal.motif?.trim() ? '#dc2626' : '#e8e4de', color:'white', fontWeight:700, fontSize:'0.88rem', cursor: rejetModal.motif?.trim() ? 'pointer' : 'not-allowed', opacity: rejetModal.motif?.trim() ? 1 : 0.5}}>❌ Confirmer le rejet</button>
                     </div>
                   </div>
                 </div>
@@ -1494,7 +1494,7 @@ export default function TabFactExterne(__props) {
                       </div>
                     </div>
                     <div style={{display:'flex', borderBottom:`1px solid ${$border}`}}>
-                      {[{k:'edit',label:'✎ Détails & Édition'},{k:'preview',label:'▫ Aperçu A4'}].map(t => (
+                      {[{k:'edit',label:'✏️ Détails & Édition'},{k:'preview',label:'📄 Aperçu A4'}].map(t => (
                         <button key={t.k} onClick={() => setContratView(t.k)} style={{flex:1, padding:'10px', border:'none', borderBottom: contratView===t.k ? '2px solid #1e293b' : '2px solid transparent', background: contratView===t.k ? '#f8fafc' : 'white', fontWeight:700, fontSize:'0.88rem', color: contratView===t.k ? '#1e293b' : '#b0a08a', cursor:'pointer'}}>{t.label}</button>
                       ))}
                     </div>
@@ -1536,9 +1536,9 @@ export default function TabFactExterne(__props) {
                         {/* CGV — Conditions Générales */}
                         <div style={{marginBottom:14, padding:12, background:'#fffbf5', borderRadius:crmRd, border:`1px solid ${$border}`}}>
                           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6}}>
-                            <div style={{fontSize:'0.7rem', fontWeight:700, color:$accent, textTransform:'uppercase'}}>☰ Conditions Générales (CGV)</div>
+                            <div style={{fontSize:'0.7rem', fontWeight:700, color:$accent, textTransform:'uppercase'}}>📋 Conditions Générales (CGV)</div>
                             <div style={{display:'flex', gap:6}}>
-                              {!showCGVEditor && <button onClick={() => { if(!cedit.cgv) { setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS[prev.type] || CGV_DEFAULTS._default})); } setShowCGVEditor(true); }} style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, cursor:'pointer'}}>{cedit.cgv ? '✎ Modifier' : '➕ Ajouter CGV'}</button>}
+                              {!showCGVEditor && <button onClick={() => { if(!cedit.cgv) { setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS[prev.type] || CGV_DEFAULTS._default})); } setShowCGVEditor(true); }} style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, cursor:'pointer'}}>{cedit.cgv ? '✏️ Modifier' : '➕ Ajouter CGV'}</button>}
                               {showCGVEditor && <button onClick={() => setShowCGVEditor(false)} style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, fontWeight:600, cursor:'pointer'}}>▲ Réduire</button>}
                             </div>
                           </div>
@@ -1546,29 +1546,29 @@ export default function TabFactExterne(__props) {
                           {!cedit.cgv && !showCGVEditor && <div style={{fontSize:'0.75rem', color:$textMut, fontStyle:'italic'}}>Aucune CGV — cliquez "Ajouter CGV" pour charger les conditions par défaut</div>}
                           {showCGVEditor && (<>
                             <div style={{display:'flex', gap:6, marginBottom:8, flexWrap:'wrap'}}>
-                              <button onClick={() => setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS[prev.type] || CGV_DEFAULTS._default}))} style={{fontSize:'0.68rem', padding:'3px 8px', borderRadius:crmRd, border:'1px solid #d4c5a9', background:$bgSub, color:$accent, cursor:'pointer', fontWeight:600}}>↻ Recharger défaut ({(CONTRAT_TYPES[cedit.type]||{}).short || 'Standard'})</button>
+                              <button onClick={() => setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS[prev.type] || CGV_DEFAULTS._default}))} style={{fontSize:'0.68rem', padding:'3px 8px', borderRadius:crmRd, border:'1px solid #d4c5a9', background:$bgSub, color:$accent, cursor:'pointer', fontWeight:600}}>🔄 Recharger défaut ({(CONTRAT_TYPES[cedit.type]||{}).short || 'Standard'})</button>
                               <button onClick={() => setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS.prestation}))} style={{fontSize:'0.68rem', padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, cursor:'pointer'}}>Prestation</button>
                               <button onClick={() => setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS.sous_traitance}))} style={{fontSize:'0.68rem', padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, cursor:'pointer'}}>Sous-traitance</button>
                               <button onClick={() => setContratEdit(prev => ({...prev, cgv: CGV_DEFAULTS.lettre_mission}))} style={{fontSize:'0.68rem', padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, cursor:'pointer'}}>Lettre mission</button>
                             </div>
                             <textarea value={cedit.cgv||''} onChange={e => setContratEdit(prev => ({...prev, cgv:e.target.value}))} rows={10} style={{width:'100%', padding:10, borderRadius:crmRd, border:'1px solid #d4c5a9', fontSize:'0.78rem', lineHeight:1.6, resize:'vertical', boxSizing:'border-box', fontFamily:'inherit', background:$bgCard}} placeholder="Saisissez ou modifiez les conditions générales..."/>
-                            <div style={{fontSize:'0.65rem', color:$textMut, marginTop:4}}>✧ Ces conditions seront ajoutées à la fin du contrat A4. Personnalisez librement selon le prestataire.</div>
+                            <div style={{fontSize:'0.65rem', color:$textMut, marginTop:4}}>💡 Ces conditions seront ajoutées à la fin du contrat A4. Personnalisez librement selon le prestataire.</div>
                           </>)}
                         </div>
                         <div style={{padding:12, background:'#f8fafc', borderRadius:crmRd, border:'1px solid #e2e8f0', marginBottom:16}}>
                           <div style={{fontSize:'0.7rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:6}}>Récapitulatif prestataire</div>
                           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:4, fontSize:'0.86rem'}}>
-                            <div>{'◉'} <strong>{p.nom}</strong> ({tp.label})</div>
+                            <div>{'👤'} <strong>{p.nom}</strong> ({tp.label})</div>
                             <div>{cat.icon} {p.specialite}</div>
                             <div>{'💶'} {mode.icon} {p.tarifBase > 0 ? p.tarifBase.toLocaleString('fr-FR')+' '+p.tarifUnite : 'Sur devis'}</div>
                             <div>{'📍'} {p.ville} {p.cp}</div>
-                            {p.siret && <div>{'◆'} {p.siret}</div>}
+                            {p.siret && <div>{'🏛️'} {p.siret}</div>}
                             {p.contactEmail && <div>{'📧'} {p.contactEmail}</div>}
                           </div>
                         </div>
                         <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
                           <button onClick={saveContrat} style={{padding:'10px 20px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #1e293b, #334155)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>💾 Enregistrer</button>
-                          <button onClick={() => setContratView('preview')} style={{padding:'10px 18px', borderRadius:crmRd, border:'1px solid #e2e8f0', background:$bgCard, color:$text, fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>▫ Aperçu A4</button>
+                          <button onClick={() => setContratView('preview')} style={{padding:'10px 18px', borderRadius:crmRd, border:'1px solid #e2e8f0', background:$bgCard, color:$text, fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>📄 Aperçu A4</button>
                           <button onClick={printContrat} style={{padding:'10px 18px', borderRadius:crmRd, border:'1px solid #e2e8f0', background:$bgCard, color:'#059669', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>🖨️ Imprimer / PDF</button>
                         </div>
                       </>)}

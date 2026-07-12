@@ -8,7 +8,7 @@ export default function TabKpiDashboard(__props) {
           const entrepriseNom = SERVICES_CONFIG[navEntreprise]?.nom || navEntreprise;
           const svcConfig = SERVICES_CONFIG[navEntreprise]?.services.find(s => s.id === navService);
           const svcLabel = svcConfig?.label || navService;
-          const svcIcon = svcConfig?.icon || '☰';
+          const svcIcon = svcConfig?.icon || '📋';
           const svcKey = `${navEntreprise}_${navService}`;
           const acc = CRM_FIL_ACC[navEntreprise] || $accent;
           const aoActifs = AO_RAW.filter(a => ['À Préparer','Visite rdv à prendre','Visite demandée','Visite rdv pris','Demandes de précisions','En préparation','En attente de Réponse','AO sélectionné'].includes(a.s));
@@ -46,130 +46,130 @@ export default function TabKpiDashboard(__props) {
           ];
           const KPI_DATA = {
             'ezel_etudes_prix': [
-              {l:'AO actifs',v:String(aoActifs.length),i:'◺',c:acc,sub:aoActifs.filter(a=>a.d&&Math.ceil((new Date(a.d)-new Date())/86400000)<=7&&Math.ceil((new Date(a.d)-new Date())/86400000)>=0).length+' urgents (≤7j)'},
-              {l:'En attente réponse',v:String(AO_RAW.filter(a=>a.s==='En attente de Réponse').length),i:'↥',c:'#3b82f6',sub:fmtEuro(AO_RAW.filter(a=>a.s==='En attente de Réponse').reduce((s,a)=>s+(a.o||0),0))+' en jeu'},
+              {l:'AO actifs',v:String(aoActifs.length),i:'📐',c:acc,sub:aoActifs.filter(a=>a.d&&Math.ceil((new Date(a.d)-new Date())/86400000)<=7&&Math.ceil((new Date(a.d)-new Date())/86400000)>=0).length+' urgents (≤7j)'},
+              {l:'En attente réponse',v:String(AO_RAW.filter(a=>a.s==='En attente de Réponse').length),i:'📤',c:'#3b82f6',sub:fmtEuro(AO_RAW.filter(a=>a.s==='En attente de Réponse').reduce((s,a)=>s+(a.o||0),0))+' en jeu'},
               {l:'Taux de succès',v:tauxSucces+'%',i:'🏆',c:tauxSucces>=15?'#10b981':tauxSucces>=8?'#f59e0b':'#ef4444',sub:aoGagnes.length+' gagnés / '+aoDecides+' décidés'},
-              {l:'Pipeline budget',v:fmtEuro(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).reduce((s,a)=>s+(a.b||0),0)),i:'€',c:'#8b5cf6',sub:String(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).length)+' dossiers actifs'}
+              {l:'Pipeline budget',v:fmtEuro(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).reduce((s,a)=>s+(a.b||0),0)),i:'💰',c:'#8b5cf6',sub:String(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).length)+' dossiers actifs'}
             ],
             'ezel_preparation': [
-              {l:'Dossiers Phase 2',v:'4',i:'☰',c:acc,sub:'228k€ de marché'},
-              {l:'OS reçus',v:'3',i:'✓',c:'#10b981',sub:'prêts à démarrer'},
+              {l:'Dossiers Phase 2',v:'4',i:'📋',c:acc,sub:'228k€ de marché'},
+              {l:'OS reçus',v:'3',i:'✅',c:'#10b981',sub:'prêts à démarrer'},
               {l:'En attente OS',v:'1',i:'⏳',c:'#f59e0b',sub:'EPA Sénart'},
-              {l:'Docs à préparer',v:'12',i:'▸',c:'#8b5cf6',sub:'PPSPS, DICT, planning'}
+              {l:'Docs à préparer',v:'12',i:'📁',c:'#8b5cf6',sub:'PPSPS, DICT, planning'}
             ],
             'ezel_execution': [
-              {l:'Chantiers Phase 3',v:'14',i:'◆',c:acc,sub:'6.82M€ de marché'},
+              {l:'Chantiers Phase 3',v:'14',i:'🏗️',c:acc,sub:'6.82M€ de marché'},
               {l:'Travaux en cours',v:'7',i:'🔨',c:'#10b981',sub:'équipes sur site'},
               {l:'Travaux suspendus',v:'7',i:'🚦',c:'#f59e0b',sub:'intempéries / blocage'},
-              {l:'CA Phase 3',v:'6.8M€',i:'€',c:'#3b82f6',sub:"en cours d'exécution"}
+              {l:'CA Phase 3',v:'6.8M€',i:'💰',c:'#3b82f6',sub:"en cours d'exécution"}
             ],
             'ezel_cloture': [
-              {l:'Réception & Clôture',v:'19',i:'☰',c:acc,sub:'10M€ de marché'},
-              {l:'DGD en préparation',v:'9',i:'✎',c:'#f59e0b',sub:'décompte à préparer'},
-              {l:'DGD envoyée',v:'6',i:'↥',c:'#3b82f6',sub:'en attente validation'},
+              {l:'Réception & Clôture',v:'19',i:'📋',c:acc,sub:'10M€ de marché'},
+              {l:'DGD en préparation',v:'9',i:'📝',c:'#f59e0b',sub:'décompte à préparer'},
+              {l:'DGD envoyée',v:'6',i:'📤',c:'#3b82f6',sub:'en attente validation'},
               {l:'GPA / RG bloquée',v:'11',i:'💳',c:'#8b5cf6',sub:'2.8M€ GPA en cours'}
             ],
             'ezel_logistique': [
               {l:'Véhicules actifs',v:'8',i:'🚐',c:acc,sub:'sur chantiers'},
               {l:'Engins loués',v:'3',i:'🚜',c:'#f59e0b',sub:'nacelle, chariot, benne'},
-              {l:'Bons de commande',v:'14',i:'▣',c:'#3b82f6',sub:'en cours de livraison'},
+              {l:'Bons de commande',v:'14',i:'📦',c:'#3b82f6',sub:'en cours de livraison'},
               {l:'Fournisseurs actifs',v:'22',i:'🤝',c:'#8b5cf6',sub:'référencés 2026'}
             ],
             'ezel_rh': [
               {l:'Effectif actif',v:'34',i:'👷',c:acc,sub:'salariés Ezel'},
-              {l:'Habilitations',v:'4',i:'▲',c:'#ef4444',sub:'à renouveler'},
-              {l:'Absences (mois)',v:'3',i:'◫',c:'#f59e0b',sub:'CP + maladie'},
-              {l:'Recrutements',v:'2',i:'◉',c:'#3b82f6',sub:'postes ouverts'}
+              {l:'Habilitations',v:'4',i:'⚠️',c:'#ef4444',sub:'à renouveler'},
+              {l:'Absences (mois)',v:'3',i:'📅',c:'#f59e0b',sub:'CP + maladie'},
+              {l:'Recrutements',v:'2',i:'👤',c:'#3b82f6',sub:'postes ouverts'}
             ],
             'ezel_juridique': [
               {l:'Litiges actifs',v:'2',i:'⚖️',c:'#ef4444',sub:'en cours'},
-              {l:'Contrats actifs',v:'28',i:'✎',c:acc,sub:'marchés en cours'},
+              {l:'Contrats actifs',v:'28',i:'📝',c:acc,sub:'marchés en cours'},
               {l:'Assurances',v:'3',i:'🛡️',c:'#10b981',sub:'DC, RCP, dommages'},
               {l:'Contentieux',v:'1',i:'🔴',c:'#ef4444',sub:'procédure engagée'}
             ],
             'ezel_comptabilite': [
               {l:'Encours clients',v:'3.8M€',i:'💳',c:acc,sub:'créances à recouvrer'},
-              {l:'Factures à émettre',v:'11',i:'↥',c:'#3b82f6',sub:'situations validées'},
-              {l:'Factures à payer',v:'18',i:'↧',c:'#f59e0b',sub:'fournisseurs + ST'},
-              {l:'Délai moyen',v:'47j',i:'◷',c:'#8b5cf6',sub:'jours paiement client'}
+              {l:'Factures à émettre',v:'11',i:'📤',c:'#3b82f6',sub:'situations validées'},
+              {l:'Factures à payer',v:'18',i:'📥',c:'#f59e0b',sub:'fournisseurs + ST'},
+              {l:'Délai moyen',v:'47j',i:'⏱️',c:'#8b5cf6',sub:'jours paiement client'}
             ],
             'ezel_administratif': [
-              {l:'Docs en attente',v:'5',i:'▫',c:'#f59e0b',sub:'à signer ou valider'},
-              {l:'Contrats actifs',v:'28',i:'✎',c:acc,sub:'marchés en portefeuille'},
+              {l:'Docs en attente',v:'5',i:'📄',c:'#f59e0b',sub:'à signer ou valider'},
+              {l:'Contrats actifs',v:'28',i:'📝',c:acc,sub:'marchés en portefeuille'},
               {l:'Assurances',v:'2',i:'🛡️',c:'#ef4444',sub:'à renouveler avant 06/2026'},
-              {l:'Conformité',v:'100%',i:'✓',c:'#10b981',sub:'certifications à jour'}
+              {l:'Conformité',v:'100%',i:'✅',c:'#10b981',sub:'certifications à jour'}
             ],
             'roulotte_exploitation': [
-              {l:'Unités en location',v:'45 / 60',i:'▸',c:'#10b981',sub:'taux occupation 75%'},
-              {l:'Livraisons sem.',v:'12',i:'▣',c:acc,sub:'planifiées cette semaine'},
-              {l:'Retours planifiés',v:'8',i:'↻',c:'#f59e0b',sub:'récupérations à effectuer'},
-              {l:'Incidents signalés',v:'2',i:'▲',c:'#ef4444',sub:'en cours de traitement'}
+              {l:'Unités en location',v:'45 / 60',i:'🚛',c:'#10b981',sub:'taux occupation 75%'},
+              {l:'Livraisons sem.',v:'12',i:'📦',c:acc,sub:'planifiées cette semaine'},
+              {l:'Retours planifiés',v:'8',i:'🔄',c:'#f59e0b',sub:'récupérations à effectuer'},
+              {l:'Incidents signalés',v:'2',i:'⚠️',c:'#ef4444',sub:'en cours de traitement'}
             ],
             'roulotte_crm': [
-              {l:'Devis en attente',v:'15',i:'☰',c:acc,sub:'réponse client attendue'},
-              {l:'Contrats signés',v:'9',i:'✓',c:'#10b981',sub:'ce mois'},
-              {l:'Taux conversion',v:'38%',i:'↗',c:'#8b5cf6',sub:'devis → contrat'},
-              {l:'CA mensuel',v:'435k€',i:'€',c:'#3b82f6',sub:'objectif 500k€'}
+              {l:'Devis en attente',v:'15',i:'📋',c:acc,sub:'réponse client attendue'},
+              {l:'Contrats signés',v:'9',i:'✅',c:'#10b981',sub:'ce mois'},
+              {l:'Taux conversion',v:'38%',i:'📈',c:'#8b5cf6',sub:'devis → contrat'},
+              {l:'CA mensuel',v:'435k€',i:'💰',c:'#3b82f6',sub:'objectif 500k€'}
             ],
             'roulotte_logistique': [
               {l:'Flotte véhicules',v:'12',i:'🚐',c:acc,sub:'camions + utilitaires'},
               {l:'Tournées / sem.',v:'28',i:'📍',c:'#3b82f6',sub:'livraisons + retraits'},
-              {l:'Conflits planning',v:'3',i:'▲',c:'#ef4444',sub:'à résoudre'},
-              {l:'Ponctualité',v:'92%',i:'◷',c:'#10b981',sub:'dans les délais'}
+              {l:'Conflits planning',v:'3',i:'⚠️',c:'#ef4444',sub:'à résoudre'},
+              {l:'Ponctualité',v:'92%',i:'⏱️',c:'#10b981',sub:'dans les délais'}
             ],
             'roulotte_rh': [
-              {l:'Effectif',v:'8',i:'◉',c:acc,sub:'chauffeurs + admin'},
-              {l:'Permis C valides',v:'6 / 6',i:'✓',c:'#10b981',sub:'tous à jour'},
-              {l:'Congés (mois)',v:'2',i:'◫',c:'#f59e0b',sub:'à planifier'},
+              {l:'Effectif',v:'8',i:'👤',c:acc,sub:'chauffeurs + admin'},
+              {l:'Permis C valides',v:'6 / 6',i:'✅',c:'#10b981',sub:'tous à jour'},
+              {l:'Congés (mois)',v:'2',i:'📅',c:'#f59e0b',sub:'à planifier'},
               {l:'Formation',v:'1',i:'📚',c:'#3b82f6',sub:'ce trimestre'}
             ],
             'roulotte_comptabilite': [
-              {l:'Factures à émettre',v:'11',i:'↥',c:acc,sub:'contrats livrés'},
-              {l:'Factures à payer',v:'8',i:'↧',c:'#ef4444',sub:'fournisseurs'},
+              {l:'Factures à émettre',v:'11',i:'📤',c:acc,sub:'contrats livrés'},
+              {l:'Factures à payer',v:'8',i:'📥',c:'#ef4444',sub:'fournisseurs'},
               {l:'Encours clients',v:'680k€',i:'💳',c:'#f59e0b',sub:'créances actives'},
-              {l:'Délai paiement',v:'38j',i:'◷',c:'#8b5cf6',sub:'moyenne clients'}
+              {l:'Délai paiement',v:'38j',i:'⏱️',c:'#8b5cf6',sub:'moyenne clients'}
             ],
             'roulotte_administratif': [
-              {l:'Docs en attente',v:'4',i:'▫',c:'#f59e0b',sub:'à signer'},
-              {l:'Contrats actifs',v:'45',i:'✎',c:acc,sub:'locations en cours'},
-              {l:'CT à planifier',v:'3',i:'⌕',c:'#ef4444',sub:'contrôles techniques'},
-              {l:'Conformité',v:'98%',i:'✓',c:'#10b981',sub:'équipements normés'}
+              {l:'Docs en attente',v:'4',i:'📄',c:'#f59e0b',sub:'à signer'},
+              {l:'Contrats actifs',v:'45',i:'📝',c:acc,sub:'locations en cours'},
+              {l:'CT à planifier',v:'3',i:'🔍',c:'#ef4444',sub:'contrôles techniques'},
+              {l:'Conformité',v:'98%',i:'✅',c:'#10b981',sub:'équipements normés'}
             ],
             'echafaudage_exploitation': [
-              {l:'Chantiers montage',v:'8',i:'◆',c:acc,sub:'actifs en ce moment'},
-              {l:'Tonnes en location',v:'320t / 450t',i:'▣',c:'#3b82f6',sub:'taux utilisation 71%'},
-              {l:'Montages sem.',v:'5',i:'✱',c:'#10b981',sub:'nouvelles installations'},
-              {l:'Démontages sem.',v:'3',i:'↻',c:'#f59e0b',sub:'récupérations planifiées'}
+              {l:'Chantiers montage',v:'8',i:'🏗️',c:acc,sub:'actifs en ce moment'},
+              {l:'Tonnes en location',v:'320t / 450t',i:'📦',c:'#3b82f6',sub:'taux utilisation 71%'},
+              {l:'Montages sem.',v:'5',i:'⚙️',c:'#10b981',sub:'nouvelles installations'},
+              {l:'Démontages sem.',v:'3',i:'🔄',c:'#f59e0b',sub:'récupérations planifiées'}
             ],
             'echafaudage_crm': [
-              {l:'Devis en attente',v:'22',i:'☰',c:acc,sub:'réponse client attendue'},
-              {l:'Contrats signés',v:'7',i:'✓',c:'#10b981',sub:'ce mois'},
-              {l:'Taux conversion',v:'35%',i:'↗',c:'#8b5cf6',sub:'devis → contrat'},
-              {l:'CA mensuel',v:'1.25M€',i:'€',c:'#3b82f6',sub:'objectif 1.5M€'}
+              {l:'Devis en attente',v:'22',i:'📋',c:acc,sub:'réponse client attendue'},
+              {l:'Contrats signés',v:'7',i:'✅',c:'#10b981',sub:'ce mois'},
+              {l:'Taux conversion',v:'35%',i:'📈',c:'#8b5cf6',sub:'devis → contrat'},
+              {l:'CA mensuel',v:'1.25M€',i:'💰',c:'#3b82f6',sub:'objectif 1.5M€'}
             ],
             'echafaudage_logistique': [
-              {l:'Parc matériel',v:'450t',i:'▣',c:acc,sub:'stock total'},
-              {l:'En maintenance',v:'15t',i:'✱',c:'#ef4444',sub:'en réparation'},
+              {l:'Parc matériel',v:'450t',i:'📦',c:acc,sub:'stock total'},
+              {l:'En maintenance',v:'15t',i:'🔧',c:'#ef4444',sub:'en réparation'},
               {l:'Flotte véhicules',v:'6',i:'🚐',c:'#3b82f6',sub:'camions + grues'},
-              {l:'Valeur parc',v:'2.8M€',i:'€',c:'#8b5cf6',sub:'immobilisations 2026'}
+              {l:'Valeur parc',v:'2.8M€',i:'💰',c:'#8b5cf6',sub:'immobilisations 2026'}
             ],
             'echafaudage_rh': [
               {l:'Monteurs',v:'18',i:'👷',c:acc,sub:'effectif terrain'},
-              {l:'Habilitations',v:'4',i:'▲',c:'#ef4444',sub:'à renouveler'},
-              {l:'Absences (mois)',v:'2',i:'◫',c:'#f59e0b',sub:'CP + maladie'},
+              {l:'Habilitations',v:'4',i:'⚠️',c:'#ef4444',sub:'à renouveler'},
+              {l:'Absences (mois)',v:'2',i:'📅',c:'#f59e0b',sub:'CP + maladie'},
               {l:'Formation',v:'2',i:'📚',c:'#3b82f6',sub:'travaux en hauteur'}
             ],
             'echafaudage_comptabilite': [
-              {l:'Factures à émettre',v:'16',i:'↥',c:acc,sub:'fin de mois'},
-              {l:'Factures à payer',v:'19',i:'↧',c:'#ef4444',sub:'fournisseurs + ST'},
+              {l:'Factures à émettre',v:'16',i:'📤',c:acc,sub:'fin de mois'},
+              {l:'Factures à payer',v:'19',i:'📥',c:'#ef4444',sub:'fournisseurs + ST'},
               {l:'Encours clients',v:'1.8M€',i:'💳',c:'#f59e0b',sub:'créances actives'},
-              {l:'Délai paiement',v:'52j',i:'◷',c:'#8b5cf6',sub:'moyenne clients'}
+              {l:'Délai paiement',v:'52j',i:'⏱️',c:'#8b5cf6',sub:'moyenne clients'}
             ],
             'echafaudage_administratif': [
-              {l:'Docs en attente',v:'5',i:'▫',c:'#f59e0b',sub:'à signer'},
-              {l:'Contrats actifs',v:'34',i:'✎',c:acc,sub:'chantiers en portefeuille'},
+              {l:'Docs en attente',v:'5',i:'📄',c:'#f59e0b',sub:'à signer'},
+              {l:'Contrats actifs',v:'34',i:'📝',c:acc,sub:'chantiers en portefeuille'},
               {l:'Habilitations',v:'4',i:'🛡️',c:'#ef4444',sub:'CACES à renouveler'},
-              {l:'Conformité',v:'95%',i:'✓',c:'#10b981',sub:'certifications'}
+              {l:'Conformité',v:'95%',i:'✅',c:'#10b981',sub:'certifications'}
             ]
           };
           const kpis = KPI_DATA[svcKey];
@@ -178,7 +178,7 @@ export default function TabKpiDashboard(__props) {
           if (!kpis) {
             return (
               <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'60px 20px',textAlign:'center'}}>
-                <div style={{fontSize:'2.5rem',marginBottom:16}}>▦</div>
+                <div style={{fontSize:'2.5rem',marginBottom:16}}>📊</div>
                 <div style={{fontWeight:700,color:$text,fontSize:'1rem',marginBottom:8}}>Tableau de bord en cours de configuration</div>
                 <div style={{color:$textMut,fontSize:'0.82rem',maxWidth:320}}>{svcIcon} {svcLabel} — Les indicateurs seront disponibles prochainement.</div>
               </div>
@@ -198,7 +198,7 @@ export default function TabKpiDashboard(__props) {
                   <div style={{fontSize:'0.76rem',color:$textMut,marginTop:3}}>{entrepriseNom} — Indicateurs clés</div>
                 </div>
                 <div style={{fontSize:'0.68rem',color:$textMut,background:$bgSub,padding:'4px 10px',borderRadius:6,border:`1px solid ${$border}`}}>
-                  {isMonday ? '🟢 Monday.com' : '▦ Estimées'} · Mars 2026
+                  {isMonday ? '🟢 Monday.com' : '📊 Estimées'} · Mars 2026
                 </div>
               </div>
               <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,overflow:'hidden',marginBottom:16,margin:'0 8px 16px'}}>
@@ -239,7 +239,7 @@ export default function TabKpiDashboard(__props) {
                               <span style={{fontSize:'0.68rem',color:'#6b7280',whiteSpace:'nowrap'}}>{resp.split(' ')[1]||resp}</span>
                               <span style={{fontSize:'0.74rem',fontWeight:700,color:'#dc2626',background:'#fee2e2',padding:'2px 7px',borderRadius:8}}>{dl===0?"Aujourd'hui !":dl+'j'}</span>
                               <span style={{fontSize:'0.68rem',fontWeight:600,padding:'2px 6px',borderRadius:4,background:'#bca58a22',color:'#64748b'}}>{a.s}</span>
-                              {ext.drive && <a href={ext.drive} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.68rem',color:'#1a73e8',textDecoration:'none',padding:'2px 6px',borderRadius:4,background:'#1a73e810',border:'1px solid #1a73e820',whiteSpace:'nowrap'}}>▸ Drive</a>}
+                              {ext.drive && <a href={ext.drive} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.68rem',color:'#1a73e8',textDecoration:'none',padding:'2px 6px',borderRadius:4,background:'#1a73e810',border:'1px solid #1a73e820',whiteSpace:'nowrap'}}>📁 Drive</a>}
                               <a href={"https://ezel-batiment.monday.com/boards/6470581185/views/159052052/item/"+a.id} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.68rem',color:'#0073ea',textDecoration:'none',padding:'2px 6px',borderRadius:4,background:'#0073ea10',border:'1px solid #0073ea20',whiteSpace:'nowrap'}}>↗ Monday</a>
                             </div>
                           </div>
@@ -249,7 +249,7 @@ export default function TabKpiDashboard(__props) {
                   )}
                   {aoSemDash.length > 0 && aoUrgDash.length === 0 && (
                     <div style={{background:'#fffbeb',border:'1px solid #fde68a',borderRadius:crmRd,margin:'0 8px 14px',padding:'10px 14px'}}>
-                      <div style={{fontWeight:700,color:'#d97706',fontSize:'0.82rem',marginBottom:6}}>▲ AO à délai serré — deadline dans les 21 jours ({aoSemDash.length})</div>
+                      <div style={{fontWeight:700,color:'#d97706',fontSize:'0.82rem',marginBottom:6}}>⚠️ AO à délai serré — deadline dans les 21 jours ({aoSemDash.length})</div>
                       <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                         {aoSemDash.map((a,i) => { const dl=dlLeftDash(a.d); return (
                           <div key={i} style={{padding:'4px 8px',background:'#fff',border:'1px solid #fde68a',borderRadius:crmRd,display:'flex',alignItems:'center',gap:5}}>
@@ -262,7 +262,7 @@ export default function TabKpiDashboard(__props) {
                   )}
                   <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,margin:'0 8px 14px',overflow:'hidden'}}>
                     <div style={{padding:'10px 16px',borderBottom:`1px solid ${$border}`,background:$bgSub,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                      <div style={{fontWeight:700,color:$text,fontSize:'0.82rem'}}>▦ Répartition par statut — AO actifs</div>
+                      <div style={{fontWeight:700,color:$text,fontSize:'0.82rem'}}>📊 Répartition par statut — AO actifs</div>
                       <div style={{fontSize:'0.68rem',fontWeight:600,color:acc}}>{AO_RAW.length} AO total · Board Monday</div>
                     </div>
                     <div style={{padding:'14px 16px',display:'flex',flexDirection:'column',gap:7}}>
@@ -287,7 +287,7 @@ export default function TabKpiDashboard(__props) {
                     return (
                       <div style={{background:$bgCard,borderRadius:crmRd,border:'1px solid #f59e0b33',margin:'0 8px 14px',overflow:'hidden'}}>
                         <div style={{padding:'10px 16px',borderBottom:'1px solid #f59e0b22',background:'#f59e0b08',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                          <div style={{fontWeight:700,color:'#d97706',fontSize:'0.82rem'}}>◆ Visites terrain à planifier ({visitAOs.length})</div>
+                          <div style={{fontWeight:700,color:'#d97706',fontSize:'0.82rem'}}>🏗️ Visites terrain à planifier ({visitAOs.length})</div>
                           <div style={{fontSize:'0.68rem',color:'#d97706',fontWeight:600}}>Action requise</div>
                         </div>
                         <div style={{padding:'10px 14px',display:'flex',flexDirection:'column',gap:6}}>{visitAOs.map((a,i)=>{
@@ -304,7 +304,7 @@ export default function TabKpiDashboard(__props) {
                                 <span style={{padding:'2px 7px',borderRadius:8,background:a.s.includes('problématique')?'#dc262618':'#66ccff22',color:a.s.includes('problématique')?'#dc2626':'#0284c7',fontSize:'0.68rem',fontWeight:700}}>{a.s}</span>
                                 {ext.vo==='Oui'&&<span style={{padding:'2px 6px',borderRadius:4,background:'#dc262612',color:'#dc2626',fontSize:'0.65rem',fontWeight:700}}>OBL</span>}
                                 {dl!==null&&<span style={{padding:'2px 6px',borderRadius:4,background:dl<=7?'#dc262612':'#f59e0b12',color:dl<=7?'#dc2626':'#d97706',fontSize:'0.68rem',fontWeight:700}}>J-{dl}</span>}
-                                {ext.drive&&<a href={ext.drive} target="_blank" rel="noreferrer" style={{padding:'2px 6px',borderRadius:4,background:'#1a73e810',color:'#1a73e8',fontSize:'0.65rem',textDecoration:'none',border:'1px solid #1a73e820'}}>▸</a>}
+                                {ext.drive&&<a href={ext.drive} target="_blank" rel="noreferrer" style={{padding:'2px 6px',borderRadius:4,background:'#1a73e810',color:'#1a73e8',fontSize:'0.65rem',textDecoration:'none',border:'1px solid #1a73e820'}}>📁</a>}
                               </div>
                             </div>
                           );
@@ -346,7 +346,7 @@ export default function TabKpiDashboard(__props) {
                 <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,margin:'0 8px 14px',overflow:'hidden'}}>
                   <div style={{padding:'10px 16px',borderBottom:`1px solid ${$border}`,display:'flex',alignItems:'center',justifyContent:'space-between',background:$bgSub}}>
                     <div style={{fontWeight:700,color:$text,fontSize:'0.82rem'}}>
-                      {svcKey==='ezel_execution'?'◆ Chantiers Phase 3 — Exécution':'☰ Chantiers Phase 2 — Préparation'}
+                      {svcKey==='ezel_execution'?'🏗️ Chantiers Phase 3 — Exécution':'📋 Chantiers Phase 2 — Préparation'}
                     </div>
                     <div style={{fontSize:'0.68rem',fontWeight:600,color:acc}}>{chantierList.length} chantiers · Board Monday</div>
                   </div>

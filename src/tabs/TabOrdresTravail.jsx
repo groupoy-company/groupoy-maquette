@@ -4,7 +4,7 @@
 export default function TabOrdresTravail(__props) {
   const { $accent, $bgCard, $bgSub, $border, $borderAlt, $danger, $info, $selBg, $selText, $shadow, $shadowLg, $success, $text, $textMut, $textSec, ChLink, FilLink, chNom, chantiers, crmRd, empNom, employes, filialesDynamiques, filterByFiliale, highlightStyle, odtData, odtEdit, odtFilter, odtView, setOdtData, setOdtEdit, setOdtFilter, setOdtView, showBorderAccent } = __props;
         const saveOdt = d => { setOdtData(d); localStorage.setItem('ruches_odt_data', JSON.stringify(d)); };
-        const ODT_TYPES = [{id:'travaux',label:'Travaux',color:'#3b82f6',icon:'◆'},{id:'securite',label:'Sécurité',color:'#ef4444',icon:'🛡️'},{id:'livraison',label:'Livraison',color:'#f59e0b',icon:'▸'},{id:'maintenance',label:'Maintenance',color:'#8b5cf6',icon:'✱'},{id:'inspection',label:'Inspection/Contrôle',color:'#10b981',icon:'⌕'},{id:'administratif',label:'Administratif',color:$textSec,icon:'☰'}];
+        const ODT_TYPES = [{id:'travaux',label:'Travaux',color:'#3b82f6',icon:'🏗️'},{id:'securite',label:'Sécurité',color:'#ef4444',icon:'🛡️'},{id:'livraison',label:'Livraison',color:'#f59e0b',icon:'🚛'},{id:'maintenance',label:'Maintenance',color:'#8b5cf6',icon:'🔧'},{id:'inspection',label:'Inspection/Contrôle',color:'#10b981',icon:'🔍'},{id:'administratif',label:'Administratif',color:$textSec,icon:'📋'}];
         const ODT_STATUTS = [{id:'brouillon',label:'Brouillon',color:$textSec},{id:'emis',label:'Émis',color:'#3b82f6'},{id:'en_cours',label:'En cours',color:'#f59e0b'},{id:'termine',label:'Terminé',color:'#10b981'},{id:'annule',label:'Annulé',color:'#ef4444'}];
         const ODT_PRIORITES = [{id:'urgente',label:'Urgente',color:'#dc2626'},{id:'haute',label:'Haute',color:'#f59e0b'},{id:'normale',label:'Normale',color:'#3b82f6'},{id:'basse',label:'Basse',color:$textSec}];
         const sampleOdt = [
@@ -95,13 +95,13 @@ export default function TabOrdresTravail(__props) {
                         {d.equipeIds?.length > 0 && <span>Équipe: <b>{d.equipeIds.map(id=>empNom(id)).join(', ')}</b></span>}
                       </div>
                       {d.securite && <div style={{marginTop:6,padding:'4px 10px',borderRadius:crmRd,background:$danger+'12',border:'1px solid #fecaca',fontSize:'0.72rem',color:'#991b1b'}}>🛡️ {d.securite}</div>}
-                      {d.consignes && <div style={{fontSize:'0.72rem',color:$textMut,marginTop:4,fontStyle:'italic'}}>✎ {d.consignes.substring(0,120)}{d.consignes.length>120?'...':''}</div>}
+                      {d.consignes && <div style={{fontSize:'0.72rem',color:$textMut,marginTop:4,fontStyle:'italic'}}>📝 {d.consignes.substring(0,120)}{d.consignes.length>120?'...':''}</div>}
                     </div>
                     <div style={{textAlign:'right',flexShrink:0,marginLeft:16}}>
                       <div style={{fontSize:'0.82rem',fontWeight:700,color:$accent}}>{d.heuresReelles}h / {d.heuresEstimees}h</div>
                       <div style={{width:80,height:6,background:$bgSub,borderRadius:3,overflow:'hidden',marginTop:4}}><div style={{width:Math.min(pctH,100)+'%',height:'100%',borderRadius:3,background:pctH>=100?'#dc2626':pctH>=70?'#f59e0b':'#3b82f6'}}/></div>
                       <div style={{fontSize:'0.68rem',color:$textMut,marginTop:2}}>{pctH}%</div>
-                      {d.materiel?.length > 0 && <div style={{fontSize:'0.65rem',color:$textMut,marginTop:6}}>✱ {d.materiel.length} matériel(s)</div>}
+                      {d.materiel?.length > 0 && <div style={{fontSize:'0.65rem',color:$textMut,marginTop:6}}>🔧 {d.materiel.length} matériel(s)</div>}
                     </div>
                   </div>
                 </div>;
@@ -111,7 +111,7 @@ export default function TabOrdresTravail(__props) {
             {/* Edit modal */}
             {odtEdit && (<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}} onClick={()=>setOdtEdit(null)}>
               <div style={{background:$bgCard,borderRadius:crmRd,width:'95%',maxWidth:700,maxHeight:'90vh',overflow:'auto',boxShadow:'0 20px 60px rgba(0,0,0,0.2)'}} onClick={e=>e.stopPropagation()}>
-                <div style={{padding:'16px 20px',borderBottom:`2px solid ${$accent}`,fontWeight:800,fontSize:'1rem',color:$text}}>◆ {data.find(d=>d.id===odtEdit.id)?'Modifier':'Nouvel'} Ordre de Travail</div>
+                <div style={{padding:'16px 20px',borderBottom:`2px solid ${$accent}`,fontWeight:800,fontSize:'1rem',color:$text}}>🏗️ {data.find(d=>d.id===odtEdit.id)?'Modifier':'Nouvel'} Ordre de Travail</div>
                 <div style={{padding:'16px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                   {[{k:'titre',l:'Titre',span:2},{k:'type',l:'Type',type:'select',opts:ODT_TYPES},{k:'priorite',l:'Priorité',type:'select',opts:ODT_PRIORITES},{k:'statut',l:'Statut',type:'select',opts:ODT_STATUTS},{k:'dateEmission',l:'Date émission',type:'date'},{k:'dateDebut',l:'Date début',type:'date'},{k:'dateFin',l:'Date fin',type:'date'},{k:'heuresEstimees',l:'Heures estimées',type:'number'},{k:'heuresReelles',l:'Heures réalisées',type:'number'},{k:'consignes',l:'Consignes',type:'textarea',span:2},{k:'securite',l:'Consignes sécurité',type:'textarea',span:2},{k:'observations',l:'Observations',type:'textarea',span:2}].map(f => (
                     <div key={f.k} style={{gridColumn:f.span?'span 2':''}}>

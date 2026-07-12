@@ -72,14 +72,14 @@ export default function TabDossierRh(__props) {
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    <div style={{width:40,height:40,borderRadius:10,background:$accent,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>▸</div>
+                    <div style={{width:40,height:40,borderRadius:10,background:$accent,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>📁</div>
                     <div>
                       <h2 style={{margin:'0 0 2px',fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Dossier du Personnel</h2>
                       <p style={{margin:0,fontSize:'0.8rem',color:$textMut}}>{data.length} dossiers · Visites médicales · Mutuelle · Prévoyance · DPAE</p>
                     </div>
                   </div>
                   {(()=>{const docsExp=data.flatMap(d=>d.documents||[]).filter(d=>d.statut==='expire');const vm=data.filter(d=>{if(!d.visiteMedicale?.prochaine)return false;const diff=Math.floor((new Date(d.visiteMedicale.prochaine)-new Date())/86400000);return diff<90;}).length;return(<div style={{display:'flex',gap:6}}>
-                    {docsExp.length>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#ef444415',color:'#ef4444',fontWeight:700,border:'1px solid #ef444430'}}>▲ {docsExp.length} doc expiré{docsExp.length>1?'s':''}</span>}
+                    {docsExp.length>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#ef444415',color:'#ef4444',fontWeight:700,border:'1px solid #ef444430'}}>⚠ {docsExp.length} doc expiré{docsExp.length>1?'s':''}</span>}
                     {vm>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#f59e0b15',color:'#d97706',fontWeight:700,border:'1px solid #f59e0b30'}}>{vm} visite{vm>1?'s':''} à planifier</span>}
                   </div>);})()}
                 </div>
@@ -92,12 +92,12 @@ export default function TabDossierRh(__props) {
               </div>
               <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
                 <button onClick={()=>setRhSettingsOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${rhSettingsOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:rhSettingsOpen?$accentSub:'transparent',color:rhSettingsOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                  ✱ Filtres & Colonnes {rhFilter!=='all'&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                  ⚙ Filtres & Colonnes {rhFilter!=='all'&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
                 </button>
                 {rhFilter!=='all'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setRhFilter('all')}>✕ {rhFilter}</span>}
               </div>
             </div>
-            {/* ✱ Filtres panel */}
+            {/* ⚙ Filtres panel */}
             {rhSettingsOpen&&<><div onClick={()=>setRhSettingsOpen(false)} style={{position:'fixed',inset:0,background:'transparent',zIndex:9997}}/><div style={{position:'fixed',top:210,right:20,width:320,maxHeight:'70vh',overflow:'auto',background:$bgCard,border:`1px solid ${$borderAlt}`,borderRadius:crmRd,padding:20,boxShadow:'0 12px 40px rgba(0,0,0,0.15)',zIndex:9998}} onClick={e=>e.stopPropagation()}>
               {isYilmazContext&&<div style={{marginBottom:14}}>
                 <div style={{fontSize:'0.7rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:8}}>Filtrer par filiale</div>
@@ -221,7 +221,7 @@ export default function TabDossierRh(__props) {
                                     <div style={{color:'#059669',fontWeight:600,marginTop:4}}>✓ DPAE effectuée auprès de l'URSSAF</div>
                                   </div>
                                 ) : (
-                                  <div style={{fontSize:'0.78rem',color:'#dc2626',fontWeight:600,marginTop:4}}>▲ DPAE manquante — Obligation avant J1</div>
+                                  <div style={{fontSize:'0.78rem',color:'#dc2626',fontWeight:600,marginTop:4}}>⚠ DPAE manquante — Obligation avant J1</div>
                                 )}
                               </div>
                               <div style={{padding:'12px 14px',border:`1px solid ${$border}`,background: carteBtp ? '#ecfdf5' : '#fef2f2'}}>
@@ -233,7 +233,7 @@ export default function TabDossierRh(__props) {
                                     <div style={{color:'#059669',fontWeight:600,marginTop:4}}>✓ Carte BTP active</div>
                                   </div>
                                 ) : (
-                                  <div style={{fontSize:'0.78rem',color:'#dc2626',fontWeight:600,marginTop:4}}>▲ Carte BTP manquante — Obligatoire pour tous les intervenants chantier</div>
+                                  <div style={{fontSize:'0.78rem',color:'#dc2626',fontWeight:600,marginTop:4}}>⚠ Carte BTP manquante — Obligatoire pour tous les intervenants chantier</div>
                                 )}
                               </div>
                               <div style={{marginTop:6,padding:'10px 12px',background:$info+'12',border:'1px solid #bfdbfe',fontSize:'0.75rem',color:'#1e40af'}}>

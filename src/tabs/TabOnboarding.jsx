@@ -7,8 +7,8 @@ export default function TabOnboarding(__props) {
         const OB_POSTES = [
           {id:'ouvrier_btp', label:'Ouvrier BTP', icon:'⛏', color:'#f59e0b'},
           {id:'chef_chantier', label:'Chef de chantier', icon:'🪖', color:'#ef4444'},
-          {id:'charge_affaires', label:"Chargé d'affaires", icon:'☰', color:'#3b82f6'},
-          {id:'conducteur_travaux', label:'Conducteur de travaux', icon:'◆', color:'#8b5cf6'},
+          {id:'charge_affaires', label:"Chargé d'affaires", icon:'📋', color:'#3b82f6'},
+          {id:'conducteur_travaux', label:'Conducteur de travaux', icon:'🏗', color:'#8b5cf6'},
           {id:'assistante_admin', label:'Assistante administrative', icon:'🗂', color:'#10b981'},
           {id:'direction', label:'Direction / Cadre', icon:'👔', color:'#1e40af'}
         ];
@@ -73,7 +73,7 @@ export default function TabOnboarding(__props) {
               {t:'Harnais antichute (si travail en hauteur)', obligatoire:false, delai:'S1'},
               {t:'Bouchons d\'oreilles / casque antibruit', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive dossier équipe', obligatoire:false, delai:'S1'},
               {t:'Partage dossier procédures sécurité', obligatoire:true, delai:'J1'},
               {t:'Accès dossier modèles (bons, rapports)', obligatoire:false, delai:'S1'}
@@ -144,7 +144,7 @@ export default function TabOnboarding(__props) {
               {t:'Assurance véhicule vérifiée', obligatoire:true, delai:'J1'},
               {t:'Charte utilisation véhicule signée', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'✱ Matériel & Équipements', items:[
+            {cat:'🔧 Matériel & Équipements', items:[
               {t:'Téléphone professionnel (si poste le requiert)', obligatoire:true, delai:'J1'},
               {t:'Tablette chantier configurée', obligatoire:false, delai:'S1'},
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
@@ -156,7 +156,7 @@ export default function TabOnboarding(__props) {
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
               {t:'Harnais antichute', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive — dossiers chantiers', obligatoire:true, delai:'J1'},
               {t:'Partage dossier templates (PPSPS, DOE, PV)', obligatoire:true, delai:'J1'},
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
@@ -224,7 +224,7 @@ export default function TabOnboarding(__props) {
               {t:'Assurance véhicule vérifiée', obligatoire:true, delai:'J1'},
               {t:'Charte utilisation véhicule signée', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'✱ Matériel & Équipements', items:[
+            {cat:'🔧 Matériel & Équipements', items:[
               {t:'Téléphone professionnel (si poste le requiert)', obligatoire:true, delai:'J1'},
               {t:'Tablette ou laptop terrain', obligatoire:false, delai:'S1'},
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
@@ -236,7 +236,7 @@ export default function TabOnboarding(__props) {
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
               {t:'Harnais antichute', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive — dossiers chantiers', obligatoire:true, delai:'J1'},
               {t:'Partage dossier templates (PPSPS, DOE, PV)', obligatoire:true, delai:'J1'},
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
@@ -306,7 +306,7 @@ export default function TabOnboarding(__props) {
               {t:'Assurance véhicule vérifiée', obligatoire:true, delai:'J1'},
               {t:'Charte utilisation véhicule signée', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'✱ Matériel & Équipements', items:[
+            {cat:'🔧 Matériel & Équipements', items:[
               {t:'Téléphone professionnel (si poste le requiert)', obligatoire:true, delai:'J1'},
               {t:'Tablette chantier configurée', obligatoire:false, delai:'S1'},
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
@@ -318,7 +318,7 @@ export default function TabOnboarding(__props) {
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
               {t:'Harnais antichute', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive — dossiers chantiers', obligatoire:true, delai:'J1'},
               {t:'Partage dossier templates (PPSPS, DOE, PV)', obligatoire:true, delai:'J1'},
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
@@ -377,7 +377,7 @@ export default function TabOnboarding(__props) {
               {t:'Compte Google Workspace complet (Drive, Agenda, Meet, Sheets)', obligatoire:true, delai:'J1'},
               {t:'Accès Yousign (si signatures)', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'✱ Matériel IT', items:[
+            {cat:'🔧 Matériel IT', items:[
               {t:'Ordinateur portable configuré', obligatoire:true, delai:'J1'},
               {t:'Écran externe (si bureau)', obligatoire:false, delai:'J1'},
               {t:'Souris + clavier', obligatoire:false, delai:'J1'},
@@ -385,7 +385,7 @@ export default function TabOnboarding(__props) {
               {t:'Imprimante / scanner configuré', obligatoire:false, delai:'S1'},
               {t:'Badge accès bureaux', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive — tous les dossiers partagés', obligatoire:true, delai:'J1'},
               {t:'Partage dossier templates administratifs', obligatoire:true, delai:'J1'},
               {t:'Accès dossier RH (contrats, absences)', obligatoire:true, delai:'J1'},
@@ -451,13 +451,13 @@ export default function TabOnboarding(__props) {
               {t:'Carte carburant + badge télépéage', obligatoire:true, delai:'J1'},
               {t:'Assurance véhicule', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'✱ Matériel', items:[
+            {cat:'🔧 Matériel', items:[
               {t:'Ordinateur portable haut de gamme', obligatoire:true, delai:'J1'},
               {t:'Téléphone professionnel', obligatoire:true, delai:'J1'},
               {t:'Bureau aménagé', obligatoire:true, delai:'J1'},
               {t:'Badge accès tous sites', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'▸ Dossiers & Drive', items:[
+            {cat:'📁 Dossiers & Drive', items:[
               {t:'Accès Google Drive — tous les dossiers stratégiques', obligatoire:true, delai:'J1'},
               {t:'Accès dossier direction / CODIR', obligatoire:true, delai:'J1'},
               {t:'Accès dossier juridique', obligatoire:true, delai:'S1'},
@@ -516,13 +516,13 @@ export default function TabOnboarding(__props) {
               {OB_POSTES.map(p => <button key={p.id} onClick={()=>setObPosteFilter(p.id)} style={{padding:'6px 14px',borderRadius:Math.max(crmRd-2,0),border:'none',cursor:'pointer',background:obPosteFilter===p.id?p.color:'transparent',color:obPosteFilter===p.id?'#fff':$textMut,fontWeight:obPosteFilter===p.id?600:400,fontSize:'0.78rem',transition:'all 0.15s',fontFamily:'inherit'}}>{p.icon} {p.label}</button>)}</div>
               <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
                 <button onClick={()=>setObSettingsOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${obSettingsOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:obSettingsOpen?$accentSub:'transparent',color:obSettingsOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                  ✱ Filtres & Colonnes {(obStatutFilter!=='tous'||obFilialeFilter!=='tous')&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                  ⚙ Filtres & Colonnes {(obStatutFilter!=='tous'||obFilialeFilter!=='tous')&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
                 </button>
                 {obStatutFilter!=='tous'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setObStatutFilter('tous')}>✕ {obStatutFilter==='en_cours'?'En cours':obStatutFilter==='planifie'?'Planifié':'Terminé'}</span>}
                 {obFilialeFilter!=='tous'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setObFilialeFilter('tous')}>✕ Filiale</span>}
               </div>
             </div>
-            {/* ✱ Filtres panel */}
+            {/* ⚙ Filtres panel */}
             {obSettingsOpen&&<><div onClick={()=>setObSettingsOpen(false)} style={{position:'fixed',inset:0,background:'transparent',zIndex:9997}}/><div style={{position:'fixed',top:210,right:20,width:320,maxHeight:'70vh',overflow:'auto',background:$bgCard,border:`1px solid ${$borderAlt}`,borderRadius:crmRd,padding:20,boxShadow:'0 12px 40px rgba(0,0,0,0.15)',zIndex:9998}} onClick={e=>e.stopPropagation()}>
               <div style={{marginBottom:14}}>
                 <div style={{fontSize:'0.7rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:8}}>Filtrer par statut</div>
@@ -559,8 +559,8 @@ export default function TabOnboarding(__props) {
                     {l:'Planifiés',v:planifies,c:$warn,ic:'◔'},
                     {l:'Terminés',v:termines,c:$success,ic:'✓'},
                     {l:'Tâches complétées',v:`${allDone}/${allItems.length}`,c:$accent,ic:'◉',sub:globalPct+'%'},
-                    {l:'Obligatoires OK',v:`${obligDone}/${allOblig.length}`,c:obligOverdue>0?$danger:$success,ic:'▲',sub:obligOverdue>0?obligOverdue+' en attente':'Tout OK'},
-                    {l:'Progression',v:globalPct+'%',c:globalPct>=80?$success:globalPct>=50?$warn:$danger,ic:'▦',bar:true,barPct:globalPct}
+                    {l:'Obligatoires OK',v:`${obligDone}/${allOblig.length}`,c:obligOverdue>0?$danger:$success,ic:'⚠',sub:obligOverdue>0?obligOverdue+' en attente':'Tout OK'},
+                    {l:'Progression',v:globalPct+'%',c:globalPct>=80?$success:globalPct>=50?$warn:$danger,ic:'📊',bar:true,barPct:globalPct}
                   ].map((k,i)=>(
                     <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'14px 16px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default',borderBottom:`3px solid ${k.c}`}}
                     onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
@@ -630,7 +630,7 @@ export default function TabOnboarding(__props) {
                                 return (
                                   <div key={i} onClick={(e) => {e.stopPropagation(); const updated = data.map(d => d.id===ob.id?{...d, checklist: d.checklist.map((cc,ii) => ii===globalIdx?{...cc,done:!cc.done}:cc)}:d); saveOb(updated);}} style={{display:'flex', alignItems:'center', gap:6, padding:'3px 6px', cursor:'pointer', borderRadius:Math.max(crmRd-3,2),background: c.done ? $success+'08' : c.obligatoire && !c.done ? $danger+'06' : 'transparent',transition:'all 0.15s',border:`1px solid ${c.done?$success+'15':c.obligatoire&&!c.done?$danger+'10':'transparent'}`}}>
                                     <span style={{width:15, height:15, borderRadius:Math.max(crmRd-4,3),border: c.done ? 'none' : `2px solid ${c.obligatoire?$danger+'50':$border}`, background: c.done ? $success : 'transparent', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontSize:'0.58rem', flexShrink:0, transition:'all 0.15s', boxShadow: c.done?`0 0 0 2px ${$success}20`:'none'}}>{c.done ? '✓' : ''}</span>
-                                    <span style={{fontSize:'0.72rem', color: c.done ? $success : $textSec, textDecoration: c.done ? 'line-through' : 'none'}}>{c.obligatoire && !c.done ? '▲ ' : ''}{c.t}{c.delai&&<span style={{marginLeft:4,padding:'0 4px',borderRadius:4,fontSize:'0.55rem',fontWeight:600,background:c.delai==='Avant J1'?'#8b5cf620':c.delai==='J1'?'#f9731620':c.delai==='S1'?'#3b82f620':'#10b98120',color:c.delai==='Avant J1'?'#8b5cf6':c.delai==='J1'?'#f97316':c.delai==='S1'?'#3b82f6':'#10b981'}}>{c.delai}</span>}</span>
+                                    <span style={{fontSize:'0.72rem', color: c.done ? $success : $textSec, textDecoration: c.done ? 'line-through' : 'none'}}>{c.obligatoire && !c.done ? '⚠ ' : ''}{c.t}{c.delai&&<span style={{marginLeft:4,padding:'0 4px',borderRadius:4,fontSize:'0.55rem',fontWeight:600,background:c.delai==='Avant J1'?'#8b5cf620':c.delai==='J1'?'#f9731620':c.delai==='S1'?'#3b82f620':'#10b98120',color:c.delai==='Avant J1'?'#8b5cf6':c.delai==='J1'?'#f97316':c.delai==='S1'?'#3b82f6':'#10b981'}}>{c.delai}</span>}</span>
                                   </div>
                                 );
                               })}
@@ -653,7 +653,7 @@ export default function TabOnboarding(__props) {
             return null;
           })()}
           {obEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setObEdit(null)}><div style={{background:$bgCard,width:'94%',maxWidth:600,maxHeight:'88vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(d=>d.id===obEdit.id)?'✎ Modifier':'➕ Nouvel'} onboarding</span><button onClick={()=>setObEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(d=>d.id===obEdit.id)?'✏️ Modifier':'➕ Nouvel'} onboarding</span><button onClick={()=>setObEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
               <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                 <div style={{gridColumn:'span 2'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>Collaborateur</label><input value={obEdit.collaborateur||''} onChange={e=>setObEdit({...obEdit,collaborateur:e.target.value})} style={{width:'100%',padding:'7px 10px',border:`1px solid ${$border}`,borderRadius:crmRd,fontSize:'0.82rem',fontFamily:'inherit',background:$bgCard,color:$text,outline:'none',boxSizing:'border-box'}}/></div>
                 <div><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>Poste</label><input value={obEdit.poste||''} onChange={e=>setObEdit({...obEdit,poste:e.target.value})} style={{width:'100%',padding:'7px 10px',border:`1px solid ${$border}`,borderRadius:crmRd,fontSize:'0.82rem',fontFamily:'inherit',background:$bgCard,color:$text,outline:'none',boxSizing:'border-box'}}/></div>

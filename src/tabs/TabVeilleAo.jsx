@@ -8,7 +8,7 @@ export default function TabVeilleAo(__props) {
           const ACC = navEntreprise==='ezel'?'#007ab5':navEntreprise==='roulotte'?'#C49A2A':navEntreprise==='echafaudage'?'#9f58bd':navEntreprise==='etancheite'?'#12856f':navEntreprise==='yilmaz'?'#555555':'#007ab5';
           const svcKey = navEntreprise + '_' + navService;
           const filialesOp = filialesEnrichies.filter(f => !['GROUP OY','INVEST LOC','INVEST EXE','YILMAZ'].includes(f.nom));
-          const svcIcon = CRM_FIL_ICONS[navEntreprise] || '◆';
+          const svcIcon = CRM_FIL_ICONS[navEntreprise] || '🏗️';
 
           // Logos SVG
           const LogoSpigao = ({size=20}) => (<svg width={size} height={size} viewBox="0 0 24 24"><defs><linearGradient id="spG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#ff6d00"/><stop offset="100%" stopColor="#e65100"/></linearGradient></defs><circle cx="12" cy="12" r="10" fill="url(#spG)"/><text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">S</text></svg>);
@@ -64,7 +64,7 @@ export default function TabVeilleAo(__props) {
           };
 
           const tabGroupes = [
-            { id: 'tous', label: '☰ Tous', count: veilleAO.length },
+            { id: 'tous', label: '📋 Tous', count: veilleAO.length },
             { id: 'nouveaux', label: '🆕 Nouveaux', count: veilleAO.filter(a => a.statut === 'nouveau').length },
             { id: 'suivis', label: '👁️ Suivis', count: veilleAO.filter(a => !['nouveau','hors_cible','no_go','archive'].includes(a.statut)).length },
             { id: 'archives', label: '🗄️ Archives', count: veilleAO.filter(a => ['hors_cible','no_go','archive'].includes(a.statut)).length }
@@ -100,15 +100,15 @@ export default function TabVeilleAo(__props) {
                           <div style={{display:'flex', gap:5, flexWrap:'wrap'}}>
                             <span style={{padding:'2px 8px', borderRadius:8, background:vs.bg||'#f1f5f9', color:vs.color||'#64748b', fontSize:'0.7rem', fontWeight:700, border:`1px solid ${vs.color||'#64748b'}33`}}>{vs.icon} {vs.label}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:pInfo.bg, color:pInfo.color, fontSize:'0.7rem', fontWeight:700}}>{ao.priorite}</span>
-                            <span style={{padding:'2px 8px', borderRadius:8, background:typeColor+'15', color:typeColor, fontSize:'0.7rem', fontWeight:700, border:`1px solid ${typeColor}30`}}>{ao.type === 'Public' ? '◆' : ao.type === 'Privé' ? '▪' : '🏠'} {ao.type}</span>
+                            <span style={{padding:'2px 8px', borderRadius:8, background:typeColor+'15', color:typeColor, fontSize:'0.7rem', fontWeight:700, border:`1px solid ${typeColor}30`}}>{ao.type === 'Public' ? '🏛️' : ao.type === 'Privé' ? '🏢' : '🏠'} {ao.type}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:srcColor+'15', color:srcColor, fontSize:'0.7rem', fontWeight:700}}>{ao.source}</span>
                             {dlDays !== null && dlDays >= 0 && dlDays <= 7 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fee2e2', color:'#dc2626', fontSize:'0.7rem', fontWeight:700}}>⏰ J-{dlDays}</span>}
-                            {dlDays !== null && dlDays < 0 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fef3c7', color:'#92400e', fontSize:'0.7rem', fontWeight:700}}>▲ Expirée</span>}
+                            {dlDays !== null && dlDays < 0 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fef3c7', color:'#92400e', fontSize:'0.7rem', fontWeight:700}}>⚠️ Expirée</span>}
                           </div>
                         </div>
                         <div style={{display:'flex', gap:6, flexShrink:0, marginLeft:14}}>
                           <button onClick={()=>setVeilleSelectedAO(null)} style={{width:28,height:28,borderRadius:'50%',border:`1px solid ${$border}`,background:$bgSub,fontSize:'0.9rem',color:$textMut,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center'}}>✕</button>
-                          <button onClick={()=>{ const va=veilleAO.find(a=>a.id===veilleSelectedAO); if(va){setVeilleAOPrefill({n:va.titre,m:va.moa||va.maitrise_ouvrage||'',tm:va.type||'Marché public',b:va.budget||0,d:va.deadline||''});} setVeilleSelectedAO(null);setOngletActif('suivi_dossiers'); }} style={{padding:'5px 11px', borderRadius:crmRd, border:'1px solid #007ab533', background:'#007ab510', fontSize:'0.73rem', fontWeight:700, color:'#007ab5', cursor:'pointer'}}>☰ Passer en Suivi Dossiers →</button>
+                          <button onClick={()=>{ const va=veilleAO.find(a=>a.id===veilleSelectedAO); if(va){setVeilleAOPrefill({n:va.titre,m:va.moa||va.maitrise_ouvrage||'',tm:va.type||'Marché public',b:va.budget||0,d:va.deadline||''});} setVeilleSelectedAO(null);setOngletActif('suivi_dossiers'); }} style={{padding:'5px 11px', borderRadius:crmRd, border:'1px solid #007ab533', background:'#007ab510', fontSize:'0.73rem', fontWeight:700, color:'#007ab5', cursor:'pointer'}}>📋 Passer en Suivi Dossiers →</button>
                         </div>
                       </div>
                       {/* Fields grid */}
@@ -124,10 +124,10 @@ export default function TabVeilleAo(__props) {
                       </div>
                       {/* Quick actions */}
                       <div style={{display:'flex',gap:7,marginBottom:12,flexWrap:'wrap'}}>
-                        {ao.source==='BOAMP' && <a href={"https://www.boamp.fr/avis/detail/"+ao.ref.replace('BOAMP-','')} target="_blank" rel="noreferrer" style={{padding:'5px 12px',borderRadius:crmRd,background:'#00009115',color:'#000091',border:'1px solid #00009133',fontSize:'0.73rem',fontWeight:700,textDecoration:'none'}}>◆ Voir sur BOAMP</a>}
-                        <button onClick={()=>{navigator.clipboard&&navigator.clipboard.writeText(ao.titre);}} style={{padding:'5px 12px',borderRadius:crmRd,background:$bgSub,color:$textSec,border:"1px solid "+$border,fontSize:'0.73rem',cursor:'pointer'}}>☰ Copier intitulé</button>
-                        <button onClick={()=>{ const va=veilleAO.find(a=>a.id===veilleSelectedAO); if(va){setVeilleAOPrefill({n:va.titre,m:va.moa||va.maitrise_ouvrage||'',tm:va.type||'Marché public',b:va.budget||0,d:va.deadline||''});} setVeilleSelectedAO(null);setOngletActif('suivi_dossiers'); }} style={{padding:'5px 12px',borderRadius:crmRd,background:'#007ab510',color:'#007ab5',border:'1px solid #007ab533',fontSize:'0.73rem',fontWeight:700,cursor:'pointer'}}>☰ Passer en Suivi Dossiers →</button>
-                        {ao.statut==='go_a_traiter' && <span style={{padding:'5px 12px',borderRadius:crmRd,background:'#05966910',color:'#059669',border:'1px solid #05966930',fontSize:'0.73rem',fontWeight:700}}>✓ GO décidé — À transférer dans Suivi</span>}
+                        {ao.source==='BOAMP' && <a href={"https://www.boamp.fr/avis/detail/"+ao.ref.replace('BOAMP-','')} target="_blank" rel="noreferrer" style={{padding:'5px 12px',borderRadius:crmRd,background:'#00009115',color:'#000091',border:'1px solid #00009133',fontSize:'0.73rem',fontWeight:700,textDecoration:'none'}}>🏛️ Voir sur BOAMP</a>}
+                        <button onClick={()=>{navigator.clipboard&&navigator.clipboard.writeText(ao.titre);}} style={{padding:'5px 12px',borderRadius:crmRd,background:$bgSub,color:$textSec,border:"1px solid "+$border,fontSize:'0.73rem',cursor:'pointer'}}>📋 Copier intitulé</button>
+                        <button onClick={()=>{ const va=veilleAO.find(a=>a.id===veilleSelectedAO); if(va){setVeilleAOPrefill({n:va.titre,m:va.moa||va.maitrise_ouvrage||'',tm:va.type||'Marché public',b:va.budget||0,d:va.deadline||''});} setVeilleSelectedAO(null);setOngletActif('suivi_dossiers'); }} style={{padding:'5px 12px',borderRadius:crmRd,background:'#007ab510',color:'#007ab5',border:'1px solid #007ab533',fontSize:'0.73rem',fontWeight:700,cursor:'pointer'}}>📋 Passer en Suivi Dossiers →</button>
+                        {ao.statut==='go_a_traiter' && <span style={{padding:'5px 12px',borderRadius:crmRd,background:'#05966910',color:'#059669',border:'1px solid #05966930',fontSize:'0.73rem',fontWeight:700}}>✅ GO décidé — À transférer dans Suivi</span>}
                       </div>
                       {/* ── IA RAPIDE GO/NO-GO + RC ── */}
                       {(()=>{
@@ -163,8 +163,8 @@ export default function TabVeilleAo(__props) {
                               + '\n- Deadline : '+(ao.dateLimite?new Date(ao.dateLimite).toLocaleDateString('fr-FR'):'NC');
 
                             const instr = viaDoc
-                              ? '\n\nLe RC / CCTP est joint. Analyse les exigences clés, clauses importantes, références demandées.\n\nRéponds en 5 points :\n**VERDICT** : GO ✓ ou NO-GO ✕\n**RAISON** : (1 ligne)\n**EXIGENCES CLÉS** : (2-3 bullet depuis le document)\n**RISQUE CLÉ** : (1 ligne)\n**ACTION IMMÉDIATE** : (1 ligne)'
-                              : '\n\nRéponds en 4 points MAX :\n**VERDICT** : GO ✓ ou NO-GO ✕\n**RAISON** : (1 ligne)\n**RISQUE CLÉ** : (1 ligne)\n**ACTION IMMÉDIATE** : si GO (1 ligne)';
+                              ? '\n\nLe RC / CCTP est joint. Analyse les exigences clés, clauses importantes, références demandées.\n\nRéponds en 5 points :\n**VERDICT** : GO ✅ ou NO-GO ❌\n**RAISON** : (1 ligne)\n**EXIGENCES CLÉS** : (2-3 bullet depuis le document)\n**RISQUE CLÉ** : (1 ligne)\n**ACTION IMMÉDIATE** : (1 ligne)'
+                              : '\n\nRéponds en 4 points MAX :\n**VERDICT** : GO ✅ ou NO-GO ❌\n**RAISON** : (1 ligne)\n**RISQUE CLÉ** : (1 ligne)\n**ACTION IMMÉDIATE** : si GO (1 ligne)';
 
                             let messages;
                             if(viaDoc && viaDoc.type==='pdf') {
@@ -179,7 +179,7 @@ export default function TabVeilleAo(__props) {
                             const d = await r.json();
                             window[viaKey] = d.content?.[0]?.text||'Erreur';
                             window[viaKey+'_l'] = false;
-                          } catch(e) { window[viaKey]='▲ Erreur: '+e.message; window[viaKey+'_l']=false; }
+                          } catch(e) { window[viaKey]='⚠ Erreur: '+e.message; window[viaKey+'_l']=false; }
                           setVeilleSelectedAO(null); setTimeout(()=>setVeilleSelectedAO(ao.id),10);
                         };
 
@@ -190,20 +190,20 @@ export default function TabVeilleAo(__props) {
                               <div style={{display:'flex',alignItems:'center',gap:7}}>
                                 <span style={{fontSize:'1rem'}}>🤖</span>
                                 <span style={{fontSize:'0.75rem',fontWeight:700,color:'#007ab5'}}>Analyse IA — GO / NO-GO</span>
-                                {viaDoc&&<span style={{fontSize:'0.62rem',padding:'1px 6px',borderRadius:4,background:'#05966912',color:'#059669',fontWeight:700}}>▫ {viaDoc.name.slice(0,20)}{viaDoc.name.length>20?'...':''}</span>}
+                                {viaDoc&&<span style={{fontSize:'0.62rem',padding:'1px 6px',borderRadius:4,background:'#05966912',color:'#059669',fontWeight:700}}>📄 {viaDoc.name.slice(0,20)}{viaDoc.name.length>20?'...':''}</span>}
                                 {viaRes&&!viaLoad&&<span style={{fontSize:'0.6rem',color:$textMut}}>mis en cache</span>}
                               </div>
                               <div style={{display:'flex',alignItems:'center',gap:5,flexWrap:'wrap',justifyContent:'flex-end'}}>
                                 {/* ── SOURCE SÉLECTION ── */}
                                 <div style={{display:'flex',gap:3,alignItems:'center'}}>
 
-                                  {/* § Upload manuel */}
+                                  {/* 📎 Upload manuel */}
                                   <label title="Upload RC/CCTP/DPGF depuis votre ordinateur (PDF, DOCX, XLSX)" style={{display:'flex',alignItems:'center',gap:4,padding:'3px 9px',borderRadius:crmRd,border:'1px solid '+(viaDoc&&!viaDoc.fromBoamp&&!viaDoc.fromSpigao?'#059669':'#007ab533'),background:viaDoc&&!viaDoc.fromBoamp&&!viaDoc.fromSpigao?'#05966910':'transparent',color:viaDoc&&!viaDoc.fromBoamp&&!viaDoc.fromSpigao?'#059669':'#007ab5',fontSize:'0.68rem',fontWeight:600,cursor:'pointer'}}>
-                                    {viaDoc&&!viaDoc.fromBoamp&&!viaDoc.fromSpigao?'✓ Fichier joint':'§ Upload'}
+                                    {viaDoc&&!viaDoc.fromBoamp&&!viaDoc.fromSpigao?'✓ Fichier joint':'📎 Upload'}
                                     <input type="file" accept=".pdf,.docx,.doc,.txt,.xlsx,.xls,.csv" style={{display:'none'}} onChange={handleViaFile}/>
                                   </label>
 
-                                  {/* ◆ BOAMP auto-fetch */}
+                                  {/* 🏛️ BOAMP auto-fetch */}
                                   {ao.source==='BOAMP'&&ao.ref&&(
                                     <button
                                       title={"BOAMP : récupère automatiquement les pièces du DCE via l'API BOAMP (data.gouv.fr) — disponible Phase 1 Next.js"}
@@ -216,14 +216,14 @@ export default function TabVeilleAo(__props) {
                                       }}
                                       style={{display:'flex',alignItems:'center',gap:4,padding:'3px 9px',borderRadius:crmRd,border:'1px solid #00009133',background:viaDoc?.fromBoamp?'#00009110':'transparent',color:'#000091',fontSize:'0.68rem',fontWeight:600,cursor:'pointer',opacity:1}}
                                     >
-                                      ◆ BOAMP
+                                      🏛️ BOAMP
                                       <span style={{fontSize:'0.55rem',padding:'1px 4px',borderRadius:3,background:'#f59e0b20',color:'#d97706',fontWeight:700}}>Phase 1</span>
                                     </button>
                                   )}
 
-                                  {/* ⌕ SPIGAO */}
+                                  {/* 🔍 SPIGAO */}
                                   <button
-                                      title={"SPIGAO : pas d'API publique — ouvrir SPIGAO, télécharger le RC, puis l'uploader via '§ Upload'"}
+                                      title={"SPIGAO : pas d'API publique — ouvrir SPIGAO, télécharger le RC, puis l'uploader via '📎 Upload'"}
                                       onClick={()=>{
                                         // 🚧 Pas d'API publique SPIGAO
                                         // Workflow manuel: SPIGAO → télécharger → upload ici
@@ -265,7 +265,7 @@ export default function TabVeilleAo(__props) {
                             {/* Workflow hint + Télécharger tout */}
                             <div style={{padding:'8px 14px',background:$bgCard,borderTop:'1px solid '+$border,display:'flex',alignItems:'center',justifyContent:'space-between',gap:8,flexWrap:'wrap'}}>
                               <div style={{fontSize:'0.67rem',color:$textMut,lineHeight:1.5}}>
-                                <span style={{fontWeight:700,color:$textSec}}>Étape 1</span> → Joindre le <strong>RC</strong> (Règlement de Consultation) via § Upload ou BOAMP/SPIGAO · <span style={{fontWeight:700,color:$textSec}}>Étape 2</span> → ▶ Analyser
+                                <span style={{fontWeight:700,color:$textSec}}>Étape 1</span> → Joindre le <strong>RC</strong> (Règlement de Consultation) via 📎 Upload ou BOAMP/SPIGAO · <span style={{fontWeight:700,color:$textSec}}>Étape 2</span> → ▶ Analyser
                               </div>
                               <button
                                 onClick={()=>{
@@ -346,7 +346,7 @@ export default function TabVeilleAo(__props) {
               <div style={{padding:'18px 24px'}}>
                 <div style={{display:'flex', alignItems:'flex-start', justifyContent:'space-between'}}>
                   <div style={{display:'flex', alignItems:'center', gap:14}}>
-                    <div style={{width:44, height:44, borderRadius:10, background:'#007ab5', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.3rem', flexShrink:0}}>⌕</div>
+                    <div style={{width:44, height:44, borderRadius:10, background:'#007ab5', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.3rem', flexShrink:0}}>🔍</div>
                     <div>
                       <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:3}}>
                         <h2 style={{margin:0, fontSize:'1.1rem', fontWeight:800, color:$text, letterSpacing:'-0.01em'}}>Veille Appels d'Offres</h2>
@@ -429,10 +429,10 @@ export default function TabVeilleAo(__props) {
             {/* ═══ KPI CARDS ═══ */}
             <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:10, marginBottom:14}}>
               {[
-                { label:'Marchés détectés', value: veilleAO.length, icon:'☰', color:'#007ab5', bg:'#007ab50d', border:'#007ab525', sub: `dont ${veilleAO.filter(a=>a.statut==='nouveau').length} nouveaux`, subColor:'#007ab5' },
+                { label:'Marchés détectés', value: veilleAO.length, icon:'📋', color:'#007ab5', bg:'#007ab50d', border:'#007ab525', sub: `dont ${veilleAO.filter(a=>a.statut==='nouveau').length} nouveaux`, subColor:'#007ab5' },
                 { label:'En analyse', value: veilleAO.filter(a=>['a_regarder','en_analyse'].includes(a.statut)).length, icon:'🔬', color:'#f59e0b', bg:'#f59e0b0d', border:'#f59e0b25', sub:'À qualifier rapidement', subColor:'#d97706' },
                 { label:'GO validés', value: veilleAO.filter(a=>a.statut==='go_a_traiter').length, icon:'🚀', color:'#059669', bg:'#0596690d', border:'#05966925', sub:'À transmettre études', subColor:'#059669' },
-                { label:'Pipeline actif', value: formatMontant(pipelineTotal), icon:'€', color:'#7c3aed', bg:'#7c3aed0d', border:'#7c3aed25', sub:`${veilleAO.filter(a=>!['hors_cible','no_go','archive'].includes(a.statut)).length} marchés actifs`, subColor:'#7c3aed' },
+                { label:'Pipeline actif', value: formatMontant(pipelineTotal), icon:'💰', color:'#7c3aed', bg:'#7c3aed0d', border:'#7c3aed25', sub:`${veilleAO.filter(a=>!['hors_cible','no_go','archive'].includes(a.statut)).length} marchés actifs`, subColor:'#7c3aed' },
               ].map((s,i) => (
                 <div key={i} style={{background:s.bg, borderRadius:crmRd, border:`1px solid ${s.border}`, padding:'0', overflow:'hidden', position:'relative'}}>
                   <div style={{height:3, background:s.color, opacity:0.7}}/>
@@ -588,8 +588,8 @@ export default function TabVeilleAo(__props) {
             {/* === TABLE CLEAN === */}
               {(() => {
                 const toggleGrp = (sid) => setVeilleGroupesFermes(prev => prev.includes(sid) ? prev.filter(x => x !== sid) : [...prev, sid]);
-                const prioStyle = { 'Critique ▲': { color:'#333', bg:'#f3f3f3' }, Haute: { color: '#401694', bg: '#ede9fe' }, Moyenne: { color: '#d97706', bg: '#fef3c7' }, Basse: { color: '#2563eb', bg: '#dbeafe' } };
-                const typeColors = { Public: { color:'#0055cc', bg:'#e0f0ff', emoji:'◆' }, 'Privé': { color:'#166534', bg:'#dcfce7', emoji:'▪' }, Particulier: { color:'#7c3aed', bg:'#f3e8ff', emoji:'🏠' } };
+                const prioStyle = { 'Critique ⚠️️': { color:'#333', bg:'#f3f3f3' }, Haute: { color: '#401694', bg: '#ede9fe' }, Moyenne: { color: '#d97706', bg: '#fef3c7' }, Basse: { color: '#2563eb', bg: '#dbeafe' } };
+                const typeColors = { Public: { color:'#0055cc', bg:'#e0f0ff', emoji:'🏛️' }, 'Privé': { color:'#166534', bg:'#dcfce7', emoji:'🏢' }, Particulier: { color:'#7c3aed', bg:'#f3e8ff', emoji:'🏠' } };
                 const sourceStyle = { SPIGAO: { color: '#e65100', bg: '#fff3e0' }, BOAMP: { color: '#000091', bg: '#e3f2fd' }, Autre: { color: '#546e7a', bg: '#eceff1' } };
                 const personColors = { pierre: '#e65100', david: '#1565c0', ozdogan: '#6a1b9a' };
                 const personInitials = { pierre: 'PS', david: 'DL', ozdogan: 'OY' };
@@ -640,10 +640,10 @@ export default function TabVeilleAo(__props) {
                 const buildGroups = () => {
                   if (veilleGroupePar === 'none') return [{ key: 'all', label: 'Tous les marchés', color: '#64748b', items: filtered }];
                   if (veilleGroupePar === 'statut') return VEILLE_STATUTS.filter(vs => filtered.some(a => a.statut === vs.id)).map(vs => ({ key: vs.id, label: vs.label, color: vs.color, icon: vs.icon, items: filtered.filter(a => a.statut === vs.id) }));
-                  if (veilleGroupePar === 'type') return ['Public','Privé','Particulier'].filter(t => filtered.some(a => a.type === t)).map(t => ({ key: t, label: t, color: typeColors[t], icon: t === 'Public' ? '◆' : t === 'Privé' ? '▪' : '🏠', items: filtered.filter(a => a.type === t) }));
+                  if (veilleGroupePar === 'type') return ['Public','Privé','Particulier'].filter(t => filtered.some(a => a.type === t)).map(t => ({ key: t, label: t, color: typeColors[t], icon: t === 'Public' ? '🏛️' : t === 'Privé' ? '🏢' : '🏠', items: filtered.filter(a => a.type === t) }));
                   if (veilleGroupePar === 'priorite') return ['Haute','Moyenne','Basse'].filter(p => filtered.some(a => a.priorite === p)).map(p => ({ key: p, label: p, color: prioStyle[p].color, icon: p === 'Haute' ? '▲' : p === 'Moyenne' ? '●' : '▽', items: filtered.filter(a => a.priorite === p) }));
                   if (veilleGroupePar === 'source') return ['SPIGAO','BOAMP','Autre'].filter(s => filtered.some(a => a.source === s)).map(s => ({ key: s, label: s, color: sourceStyle[s]?.color || '#666', icon: s === 'SPIGAO' ? '◆' : s === 'BOAMP' ? '◇' : '○', items: filtered.filter(a => a.source === s) }));
-                  if (veilleGroupePar === 'acheteur') return [...new Set(filtered.map(a => a.acheteur))].sort().map(ac => ({ key: ac, label: ac, color: '#0369a1', icon: '▪', items: filtered.filter(a => a.acheteur === ac) }));
+                  if (veilleGroupePar === 'acheteur') return [...new Set(filtered.map(a => a.acheteur))].sort().map(ac => ({ key: ac, label: ac, color: '#0369a1', icon: '🏢', items: filtered.filter(a => a.acheteur === ac) }));
                   return [{ key: 'all', label: 'Tous', color: '#64748b', items: filtered }];
                 };
                 const groups = buildGroups();
@@ -787,7 +787,7 @@ export default function TabVeilleAo(__props) {
                                       </td>);
                                     }
                                     case 'priorite': {
-                                      const PRIO_ORDER_V = ['Critique ▲','Haute','Moyenne','Basse'];
+                                      const PRIO_ORDER_V = ['Critique ⚠️️','Haute','Moyenne','Basse'];
                                       const pc = prioStyle[ao.priorite] || prioStyle.Moyenne;
                                       return (<td key={colId} {...frzAttr} style={{...base, textAlign:'center'}}>
                                         <div onClick={e => { e.stopPropagation(); const idx = PRIO_ORDER_V.indexOf(ao.priorite||'Moyenne'); updateAO(ao.id, 'priorite', PRIO_ORDER_V[(idx+1)%PRIO_ORDER_V.length]); }} title="Cliquer pour changer" style={{display:'inline-flex', alignItems:'center', gap:4, cursor:'pointer', userSelect:'none'}}>
@@ -839,7 +839,7 @@ export default function TabVeilleAo(__props) {
                                       if (isTransfere) {
                                         return (<td key={colId} {...frzAttr} style={{...base, textAlign:'center'}}>
                                           <div style={{display:'inline-flex', alignItems:'center', gap:4}}>
-                                            <span style={{fontSize:TXT.md, fontWeight:400, color:'#059669'}}>✓ Transféré</span>
+                                            <span style={{fontSize:TXT.md, fontWeight:400, color:'#059669'}}>✅ Transféré</span>
                                             <button onClick={ev => { ev.stopPropagation(); handleDecision(ao.id, 'a_decider'); }} title="Annuler" style={{width:14, height:14, borderRadius:3, border:'1px solid #fca5a5', background:'#fee2e2', cursor:'pointer', display:'inline-flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:8, color:'#dc2626', lineHeight:1}}>✕</button>
                                           </div>
                                         </td>);

@@ -16,7 +16,7 @@ export default function TabSuivi(__props) {
               {/* Filtres */}
               <div style={{display:'flex',gap:6,alignItems:'center',marginBottom:14,flexWrap:'wrap'}}>
                 <button onClick={()=>setSuiviFiltreOpen(v=>!v)} style={{display:'flex',alignItems:'center',gap:5,padding:'5px 12px',borderRadius:crmRd,border:`1px solid ${suiviFilialeFilter!=='all'?$accent:$border}`,background:suiviFilialeFilter!=='all'?$accent+'10':$bgSub,color:suiviFilialeFilter!=='all'?$accent:$textSec,fontWeight:500,fontSize:'0.78rem',cursor:'pointer',fontFamily:'inherit'}}>
-                  <span>✱</span> Filtres {suiviFilialeFilter!=='all'&&<span style={{background:$accent,color:'white',borderRadius:crmRd>0?10:2,padding:'1px 6px',fontSize:'0.66rem',fontWeight:700}}>1</span>}
+                  <span>⚙</span> Filtres {suiviFilialeFilter!=='all'&&<span style={{background:$accent,color:'white',borderRadius:crmRd>0?10:2,padding:'1px 6px',fontSize:'0.66rem',fontWeight:700}}>1</span>}
                 </button>
                 {suiviFiltreOpen&&[{k:'all',l:'Toutes',c:null},...filialesDynamiques.filter(f=>!['GROUP OY','INVEST LOC','INVEST EXE'].includes(f.nom)).map(f=>({k:String(f.id),l:(f.nom||'').replace('Ezel Bâtiment','Ezel'),c:f.couleur}))].map(opt=>(
                   <button key={opt.k} onClick={()=>setSuiviFilialeFilter(opt.k)} style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,border:`1px solid ${suiviFilialeFilter===opt.k?(opt.c||$accent):$border}`,background:suiviFilialeFilter===opt.k?(opt.c||$accent)+'18':'transparent',color:suiviFilialeFilter===opt.k?(opt.c||$accent):$textMut,fontWeight:suiviFilialeFilter===opt.k?700:400,fontSize:'0.73rem',cursor:'pointer',fontFamily:'inherit'}}>{opt.l}</button>
@@ -78,7 +78,7 @@ export default function TabSuivi(__props) {
               {/* Carte 1 — CA Réel vs Objectif */}
               <div style={{background:$bgCard,borderRadius:crmRd,padding:'20px 20px 12px',border:`1px solid ${$border}`,boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
                 <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                  <span style={{fontSize:'1rem'}}>↗</span>
+                  <span style={{fontSize:'1rem'}}>📈</span>
                   <span style={{fontWeight:700,fontSize:'0.95rem',color:$text}}>CA Réel vs Objectif</span>
                   <span style={{marginLeft:'auto',padding:'2px 10px',borderRadius:crmRd>0?20:2,background:$accent+'15',color:$accent,fontSize:'0.72rem',fontWeight:700}}>{filtreAnnee==='toutes'?'Toutes':'An '+filtreAnnee}</span>
                 </div>
@@ -107,7 +107,7 @@ export default function TabSuivi(__props) {
               {/* Carte 2 — Marges & EBE */}
               <div style={{background:$bgCard,borderRadius:crmRd,padding:'20px 20px 12px',border:`1px solid ${$border}`,boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
                 <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                  <span style={{fontSize:'1rem'}}>€</span>
+                  <span style={{fontSize:'1rem'}}>💰</span>
                   <span style={{fontWeight:700,fontSize:'0.95rem',color:$text}}>Marges & EBE</span>
                   <span style={{marginLeft:'auto',padding:'2px 10px',borderRadius:crmRd>0?20:2,background:'#22c55e15',color:'#16a34a',fontSize:'0.72rem',fontWeight:700}}>{filtreAnnee==='toutes'?'Toutes':'An '+filtreAnnee}</span>
                 </div>

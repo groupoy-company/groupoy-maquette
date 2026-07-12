@@ -81,13 +81,13 @@ export default function TabAbsences(__props) {
           {/* Tabs + Filtres */}
           <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20,flexWrap:'wrap',gap:10}}>
             <div style={{display:'flex',gap:2,background:$bgSub,borderRadius:crmRd,padding:3,border:`1px solid ${$border}`,width:'fit-content'}}>
-              {[{id:'liste',l:'☰ Liste'},{id:'cartes',l:'◧ Cartes'},{id:'soldes',l:'◑ Soldes CP/RTT'},{id:'planning',l:'◫ Planning'}].map(v=>(
+              {[{id:'liste',l:'☰ Liste'},{id:'cartes',l:'◧ Cartes'},{id:'soldes',l:'◑ Soldes CP/RTT'},{id:'planning',l:'📅 Planning'}].map(v=>(
                 <button key={v.id} onClick={()=>setAbsView(v.id)} style={{padding:'6px 14px',borderRadius:Math.max(crmRd-2,0),border:'none',cursor:'pointer',background:absView===v.id?$selBg:'transparent',color:absView===v.id?$selText:$textMut,fontWeight:absView===v.id?600:400,fontSize:'0.78rem',transition:'all 0.15s',fontFamily:'inherit'}}>{v.l}</button>
               ))}
             </div>
             {absView==='liste'&&<div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
               <button onClick={()=>setAbsSettingsOpen(!absSettingsOpen)} style={{padding:'6px 14px',border:`1px solid ${absSettingsOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:absSettingsOpen?$accentSub:'transparent',color:absSettingsOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                ✱ Filtres & Colonnes {(absFilter!=='tous'||filialeFilter.length>0)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                ⚙ Filtres & Colonnes {(absFilter!=='tous'||filialeFilter.length>0)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
               </button>
               {absFilter!=='tous'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setAbsFilter('tous')}>✕ {ABS_TYPES.find(t=>t.id===absFilter)?.label||ABS_STATUTS.find(s=>s.id===absFilter)?.label||absFilter}</span>}
               {filialeFilter.length>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setFilialeFilter([])}>✕ {filialeFilter.length} filiale{filialeFilter.length>1?'s':''}</span>}
@@ -100,8 +100,8 @@ export default function TabAbsences(__props) {
               {l:'Jours posés',v:totalJours+'j',c:$accent,bg:$accent+'12',icon:'☀',sub:'tous types confondus'},
               {l:'En attente validation',v:enAttente,c:'#d97706',bg:'#d9770612',icon:'⏳',sub:'à valider',urgent:enAttente>0},
               {l:'Jours maladie',v:maladieJours+'j',c:$danger,bg:$danger+'12',icon:'🏥',sub:'arrêts en cours / passés'},
-              {l:'Accident travail',v:atJours+'j',c:'#dc2626',bg:'#dc262612',icon:'▲',sub:'AT/MP déclarés'},
-              {l:'Demandes totales',v:data.length,c:$info,bg:$info+'12',icon:'☰',sub:'sur la période filtrée'},
+              {l:'Accident travail',v:atJours+'j',c:'#dc2626',bg:'#dc262612',icon:'⚠',sub:'AT/MP déclarés'},
+              {l:'Demandes totales',v:data.length,c:$info,bg:$info+'12',icon:'📋',sub:'sur la période filtrée'},
             ];
             return (
               <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:10,marginBottom:14}}>
@@ -391,7 +391,7 @@ export default function TabAbsences(__props) {
           {/* ═══ MODAL ABSENCE ═══ */}
           {absEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.4)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setAbsEdit(null)}>
             <div style={{background:$bgCard,width:'90%',maxWidth:520,maxHeight:'85vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(a=>a.id===absEdit.id)?'✎ Modifier':'➕ Nouvelle'} absence</span><button onClick={()=>setAbsEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer',color:$textMut}}>✕</button></div>
+              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(a=>a.id===absEdit.id)?'✏️ Modifier':'➕ Nouvelle'} absence</span><button onClick={()=>setAbsEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer',color:$textMut}}>✕</button></div>
               <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                 {[{k:'collaborateur',l:'Collaborateur',span:2},{k:'filiale',l:'Filiale',type:'select',opts:['YILMAZ SAS','Ezel Bâtiment',"L'Échafaudage",'La Roulotte']},{k:'type',l:'Type',type:'select',opts:ABS_TYPES.map(t=>t.id),labels:ABS_TYPES.map(t=>t.label)},{k:'debut',l:'Début',type:'date'},{k:'fin',l:'Fin',type:'date'},{k:'jours',l:'Jours',type:'number'},{k:'statut',l:'Statut',type:'select',opts:ABS_STATUTS.map(s=>s.id),labels:ABS_STATUTS.map(s=>s.label)},{k:'motif',l:'Motif',span:2,type:'textarea'}].map(f=>(
                   <div key={f.k} style={{gridColumn:f.span?'span 2':'span 1'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>{f.l}</label>

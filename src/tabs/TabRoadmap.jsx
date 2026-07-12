@@ -12,7 +12,7 @@ export default function TabRoadmap(__props) {
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(1)+'M€' : v >= 1000 ? Math.round(v/1000)+'K€' : v.toFixed(0)+'€';
         const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:'#fefdfb'};
         const lbS = {display:'block', fontSize:'0.75rem', fontWeight:600, color:$textMut, marginBottom:3, textTransform:'uppercase'};
-        const iconOptions = ['◆','↗','🚀','🌍','👑','◎','◆','⭐','💎','🔥','🌱','⚡','🎓','🏆','✧','📍'];
+        const iconOptions = ['🏗️','📈','🚀','🌍','👑','🎯','🏛️','⭐','💎','🔥','🌱','⚡','🎓','🏆','💡','📍'];
         const colorOptions = ['#8B6F47','#059669','#2563eb','#7c3aed','#dc2626','#d97706','#0891b2','#6366f1','#ec4899'];
 
         // ══ EDIT PANEL ══
@@ -21,26 +21,26 @@ export default function TabRoadmap(__props) {
             {/* Header */}
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20}}>
               <div style={{display:'flex', alignItems:'center', gap:12}}>
-                <span style={{fontSize:'1.5rem'}}>✱</span>
+                <span style={{fontSize:'1.5rem'}}>⚙️</span>
                 <div>
                   <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>Configuration Roadmap</h1>
                   <p style={{fontSize:'0.85rem', color:$textMut, margin:0}}>Modifier les jalons, projections et objectifs stratégiques</p>
                 </div>
               </div>
               <div style={{display:'flex', gap:8}}>
-                <button onClick={resetRoadmap} style={{padding:'8px 14px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontWeight:600, fontSize:'0.85rem', cursor:'pointer'}} title="Réinitialiser les valeurs par défaut">↻ Réinitialiser</button>
-                <button onClick={() => setRoadmapEditMode(false)} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>✓ Terminé</button>
+                <button onClick={resetRoadmap} style={{padding:'8px 14px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontWeight:600, fontSize:'0.85rem', cursor:'pointer'}} title="Réinitialiser les valeurs par défaut">🔄 Réinitialiser</button>
+                <button onClick={() => setRoadmapEditMode(false)} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>✅ Terminé</button>
               </div>
             </div>
 
             {/* Tabs */}
             <div style={{display:'flex', gap:6, marginBottom:20, flexWrap:'wrap'}}>
               {[
-                {id:'jalons', label:'◫ Jalons', count: jalons.length},
-                {id:'projections', label:'▦ Projections', count: projections.length},
+                {id:'jalons', label:'📅 Jalons', count: jalons.length},
+                {id:'projections', label:'📊 Projections', count: projections.length},
                 {id:'vision', label:'🗺️ Carte Vision', count: visionCards.length},
-                {id:'objectifs', label:'◎ Objectifs', count: objectifs.length},
-                {id:'filiales', label:'▪ Par Filiale', count: projectionsFiliale.length}
+                {id:'objectifs', label:'🎯 Objectifs', count: objectifs.length},
+                {id:'filiales', label:'🏢 Par Filiale', count: projectionsFiliale.length}
               ].map(t => (
                 <button key={t.id} onClick={() => setRoadmapEditTab(t.id)} style={{padding:'8px 14px', borderRadius:crmRd, border: roadmapEditTab === t.id ? '2px solid #8B6F47' : `1px solid ${$borderAlt}`, background: roadmapEditTab === t.id ? '#faf8f5' : 'white', color: roadmapEditTab === t.id ? '#8B6F47' : '#6b5d4d', fontWeight: roadmapEditTab === t.id ? 700 : 500, fontSize:'0.88rem', cursor:'pointer'}}>
                   {t.label} <span style={{fontSize:'0.75rem', background: roadmapEditTab === t.id ? '#8B6F47' : '#e8e4de', color: roadmapEditTab === t.id ? 'white' : '#6b5d4d', padding:'1px 6px', borderRadius:crmRd, marginLeft:4}}>{t.count}</span>
@@ -85,7 +85,7 @@ export default function TabRoadmap(__props) {
                     </div>
                   </div>
                 ))}
-                <button onClick={() => addRoadmapItem('jalons', { year: 2033, label: 'Nouveau jalon', icon: '▪', color: '#6366f1', items: ['Objectif 1'], done: false, active: false })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter un jalon</button>
+                <button onClick={() => addRoadmapItem('jalons', { year: 2033, label: 'Nouveau jalon', icon: '📌', color: '#6366f1', items: ['Objectif 1'], done: false, active: false })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter un jalon</button>
               </div>
             )}
 
@@ -146,7 +146,7 @@ export default function TabRoadmap(__props) {
                     </div>
                   </div>
                 ))}
-                <button onClick={() => addRoadmapItem('visionCards', { horizon: 'X ans', year: '20XX', icon: '▪', color: '#6366f1', objectif: '', details: '' })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter une carte vision</button>
+                <button onClick={() => addRoadmapItem('visionCards', { horizon: 'X ans', year: '20XX', icon: '📌', color: '#6366f1', objectif: '', details: '' })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter une carte vision</button>
               </div>
             )}
 
@@ -182,7 +182,7 @@ export default function TabRoadmap(__props) {
                     <button onClick={() => addRoadmapListItem('objectifs', i)} style={{padding:'4px 10px', borderRadius:crmRd, border:'1px dashed #e8e4de', background:'transparent', color:$textMut, fontSize:'0.8rem', cursor:'pointer'}}>+ Ajouter</button>
                   </div>
                 ))}
-                <button onClick={() => addRoadmapItem('objectifs', { cat: 'Nouvelle catégorie', icon: '▪', color: '#6366f1', items: ['Objectif 1'] })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter une catégorie</button>
+                <button onClick={() => addRoadmapItem('objectifs', { cat: 'Nouvelle catégorie', icon: '📌', color: '#6366f1', items: ['Objectif 1'] })} style={{padding:'12px', borderRadius:crmRd, border:'2px dashed #e8e4de', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>+ Ajouter une catégorie</button>
               </div>
             )}
 
@@ -232,7 +232,7 @@ export default function TabRoadmap(__props) {
                 <h2 style={{fontSize:'1.6rem', fontWeight:800, color:$text, marginBottom:6}}>Feuille de Route Stratégique</h2>
                 <p style={{fontSize:'0.9rem', color:$textMut}}>Group OY — Vision 2025 → 2035</p>
               </div>
-              <button onClick={() => { setRoadmapEditMode(true); setRoadmapEditTab('jalons'); }} style={{padding:'8px 16px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, fontSize:'0.9rem', cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,0.06)', flexShrink:0}}>✱ Configurer</button>
+              <button onClick={() => { setRoadmapEditMode(true); setRoadmapEditTab('jalons'); }} style={{padding:'8px 16px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, fontSize:'0.9rem', cursor:'pointer', boxShadow:'0 2px 8px rgba(0,0,0,0.06)', flexShrink:0}}>⚙️ Configurer</button>
             </div>
 
             {/* ══ CARTE VISION — 1/3/5/10 ans ══ */}
@@ -262,10 +262,10 @@ export default function TabRoadmap(__props) {
               <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>📍 Situation Actuelle — 2026</h3>
               <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:16}}>
                 {[
-                  { label: 'CA Group', value: fmt(currentCA), color: '#059669', icon: '€' },
-                  { label: 'EBE Group', value: fmt(currentEBE), color: currentEBE >= 0 ? '#2563eb' : '#dc2626', icon: '▦' },
-                  { label: 'Collaborateurs', value: currentEff, color: '#7c3aed', icon: '◉' },
-                  { label: 'Filiales actives', value: filialesOp.length, color: '#d97706', icon: '▪' }
+                  { label: 'CA Group', value: fmt(currentCA), color: '#059669', icon: '💰' },
+                  { label: 'EBE Group', value: fmt(currentEBE), color: currentEBE >= 0 ? '#2563eb' : '#dc2626', icon: '📊' },
+                  { label: 'Collaborateurs', value: currentEff, color: '#7c3aed', icon: '👥' },
+                  { label: 'Filiales actives', value: filialesOp.length, color: '#d97706', icon: '🏢' }
                 ].map(kpi => (
                   <div key={kpi.label} style={{textAlign:'center', padding:12, background:$bgSub, borderRadius:crmRd}}>
                     <div style={{fontSize:'1.2rem', marginBottom:4}}>{kpi.icon}</div>
@@ -278,7 +278,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ TIMELINE 2025-2035 ══ */}
             <div style={{...cardStyle, marginBottom:24, padding:20}}>
-              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:20}}>◫ Timeline Stratégique {jalons.length > 0 ? `${jalons[0].year} → ${jalons[jalons.length-1].year}` : ''}</h3>
+              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:20}}>📅 Timeline Stratégique {jalons.length > 0 ? `${jalons[0].year} → ${jalons[jalons.length-1].year}` : ''}</h3>
               <div style={{overflowX:'auto', paddingBottom:8}}>
                 <div style={{display:'flex', gap:0, minWidth: jalons.length * 150, position:'relative'}}>
                   <div style={{position:'absolute', top:20, left:20, right:20, height:3, background:`linear-gradient(90deg, ${jalons.map(j => j.color).join(', ')})`, borderRadius:2}} />
@@ -291,7 +291,7 @@ export default function TabRoadmap(__props) {
                         <div style={{fontSize:'0.8rem', fontWeight:700, color:$text, marginBottom:6}}>{j.label}</div>
                         {j.items.map((item, idx) => (
                           <div key={idx} style={{fontSize:'0.7rem', color: j.done ? '#059669' : '#b0a08a', lineHeight:1.6, display:'flex', alignItems:'center', gap:4, justifyContent:'center'}}>
-                            <span>{j.done ? '✓' : j.active ? '↻' : '○'}</span> {item}
+                            <span>{j.done ? '✅' : j.active ? '🔄' : '○'}</span> {item}
                           </div>
                         ))}
                       </div>
@@ -303,7 +303,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ PROJECTIONS CA/EBE/EFFECTIFS ══ */}
             <div style={{...cardStyle, marginBottom:24, padding:20}}>
-              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>▦ Projections Financières & Effectifs</h3>
+              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>📊 Projections Financières & Effectifs</h3>
               <div style={{height:280, marginBottom:16}}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={projections} margin={{top:5, right:20, left:0, bottom:5}}>
@@ -353,7 +353,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ OBJECTIFS STRATÉGIQUES ══ */}
             <div style={{marginBottom:24}}>
-              <h3 style={{fontSize:'1rem', fontWeight:700, color:$accent, marginBottom:16, display:'flex', alignItems:'center', gap:8}}>◎ Objectifs Stratégiques</h3>
+              <h3 style={{fontSize:'1rem', fontWeight:700, color:$accent, marginBottom:16, display:'flex', alignItems:'center', gap:8}}>🎯 Objectifs Stratégiques</h3>
               <div style={{display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:16}}>
                 {objectifs.map(obj => (
                   <div key={obj.id || obj.cat} style={{...cardStyle, borderLeft:`4px solid ${obj.color}`}}>
@@ -376,7 +376,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ PROJECTIONS PAR FILIALE ══ */}
             <div style={{...cardStyle, padding:20}}>
-              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>▪ Projections par Filiale</h3>
+              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>🏢 Projections par Filiale</h3>
               <div style={{overflowX:'auto'}}>
               <table style={{width:'100%', borderCollapse:'collapse', fontSize:'0.85rem'}}>
                 <thead>

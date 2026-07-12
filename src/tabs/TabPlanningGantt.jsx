@@ -15,8 +15,8 @@ export default function TabPlanningGantt(__props) {
             const ACTIF_ST_PL = ['À Préparer','AO sélectionné','Visite rdv à prendre','Visite rdv pris','Visite demandée','Demandes de précisions','En préparation','Visite problématique','En attente de Réponse','En cours de négociation'];
             const GAGNE_ST_PL = ['Accepté 🍾','Projet en Cours de Réalisation','Projet Terminé'];
             const AO_PHASES_PL = [
-              {id:'preparation',label:'PRÉPARATION',color:ACC,bg:'#f0ecfd',icon:'✱'},
-              {id:'soumission',label:'SOUMISSION',color:'#ea580c',bg:'#fff3ee',icon:'↥'},
+              {id:'preparation',label:'PRÉPARATION',color:ACC,bg:'#f0ecfd',icon:'🔧'},
+              {id:'soumission',label:'SOUMISSION',color:'#ea580c',bg:'#fff3ee',icon:'📤'},
               {id:'resultat',label:'RÉSULTAT',color:'#059669',bg:'#e8f5ee',icon:'🏆'},
             ];
             const getPhaseAO = (s) => {
@@ -26,7 +26,7 @@ export default function TabPlanningGantt(__props) {
               return 'archive';
             };
             const SC_PL = {'À Préparer':'#4a90c4','AO sélectionné':'#007ab5','Visite rdv à prendre':'#d97706','Visite rdv pris':'#b45309','Demandes de précisions':'#0284c7','En préparation':ACC,'Visite problématique':'#dc2626','En attente de Réponse':'#2563eb','En cours de négociation':'#7c3aed','Accepté 🍾':'#059669','Projet en Cours de Réalisation':'#10b981','Projet Terminé':'#34d399'};
-            const TM_PL = {'Marché public':{c:'#0055cc',bg:'#e0f0ff',e:'◆'},'Marché privé':{c:'#166534',bg:'#dcfce7',e:'▪'},'Marché particulier':{c:'#7c3aed',bg:'#f3e8ff',e:'🏠'}};
+            const TM_PL = {'Marché public':{c:'#0055cc',bg:'#e0f0ff',e:'🏛️'},'Marché privé':{c:'#166534',bg:'#dcfce7',e:'🏢'},'Marché particulier':{c:'#7c3aed',bg:'#f3e8ff',e:'🏠'}};
             const aoActifsPL = AO_RAW.filter(a => ACTIF_ST_PL.includes(a.s));
             const aoGagnesPL = AO_RAW.filter(a => GAGNE_ST_PL.includes(a.s));
             const aoPerdus_PL = AO_RAW.filter(a => !ACTIF_ST_PL.includes(a.s) && !GAGNE_ST_PL.includes(a.s));
@@ -83,14 +83,14 @@ export default function TabPlanningGantt(__props) {
               {/* Header */}
               <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
                 <div>
-                  <h2 style={{margin:0,fontSize:'1.2rem',fontWeight:700,color:$text}}>◫ Planning Bureau d'Études — AOs</h2>
+                  <h2 style={{margin:0,fontSize:'1.2rem',fontWeight:700,color:$text}}>📅 Planning Bureau d'Études — AOs</h2>
                   <p style={{margin:'4px 0 0',fontSize:'0.85rem',color:$textMut}}>{aoActifsPL.length} AO actifs · {filteredGantt.length} avec deadline · Données Monday.com live</p>
                 </div>
                 <span style={{fontSize:'0.75rem',padding:'4px 10px',borderRadius:crmRd,background:'#e0f2fe',color:'#0369a1',fontWeight:600,border:'1px solid #bae6fd'}}>🟢 Monday.com live</span>
               </div>
               {/* KPI row */}
               <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:12}}>
-                {[{l:'AO actifs',v:aoActifsPL.length,i:'◺',c:'#007ab5'},{l:'Urgents ≤7j',v:aoUrgentsPL.length,i:'🚨',c:aoUrgentsPL.length>0?'#dc2626':'#10b981'},{l:'En attente réponse',v:AO_RAW.filter(a=>a.s==='En attente de Réponse').length,i:'↥',c:'#ea580c'},{l:'Taux succès',v:tauxSuccesPL+'%',i:'🏆',c:tauxSuccesPL>=15?'#10b981':tauxSuccesPL>=8?'#f59e0b':'#ef4444'},{l:'Pipeline budget',v:fmtMPL(pipelineBudgetPL),i:'€',c:'#7c3aed'}].map((k,i) => (
+                {[{l:'AO actifs',v:aoActifsPL.length,i:'📐',c:'#007ab5'},{l:'Urgents ≤7j',v:aoUrgentsPL.length,i:'🚨',c:aoUrgentsPL.length>0?'#dc2626':'#10b981'},{l:'En attente réponse',v:AO_RAW.filter(a=>a.s==='En attente de Réponse').length,i:'📤',c:'#ea580c'},{l:'Taux succès',v:tauxSuccesPL+'%',i:'🏆',c:tauxSuccesPL>=15?'#10b981':tauxSuccesPL>=8?'#f59e0b':'#ef4444'},{l:'Pipeline budget',v:fmtMPL(pipelineBudgetPL),i:'💰',c:'#7c3aed'}].map((k,i) => (
                   <div key={i} style={{background:$bgCard,borderRadius:crmRd,padding:'14px 16px',border:`1px solid ${$border}`,borderTop:`3px solid ${k.c}`}}>
                     <div style={{fontSize:'0.67rem',fontWeight:700,color:$textMut,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:4}}>{k.l}</div>
                     <div style={{fontSize:'1.5rem',fontWeight:800,color:k.c,lineHeight:1}}>{k.v}</div>
@@ -115,15 +115,15 @@ export default function TabPlanningGantt(__props) {
               )}
               {/* Vue tabs + filters */}
               <div style={{display:'flex',alignItems:'center',gap:4,borderBottom:`1px solid ${$border}`,paddingBottom:8,flexWrap:'wrap',rowGap:6}}>
-                {[{id:'gantt',icon:'▦',label:'Gantt'},{id:'tableau',icon:'☰',label:'Tableau'},{id:'kanban',icon:'🗂️',label:'Kanban'}].map(v => (
+                {[{id:'gantt',icon:'📊',label:'Gantt'},{id:'tableau',icon:'📋',label:'Tableau'},{id:'kanban',icon:'🗂️',label:'Kanban'}].map(v => (
                   <button key={v.id} onClick={e=>{e.stopPropagation();setPlanVue(v.id);}} style={{padding:'6px 14px',borderRadius:crmRd,fontSize:'0.85rem',fontWeight:planVue===v.id?700:500,background:planVue===v.id?ACC+'15':'transparent',color:planVue===v.id?ACC:$textMut,border:planVue===v.id?`1px solid ${ACC}40`:'1px solid transparent',cursor:'pointer',transition:'all 0.15s'}}>{v.icon} {v.label}</button>
                 ))}
                 <div style={{flex:1}}/>
-                <input value={planSearch} onChange={e=>setPlanSearch(e.target.value)} placeholder="⌕ Rechercher..." style={{padding:'5px 10px',borderRadius:crmRd,fontSize:'0.82rem',border:`1px solid ${$border}`,background:$bgCard,width:150,outline:'none'}} />
+                <input value={planSearch} onChange={e=>setPlanSearch(e.target.value)} placeholder="🔍 Rechercher..." style={{padding:'5px 10px',borderRadius:crmRd,fontSize:'0.82rem',border:`1px solid ${$border}`,background:$bgCard,width:150,outline:'none'}} />
                 <select value={planFiltreResp} onChange={e=>setPlanFiltreResp(e.target.value)} style={{padding:'5px 8px',borderRadius:crmRd,fontSize:'0.8rem',border:`1px solid ${$border}`,background:$bgCard,cursor:'pointer',outline:'none'}}>
                   <option value="tous">Phase : Toutes</option>
-                  <option value="preparation">✱ Préparation</option>
-                  <option value="soumission">↥ Soumission</option>
+                  <option value="preparation">🔧 Préparation</option>
+                  <option value="soumission">📤 Soumission</option>
                   <option value="resultat">🏆 Résultat</option>
                 </select>
                 <select value={planFiltrePrio} onChange={e=>setPlanFiltrePrio(e.target.value)} style={{padding:'5px 8px',borderRadius:crmRd,fontSize:'0.8rem',border:`1px solid ${$border}`,background:$bgCard,cursor:'pointer',outline:'none'}}>
@@ -151,7 +151,7 @@ export default function TabPlanningGantt(__props) {
                     <div style={{width:72,flexShrink:0,borderLeft:`1px solid ${$border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.65rem',fontWeight:700,color:$textMut,textTransform:'uppercase'}}>Phase</div>
                   </div>
                   {filteredGantt.length===0&&<div style={{padding:'32px',textAlign:'center',color:$textMut,fontSize:'0.85rem'}}>Aucun AO avec deadline dans la période affichée</div>}
-                  {filteredGantt.map((ao,i) => { const dl=dlLeft(ao.d); const barP=pctPL(ao.d); const barW=Math.max(0.5,(barP||0)-todayPctPL); const urgent=dl!==null&&dl>=0&&dl<=7; const warn=dl!==null&&dl>=0&&dl<=14; const barColor=urgent?'#dc2626':warn?'#f59e0b':SC_PL[ao.s]||'#7c3aed'; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'☰'}; const isSelected=planDetailId===ao.id; const phId=getPhaseAO(ao.s); const phCfg=AO_PHASES_PL.find(p=>p.id===phId)||{color:$textSec,bg:'#f3f4f6',icon:'🗄️'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,48);
+                  {filteredGantt.map((ao,i) => { const dl=dlLeft(ao.d); const barP=pctPL(ao.d); const barW=Math.max(0.5,(barP||0)-todayPctPL); const urgent=dl!==null&&dl>=0&&dl<=7; const warn=dl!==null&&dl>=0&&dl<=14; const barColor=urgent?'#dc2626':warn?'#f59e0b':SC_PL[ao.s]||'#7c3aed'; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'📋'}; const isSelected=planDetailId===ao.id; const phId=getPhaseAO(ao.s); const phCfg=AO_PHASES_PL.find(p=>p.id===phId)||{color:$textSec,bg:'#f3f4f6',icon:'🗄️'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,48);
                     return (<React.Fragment key={ao.id}>
                       <div onClick={e=>{e.stopPropagation();setPlanDetailId(isSelected?null:ao.id);}} style={{display:'flex',borderBottom:`1px solid ${$border}`,minHeight:50,alignItems:'stretch',cursor:'pointer',background:isSelected?barColor+'08':i%2===0?'transparent':$bgSub+'50',borderLeft:isSelected?`3px solid ${barColor}`:'3px solid transparent'}} onMouseEnter={e=>{if(!isSelected)e.currentTarget.style.background=$bgSub+'90';}} onMouseLeave={e=>{if(!isSelected)e.currentTarget.style.background=i%2===0?'transparent':$bgSub+'50';}}>
                         <div style={{width:327,flexShrink:0,padding:'8px 12px',borderRight:`1px solid ${$border}`,display:'flex',flexDirection:'column',justifyContent:'center',gap:3}}>
@@ -167,7 +167,7 @@ export default function TabPlanningGantt(__props) {
                           <div style={{position:'absolute',left:todayPctPL+'%',top:0,bottom:0,width:2,background:'#dc2626',opacity:0.3}}></div>
                           {ao.d&&barP!==null&&barP>0&&(<>
                             <div style={{position:'absolute',left:pctBarStart(ao)+'%',width:Math.max(0.5,(barP||0)-pctBarStart(ao))+'%',top:'50%',transform:'translateY(-50%)',height:16,background:barColor,borderRadius:3,opacity:0.82,display:'flex',alignItems:'center',paddingLeft:4,paddingRight:4,overflow:'hidden'}}>
-                              {Math.max(0.5,(barP||0)-pctBarStart(ao))>4&&<span style={{fontSize:'0.58rem',fontWeight:700,color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{dl!==null?(dl<0?'▲ Passé':(dl===0?'Auj.':dl+'j')):'—'}</span>}
+                              {Math.max(0.5,(barP||0)-pctBarStart(ao))>4&&<span style={{fontSize:'0.58rem',fontWeight:700,color:'#fff',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{dl!==null?(dl<0?'⚠ Passé':(dl===0?'Auj.':dl+'j')):'—'}</span>}
                             </div>
                             <div style={{position:'absolute',left:`calc(${barP}% - 1px)`,top:'15%',bottom:'15%',width:2,background:barColor,borderRadius:2}}></div>
                             <div style={{position:'absolute',left:(barP+0.5)+'%',top:'50%',transform:'translateY(-50%)',whiteSpace:'nowrap'}}>
@@ -212,7 +212,7 @@ export default function TabPlanningGantt(__props) {
                       </tr>
                     </thead>
                     <tbody>
-                      {filteredPL.map((ao,i) => { const dl=dlLeft(ao.d); const sc=SC_PL[ao.s]||'#9ca3af'; const phId=getPhaseAO(ao.s); const phCfg=AO_PHASES_PL.find(p=>p.id===phId)||{color:$textSec,bg:'#f3f4f6',icon:'🗄️',label:'ARCHIVÉ'}; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'☰'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,52);
+                      {filteredPL.map((ao,i) => { const dl=dlLeft(ao.d); const sc=SC_PL[ao.s]||'#9ca3af'; const phId=getPhaseAO(ao.s); const phCfg=AO_PHASES_PL.find(p=>p.id===phId)||{color:$textSec,bg:'#f3f4f6',icon:'🗄️',label:'ARCHIVÉ'}; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'📋'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,52);
                         return (
                           <tr key={ao.id} style={{borderBottom:`1px solid ${$border}`,background:i%2===0?'transparent':$bgSub+'40'}} onMouseEnter={e=>e.currentTarget.style.background=$bgSub+'80'} onMouseLeave={e=>e.currentTarget.style.background=i%2===0?'transparent':$bgSub+'40'}>
                             <td style={{padding:'7px 9px',color:$textMut,fontSize:'0.68rem',fontWeight:700,fontFamily:'monospace',borderRight:`1px solid ${$border}`,width:30}}>{i+1}</td>
@@ -250,7 +250,7 @@ export default function TabPlanningGantt(__props) {
                         </div>
                         <div style={{padding:'8px',display:'flex',flexDirection:'column',gap:5,maxHeight:460,overflowY:'auto'}}>
                           {pfiltAOs.length===0&&<div style={{textAlign:'center',padding:'20px',color:$textMut,fontSize:'0.8rem'}}>Aucun AO</div>}
-                          {pfiltAOs.map(ao => { const dl=dlLeft(ao.d); const sc=SC_PL[ao.s]||'#9ca3af'; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'☰'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,42);
+                          {pfiltAOs.map(ao => { const dl=dlLeft(ao.d); const sc=SC_PL[ao.s]||'#9ca3af'; const tmCfg=TM_PL[ao.tm]||{c:'#6b7280',bg:'#f3f4f6',e:'📋'}; const aoBrief=ao.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,42);
                             return (
                               <div key={ao.id} style={{background:$bg,borderRadius:crmRd,border:`1px solid ${$border}`,padding:'9px 11px',borderLeft:`3px solid ${sc}`,cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background=$bgSub} onMouseLeave={e=>e.currentTarget.style.background=$bg}>
                                 <div style={{fontSize:'0.76rem',fontWeight:600,color:$text,marginBottom:4,lineHeight:1.3}}>{aoBrief}</div>
@@ -314,13 +314,13 @@ export default function TabPlanningGantt(__props) {
 
           // ── Groupement ──
           const getGrouped = () => {
-            if (planGroupBy === 'none') return [{ key:'all', label:'Tous les projets', color:$textSec, icon:'☰', items:filtered }];
+            if (planGroupBy === 'none') return [{ key:'all', label:'Tous les projets', color:$textSec, icon:'📋', items:filtered }];
             if (planGroupBy === 'phase') return PLAN_PHASES.filter(ph => filtered.some(p => p.phase === ph.id)).map(ph => ({ key:ph.id, label:ph.label, color:ph.color, icon:ph.icon, items:filtered.filter(p => p.phase === ph.id) }));
             if (planGroupBy === 'statut') return PLAN_STATUTS.filter(st => filtered.some(p => p.statut === st.id)).map(st => ({ key:st.id, label:st.label, color:st.color, icon:st.icon, items:filtered.filter(p => p.statut === st.id) }));
             if (planGroupBy === 'priorite') return ['Haute','Moyenne','Basse'].filter(pr => filtered.some(p => p.priorite === pr)).map(pr => ({ key:pr, label:pr, color: pr==='Haute'?'#e74c3c':pr==='Moyenne'?'#f39c12':'#3498db', icon: pr==='Haute'?'▲':pr==='Moyenne'?'●':'▽', items:filtered.filter(p => p.priorite === pr) }));
-            if (planGroupBy === 'responsable') { const rs = [...new Set(filtered.map(p=>p.responsable))].sort(); return rs.map(r => ({ key:r, label:r, color:$textSec, icon:'◉', items:filtered.filter(p => p.responsable === r) })); }
-            if (planGroupBy === 'client') { const cs = [...new Set(filtered.map(p=>p.client))].sort(); return cs.map(c => ({ key:c, label:c, color:$textSec, icon:'▪', items:filtered.filter(p => p.client === c) })); }
-            return [{ key:'all', label:'Tous', color:$textSec, icon:'☰', items:filtered }];
+            if (planGroupBy === 'responsable') { const rs = [...new Set(filtered.map(p=>p.responsable))].sort(); return rs.map(r => ({ key:r, label:r, color:$textSec, icon:'👤', items:filtered.filter(p => p.responsable === r) })); }
+            if (planGroupBy === 'client') { const cs = [...new Set(filtered.map(p=>p.client))].sort(); return cs.map(c => ({ key:c, label:c, color:$textSec, icon:'🏢', items:filtered.filter(p => p.client === c) })); }
+            return [{ key:'all', label:'Tous', color:$textSec, icon:'📋', items:filtered }];
           };
 
           // ── Gantt Timeline Calc ──
@@ -376,7 +376,7 @@ export default function TabPlanningGantt(__props) {
 
             {/* Vue tabs */}
             <div style={{display:'flex', alignItems:'center', gap:4, marginBottom:12, borderBottom:`1px solid ${$border}`, paddingBottom:8}}>
-              {[{id:'gantt',icon:'▦',label:'Gantt'},{id:'tableau',icon:'☰',label:'Tableau'},{id:'kanban',icon:'🗂️',label:'Kanban'}].map(v => (
+              {[{id:'gantt',icon:'📊',label:'Gantt'},{id:'tableau',icon:'📋',label:'Tableau'},{id:'kanban',icon:'🗂️',label:'Kanban'}].map(v => (
                 <button key={v.id} onClick={() => setPlanVue(v.id)} style={{padding:'6px 14px', borderRadius:crmRd, fontSize:'0.85rem', fontWeight: planVue===v.id?700:500, background:planVue===v.id?ACC+'15':'transparent',color:planVue===v.id?ACC:$textMut,border:planVue===v.id?`1px solid ${ACC}40`:'1px solid transparent', cursor:'pointer', transition:'all 0.15s'}}>{v.icon} {v.label}</button>
               ))}
               <div style={{flex:1}}/>
@@ -393,7 +393,7 @@ export default function TabPlanningGantt(__props) {
             </div>
             {/* Filter bar */}
             <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:16, flexWrap:'wrap'}}>
-              <input value={planSearch} onChange={e => setPlanSearch(e.target.value)} placeholder="⌕ Rechercher..." style={{padding:'5px 10px', borderRadius:crmRd, fontSize:'0.82rem', border:`1px solid ${$border}`, background:'#fff', width:160, outline:'none'}} />
+              <input value={planSearch} onChange={e => setPlanSearch(e.target.value)} placeholder="🔍 Rechercher..." style={{padding:'5px 10px', borderRadius:crmRd, fontSize:'0.82rem', border:`1px solid ${$border}`, background:'#fff', width:160, outline:'none'}} />
               <select value={planFiltrePrio} onChange={e => setPlanFiltrePrio(e.target.value)} style={{padding:'5px 10px', borderRadius:crmRd, fontSize:'0.82rem', border:`1px solid ${$border}`, background:'#fff', cursor:'pointer', outline:'none'}}>
                 <option value="tous">Priorité : Tous</option>
                 <option value="Haute">▲ Haute</option><option value="Moyenne">● Moyenne</option><option value="Basse">▽ Basse</option>
@@ -594,10 +594,10 @@ export default function TabPlanningGantt(__props) {
                           <div style={{fontSize:'0.82rem', fontWeight:700, color:$text, marginBottom:3, lineHeight:1.3}}>{p.nom}</div>
                           <div style={{fontSize:'0.72rem', color:$textMut, marginBottom:8}}>{p.client}</div>
                           <div style={{display:'flex', alignItems:'center', gap:4, marginBottom:6}}>
-                            <span style={{fontSize:'0.7rem', color:$textSec}}>◉ {p.responsable}</span>
+                            <span style={{fontSize:'0.7rem', color:$textSec}}>👤 {p.responsable}</span>
                           </div>
                           <div style={{display:'flex', alignItems:'center', gap:4, marginBottom:6}}>
-                            <span style={{fontSize:'0.7rem', color:$textMut}}>◫ {fmtDate(p.dateDebut)} → {fmtDate(p.dateFin)}</span>
+                            <span style={{fontSize:'0.7rem', color:$textMut}}>📅 {fmtDate(p.dateDebut)} → {fmtDate(p.dateFin)}</span>
                           </div>
                           {/* Progress bar */}
                           <div style={{display:'flex', alignItems:'center', gap:4, marginBottom:6}}>
@@ -605,9 +605,9 @@ export default function TabPlanningGantt(__props) {
                             <span style={{fontSize:'0.68rem', fontWeight:700, color:$textSec}}>{p.progression}%</span>
                           </div>
                           <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                            <span style={{fontSize:'0.72rem', fontWeight:700, color:$text}}>€ {(p.montant/1000000).toFixed(1)}M€</span>
-                            {p.statut !== 'termine' && daysLeft >= 0 && <span style={{fontSize:'0.68rem', fontWeight:600, color: daysLeft<=14?'#e74c3c':'#b0a08a'}}>◷ J-{daysLeft}</span>}
-                            {p.statut !== 'termine' && daysLeft < 0 && <span style={{fontSize:'0.68rem', fontWeight:600, color:'#e74c3c'}}>▲ +{Math.abs(daysLeft)}j</span>}
+                            <span style={{fontSize:'0.72rem', fontWeight:700, color:$text}}>💰 {(p.montant/1000000).toFixed(1)}M€</span>
+                            {p.statut !== 'termine' && daysLeft >= 0 && <span style={{fontSize:'0.68rem', fontWeight:600, color: daysLeft<=14?'#e74c3c':'#b0a08a'}}>⏱ J-{daysLeft}</span>}
+                            {p.statut !== 'termine' && daysLeft < 0 && <span style={{fontSize:'0.68rem', fontWeight:600, color:'#e74c3c'}}>⚠️ +{Math.abs(daysLeft)}j</span>}
                           </div>
                         </div>);
                       })}
@@ -676,7 +676,7 @@ export default function TabPlanningGantt(__props) {
               <div style={{marginBottom:16, background:$bgSub, borderRadius:crmRd, padding:'12px 16px', border:`1px solid ${$border}`}}>
                 <div style={{fontSize:'0.75rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8}}>Équipe</div>
                 <div style={{display:'flex', alignItems:'center', gap:4, marginBottom:4}}>
-                  <span style={{fontSize:'0.8rem', fontWeight:600, color:$text}}>◉ {detailProjet.responsable}</span>
+                  <span style={{fontSize:'0.8rem', fontWeight:600, color:$text}}>👤 {detailProjet.responsable}</span>
                   <span style={{fontSize:'0.7rem', color:$textMut}}>(resp.)</span>
                 </div>
                 {detailProjet.equipe.map(m => (
@@ -693,7 +693,7 @@ export default function TabPlanningGantt(__props) {
                       <div style={{width:8, height:8, background: j.done?'#27ae60':'#e74c3c', transform:'rotate(45deg)', borderRadius:1}} />
                       <span style={{fontSize:'0.78rem', color:$text, flex:1}}>{j.label}</span>
                       <span style={{fontSize:'0.72rem', color:$textMut}}>{fmtDate(j.date)}</span>
-                      <span style={{fontSize:'0.7rem'}}>{j.done ? '✓' : '⏳'}</span>
+                      <span style={{fontSize:'0.7rem'}}>{j.done ? '✅' : '⏳'}</span>
                     </div>
                   ))}
                 </div>
@@ -706,7 +706,7 @@ export default function TabPlanningGantt(__props) {
                   {detailProjet.sousTaches.map(st => (
                     <div key={st.id} style={{padding:'4px 0', borderBottom:`1px solid ${$border}`}}>
                       <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:3}}>
-                        <span style={{fontSize:'0.78rem', fontWeight:600, color:$text}}>{st.progression===100?'✓':'↻'} {st.nom}</span>
+                        <span style={{fontSize:'0.78rem', fontWeight:600, color:$text}}>{st.progression===100?'✅':'🔄'} {st.nom}</span>
                         <span style={{fontSize:'0.7rem', fontWeight:700, color: st.progression===100?'#27ae60':'#3498db'}}>{st.progression}%</span>
                       </div>
                       <div style={{display:'flex', alignItems:'center', gap:8}}>

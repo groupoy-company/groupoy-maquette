@@ -12,9 +12,9 @@ export default function TabPresentationGroupe(__props) {
           const gradMap = {'La Roulotte':['#F5D78E','#C49A2A'],"L'Échafaudage":['#C39BD3','#6C3483'],'Ezel Bâtiment':['#85C1E9','#007ab5'],"L'Étanchéité":['#82E0AA','#0e6655']};
           const niveauxData = [
             { niv: 'XXS', label: 'Butineur', ca: '0-0.5M€', color: '#a3e635', emoji: '🌱' },
-            { niv: 'XS', label: 'Collecteur', ca: '0.5-1M€', color: '#84cc16', emoji: '◆' },
+            { niv: 'XS', label: 'Collecteur', ca: '0.5-1M€', color: '#84cc16', emoji: '🐝' },
             { niv: 'S', label: 'Bâtisseur', ca: '1-1.5M€', color: '#eab308', emoji: '🍯' },
-            { niv: 'M', label: 'Maître-Bâtisseur', ca: '1.5-3M€', color: '#f59e0b', emoji: '◆' },
+            { niv: 'M', label: 'Maître-Bâtisseur', ca: '1.5-3M€', color: '#f59e0b', emoji: '🏗️' },
             { niv: 'L', label: 'Gardien de Ruche', ca: '3-5M€', color: '#f97316', emoji: '🏰' },
             { niv: 'XL', label: 'Régisseur de Ruche', ca: '5-7.5M€', color: '#ef4444', emoji: '🏰' },
             { niv: 'XXL', label: 'Maître-Apiculteur', ca: '7.5-12M€', color: '#dc2626', emoji: '👑' },
@@ -74,7 +74,7 @@ export default function TabPresentationGroupe(__props) {
               <div style={{position:'absolute', top:'-20%', right:'-10%', width:600, height:600, borderRadius:'50%', background:'radial-gradient(circle, rgba(201,184,150,0.08) 0%, transparent 70%)'}}></div>
               <div style={{position:'absolute', bottom:'-15%', left:'-8%', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle, rgba(139,111,71,0.06) 0%, transparent 70%)'}}></div>
               <div style={{position:'relative', zIndex:2, textAlign:'center', padding:'48px 32px', maxWidth:900}}>
-                <div style={{fontSize:'5.5rem', marginBottom:20, filter:'drop-shadow(0 3px 16px rgba(139,111,71,0.15))'}}>◆</div>
+                <div style={{fontSize:'5.5rem', marginBottom:20, filter:'drop-shadow(0 3px 16px rgba(139,111,71,0.15))'}}>🐝</div>
                 <div style={{fontSize:'5rem', fontWeight:800, color:$text, letterSpacing:'-0.05em', lineHeight:1.05, marginBottom:14}}>
                   Group <span style={{color:$accent}}>OY</span>
                 </div>
@@ -109,10 +109,10 @@ export default function TabPresentationGroupe(__props) {
               </FadeIn>
               <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:20}}>
                 {[
-                  {icon:'◎', title:'Performance', desc:'Rémunération liée à la performance réelle, mesurée par l\'EBE de chaque ruche.', color:'#059669'},
+                  {icon:'🎯', title:'Performance', desc:'Rémunération liée à la performance réelle, mesurée par l\'EBE de chaque ruche.', color:'#059669'},
                   {icon:'🤝', title:'Autonomie', desc:'Chaque responsable gère sa ruche comme un entrepreneur avec le soutien du groupe.', color:'#2563eb'},
-                  {icon:'↗', title:'Croissance', desc:'De 10M€ à 30M€ de CA sur 10 ans, par croissance organique et acquisitions.', color:'#d97706'},
-                  {icon:'◆', title:'Esprit Ruche', desc:'Intelligence collective et services mutualisés via YILMAZ pour chaque filiale.', color:$accent}
+                  {icon:'📈', title:'Croissance', desc:'De 10M€ à 30M€ de CA sur 10 ans, par croissance organique et acquisitions.', color:'#d97706'},
+                  {icon:'🐝', title:'Esprit Ruche', desc:'Intelligence collective et services mutualisés via YILMAZ pour chaque filiale.', color:$accent}
                 ].map((v, i) => (
                   <FadeIn key={i} delay={i*100}>
                     <div style={{background:$bgCard, borderRadius:crmRd, padding:'32px 28px', border:`1px solid ${$border}`, boxShadow:'0 2px 16px rgba(0,0,0,0.03)', height:'100%', transition:'all 0.3s'}} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 12px 40px rgba(0,0,0,0.08)';}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 2px 16px rgba(0,0,0,0.03)';}}>
@@ -136,12 +136,12 @@ export default function TabPresentationGroupe(__props) {
                 </FadeIn>
                 <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(160px, 1fr))', gap:20}}>
                   {[
-                    {end: Math.round(totCA/1000000*10)/10, suffix:'M€', label:'Chiffre d\'Affaires', icon:'€', desc:'CA consolidé groupe'},
-                    {end: totEffectif, suffix:'', label:'Collaborateurs', icon:'◉', desc:'Effectif total groupe'},
-                    {end: totFiliales, suffix:'', label:'Filiales', icon:'▪', desc:'Entités opérationnelles'},
-                    {end: totChantiers, suffix:'', label:'Chantiers en Cours', icon:'◆', desc:'Projets actifs'},
+                    {end: Math.round(totCA/1000000*10)/10, suffix:'M€', label:'Chiffre d\'Affaires', icon:'💰', desc:'CA consolidé groupe'},
+                    {end: totEffectif, suffix:'', label:'Collaborateurs', icon:'👥', desc:'Effectif total groupe'},
+                    {end: totFiliales, suffix:'', label:'Filiales', icon:'🏢', desc:'Entités opérationnelles'},
+                    {end: totChantiers, suffix:'', label:'Chantiers en Cours', icon:'🏗️', desc:'Projets actifs'},
                     {end: responsables.length, suffix:'', label:'Responsables', icon:'👑', desc:'Managers de ruches'},
-                    {end: 8, suffix:'', label:'Niveaux Ruche', icon:'◆', desc:'De XXS à XXXL'}
+                    {end: 8, suffix:'', label:'Niveaux Ruche', icon:'🐝', desc:'De XXS à XXXL'}
                   ].map((k,i) => (
                     <FadeIn key={i} delay={i*80}>
                       <div style={{background:$bgCard, borderRadius:crmRd, padding:'28px 20px', border:`1px solid ${$border}`, boxShadow:'0 2px 16px rgba(0,0,0,0.03)', textAlign:'center', transition:'all 0.3s'}} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 12px 40px rgba(0,0,0,0.08)';}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='0 2px 16px rgba(0,0,0,0.03)';}}>
@@ -182,7 +182,7 @@ export default function TabPresentationGroupe(__props) {
                     if (card.type === 'yilmaz') return (
                       <div style={{borderRadius:crmRd, overflow:'hidden', background:$bgCard, border:`1px solid ${$border}`, boxShadow:'0 4px 24px rgba(0,0,0,0.04)', width:'100%', transition:'transform 0.2s, box-shadow 0.2s', pointerEvents:'none', boxSizing:'border-box', display:'flex', flexDirection:'column'}}>
                         <div style={{height: homFilCardSize==='sm'?56:homFilCardSize==='md'?76:100, background:'linear-gradient(135deg, #9e9e9e, #4a4a4a)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0}}>
-                          <span style={{fontSize: homFilCardSize==='sm'?'1.6rem':homFilCardSize==='md'?'2rem':'2.5rem', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.2))'}}>▪</span>
+                          <span style={{fontSize: homFilCardSize==='sm'?'1.6rem':homFilCardSize==='md'?'2rem':'2.5rem', filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.2))'}}>🏢</span>
                         </div>
                         <div style={{padding: homFilCardSize==='sm'?'10px 14px':homFilCardSize==='md'?'14px 18px':'20px 24px', flex:1, display:'flex', flexDirection:'column'}}>
                           <div style={{fontSize: homFilCardSize==='sm'?'0.75rem':homFilCardSize==='md'?'0.9rem':'1.15rem', fontWeight:800, color:$text, marginBottom:3, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>YILMAZ</div>
@@ -459,7 +459,7 @@ export default function TabPresentationGroupe(__props) {
                 <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:28}}>
                   <FadeIn delay={100}>
                     <div style={{background:$bgCard, borderRadius:crmRd, padding:32, border:`1px solid ${$border}`, boxShadow:'0 2px 16px rgba(0,0,0,0.03)'}}>
-                      <div style={{fontSize:'0.95rem', fontWeight:700, color:$text, marginBottom:24}}>▦ Répartition CA par filiale</div>
+                      <div style={{fontSize:'0.95rem', fontWeight:700, color:$text, marginBottom:24}}>📊 Répartition CA par filiale</div>
                       {allKpis.filter(f => f.kpi.ca > 0).map((f, i) => {
                         const g = gradMap[f.nom] || ['#c9b896','#8B6F47'];
                         const pct = totCA > 0 ? (f.kpi.ca / totCA * 100) : 0;
@@ -479,7 +479,7 @@ export default function TabPresentationGroupe(__props) {
                   </FadeIn>
                   <FadeIn delay={250}>
                     <div style={{background:$bgCard, borderRadius:crmRd, padding:32, border:`1px solid ${$border}`, boxShadow:'0 2px 16px rgba(0,0,0,0.03)'}}>
-                      <div style={{fontSize:'0.95rem', fontWeight:700, color:$text, marginBottom:24}}>↗ Marges par filiale</div>
+                      <div style={{fontSize:'0.95rem', fontWeight:700, color:$text, marginBottom:24}}>📈 Marges par filiale</div>
                       {allKpis.filter(f => f.kpi.ca > 0).map((f, i) => {
                         const g = gradMap[f.nom] || ['#c9b896','#8B6F47'];
                         return (
@@ -523,7 +523,7 @@ export default function TabPresentationGroupe(__props) {
                     const serviceColorMap = {'EZEL':['#85C1E9','#007ab5'],'ECH':['#C39BD3','#6C3483'],'ROU':['#F5D78E','#C49A2A'],'ETAN':['#82E0AA','#0e6655']};
                     const isDirectionOY = emp.niveau === 'XXXL';
                     const g = isDirectionOY ? oyGrad : fil ? (gradMap[fil.nom] || yilmazGrad) : (serviceColorMap[emp.service] || yilmazGrad);
-                    const filLabel = isDirectionOY ? '◆ Group OY' : fil ? `${fil.icon} ${fil.nom}` : emp.service === 'EZEL' ? '▪ Ezel Bâtiment' : emp.service === 'ECH' ? '✱ L\'Échafaudage' : emp.service === 'ROU' ? '▸ La Roulotte' : emp.service === 'ETAN' ? '◦ L\'Étanchéité' : '▪ YILMAZ';
+                    const filLabel = isDirectionOY ? '🐝 Group OY' : fil ? `${fil.icon} ${fil.nom}` : emp.service === 'EZEL' ? '🏢 Ezel Bâtiment' : emp.service === 'ECH' ? '⚙️ L\'Échafaudage' : emp.service === 'ROU' ? '🚛 La Roulotte' : emp.service === 'ETAN' ? '💧 L\'Étanchéité' : '🏢 YILMAZ';
                     const initials = `${(emp.prenom||'')[0]||''}${(emp.nom||'')[0]||''}`;
                     return (
                       <div style={{background:$bgCard, borderRadius:crmRd, overflow:'hidden', border:`1px solid ${$border}`, boxShadow:'0 4px 24px rgba(0,0,0,0.04)', textAlign:'center', width:'100%', pointerEvents:'none'}}>
@@ -631,13 +631,13 @@ export default function TabPresentationGroupe(__props) {
             {/* ══════ SECTION 10: CTA / FOOTER ══════ */}
             <div style={{background:$bgSub, padding:'100px 32px 60px', textAlign:'center'}}>
               <FadeIn>
-                <div style={{fontSize:'2.5rem', marginBottom:20}}>◆</div>
+                <div style={{fontSize:'2.5rem', marginBottom:20}}>🐝</div>
                 <div style={{fontSize:'2.2rem', fontWeight:800, color:$text, marginBottom:12, letterSpacing:'-0.03em'}}>Rejoignez le Grand Rucher</div>
                 <div style={{fontSize:'1rem', color:$textSec, maxWidth:500, margin:'0 auto 40px', lineHeight:1.7}}>
                   Un groupe en pleine croissance, des opportunités uniques, un modèle innovant.
                 </div>
                 <div style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap'}}>
-                  <button onClick={() => { if (!isLoggedIn) { setShowLoginModal(true); return; } setOngletActif('collaborateurs'); setNavEntreprise('yilmaz'); setNavService('rh'); setDashboardFiliale('yilmaz'); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s', boxShadow:'0 4px 20px rgba(139,111,71,0.15)'}} onMouseOver={e=>e.target.style.background='#a68856'} onMouseOut={e=>e.target.style.background='#8B6F47'}>{isLoggedIn ? '◉ Voir nos équipes' : '🔐 Se connecter'}</button>
+                  <button onClick={() => { if (!isLoggedIn) { setShowLoginModal(true); return; } setOngletActif('collaborateurs'); setNavEntreprise('yilmaz'); setNavService('rh'); setDashboardFiliale('yilmaz'); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s', boxShadow:'0 4px 20px rgba(139,111,71,0.15)'}} onMouseOver={e=>e.target.style.background='#a68856'} onMouseOut={e=>e.target.style.background='#8B6F47'}>{isLoggedIn ? '👥 Voir nos équipes' : '🔐 Se connecter'}</button>
                   <button onClick={() => { if (!isLoggedIn) setShowLoginModal(true); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'1.5px solid #c9b896', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s'}} onMouseOver={e=>{e.target.style.background='#8B6F47';e.target.style.color='white';e.target.style.borderColor='#8B6F47';}} onMouseOut={e=>{e.target.style.background='transparent';e.target.style.color='#8B6F47';e.target.style.borderColor='#c9b896';}}>📧 Nous contacter</button>
                 </div>
                 <div style={{marginTop:80, paddingTop:32, borderTop:'1px solid #e0d5c5', fontSize:'0.82rem', color:$textMut}}>

@@ -4,10 +4,10 @@
 export default function TabGuide(__props) {
   const { $accent, $bgCard, $bgSub, $border, $info, $success, $text, $textMut, $textSec, ca, crmRd, filiales, guideSection, niveau, setGuideSection, widgetDescriptions, widgetLabels } = __props;
           const sections = [
-            {key:'widgets', label:'▦ Widgets du Tableau de Bord', desc:'Documentation complète des 20 widgets'},
-            {key:'centres', label:'☰ Centre de Données', desc:'Saisie des données financières manuelles'},
-            {key:'ruches', label:'◆ Système Ruches', desc:'Modèle de rémunération variable'},
-            {key:'structure', label:'◆ Organisation du Group', desc:'Holdings, filiales, services partagés'},
+            {key:'widgets', label:'📊 Widgets du Tableau de Bord', desc:'Documentation complète des 20 widgets'},
+            {key:'centres', label:'📋 Centre de Données', desc:'Saisie des données financières manuelles'},
+            {key:'ruches', label:'🐝 Système Ruches', desc:'Modèle de rémunération variable'},
+            {key:'structure', label:'🏛️ Organisation du Group', desc:'Holdings, filiales, services partagés'},
             {key:'glossaire', label:'📖 Glossaire BTP', desc:'Termes financiers et métier BTP'}
           ];
 
@@ -34,7 +34,7 @@ export default function TabGuide(__props) {
             {guideSection === 'widgets' && (
               <div>
                 <p style={{fontSize:'0.98rem', color:$textSec, marginBottom:20, lineHeight:1.6}}>
-                  Le Tableau de Bord du Group comprend <strong>20 widgets</strong> configurables, regroupés par catégorie. Chaque widget peut être activé/désactivé, redimensionné (½ ou pleine largeur) et réordonné via le panneau ✱ Widgets.
+                  Le Tableau de Bord du Group comprend <strong>20 widgets</strong> configurables, regroupés par catégorie. Chaque widget peut être activé/désactivé, redimensionné (½ ou pleine largeur) et réordonné via le panneau ⚙️ Widgets.
                 </p>
                 {['Pilotage', 'Finance', 'BTP / Rentabilité', 'BTP / Sous-traitance', 'BTP / Contrôle de gestion', 'BTP / Performance', 'RH / Finance', 'RH / Productivité', 'RH', 'Commercial', 'Opérationnel', 'Monitoring', 'Organisation', 'Comparaison', 'Répartition', 'Synthèse', 'Tendance', 'Finance / Trésorerie'].filter((cat, i, arr) => arr.indexOf(cat) === i).map(cat => {
                   const widgets = Object.entries(widgetDescriptions).filter(([k, v]) => v.categorie === cat);
@@ -53,8 +53,8 @@ export default function TabGuide(__props) {
                           <div style={{fontSize:'0.9rem', color:$textSec, lineHeight:1.55, marginBottom:12}}>{desc.detail}</div>
                           <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
                             <span style={{padding:'3px 10px', borderRadius:crmRd, background:'#f8f6f1', fontSize:'0.82rem', fontWeight:600, color:$accent}}>📂 {desc.categorie}</span>
-                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:$info+'12', fontSize:'0.82rem', fontWeight:600, color:'#2563eb'}}>↻ {desc.frequence}</span>
-                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:$success+'12', fontSize:'0.82rem', fontWeight:600, color:'#059669'}}>↧ {desc.source}</span>
+                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:$info+'12', fontSize:'0.82rem', fontWeight:600, color:'#2563eb'}}>🔄 {desc.frequence}</span>
+                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:$success+'12', fontSize:'0.82rem', fontWeight:600, color:'#059669'}}>📥 {desc.source}</span>
                           </div>
                         </div>
                       ))}
@@ -68,7 +68,7 @@ export default function TabGuide(__props) {
             {guideSection === 'centres' && (
               <div style={{display:'flex', flexDirection:'column', gap:16}}>
                 <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:24}}>
-                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>☰ Centre de Données</h3>
+                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>📋 Centre de Données</h3>
                   <p style={{fontSize:'0.95rem', color:$textSec, lineHeight:1.6, marginBottom:16}}>Le Centre de Données est le module de saisie manuelle des données financières par filiale et par année. Il permet de renseigner les valeurs réelles qui alimentent ensuite tous les widgets du Tableau de Bord.</p>
                   <div style={{background:$bgSub, borderRadius:crmRd, padding:16, marginBottom:16}}>
                     <div style={{fontWeight:700, fontSize:'0.98rem', color:$accent, marginBottom:10}}>Indicateurs disponibles (15 par filiale)</div>
@@ -79,7 +79,7 @@ export default function TabGuide(__props) {
                     </div>
                   </div>
                   <div style={{background:$info+'12', borderRadius:crmRd, padding:16}}>
-                    <div style={{fontWeight:700, fontSize:'0.98rem', color:'#2563eb', marginBottom:8}}>✧ Règles de priorité</div>
+                    <div style={{fontWeight:700, fontSize:'0.98rem', color:'#2563eb', marginBottom:8}}>💡 Règles de priorité</div>
                     <p style={{fontSize:'0.92rem', color:$textSec, lineHeight:1.6}}>Les données saisies manuellement dans le Centre de Données sont <strong>toujours prioritaires</strong> sur les valeurs calculées automatiquement. Si un champ est vide, le système utilise les calculs par défaut (ex: sous-traitance = CA × taux %, BFR = CA × 15%). Format : comptable français avec virgule et 2 décimales (1 234 567,00).</p>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default function TabGuide(__props) {
             {guideSection === 'ruches' && (
               <div style={{display:'flex', flexDirection:'column', gap:16}}>
                 <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:24}}>
-                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>◆ Le Système Ruches</h3>
+                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>🐝 Le Système Ruches</h3>
                   <p style={{fontSize:'0.95rem', color:$textSec, lineHeight:1.6, marginBottom:16}}>Modèle innovant de rémunération variable basé sur l'analogie de la ruche. Chaque collaborateur est affecté à un niveau (taille de ruche) selon le CA qu'il gère, avec une prime variable indexée sur l'atteinte de l'EBE cible.</p>
                   <div style={{background:$accent+'15', borderRadius:crmRd, padding:16, marginBottom:16}}>
                     <div style={{fontWeight:700, fontSize:'0.98rem', color:$accent, marginBottom:10}}>8 Niveaux de Ruche</div>
@@ -115,12 +115,12 @@ export default function TabGuide(__props) {
             {guideSection === 'structure' && (
               <div style={{display:'flex', flexDirection:'column', gap:16}}>
                 <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:24}}>
-                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>◆ Organisation du Group OY</h3>
+                  <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>🏛️ Organisation du Group OY</h3>
                   <div style={{fontSize:'0.95rem', color:$textSec, lineHeight:1.7}}>
                     <p style={{marginBottom:12}}><strong>GROUP OY</strong> est la holding mère qui détient l'ensemble du groupe. Elle supervise deux sous-holdings :</p>
                     <p style={{marginBottom:8, paddingLeft:16}}><strong>🏦 INVEST LOC</strong> — Holding Location : détient La Roulotte (location roulottes & matériel) et L'Échafaudage (location + montage/démontage d'échafaudages).</p>
-                    <p style={{marginBottom:8, paddingLeft:16}}><strong>◆ INVEST EXE</strong> — Holding Exécution : détient Ezel Bâtiment (entreprise générale de bâtiment) et L'Étanchéité (travaux d'imperméabilisation).</p>
-                    <p style={{marginBottom:12}}><strong>◆ Yilmaz</strong> est la société de services partagés (Finance, RH, IT, Marketing) qui facture ses prestations à hauteur de 3% du CA opérationnel de chaque filiale.</p>
+                    <p style={{marginBottom:8, paddingLeft:16}}><strong>🏛️ INVEST EXE</strong> — Holding Exécution : détient Ezel Bâtiment (entreprise générale de bâtiment) et L'Étanchéité (travaux d'imperméabilisation).</p>
+                    <p style={{marginBottom:12}}><strong>🐝 Yilmaz</strong> est la société de services partagés (Finance, RH, IT, Marketing) qui facture ses prestations à hauteur de 3% du CA opérationnel de chaque filiale.</p>
                   </div>
                   <div style={{background:$bgSub, borderRadius:crmRd, padding:16}}>
                     <div style={{fontWeight:700, fontSize:'0.98rem', color:$accent, marginBottom:8}}>Services par filiale</div>

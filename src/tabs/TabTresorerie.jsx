@@ -98,8 +98,8 @@ export default function TabTresorerie(__props) {
         const decouvertTotal = filiales.reduce((s,f) => s + (tresoDataAll[f]?.decouvert||0), 0);
 
         const sumCat = (type, cat, mois) => filiales.reduce((s,f) => s + ((tresoDataAll[f]?.[type]?.[cat]||[])[mois]||0), 0);
-        const encCats = [{id:'factures_clients',label:'Factures clients',icon:'▫'},{id:'refacturations',label:'Refacturations internes',icon:'↻'},{id:'subventions',label:'Subventions & aides',icon:'◆'},{id:'autres_encaiss',label:'Autres encaissements',icon:'💎'}];
-        const decCats = [{id:'fournisseurs',label:'Fournisseurs & matériaux',icon:'🧱'},{id:'salaires',label:'Salaires nets',icon:'◉'},{id:'charges_sociales',label:'Charges sociales',icon:'▦'},{id:'loyers',label:'Loyers & charges',icon:'▪'},{id:'assurances',label:'Assurances',icon:'🛡️'},{id:'impots_taxes',label:'Impôts & taxes',icon:'🏦'},{id:'investissements',label:'Investissements',icon:'€'},{id:'remboursements_emprunt',label:'Remb. emprunts',icon:'📉'},{id:'autres_decaiss',label:'Autres décaissements',icon:'☰'}];
+        const encCats = [{id:'factures_clients',label:'Factures clients',icon:'📄'},{id:'refacturations',label:'Refacturations internes',icon:'🔄'},{id:'subventions',label:'Subventions & aides',icon:'🏛️'},{id:'autres_encaiss',label:'Autres encaissements',icon:'💎'}];
+        const decCats = [{id:'fournisseurs',label:'Fournisseurs & matériaux',icon:'🧱'},{id:'salaires',label:'Salaires nets',icon:'👥'},{id:'charges_sociales',label:'Charges sociales',icon:'📊'},{id:'loyers',label:'Loyers & charges',icon:'🏢'},{id:'assurances',label:'Assurances',icon:'🛡️'},{id:'impots_taxes',label:'Impôts & taxes',icon:'🏦'},{id:'investissements',label:'Investissements',icon:'💰'},{id:'remboursements_emprunt',label:'Remb. emprunts',icon:'📉'},{id:'autres_decaiss',label:'Autres décaissements',icon:'📋'}];
 
         const totalEnc = (m) => encCats.reduce((s,c) => s + sumCat('encaissements',c.id,m), 0);
         const totalDec = (m) => decCats.reduce((s,c) => s + sumCat('decaissements',c.id,m), 0);
@@ -123,7 +123,7 @@ export default function TabTresorerie(__props) {
           <div>
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
               <div>
-                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>€ Plan de Trésorerie</h1>
+                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>💰 Plan de Trésorerie</h1>
                 <div style={{fontSize:'0.8rem', color:$textMut}}>Suivi cash-flow et projections — {new Date().getFullYear()}</div>
               </div>
               <div style={{display:'flex', gap:8, alignItems:'center', flexWrap:'wrap'}}>
@@ -139,7 +139,7 @@ export default function TabTresorerie(__props) {
                 {label:'Solde bancaire actuel', value:soldeBancaireTotal, sub:'Début de période', color:'#5a8a48', bg:'linear-gradient(145deg, #fafcfa, #f2f8f0)', border:'#d8e8d2'},
                 {label:'Encaissements ' + moisN[moisActuel], value:encMois, sub:fmt(encMois - totalEnc(Math.max(0,moisActuel-1))) + ' vs mois préc.', color:'#3a6a2a', bg:'linear-gradient(145deg, #f5faf2, #eaf5e4)', border:'#c8e0c0'},
                 {label:'Décaissements ' + moisN[moisActuel], value:decMois, sub: Math.round(decMois/encMois*100) + '% des encaissements', color:'#8a6040', bg:'linear-gradient(145deg, #fcfaf8, #f8f2ec)', border:'#e8d8c8'},
-                {label:'Projection fin ' + moisN[Math.min(moisActuel+2,11)], value:solde3m, sub: solde3m < seuilAlerte ? '▲ Sous le seuil d\'alerte' : '✓ Au-dessus du seuil', color: solde3m < seuilAlerte ? '#c04030' : '#5a8a48', bg: solde3m < seuilAlerte ? 'linear-gradient(145deg, #fef8f8, #fdf2f0)' : 'linear-gradient(145deg, #fafcfa, #f2f8f0)', border: solde3m < seuilAlerte ? '#e8c8c8' : '#d8e8d2'},
+                {label:'Projection fin ' + moisN[Math.min(moisActuel+2,11)], value:solde3m, sub: solde3m < seuilAlerte ? '⚠️ Sous le seuil d\'alerte' : '✓ Au-dessus du seuil', color: solde3m < seuilAlerte ? '#c04030' : '#5a8a48', bg: solde3m < seuilAlerte ? 'linear-gradient(145deg, #fef8f8, #fdf2f0)' : 'linear-gradient(145deg, #fafcfa, #f2f8f0)', border: solde3m < seuilAlerte ? '#e8c8c8' : '#d8e8d2'},
               ].map((k,i) => (
                 <div key={i} style={{background:k.bg, borderRadius:crmRd, padding:'16px 18px', border:'1px solid '+k.border}}>
                   <div style={{fontSize:'0.72rem', color:$textMut, fontWeight:600, textTransform:'uppercase', letterSpacing:'0.5px'}}>{k.label}</div>
@@ -151,7 +151,7 @@ export default function TabTresorerie(__props) {
 
             {/* Tabs */}
             <div style={{display:'flex', gap:6, marginBottom:14}}>
-              {[{id:'tableau',label:'☰ Tableau mensuel'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'🚨 Alertes ('+tresoAlertes.length+')'}].map(t => (
+              {[{id:'tableau',label:'📋 Tableau mensuel'},{id:'graphiques',label:'📈 Graphiques'},{id:'alertes',label:'🚨 Alertes ('+tresoAlertes.length+')'}].map(t => (
                 <button key={t.id} onClick={() => setTresoTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: tresoTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: tresoTab===t.id ? '#faf6ef' : 'white', color: tresoTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
               ))}
             </div>
@@ -170,13 +170,13 @@ export default function TabTresorerie(__props) {
                   <tbody>
                     {/* Solde initial */}
                     <tr style={{background:'#f0f7f0', fontWeight:700}}>
-                      <td style={{padding:'8px 14px', position:'sticky', left:0, background:'#f0f7f0', zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:'#3a6a2a'}}>€ Solde initial</td>
+                      <td style={{padding:'8px 14px', position:'sticky', left:0, background:'#f0f7f0', zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:'#3a6a2a'}}>💰 Solde initial</td>
                       {moisN.map((m,i) => <td key={i} style={{padding:'6px', textAlign:'right', color:'#3a6a2a'}}>{fmt(i === 0 ? soldeBancaireTotal : soldesCumul[i-1])}</td>)}
                       <td style={{padding:'6px 10px', textAlign:'right', borderLeft:`2px solid ${$borderAlt}`}}></td>
                     </tr>
                     {/* Encaissements header */}
                     <tr style={{background:'#e8f5e2'}}>
-                      <td colSpan={14} style={{padding:'8px 14px', fontWeight:800, color:'#2d5016', fontSize:'0.82rem'}}>↗ ENCAISSEMENTS</td>
+                      <td colSpan={14} style={{padding:'8px 14px', fontWeight:800, color:'#2d5016', fontSize:'0.82rem'}}>📈 ENCAISSEMENTS</td>
                     </tr>
                     {encCats.map(c => (
                       <tr key={c.id} style={{borderBottom:`1px solid ${$border}`}}>
@@ -341,7 +341,7 @@ export default function TabTresorerie(__props) {
             {tresoTab === 'alertes' && (
               <div style={{display:'flex', flexDirection:'column', gap:12}}>
                 <div style={{padding:'14px 20px', background:$bgSub, borderRadius:crmRd, border:`1px solid ${$border}`}}>
-                  <div style={{fontWeight:700, color:$accent, marginBottom:8}}>✱ Seuil d'alerte de trésorerie</div>
+                  <div style={{fontWeight:700, color:$accent, marginBottom:8}}>⚙️ Seuil d'alerte de trésorerie</div>
                   <div style={{display:'flex', alignItems:'center', gap:12}}>
                     <span style={{fontSize:'0.85rem', color:$textSec}}>Solde minimum :</span>
                     <span style={{fontWeight:800, color:'#c04030', fontSize:'1.1rem'}}>{fmt(seuilAlerte)}</span>
@@ -349,7 +349,7 @@ export default function TabTresorerie(__props) {
                   </div>
                 </div>
                 {tresoAlertes.length === 0 ? (
-                  <div style={{textAlign:'center', padding:40, color:'#5a8a48', fontSize:'0.95rem', fontWeight:600}}>✓ Aucune alerte — trésorerie au-dessus du seuil sur toute la période</div>
+                  <div style={{textAlign:'center', padding:40, color:'#5a8a48', fontSize:'0.95rem', fontWeight:600}}>✅ Aucune alerte — trésorerie au-dessus du seuil sur toute la période</div>
                 ) : tresoAlertes.map((a,i) => (
                   <div key={i} style={{padding:'14px 20px', borderRadius:crmRd, background: a.type === 'danger' ? '#fef2f2' : '#fefce8', borderLeft: '4px solid ' + (a.type === 'danger' ? '#dc2626' : '#d97706')}}>
                     <div style={{fontWeight:700, color: a.type === 'danger' ? '#991b1b' : '#92400e', fontSize:'0.9rem'}}>{a.type === 'danger' ? '▲' : '●'} {a.mois} — Solde prévu : <span style={{fontWeight:800}}>{fmt(a.solde)}</span></div>
@@ -360,7 +360,7 @@ export default function TabTresorerie(__props) {
                   </div>
                 ))}
                 <div style={{padding:'14px 20px', background:'#f0f2f7', borderRadius:crmRd, border:'1px solid #d5d8e8'}}>
-                  <div style={{fontWeight:700, color:'#2a3a5a', marginBottom:8}}>✧ Recommandations</div>
+                  <div style={{fontWeight:700, color:'#2a3a5a', marginBottom:8}}>💡 Recommandations</div>
                   <div style={{fontSize:'0.82rem', color:'#4a5a7a', lineHeight:1.6}}>
                     {tresoAlertes.length > 0 ? (
                       <>• Anticiper les périodes tendues en décalant certains paiements fournisseurs<br/>• Relancer les impayés clients avant les mois critiques<br/>• Négocier une ligne de crédit de trésorerie avec la banque<br/>• Étudier l'affacturage pour accélérer les encaissements</>

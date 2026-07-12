@@ -55,7 +55,7 @@ export default function TabCalendrierSvc(__props) {
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
               <div>
                 <h2 style={{margin:0,fontSize:'1.2rem',fontWeight:700,color:$text,display:'flex',alignItems:'center',gap:8}}>
-                  ◫ {isEtudesPrix ? 'Calendrier Deadlines AO' : 'Calendrier — ' + (SERVICES_CONFIG[navEntreprise]?.services.find(s=>s.id===navService)?.label||'Service')}
+                  📅 {isEtudesPrix ? 'Calendrier Deadlines AO' : 'Calendrier — ' + (SERVICES_CONFIG[navEntreprise]?.services.find(s=>s.id===navService)?.label||'Service')}
                 </h2>
                 <p style={{margin:'4px 0 0',fontSize:'0.85rem',color:$textMut}}>
                   {isEtudesPrix ? 'Dates limites de réponse · Visites de site · Board Monday.com 6470581185' : 'Vue mensuelle des événements du service'}
