@@ -2,7 +2,7 @@
 // Extrait de App.jsx lors de la modularisation (étape 5).
 
 export const FILIALES_INIT = [
-    { id: 1, nom: 'La Roulotte', holding: 'INVEST LOC', activite: 'Location Roulottes, WC & Barrières', icon: '🚛', ca: 131092, effectif: 2, sousTraitancePct: 26, fraisInternesPct: 18, margeBrutePct: 74, couleur: '#C49A2A',
+    { id: 1, nom: 'La Roulotte', siren: '928276518', holding: 'INVEST LOC', activite: 'Location Roulottes, WC & Barrières', icon: '🚛', ca: 131092, effectif: 2, sousTraitancePct: 26, fraisInternesPct: 18, margeBrutePct: 74, couleur: '#C49A2A',
       historique: [
         { annee: '2023', ca: 0.08, ebe: 0.01 },
         { annee: '2024', ca: 0.10, ebe: 0.015 },
@@ -10,7 +10,7 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 0.131, ebe: 0.024 }
       ]
     },
-    { id: 2, nom: "L'Échafaudage", holding: 'INVEST LOC', activite: 'Location + Montage/Démontage Échafaudages', icon: '⚙️', ca: 272545, effectif: 4, sousTraitancePct: 73, fraisInternesPct: 25, margeBrutePct: 27, couleur: '#6C3483',
+    { id: 2, nom: "L'Échafaudage", siren: '942781774', holding: 'INVEST LOC', activite: 'Location + Montage/Démontage Échafaudages', icon: '⚙️', ca: 272545, effectif: 4, sousTraitancePct: 73, fraisInternesPct: 25, margeBrutePct: 27, couleur: '#6C3483',
       historique: [
         { annee: '2023', ca: 0.15, ebe: -0.02 },
         { annee: '2024', ca: 0.22, ebe: -0.05 },
@@ -18,7 +18,7 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 0.273, ebe: -0.112 }
       ]
     },
-    { id: 3, nom: 'Ezel Bâtiment', holding: 'INVEST EXE', activite: 'Entreprise Générale de Bâtiment', icon: '🏗️', ca: 3878253, effectif: 8, sousTraitancePct: 36, fraisInternesPct: 20, margeBrutePct: 42, couleur: '#007ab5',
+    { id: 3, nom: 'Ezel Bâtiment', siren: '753592872', holding: 'INVEST EXE', activite: 'Entreprise Générale de Bâtiment', icon: '🏗️', ca: 3878253, effectif: 8, sousTraitancePct: 36, fraisInternesPct: 20, margeBrutePct: 42, couleur: '#007ab5',
       historique: [
         { annee: '2023', ca: 1.8, ebe: 0.08 },
         { annee: '2024', ca: 2.9, ebe: 0.15 },
@@ -26,16 +26,22 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 3.878, ebe: 0.054 }
       ]
     },
-    { id: 6, nom: "L'Étanchéité", holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '💧', ca: 0, effectif: 0, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
+    { id: 6, nom: "L'Étanchéité", siren: '104085147', holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '💧', ca: 0, effectif: 0, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
       historique: [
         { annee: '2025', ca: 0, ebe: 0 },
         { annee: '2026', ca: 0, ebe: 0 }
       ]
     },
-    { id: 4, nom: 'INVEST LOC', holding: 'GROUP OY', activite: 'Holding Location — Détient La Roulotte & L\'Échafaudage', icon: '🏦', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#0ea5e9',
+    { id: 4, nom: 'INVEST LOC', siren: '925240343', holding: 'GROUP OY', activite: 'Holding Location — Détient La Roulotte & L\'Échafaudage', icon: '🏦', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#0ea5e9',
       historique: []
     },
-    { id: 5, nom: 'INVEST EXE', holding: 'GROUP OY', activite: "Holding Exécution — Détient Ezel Bâtiment & L'Étanchéité", icon: '🏛️', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#8b5cf6',
+    { id: 7, nom: 'ELIA', siren: '983975798', holding: 'GROUP OY', activite: 'SCI — Immobilier du groupe (Tournan-en-Brie)', icon: '◆', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, fraisStructurePct: 0, couleur: '#8a7a5c',
+      historique: []
+    },
+    { id: 8, nom: "L'Ezel", siren: '104081146', holding: 'INVEST EXE', activite: "Entité d'exploitation — Tournan-en-Brie", icon: '◆', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, fraisStructurePct: 0, couleur: '#5c7a8a',
+      historique: []
+    },
+    { id: 5, nom: 'INVEST EXE', siren: '939413654', holding: 'GROUP OY', activite: "Holding Exécution — Détient Ezel Bâtiment & L'Étanchéité", icon: '🏛️', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#8b5cf6',
       historique: []
     }
 ];

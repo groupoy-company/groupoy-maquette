@@ -386,6 +386,19 @@ export default function TabPresentationGroupe(__props) {
                           <div style={{fontSize:'0.75rem', color:$textMut}}>Services Partagés</div>
                         </div>
                       </div>
+
+                      {/* COL 4: SCI & AUTRES (direct GROUP OY) */}
+                      {filialesDynamiques.filter(f => f.holding === 'GROUP OY' && !['INVEST LOC','INVEST EXE'].includes(f.nom)).map((f, fi) => (
+                        <div key={'oy'+fi} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                          <div style={{width:3, height:30, background:'#d5cfc5'}}></div>
+                          <div style={{background:$bgCard, borderRadius:crmRd, padding:'16px 24px', textAlign:'center', border:'1.5px solid rgba(201,162,39,0.35)'}}>
+                            <div style={{fontSize:'1.5rem'}}>◆</div>
+                            <div style={{fontSize:'0.95rem', fontWeight:800, color:$text}}>{f.nom}</div>
+                            <div style={{fontSize:'0.72rem', color:$textMut}}>{f.activite && f.activite.split('—')[0]}</div>
+                            {f.siren && <div style={{fontSize:'0.62rem', color:$textMut, opacity:0.7, marginTop:2}}>SIREN {f.siren}</div>}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </FadeIn>
