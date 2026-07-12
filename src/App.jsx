@@ -2888,7 +2888,7 @@ const SimulateurRuches = () => {
           <span style={{fontSize:'0.78rem', color:$textMut, marginLeft:4}}>Le Grand Rucher</span>
         </div>
         <button onClick={() => setShowLoginModal(true)} style={{padding:'9px 24px', borderRadius:crmRd, border:'1.5px solid #c9b896', background:'transparent', color:$accent, fontWeight:700, fontSize:'0.92rem', cursor:'pointer'}} onMouseOver={e => {e.target.style.background='#8B6F47'; e.target.style.color='white';}} onMouseOut={e => {e.target.style.background='transparent'; e.target.style.color='#8B6F47';}}>
-          🔐 Se connecter
+          Se connecter
         </button>
       </div>
     )}
@@ -3126,15 +3126,15 @@ const SimulateurRuches = () => {
                 if (!cfg) return null;
                 const isActive = navEntreprise === key;
                 const gradients = {
-                  groupoy: 'linear-gradient(135deg, #c9b896 0%, #8B6F47 100%)',
-                  yilmaz: 'linear-gradient(135deg, #b0b0b0 0%, #2d2d2d 100%)',
-                  ezel: 'linear-gradient(135deg, #85C1E9 0%, #007ab5 100%)',
-                  roulotte: 'linear-gradient(135deg, #F5D78E 0%, #C49A2A 100%)',
-                  echafaudage: 'linear-gradient(135deg, #C39BD3 0%, #6C3483 100%)',
-                  etancheite: 'linear-gradient(135deg, #82E0AA 0%, #0e6655 100%)'
+                  groupoy: 'linear-gradient(135deg, #cbb994 0%, #8B6F47 100%)',
+                  yilmaz: 'linear-gradient(135deg, #b3ada2 0%, #47433c 100%)',
+                  ezel: 'linear-gradient(135deg, #9db4c4 0%, #3d5a6e 100%)',
+                  roulotte: 'linear-gradient(135deg, #e3d2a9 0%, #a98a45 100%)',
+                  echafaudage: 'linear-gradient(135deg, #b5a6b8 0%, #5d4f63 100%)',
+                  etancheite: 'linear-gradient(135deg, #a9c2b2 0%, #3f6053 100%)'
                 };
                 const iconBg = { groupoy: '#8B6F47', yilmaz: '#2d2d2d', ezel: '#007ab5', roulotte: '#C49A2A', echafaudage: '#6C3483', etancheite: '#0e6655' };
-                const iconEmoji = { groupoy: '🐝', yilmaz: '🏢', ezel: '🏗️', roulotte: '🚛', echafaudage: '⚙️', etancheite: '💧' };
+                const iconEmoji = { groupoy: 'OY', yilmaz: 'Y', ezel: 'E', roulotte: 'R', echafaudage: 'L', etancheite: 'É' };
                 const descs = {
                   groupoy: 'Vue consolidée du groupe\net pilotage stratégique',
                   yilmaz: 'Services partagés : Finance,\nRH, IT et Marketing',

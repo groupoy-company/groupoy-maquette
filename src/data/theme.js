@@ -7,4 +7,4 @@ export const CRM_TINT_BG={blanc:['#fff','#fff','#fff'],gris:['#f5f5f5','#f0f0f0'
 export const CRM_RAD=[{id:'sharp',l:'Sharp',s:'0px',d:'Angulaire',v:0},{id:'soft',l:'SaaS',s:'6px',d:'Moderne',v:6},{id:'round',l:'Apple',s:'12px',d:'Arrondi',v:12}];
 export const CRM_FIL_ACC={groupoy:'#8e7148',yilmaz:'#555555',ezel:'#007cb9',roulotte:'#C49A2A',echafaudage:'#9f58bd',etancheite:'#12856f'};
 export const CRM_FIL_NAMES={groupoy:'Group OY',yilmaz:'Yilmaz SAS',ezel:'Ezel Bâtiment',roulotte:'La Roulotte',echafaudage:"L'Échafaudage",etancheite:"L'Étanchéité"};
-export const CRM_FIL_ICONS={groupoy:'🐝',yilmaz:'🏢',ezel:'🏗️',roulotte:'🚛',echafaudage:'⚙️',etancheite:'💧'};
+export const CRM_FIL_ICONS={groupoy:'◆',yilmaz:'◆',ezel:'◆',roulotte:'◆',echafaudage:'◆',etancheite:'◆'};
