@@ -32,16 +32,16 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 0, ebe: 0 }
       ]
     },
-    { id: 4, nom: 'INVEST LOC', siren: '925240343', holding: 'GROUP OY', activite: 'Holding Location — Détient La Roulotte & L\'Échafaudage', icon: '🏦', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#0ea5e9',
+    { id: 4, nom: 'INVEST LOC', siren: '925240343', holding: 'GROUP OY', activite: 'Holding Location — Détient La Roulotte & L\'Échafaudage', icon: '⬡', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#0ea5e9',
       historique: []
     },
-    { id: 7, nom: 'ELIA', siren: '983975798', holding: 'GROUP OY', activite: 'SCI — Immobilier du groupe (Tournan-en-Brie)', icon: '◆', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, fraisStructurePct: 0, couleur: '#8a7a5c',
+    { id: 7, nom: 'ELIA', siren: '983975798', holding: 'GROUP OY', activite: 'SCI — Immobilier du groupe (Tournan-en-Brie)', icon: '⬡', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, fraisStructurePct: 0, couleur: '#8a7a5c',
       historique: []
     },
     { id: 8, nom: "L'Ezel", siren: '104081146', holding: 'INVEST EXE', activite: "Entité d'exploitation — Tournan-en-Brie", icon: '◆', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, fraisStructurePct: 0, couleur: '#5c7a8a',
       historique: []
     },
-    { id: 5, nom: 'INVEST EXE', siren: '939413654', holding: 'GROUP OY', activite: "Holding Exécution — Détient Ezel Bâtiment & L'Étanchéité", icon: '🏛️', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#8b5cf6',
+    { id: 5, nom: 'INVEST EXE', siren: '939413654', holding: 'GROUP OY', activite: "Holding Exécution — Détient Ezel Bâtiment & L'Étanchéité", icon: '⬡', ca: 0, effectif: 0, sousTraitancePct: 0, fraisInternesPct: 0, margeBrutePct: 0, couleur: '#8b5cf6',
       historique: []
     }
 ];

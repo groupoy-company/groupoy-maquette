@@ -1376,7 +1376,7 @@ const SimulateurRuches = () => {
     setConfirmDelete(null);
   };
 
-  const [filialesDynamiques, setFilialesDynamiques] = usePersistedState('filiales_v3', FILIALES_INIT);
+  const [filialesDynamiques, setFilialesDynamiques] = usePersistedState('filiales_v4', FILIALES_INIT);
 
   // Migration: ajouter L'Étanchéité si absente + sync couleurs
   useEffect(() => {

@@ -312,7 +312,7 @@ export default function TabPresentationGroupe(__props) {
                   <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                     {/* GROUP OY */}
                     <div style={{background:'linear-gradient(135deg, #8B6F47, #c9b896)', borderRadius:crmRd, padding:'24px 40px', textAlign:'center', color:'white', boxShadow:'0 8px 32px rgba(139,111,71,0.3)', zIndex:2}}>
-                      <div style={{fontSize:'2rem'}}>◆</div>
+                      <div style={{fontSize:'2rem', lineHeight:1}}>⬡</div>
                       <div style={{fontSize:'1.3rem', fontWeight:900}}>GROUP OY</div>
                       <div style={{fontSize:'0.85rem', opacity:0.7}}>Holding mère</div>
                     </div>
@@ -325,18 +325,18 @@ export default function TabPresentationGroupe(__props) {
                       <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                         <div style={{width:3, height:30, background:'#d5cfc5'}}></div>
                         <div style={{background:$bgCard, borderRadius:crmRd, padding:'16px 24px', textAlign:'center', border:'2px solid #f0ebe3', boxShadow:'0 4px 16px rgba(0,0,0,0.06)', width:170, zIndex:2}}>
-                          <div style={{fontSize:'1.5rem'}}>◆</div>
+                          <div style={{fontSize:'1.4rem', lineHeight:1.2}}>⬡</div>
                           <div style={{fontSize:'0.95rem', fontWeight:800, color:$text}}>INVEST EXE</div>
                           <div style={{fontSize:'0.75rem', color:$textMut}}>Holding Exécution</div>
                         </div>
                         <div style={{width:2, height:24, background:'#d5cfc5'}}></div>
-                        <div style={{position:'relative', width:280}}>
+                        <div style={{position:'relative', width:'100%', maxWidth:340}}>
                           <div style={{position:'absolute', top:0, left:70, right:70, height:2, background:'#d5cfc5'}}></div>
-                          <div style={{display:'flex', justifyContent:'space-between'}}>
+                          <div style={{display:'flex', justifyContent:'center', gap:12, flexWrap:'wrap'}}>
                             {filialesDynamiques.filter(f => f.holding === 'INVEST EXE').map((f, fi) => {
                               const g = gradMap[f.nom] || ['#c9b896','#8B6F47'];
                               return (
-                                <div key={fi} style={{display:'flex', flexDirection:'column', alignItems:'center', width:140}}>
+                                <div key={fi} style={{display:'flex', flexDirection:'column', alignItems:'center', minWidth:120, maxWidth:150}}>
                                   <div style={{width:2, height:16, background:'#d5cfc5'}}></div>
                                   <div style={{background:`linear-gradient(135deg, ${g[0]}30, ${g[1]}15)`, borderRadius:crmRd, padding:'12px 16px', textAlign:'center', border:`1.5px solid ${g[1]}30`, width:130}}>
                                     <div style={{fontSize:'1.2rem'}}>{f.icon}</div>
@@ -353,18 +353,18 @@ export default function TabPresentationGroupe(__props) {
                       <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                         <div style={{width:3, height:30, background:'#d5cfc5'}}></div>
                         <div style={{background:$bgCard, borderRadius:crmRd, padding:'16px 24px', textAlign:'center', border:'2px solid #f0ebe3', boxShadow:'0 4px 16px rgba(0,0,0,0.06)', width:170, zIndex:2}}>
-                          <div style={{fontSize:'1.5rem'}}>🏦</div>
+                          <div style={{fontSize:'1.4rem', lineHeight:1.2}}>⬡</div>
                           <div style={{fontSize:'0.95rem', fontWeight:800, color:$text}}>INVEST LOC</div>
                           <div style={{fontSize:'0.75rem', color:$textMut}}>Holding Location</div>
                         </div>
                         <div style={{width:2, height:24, background:'#d5cfc5'}}></div>
-                        <div style={{position:'relative', width:280}}>
+                        <div style={{position:'relative', width:'100%', maxWidth:340}}>
                           <div style={{position:'absolute', top:0, left:70, right:70, height:2, background:'#d5cfc5'}}></div>
-                          <div style={{display:'flex', justifyContent:'space-between'}}>
+                          <div style={{display:'flex', justifyContent:'center', gap:12, flexWrap:'wrap'}}>
                             {filialesDynamiques.filter(f => f.holding === 'INVEST LOC').map((f, fi) => {
                               const g = gradMap[f.nom] || ['#c9b896','#8B6F47'];
                               return (
-                                <div key={fi} style={{display:'flex', flexDirection:'column', alignItems:'center', width:140}}>
+                                <div key={fi} style={{display:'flex', flexDirection:'column', alignItems:'center', minWidth:120, maxWidth:150}}>
                                   <div style={{width:2, height:16, background:'#d5cfc5'}}></div>
                                   <div style={{background:`linear-gradient(135deg, ${g[0]}30, ${g[1]}15)`, borderRadius:crmRd, padding:'12px 16px', textAlign:'center', border:`1.5px solid ${g[1]}30`, width:130}}>
                                     <div style={{fontSize:'1.2rem'}}>{f.icon}</div>
@@ -381,7 +381,7 @@ export default function TabPresentationGroupe(__props) {
                       <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                         <div style={{width:3, height:30, background:'#d5cfc5'}}></div>
                         <div style={{background:$bgCard, borderRadius:crmRd, padding:'16px 24px', textAlign:'center', border:'2px solid #f0ebe3', boxShadow:'0 4px 16px rgba(0,0,0,0.06)', width:170, zIndex:2}}>
-                          <div style={{fontSize:'1.5rem'}}>▪</div>
+                          <div style={{fontSize:'1.4rem', lineHeight:1.2}}>⬡</div>
                           <div style={{fontSize:'0.95rem', fontWeight:800, color:$text}}>YILMAZ</div>
                           <div style={{fontSize:'0.75rem', color:$textMut}}>Services Partagés</div>
                         </div>
@@ -392,7 +392,7 @@ export default function TabPresentationGroupe(__props) {
                         <div key={'oy'+fi} style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                           <div style={{width:3, height:30, background:'#d5cfc5'}}></div>
                           <div style={{background:$bgCard, borderRadius:crmRd, padding:'16px 24px', textAlign:'center', border:'1.5px solid rgba(201,162,39,0.35)'}}>
-                            <div style={{fontSize:'1.5rem'}}>◆</div>
+                            <div style={{fontSize:'1.4rem', lineHeight:1.2}}>⬡</div>
                             <div style={{fontSize:'0.95rem', fontWeight:800, color:$text}}>{f.nom}</div>
                             <div style={{fontSize:'0.72rem', color:$textMut}}>{f.activite && f.activite.split('—')[0]}</div>
                             {f.siren && <div style={{fontSize:'0.62rem', color:$textMut, opacity:0.7, marginTop:2}}>SIREN {f.siren}</div>}
