@@ -316,8 +316,8 @@ export default function TabOrganigramme(__props) {
                           return (
                             <g key={group.key}>
                               <path d={d} fill={group.color} opacity={0.75} stroke={$bgCard} strokeWidth={2} />
-                              <text textAnchor="middle" x={lx} y={ly-6} fontSize={9} fontWeight={700} fill="#fff">{group.icon}</text>
-                              <text textAnchor="middle" x={lx} y={ly+5} fontSize={8} fontWeight={600} fill="#fff">{group.emps.length}</text>
+                              {group.emps.length / total >= 0.05 && <><text textAnchor="middle" x={lx} y={ly-6} fontSize={9} fontWeight={700} fill="#fff">{group.icon}</text>
+                              <text textAnchor="middle" x={lx} y={ly+5} fontSize={8} fontWeight={600} fill="#fff">{group.emps.length}</text></>}
                             </g>
                           );
                         })}
