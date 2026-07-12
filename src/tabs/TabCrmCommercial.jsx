@@ -9,12 +9,12 @@ export default function TabCrmCommercial(__props) {
           const filIcon = CRM_FIL_ICONS[navEntreprise] || '▪';
 
           const PHASES = [
-            { id:1, label:'P1 — Lancement',     color:'#0369a1', icon:'➤' },
+            { id:1, label:'P1 — Lancement',     color:'#0369a1', icon:'🚀' },
             { id:2, label:'P2 — Prépa & OS',     color:'#b45309', icon:'☰' },
             { id:3, label:'P3 — Exécution',      color:'#1d4ed8', icon:'◆' },
             { id:4, label:'P4 — Pré-réception',  color:'#6d28d9', icon:'⌕' },
             { id:5, label:'P5 — Réception',      color:'#047857', icon:'✓' },
-            { id:6, label:'P6 — GPA & RG',       color:'#c2410c', icon:'⬟' },
+            { id:6, label:'P6 — GPA & RG',       color:'#c2410c', icon:'🛡️' },
             { id:7, label:'P7 — Archivage',      color:'#334155', icon:'▣' },
           ];
           const STATUTS_PAR_PHASE = {
@@ -142,7 +142,7 @@ export default function TabCrmCommercial(__props) {
           const CRM_TABS = [
             { id: 'entreprises', label: 'Entreprises', icon: '▪', count: 31 },
             { id: 'contacts', label: 'Contacts', icon: '◉', count: 10 },
-            { id: 'kanban', label: 'Pipeline Kanban', icon: '▸' },
+            { id: 'kanban', label: 'Pipeline Kanban', icon: '🗂️' },
             { id: 'affaires', label: 'Affaires', icon: '☰', count: affairesToShow.length },
             { id: 'planning_global', label: 'Planning', icon: '◫' },
             { id: 'preparation_crm', label: 'Préparation', icon: '✱' },
@@ -250,7 +250,7 @@ export default function TabCrmCommercial(__props) {
                 <div style={{display:'flex', gap:8, alignItems:'center'}}>
                   {!crmMondayKey && (
                     <div style={{display:'flex', gap:6, alignItems:'center', background:$bgCard, border:`1px solid ${$border}`, borderRadius:crmRd, padding:'6px 12px'}}>
-                      <span style={{fontSize:'0.75rem', color:$textMut}}>⧉ Monday API Key :</span>
+                      <span style={{fontSize:'0.75rem', color:$textMut}}>🔗 Monday API Key :</span>
                       <input type="password" placeholder="Coller la clé Monday.com..." value={crmMondayKey} onChange={e => { setCrmMondayKey(e.target.value); try { localStorage.setItem('crm_monday_key', e.target.value); } catch(e2) {} }} style={{border:'none', background:'transparent', fontSize:'0.78rem', color:$text, outline:'none', width:200, fontFamily:'monospace'}} />
                       <button onClick={fetchMondayAffaires} style={{padding:'4px 10px', borderRadius:Math.max(crmRd-2,0), border:'none', background:filColor, color:'#fff', fontSize:'0.75rem', cursor:'pointer', fontWeight:600}}>Sync</button>
                     </div>
@@ -266,8 +266,8 @@ export default function TabCrmCommercial(__props) {
                   {l:'Chantiers actifs', v:affairesToShow.filter(a=>getPhase(a)===3).length, c:'#3b82f6', ic:'◆'},
                   {l:'En réception',     v:affairesToShow.filter(a=>[4,5].includes(getPhase(a))).length, c:'#22c55e', ic:'✓'},
                   {l:'Montant actif',    v:fmtE(affairesToShow.filter(a=>getPhase(a)<7).reduce((s,a)=>s+parseMontant(a.m||a.montant),0)), c:'#f59e0b', ic:'€'},
-                  {l:'GPA & RG en cours',v:affairesToShow.filter(a=>getPhase(a)===6).length, c:'#f97316', ic:'⬟'},
-                  {l:'Litiges actifs',   v:litCount, c:'#e74c3c', ic:'§'},
+                  {l:'GPA & RG en cours',v:affairesToShow.filter(a=>getPhase(a)===6).length, c:'#f97316', ic:'🛡️'},
+                  {l:'Litiges actifs',   v:litCount, c:'#e74c3c', ic:'⚖️'},
                 ].map((k,i)=>(
                   <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                     onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
@@ -363,7 +363,7 @@ export default function TabCrmCommercial(__props) {
                           {id:'montant',l:'Montant'},
                           {id:'phase',l:'Phase'},
                           {id:'statut',l:'Statut'},
-                          {id:'litige',l:'§ Litige'},
+                          {id:'litige',l:'⚖️ Litige'},
                         ].map(col => (
                           <label key={col.id} style={{display:'flex', alignItems:'center', gap:7, fontSize:'0.74rem', color:$textSec, cursor:col.locked?'default':'pointer', opacity:col.locked?0.45:1}}>
                             <input type="checkbox" checked={crmVisibleCols[col.id] !== false} disabled={col.locked} onChange={() => setCrmVisibleCols(p => ({...p, [col.id]: !p[col.id]}))} style={{accentColor:filColor, width:13, height:13}}/>
@@ -394,7 +394,7 @@ export default function TabCrmCommercial(__props) {
                   if(s.includes('cours')) return {c:'#3b82f6',ic:'▶'};
                   if(s.includes('suspendu')||s.includes('Suspendu')) return {c:'#f97316',ic:'⏸'};
                   if(s.includes('DGD')) return {c:'#8b5cf6',ic:'▫'};
-                  if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'⬟'};
+                  if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'🛡'};
                   if(s.includes('Terminé')||s.includes('libérée')) return {c:'#6b7280',ic:'✓'};
                   if(s.includes('reçu')||s.includes('remportée')) return {c:'#22c55e',ic:'✓'};
                   if(s.includes('réserves')||s.includes('Levée')) return {c:'#8b5cf6',ic:'⌕'};
@@ -436,7 +436,7 @@ export default function TabCrmCommercial(__props) {
                       </td>}
                       {cols.statut!==false&&<td style={{padding:'12px 14px',fontSize:'0.78rem',color:si2.c,whiteSpace:'nowrap'}}>{si2.ic} {st}</td>}
                       {cols.litige!==false&&<td style={{padding:'12px 14px',textAlign:'center'}}>
-                        {isLit&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.7rem',fontWeight:600,background:'#e74c3c18',color:'#e74c3c',display:'inline-flex',alignItems:'center',gap:4}}>§ Litige</span>}
+                        {isLit&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.7rem',fontWeight:600,background:'#e74c3c18',color:'#e74c3c',display:'inline-flex',alignItems:'center',gap:4}}>⚖️ Litige</span>}
                       </td>}
                     </tr>
                   );
@@ -445,7 +445,7 @@ export default function TabCrmCommercial(__props) {
                   <div style={{border:`1px solid ${$border}`,borderRadius:crmRd,overflow:'hidden',boxShadow:$shadow,background:$bgCard}}>
                     <div style={{padding:'10px 16px',borderBottom:`1px solid ${$border}`,background:$bgSub,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                       <span style={{fontSize:'0.8rem',fontWeight:700,color:$text}}>☰ {affairesToShow.length} affaires · {groups.length} groupe{groups.length>1?'s':''}</span>
-                      {litCount>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:'#e74c3c18',color:'#e74c3c',display:'inline-flex',alignItems:'center',gap:4}}>§ {litCount} litige{litCount>1?'s':''} en cours</span>}
+                      {litCount>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:'#e74c3c18',color:'#e74c3c',display:'inline-flex',alignItems:'center',gap:4}}>⚖️ {litCount} litige{litCount>1?'s':''} en cours</span>}
                     </div>
                     {/* Sticky group indicator — Monday.com style */}
                     {crmActiveGroup && (
@@ -610,7 +610,7 @@ export default function TabCrmCommercial(__props) {
                   {id:'en_echange', label:'En échange',  icon:'💬', color:'#f97316'},
                   {id:'qualifié',   label:'Qualifié',    icon:'◎', color:'#10b981'},
                   {id:'proposition',label:'Proposition', icon:'✎', color:'#8b5cf6'},
-                  {id:'affaire',    label:'Affaire',     icon:'◈', color:'#007ab5'},
+                  {id:'affaire',    label:'Affaire',     icon:'🤝', color:'#007ab5'},
                 ];
                 const NEXT_ACTIONS = [
                   {id:'appeler',    label:'À appeler',    icon:'✆', color:'#3b82f6'},
@@ -619,7 +619,7 @@ export default function TabCrmCommercial(__props) {
                   {id:'en_attente', label:'En attente',  icon:'⏳', color:'#94a3b8'},
                   {id:'rdv',        label:'RDV à prép.', icon:'◫', color:'#8b5cf6'},
                   {id:'proposition',label:'Envoyer offre',icon:'▫',color:'#10b981'},
-                  {id:'rien',       label:'Rien',         icon:'∅', color:'#d1d5db'},
+                  {id:'rien',       label:'Rien',         icon:'🚫', color:'#d1d5db'},
                 ];
                 const ACT_TYPES = [
                   {id:'appel',   label:'Appel',   icon:'✆', color:'#3b82f6'},
@@ -633,8 +633,8 @@ export default function TabCrmCommercial(__props) {
                   {id:'architecte', label:'Architecte',  icon:'◺', color:'#8b5cf6'},
                   {id:'moe',        label:'MOE / Ingé.', icon:'📏', color:'#3b82f6'},
                   {id:'promoteur',  label:'Promoteur',   icon:'◆', color:'#f97316'},
-                  {id:'immo',       label:'Immo.',        icon:'⌂', color:'#f59e0b'},
-                  {id:'gestionnaire',label:'Gest. Copro',icon:'▸', color:'#10b981'},
+                  {id:'immo',       label:'Immo.',        icon:'🏠', color:'#f59e0b'},
+                  {id:'gestionnaire',label:'Gest. Copro',icon:'🗂️', color:'#10b981'},
                   {id:'bailleur',   label:'Bailleur soc.',icon:'◆',color:'#007ab5'},
                   {id:'industriel', label:'Industriel',  icon:'✱', color:'#6b7280'},
                   {id:'particulier',label:'Particulier', icon:'◉', color:'#ec4899'},
@@ -960,7 +960,7 @@ export default function TabCrmCommercial(__props) {
 
                         {/* ─ AXE 2 : Prochaine action ─ */}
                         <div style={{background:$bgSub, borderRadius:crmRd, padding:'10px 12px', border:`1px solid ${$border}`}}>
-                          <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:8}}>↯ Axe 2 — Prochaine action</div>
+                          <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:8}}>⚡ Axe 2 — Prochaine action</div>
                           <div style={{display:'flex', gap:5, flexWrap:'wrap'}}>
                             {NEXT_ACTIONS.map(a => {
                               const isA = getAction(selContact) === a.id;
@@ -979,7 +979,7 @@ export default function TabCrmCommercial(__props) {
                             <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:8}}>Coordonnées</div>
                             {selContact.tel && <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:5}}><span>✆</span><a href={"tel:"+selContact.tel} style={{fontSize:'0.76rem', color:filColor, textDecoration:'none', fontWeight:600}}>{selContact.tel}</a></div>}
                             {selContact.email && <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:5, overflow:'hidden'}}><span style={{flexShrink:0}}>✉️</span><a href={"mailto:"+selContact.email} style={{fontSize:'0.7rem', color:filColor, textDecoration:'none', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{selContact.email}</a></div>}
-                            {selContact.linkedin && selContact.linkedin.startsWith('http') && <div style={{display:'flex', alignItems:'center', gap:6}}><span>⧉</span><a href={selContact.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:'0.7rem', color:'#0077b5'}}>LinkedIn</a></div>}
+                            {selContact.linkedin && selContact.linkedin.startsWith('http') && <div style={{display:'flex', alignItems:'center', gap:6}}><span>🔗</span><a href={selContact.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:'0.7rem', color:'#0077b5'}}>LinkedIn</a></div>}
                           </div>
                           <div style={{background:$bgSub, borderRadius:crmRd, padding:'10px 12px', border:`1px solid ${$border}`}}>
                             <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:8}}>Qualification</div>
@@ -1538,13 +1538,13 @@ export default function TabCrmCommercial(__props) {
                 const PREP_STATUTS = [
                   {id:'a_demarrer', l:'À démarrer',     c:'#94a3b8', ic:'⬜'},
                   {id:'en_cours',   l:'En cours',        c:'#3b82f6', ic:'↻'},
-                  {id:'bloque',     l:'Bloqué',          c:'#e74c3c', ic:'∅'},
+                  {id:'bloque',     l:'Bloqué',          c:'#e74c3c', ic:'🚫'},
                   {id:'pret',       l:'Prêt à démarrer', c:'#059669', ic:'✓'},
                 ];
                 const PREP_GROUPS_DEF = [
                   {ic:'☰',l:'Transfert Études→Travaux',steps:5},
-                  {ic:'▤',l:'Admin & Réglementaire',steps:6},
-                  {ic:'⌖',l:'PIC',steps:6},
+                  {ic:'📜',l:'Admin & Réglementaire',steps:6},
+                  {ic:'🗺️',l:'PIC',steps:6},
                   {ic:'◆',l:'Installation physique',steps:7},
                 ];
                 const getStatut = (a) => {
@@ -1579,7 +1579,7 @@ export default function TabCrmCommercial(__props) {
                 } else if(prepGroupBy==='ct') {
                   const cts = [...new Set(PREP_AFFAIRES.map(a=>a.eq||'Non assigné'))];
                   groups = cts.map(ct=>({
-                    id:ct, label:ct, color:filColor, ic:'◉',
+                    id:ct, label:ct, color:filColor, ic:'👷',
                     items: PREP_AFFAIRES.filter(a=>(a.eq||'Non assigné')===ct)
                   }));
                 } else {
@@ -1615,9 +1615,9 @@ export default function TabCrmCommercial(__props) {
                     <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
                       <span style={{fontSize:'0.75rem',color:$textMut,fontWeight:600}}>Grouper par</span>
                       {[
-                        {id:'statut', l:'Statut préparation', ic:'⌗'},
+                        {id:'statut', l:'Statut préparation', ic:'🏷️'},
                         {id:'phase',  l:'Phase chantier',     ic:'🔢'},
-                        {id:'ct',     l:'Conducteur travaux', ic:'◉'},
+                        {id:'ct',     l:'Conducteur travaux', ic:'👷'},
                         {id:'aucun',  l:'Sans regroupement',  ic:'☰'},
                       ].map(opt=>(
                         <button key={opt.id} onClick={()=>setPrepGroupBy(opt.id)}
@@ -1734,7 +1734,7 @@ export default function TabCrmCommercial(__props) {
                     {/* Légende statuts + groupes */}
                     <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                       <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,padding:'12px 14px'}}>
-                        <div style={{fontWeight:700,fontSize:'0.78rem',color:$text,marginBottom:8}}>⌗ Statuts de préparation</div>
+                        <div style={{fontWeight:700,fontSize:'0.78rem',color:$text,marginBottom:8}}>🏷️ Statuts de préparation</div>
                         {PREP_STATUTS.map((s,i)=>(
                           <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:i<PREP_STATUTS.length-1?`1px solid ${$borderLight}`:'none'}}>
                             <div style={{width:8,height:8,borderRadius:'50%',background:s.c,flexShrink:0}}/>
@@ -1778,7 +1778,7 @@ export default function TabCrmCommercial(__props) {
                   if(s.includes('cours')) return {c:'#3b82f6',ic:'▶'};
                   if(s.includes('suspendu')||s.includes('Suspendu')) return {c:'#f97316',ic:'⏸'};
                   if(s.includes('DGD')) return {c:'#8b5cf6',ic:'▫'};
-                  if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'⬟'};
+                  if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'🛡'};
                   if(s.includes('reçu')||s.includes('OS')) return {c:'#22c55e',ic:'✓'};
                   if(s.includes('remportée')||s.includes('transféré')) return {c:'#3b82f6',ic:'→'};
                   if(s.includes('Levée')||s.includes('Réception')) return {c:'#22c55e',ic:'✓'};
@@ -1832,7 +1832,7 @@ export default function TabCrmCommercial(__props) {
                     {n:'Béton BPE (contrat cadre)', fournisseur:'Cemex Île-de-France', montant:'Cadre 180K€', statut:'En cours', date:'15/01/2025', ic:'🪣'},
                     {n:'Armatures HA', fournisseur:'ArcelorMittal', montant:'42K€', statut:'Livré', date:'25/01/2025', ic:'✱'},
                     {n:'Banches coffrages', fournisseur:'Doka France', montant:'3.2K€/mois', statut:'Livré', date:'22/01/2025', ic:'🧱'},
-                    {n:'Cantonnement bungalows', fournisseur:'La Roulotte (Group OY)', montant:'1.8K€/mois', statut:'Livré', date:'18/01/2025', ic:'⌂'},
+                    {n:'Cantonnement bungalows', fournisseur:'La Roulotte (Group OY)', montant:'1.8K€/mois', statut:'Livré', date:'18/01/2025', ic:'🏠'},
                     {n:'EPI & Sécurité', fournisseur:'Würth France', montant:'4.2K€', statut:'Commandé', date:'28/01/2025', ic:'🦺'},
                   ],
                   planning: [
@@ -1967,7 +1967,7 @@ export default function TabCrmCommercial(__props) {
                       ].filter(it=>show(it.types))
                     },
                     {
-                      titre:'Admin & Réglementaire', ic:'▤', color:'#8b5cf6',
+                      titre:'Admin & Réglementaire', ic:'📜', color:'#8b5cf6',
                       items:[
                         {l:'DICT (réseaux enterrés) envoyée',done:ph.id>=2,types:[]},
                         {l:'PPSPS / PGC rédigé et validé',done:ph.id>=2,types:[]},
@@ -1981,7 +1981,7 @@ export default function TabCrmCommercial(__props) {
                       ].filter(it=>show(it.types))
                     },
                     {
-                      titre:'PIC — Plan d\'Installation de Chantier', ic:'⌖', color:'#d97706',
+                      titre:'PIC — Plan d\'Installation de Chantier', ic:'🗺️', color:'#d97706',
                       items:[
                         {l:'Positionnement grue(s) défini',done:ph.id>=2,types:[]},
                         {l:'Cantonnement / bungalows localisé',done:ph.id>=2,types:[]},
@@ -2014,7 +2014,7 @@ export default function TabCrmCommercial(__props) {
                     {fourniture:'Coffrages banches',fournisseurs:['Doka France','Hussor','COFNORD'],retenu:'Doka France',prix:'3.2K€/mois',statut:'Retenu',ic:'🧱',urgent:false},
                     {fourniture:'Terrassement (ST)',fournisseurs:['Terrabat','Géosol IDF','Eurovia'],retenu:'Terrabat',prix:'42K€ forfait',statut:'Signé',ic:'🚜',urgent:false},
                     {fourniture:'Étanchéité terrasse (ST)',fournisseurs:['L\'Étanchéité (Group OY)','Soprema'],retenu:'En attente',prix:'—',statut:'À consulter',ic:'◦',urgent:true},
-                    {fourniture:'Électricité courants forts (ST)',fournisseurs:['Elec IDF','Spie Batignolles'],retenu:'—',prix:'—',statut:'À consulter',ic:'↯',urgent:false},
+                    {fourniture:'Électricité courants forts (ST)',fournisseurs:['Elec IDF','Spie Batignolles'],retenu:'—',prix:'—',statut:'À consulter',ic:'⚡',urgent:false},
                   ],
                 };
 
@@ -2026,7 +2026,7 @@ export default function TabCrmCommercial(__props) {
                   commandes:{id:'commandes',l:'Commandes',ic:'▣'},
                   planning:{id:'planning',l:'Planning',ic:'◫'},
                   documents:{id:'documents',l:'Documents',ic:'▸'},
-                  litiges:{id:'litiges',l:'Litiges',ic:'§'},
+                  litiges:{id:'litiges',l:'Litiges',ic:'⚖️'},
                   avancement:{id:'avancement',l:'Avancement',ic:'▦'},
                   activites:{id:'activites',l:'Activités',ic:'◷'},
                 };
@@ -2059,7 +2059,7 @@ export default function TabCrmCommercial(__props) {
                               <span style={{fontFamily:'monospace',fontSize:'0.85rem',fontWeight:700,color:filColor,background:filColor+'15',padding:'2px 8px',borderRadius:rd>0?6:0}}>{aff.cd||aff.id}</span>
                               <span style={{padding:'3px 10px',borderRadius:rd>0?20:2,fontSize:'0.72rem',fontWeight:700,background:ph.color+'18',color:ph.color}}>{ph.icon} {ph.label}</span>
                               {(()=>{const mk=aff.mk||aff.marche;const mkC=mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';const mkIc=mk==='Public'?'◆':mk==='Particulier'?'◉':'▪';return mk?<span style={{padding:'3px 10px',borderRadius:rd>0?20:2,fontSize:'0.72rem',fontWeight:700,background:mkC+'18',color:mkC,border:`1px solid ${mkC}30`}}>{mkIc} {mk}</span>:null;})()}
-                              {aff.lit&&<span style={{padding:'3px 8px',borderRadius:rd>0?20:2,fontSize:'0.7rem',fontWeight:700,background:'#e74c3c18',color:'#e74c3c'}}>§ Litige</span>}
+                              {aff.lit&&<span style={{padding:'3px 8px',borderRadius:rd>0?20:2,fontSize:'0.7rem',fontWeight:700,background:'#e74c3c18',color:'#e74c3c'}}>⚖️ Litige</span>}
                             </div>
                             <div style={{fontWeight:700,fontSize:'1.05rem',color:$text,lineHeight:1.3,marginBottom:4}}>{aff.n||aff.nom}</div>
                             <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
@@ -2075,7 +2075,7 @@ export default function TabCrmCommercial(__props) {
                         {/* Info pills */}
                         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
                           {[
-                            {l:'⌖ '+MOCK_FICHE.adresse},
+                            {l:'📍 '+MOCK_FICHE.adresse},
                             {l:'◆ '+MOCK_FICHE.ct},
                             {l:'✉️ '+MOCK_FICHE.email},
                             {l:'◫ OS: '+MOCK_FICHE.dateOS},
@@ -2126,7 +2126,7 @@ export default function TabCrmCommercial(__props) {
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
                               <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12,display:'flex',alignItems:'center',gap:6}}>▪ Équipe interne Ezel</div>
                               {[
-                                {role:'Conducteur de travaux',nom:MOCK_FICHE.ct,ic:'◉'},
+                                {role:'Conducteur de travaux',nom:MOCK_FICHE.ct,ic:'👷'},
                                 {role:'Chef de chantier',nom:MOCK_FICHE.chef,ic:'🪖'},
                                 {role:'Chargé d\'études',nom:MOCK_FICHE.etudes,ic:'◺'},
                               ].map((p,i)=>(
@@ -2141,7 +2141,7 @@ export default function TabCrmCommercial(__props) {
                             </div>
                             {/* Intervenants externes */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>◈ Intervenants externes</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>🤝 Intervenants externes</div>
                               {[
                                 {role:'Maître d\'œuvre (MOE)',nom:MOCK_FICHE.moe},
                                 {role:'OPC',nom:MOCK_FICHE.opc},
@@ -2183,7 +2183,7 @@ export default function TabCrmCommercial(__props) {
                               {[
                                 {l:'Montant marché',v:MOCK_FICHE.montant,c:filColor,ic:'▪'},
                                 {l:'Marge brute',v:MOCK_FICHE.margePct+'% — '+fmtE(MOCK_FICHE.margeB),c:'#059669',ic:'↗'},
-                                {l:'Retenue de garantie',v:fmtE(MOCK_FICHE.rgMontant),c:'#d97706',ic:'▪'},
+                                {l:'Retenue de garantie',v:fmtE(MOCK_FICHE.rgMontant),c:'#d97706',ic:'🔒'},
                                 {l:'Avancement physique',v:MOCK_FICHE.avancPhy+'%',c:'#3b82f6',ic:'◆'},
                                 {l:'Avancement financier',v:MOCK_FICHE.avancFin+'%',c:'#8b5cf6',ic:'€'},
                                 {l:'TS / Avenants',v:'+'+fmtE(MOCK_FICHE.ts),c:'#f97316',ic:'☰'},
@@ -2239,7 +2239,7 @@ export default function TabCrmCommercial(__props) {
                             </div>
                             {/* Budget vs réel par poste */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>↘ Budget vs Réel par poste</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>📉 Budget vs Réel par poste</div>
                               {MOCK_FICHE.budgetPostes.map((b,i)=>{
                                 const pct = Math.round(b.reel/b.budget*100);
                                 const c = pct>100?'#e74c3c':pct>90?'#d97706':'#059669';
@@ -2327,7 +2327,7 @@ export default function TabCrmCommercial(__props) {
                                       <span style={{color:$textMut,fontSize:'1rem',flexShrink:0,userSelect:'none',lineHeight:1}} title="Glisser pour réordonner">⠿</span>
                                       {/* Visible toggle */}
                                       <button onClick={e=>{e.stopPropagation();updateChecklistItem(affId,item.id,{hidden:!item.hidden},defaultFlat);}} style={{width:22,height:22,borderRadius:rd>0?'50%':2,border:`1px solid ${item.hidden?'#e74c3c':$border}`,background:item.hidden?'#e74c3c15':'transparent',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,fontSize:'0.75rem'}}>
-                                        {item.hidden?'∅':'◎'}
+                                        {item.hidden?'🚫':'👁️'}
                                       </button>
                                       <span style={{flex:1,fontSize:'0.75rem',color:item.hidden?$textMut:$text,textDecoration:item.hidden?'line-through':'none'}}>{item.l}</span>
                                       {isSpec&&<span style={{fontSize:'0.6rem',padding:'1px 5px',borderRadius:rd>0?8:2,background:tC+'18',color:tC,fontWeight:700,flexShrink:0}}>{item.types[0]}</span>}
@@ -2430,7 +2430,7 @@ export default function TabCrmCommercial(__props) {
                                     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:4}}>
                                       <span style={{fontWeight:700,fontSize:'0.83rem',color:$text}}>{c.fourniture}</span>
                                       <div style={{display:'flex',alignItems:'center',gap:6}}>
-                                        {c.urgent&&<span style={{fontSize:'0.65rem',padding:'2px 7px',borderRadius:rd>0?10:2,background:'#e74c3c15',color:'#e74c3c',fontWeight:700}}>↯ Urgent</span>}
+                                        {c.urgent&&<span style={{fontSize:'0.65rem',padding:'2px 7px',borderRadius:rd>0?10:2,background:'#e74c3c15',color:'#e74c3c',fontWeight:700}}>⚡ Urgent</span>}
                                         <span style={{fontSize:'0.7rem',padding:'2px 9px',borderRadius:rd>0?20:2,fontWeight:600,background:c.statut==='Retenu'||c.statut==='Signé'?'#05966915':c.statut==='En cours'?'#d9770615':'#e74c3c15',color:c.statut==='Retenu'||c.statut==='Signé'?'#059669':c.statut==='En cours'?'#d97706':'#e74c3c'}}>{c.statut}</span>
                                       </div>
                                     </div>
@@ -2646,7 +2646,7 @@ export default function TabCrmCommercial(__props) {
                         {crmFicheTab==='documents'&&(
                           <div style={{display:'flex',flexDirection:'column',gap:12}}>
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'12px 16px',display:'flex',alignItems:'center',gap:10}}>
-                              <span style={{fontSize:'1.2rem'}}>▸</span>
+                              <span style={{fontSize:'1.2rem'}}>📂</span>
                               <div style={{flex:1}}>
                                 <div style={{fontWeight:600,fontSize:'0.82rem',color:$text}}>Dossier Google Drive</div>
                                 <div style={{fontSize:'0.7rem',color:$textMut}}>Chantier {aff.cd||aff.id} — {aff.n}</div>
@@ -2671,7 +2671,7 @@ export default function TabCrmCommercial(__props) {
                           <div style={{display:'flex',flexDirection:'column',gap:14}}>
                             <div style={{background:'#e74c3c08',borderRadius:rd,border:'1px solid #e74c3c30',padding:'14px 16px'}}>
                               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:10}}>
-                                <span style={{fontSize:'1.1rem'}}>§</span>
+                                <span style={{fontSize:'1.1rem'}}>⚖️</span>
                                 <span style={{fontWeight:700,fontSize:'0.85rem',color:'#e74c3c'}}>Litige signalé</span>
                                 <span style={{marginLeft:'auto',padding:'2px 10px',borderRadius:rd>0?20:2,background:'#d9770620',color:'#d97706',fontSize:'0.72rem',fontWeight:700}}>En analyse</span>
                               </div>
@@ -2757,7 +2757,7 @@ export default function TabCrmCommercial(__props) {
                                     <div key={item.id} draggable onDragStart={()=>setClDragId(item.id)} onDragOver={e=>{e.preventDefault();setClDragOver(item.id);}} onDragEnd={()=>{if(clDragOver&&clDragOver!==item.id){reorderChecklistItem(affId,clDragId,clDragOver,defaultFlat);}setClDragId(null);setClDragOver(null);}} style={{display:'flex',alignItems:'center',gap:8,padding:'7px 12px',borderBottom:`1px solid ${$borderLight}`,opacity:item.hidden?0.5:1,background:clDragOver===item.id&&clDragId!==item.id?$accent+'12':item.hidden?'#e74c3c06':'transparent',cursor:'grab',transition:'background 0.12s'}}>
                                       <span style={{color:$textMut,fontSize:'1rem',flexShrink:0,userSelect:'none'}} title="Glisser pour réordonner">⠿</span>
                                       <button onClick={e=>{e.stopPropagation();updateChecklistItem(affId,item.id,{hidden:!item.hidden},defaultFlat);}} style={{width:22,height:22,borderRadius:rd>0?'50%':2,border:`1px solid ${item.hidden?'#e74c3c':$border}`,background:item.hidden?'#e74c3c15':'transparent',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.75rem'}}>
-                                        {item.hidden?'∅':'◎'}
+                                        {item.hidden?'🚫':'👁️'}
                                       </button>
                                       <span style={{width:6,height:6,borderRadius:'50%',background:gC,flexShrink:0}}/>
                                       <span style={{flex:1,fontSize:'0.75rem',color:item.hidden?$textMut:$text,textDecoration:item.hidden?'line-through':'none'}}>{item.l}</span>
@@ -2828,7 +2828,7 @@ export default function TabCrmCommercial(__props) {
                             })}
                             {/* Garanties */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>⬟ Garanties légales</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>🛡️ Garanties légales</div>
                               {MOCK_FICHE.garanties.map((g,i)=>(
                                 <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 0',borderBottom:i<MOCK_FICHE.garanties.length-1?`1px solid ${$borderLight}`:'none'}}>
                                   <div style={{width:10,height:10,borderRadius:'50%',background:g.active?'#059669':$border,flexShrink:0}}/>
@@ -2852,7 +2852,7 @@ export default function TabCrmCommercial(__props) {
                                 <div key={i} style={{display:'flex',gap:12,padding:'12px 16px',borderBottom:i<MOCK_FICHE.activites.length-1?`1px solid ${$borderLight}`:'none',alignItems:'flex-start'}}>
                                   <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:4,flexShrink:0}}>
                                     <div style={{width:32,height:32,borderRadius:'50%',background:filColor+'15',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.85rem'}}>
-                                      {a.type==='Réunion'?'◈':a.type==='Email'?'✉️':'▬'}
+                                      {a.type==='Réunion'?'🤝':a.type==='Email'?'✉️':'💳'}
                                     </div>
                                   </div>
                                   <div style={{flex:1}}>

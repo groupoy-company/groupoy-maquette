@@ -128,7 +128,7 @@ export default function TabBudget(__props) {
 
             {/* Tab buttons */}
             <div style={{display:'flex', gap:6, marginBottom:16}}>
-              {[{id:'tableau',label:'☰ Tableau détaillé'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'▲ Alertes ('+alertes.length+')'},{id:'api',label:'🔌 API & Intégrations'}].map(t => (
+              {[{id:'tableau',label:'☰ Tableau détaillé'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'🚨 Alertes ('+alertes.length+')'},{id:'api',label:'🔌 API & Intégrations'}].map(t => (
                 <button key={t.id} onClick={() => setBudgetTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: budgetTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: budgetTab===t.id ? '#faf6ef' : 'white', color: budgetTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
               ))}
             </div>
@@ -164,7 +164,7 @@ export default function TabBudget(__props) {
                     </thead>
                     <tbody>
                       {/* Section headers + rows */}
-                      {[{type:'revenu', label:'€ REVENUS', color:'#059669'}, {type:'charge', label:'💸 CHARGES', color:'#dc2626'}, {type:'invest', label:'🏭 INVESTISSEMENTS', color:'#7c3aed'}, {type:'financier', label:'⬡ FINANCIER', color:'#0891b2'}].map(section => {
+                      {[{type:'revenu', label:'€ REVENUS', color:'#059669'}, {type:'charge', label:'💸 CHARGES', color:'#dc2626'}, {type:'invest', label:'🏭 INVESTISSEMENTS', color:'#7c3aed'}, {type:'financier', label:'🏦 FINANCIER', color:'#0891b2'}].map(section => {
                         const cats = BUDGET_CATS.filter(c => c.type === section.type);
                         if(cats.length === 0) return null;
                         return (
@@ -375,7 +375,7 @@ export default function TabBudget(__props) {
             {/* TAB: ALERTES */}
             {budgetTab === 'alertes' && (
               <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden', boxShadow:'0 2px 8px rgba(0,0,0,0.03)'}}>
-                <div style={{padding:'14px 18px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:'#991b1b', fontSize:'0.92rem'}}>▲ Alertes budgétaires — Dépassements YTD ({moisActuel >= 0 ? moisCourts[moisActuel] : '—'} {budgetAnnee})</div>
+                <div style={{padding:'14px 18px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:'#991b1b', fontSize:'0.92rem'}}>🚨 Alertes budgétaires — Dépassements YTD ({moisActuel >= 0 ? moisCourts[moisActuel] : '—'} {budgetAnnee})</div>
                 <div style={{padding:'16px'}}>
                   {alertes.length === 0 && <div style={{padding:20, textAlign:'center', color:'#059669', fontWeight:600, fontSize:'0.95rem'}}>✓ Aucun dépassement budgétaire — Tout est sous contrôle !</div>}
                   {alertes.sort((a,b) => b.ecart - a.ecart).map((a,i) => (
@@ -474,7 +474,7 @@ export default function TabBudget(__props) {
                           <input value={cfg.companyId} onChange={e => updateCfg('companyId', e.target.value)} placeholder="company_xxxx ou N° dossier" style={{width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.82rem', boxSizing:'border-box', fontFamily:'monospace'}}/>
                         </div>
                         <div style={{display:'flex', gap:8}}>
-                          <button onClick={() => { if(cfg.apiKey) { alert('✓ Connexion réussie à ' + currentProvider.label + '\nCompany: ' + (cfg.companyId || 'default')); updateCfg('lastSync', new Date().toISOString()); } else { alert('✕ Veuillez renseigner une API Key'); }}} style={{flex:1, padding:'8px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>⧉ Tester la connexion</button>
+                          <button onClick={() => { if(cfg.apiKey) { alert('✓ Connexion réussie à ' + currentProvider.label + '\nCompany: ' + (cfg.companyId || 'default')); updateCfg('lastSync', new Date().toISOString()); } else { alert('✕ Veuillez renseigner une API Key'); }}} style={{flex:1, padding:'8px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>🔗 Tester la connexion</button>
                           {currentProvider.docs && <a href={currentProvider.docs} target="_blank" rel="noopener noreferrer" style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', textDecoration:'none', display:'flex', alignItems:'center'}}>▫ Docs</a>}
                         </div>
                       </div>
@@ -575,7 +575,7 @@ export default function TabBudget(__props) {
                   {/* ─── Sync Log ─── */}
                   <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
                     <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                      <div style={{fontWeight:700, color:$text, fontSize:'0.88rem'}}>▤ Historique de synchronisation</div>
+                      <div style={{fontWeight:700, color:$text, fontSize:'0.88rem'}}>📜 Historique de synchronisation</div>
                       {(cfg.syncLog||[]).length > 0 && <button onClick={() => saveBudgetApi({...cfg, syncLog:[]})} style={{fontSize:'0.72rem', color:$textMut, background:'none', border:'none', cursor:'pointer', textDecoration:'underline'}}>Vider</button>}
                     </div>
                     <div style={{padding:'16px', maxHeight:200, overflowY:'auto'}}>
@@ -597,7 +597,7 @@ export default function TabBudget(__props) {
 
                   {/* ─── Code Snippet ─── */}
                   <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
-                    <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>▢ Exemple d'intégration</div>
+                    <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>💻 Exemple d'intégration</div>
                     <div style={{padding:'16px'}}>
                       <div style={{display:'flex', gap:6, marginBottom:10}}>
                         {['curl','javascript','python'].map(lang => (
@@ -666,7 +666,7 @@ for inv in invoices:
                     <div style={{fontWeight:700, color:$text, fontSize:'1rem'}}>↧ Export CSV — {(BUDGET_FILIALES.find(f=>f.id===budgetFiliale)||{}).label} {budgetAnnee}</div>
                     <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
                       <button onClick={() => { navigator.clipboard ? navigator.clipboard.writeText(csvExportText).then(() => alert('Copié !')).catch(() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} }) : (() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} })(); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:$accent, color:'#fff', fontWeight:600, fontSize:'0.8rem', cursor:'pointer', transition:'all 0.15s', fontFamily:'inherit'}}>☰ Copier</button>
-                      <button onClick={() => { const bom = String.fromCharCode(0xFEFF); const blob = new Blob([bom+csvExportText], {type:'text/csv;charset=utf-8;'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'budget_'+(budgetFiliale||'all')+'_'+budgetAnnee+'.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:'#5a8a48', color:'white', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>↓ Télécharger .csv</button>
+                      <button onClick={() => { const bom = String.fromCharCode(0xFEFF); const blob = new Blob([bom+csvExportText], {type:'text/csv;charset=utf-8;'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'budget_'+(budgetFiliale||'all')+'_'+budgetAnnee+'.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:'#5a8a48', color:'white', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>💾 Télécharger .csv</button>
                       <button onClick={() => setCsvExportText(null)} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>✕ Fermer</button>
                     </div>
                   </div>
@@ -883,7 +883,7 @@ for inv in invoices:
                             nd[budgetFiliale][budgetAnnee][reCat.id].prevu = [...budgetRowEdit.values];
                             nd[budgetFiliale][budgetAnnee][reCat.id].reel = [...budgetRowEdit.reelValues];
                             saveBudget(nd); setBudgetRowEdit(null);
-                          }} style={{padding:'8px 20px', borderRadius:crmRd, border:'none', background:$accent, color:'#fff', fontWeight:600, fontSize:'0.8rem', cursor:'pointer', transition:'all 0.15s', fontFamily:'inherit'}}>↓ Enregistrer</button>
+                          }} style={{padding:'8px 20px', borderRadius:crmRd, border:'none', background:$accent, color:'#fff', fontWeight:600, fontSize:'0.8rem', cursor:'pointer', transition:'all 0.15s', fontFamily:'inherit'}}>💾 Enregistrer</button>
                         </div>
                       </div>
                     </div>

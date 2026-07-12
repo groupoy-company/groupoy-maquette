@@ -4,7 +4,7 @@
 export default function TabOrdresTravail(__props) {
   const { $accent, $bgCard, $bgSub, $border, $borderAlt, $danger, $info, $selBg, $selText, $shadow, $shadowLg, $success, $text, $textMut, $textSec, ChLink, FilLink, chNom, chantiers, crmRd, empNom, employes, filialesDynamiques, filterByFiliale, highlightStyle, odtData, odtEdit, odtFilter, odtView, setOdtData, setOdtEdit, setOdtFilter, setOdtView, showBorderAccent } = __props;
         const saveOdt = d => { setOdtData(d); localStorage.setItem('ruches_odt_data', JSON.stringify(d)); };
-        const ODT_TYPES = [{id:'travaux',label:'Travaux',color:'#3b82f6',icon:'◆'},{id:'securite',label:'Sécurité',color:'#ef4444',icon:'⬟'},{id:'livraison',label:'Livraison',color:'#f59e0b',icon:'▸'},{id:'maintenance',label:'Maintenance',color:'#8b5cf6',icon:'✱'},{id:'inspection',label:'Inspection/Contrôle',color:'#10b981',icon:'⌕'},{id:'administratif',label:'Administratif',color:$textSec,icon:'☰'}];
+        const ODT_TYPES = [{id:'travaux',label:'Travaux',color:'#3b82f6',icon:'◆'},{id:'securite',label:'Sécurité',color:'#ef4444',icon:'🛡️'},{id:'livraison',label:'Livraison',color:'#f59e0b',icon:'▸'},{id:'maintenance',label:'Maintenance',color:'#8b5cf6',icon:'✱'},{id:'inspection',label:'Inspection/Contrôle',color:'#10b981',icon:'⌕'},{id:'administratif',label:'Administratif',color:$textSec,icon:'☰'}];
         const ODT_STATUTS = [{id:'brouillon',label:'Brouillon',color:$textSec},{id:'emis',label:'Émis',color:'#3b82f6'},{id:'en_cours',label:'En cours',color:'#f59e0b'},{id:'termine',label:'Terminé',color:'#10b981'},{id:'annule',label:'Annulé',color:'#ef4444'}];
         const ODT_PRIORITES = [{id:'urgente',label:'Urgente',color:'#dc2626'},{id:'haute',label:'Haute',color:'#f59e0b'},{id:'normale',label:'Normale',color:'#3b82f6'},{id:'basse',label:'Basse',color:$textSec}];
         const sampleOdt = [
@@ -30,7 +30,7 @@ export default function TabOrdresTravail(__props) {
               >+ Nouvel OT</button>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12, marginBottom:20}}>
-              {[{l:'OT actifs',v:enCours,c:$info,ic:'▸'},{l:'Urgents',v:urgents,c:$danger,ic:'▲'},{l:'Heures réalisées',v:heuresTotal+'h',c:$accent,ic:'◎'},{l:'Terminés ce mois',v:data.filter(d=>d.statut==='termine').length,c:$success,ic:'✓'}].map((k,i)=>(<div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
+              {[{l:'OT actifs',v:enCours,c:$info,ic:'▸'},{l:'Urgents',v:urgents,c:$danger,ic:'🚨'},{l:'Heures réalisées',v:heuresTotal+'h',c:$accent,ic:'◎'},{l:'Terminés ce mois',v:data.filter(d=>d.statut==='termine').length,c:$success,ic:'✓'}].map((k,i)=>(<div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=$border;e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow=$shadow;}}
               >
@@ -94,7 +94,7 @@ export default function TabOrdresTravail(__props) {
                         <span>Responsable: <b>{d.responsableId ? empNom(d.responsableId) : '—'}</b></span>
                         {d.equipeIds?.length > 0 && <span>Équipe: <b>{d.equipeIds.map(id=>empNom(id)).join(', ')}</b></span>}
                       </div>
-                      {d.securite && <div style={{marginTop:6,padding:'4px 10px',borderRadius:crmRd,background:$danger+'12',border:'1px solid #fecaca',fontSize:'0.72rem',color:'#991b1b'}}>⬟ {d.securite}</div>}
+                      {d.securite && <div style={{marginTop:6,padding:'4px 10px',borderRadius:crmRd,background:$danger+'12',border:'1px solid #fecaca',fontSize:'0.72rem',color:'#991b1b'}}>🛡️ {d.securite}</div>}
                       {d.consignes && <div style={{fontSize:'0.72rem',color:$textMut,marginTop:4,fontStyle:'italic'}}>✎ {d.consignes.substring(0,120)}{d.consignes.length>120?'...':''}</div>}
                     </div>
                     <div style={{textAlign:'right',flexShrink:0,marginLeft:16}}>

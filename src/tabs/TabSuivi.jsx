@@ -139,7 +139,7 @@ export default function TabSuivi(__props) {
             {/* Carte 3 — Composition Rémunération */}
             <div style={{background:$bgCard,borderRadius:crmRd,padding:'20px 20px 12px',border:`1px solid ${$border}`,boxShadow:'0 1px 8px rgba(0,0,0,0.04)'}}>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-                <span style={{fontSize:'1rem'}}>⬡</span>
+                <span style={{fontSize:'1rem'}}>🍯</span>
                 <span style={{fontWeight:700,fontSize:'0.95rem',color:$text}}>Composition de la Rémunération</span>
                 <span style={{marginLeft:'auto',padding:'2px 10px',borderRadius:crmRd>0?20:2,background:'#8b5cf615',color:'#7c3aed',fontSize:'0.72rem',fontWeight:700}}>Annuel</span>
               </div>

@@ -12,7 +12,7 @@ export default function TabKpiDashboard(__props) {
           const svcKey = `${navEntreprise}_${navService}`;
           const acc = CRM_FIL_ACC[navEntreprise] || $accent;
           const aoActifs = AO_RAW.filter(a => ['À Préparer','Visite rdv à prendre','Visite demandée','Visite rdv pris','Demandes de précisions','En préparation','En attente de Réponse','AO sélectionné'].includes(a.s));
-          const aoGagnes = AO_RAW.filter(a => ['Accepté ✧','Projet en Cours de Réalisation','Projet Terminé'].includes(a.s));
+          const aoGagnes = AO_RAW.filter(a => ['Accepté 🍾','Projet en Cours de Réalisation','Projet Terminé'].includes(a.s));
           const aoPerdus = AO_RAW.filter(a => ['Rejeté  😡','Pas répondu','Reporté','À Suivre - Sans Suite','Visite problématique'].includes(a.s));
           const aoDecides = aoGagnes.length + aoPerdus.filter(a => a.s !== 'Pas répondu' && a.s !== 'Reporté').length;
           const tauxSucces = aoDecides > 0 ? Math.round(aoGagnes.length / aoDecides * 100) : 0;
@@ -48,7 +48,7 @@ export default function TabKpiDashboard(__props) {
             'ezel_etudes_prix': [
               {l:'AO actifs',v:String(aoActifs.length),i:'◺',c:acc,sub:aoActifs.filter(a=>a.d&&Math.ceil((new Date(a.d)-new Date())/86400000)<=7&&Math.ceil((new Date(a.d)-new Date())/86400000)>=0).length+' urgents (≤7j)'},
               {l:'En attente réponse',v:String(AO_RAW.filter(a=>a.s==='En attente de Réponse').length),i:'↥',c:'#3b82f6',sub:fmtEuro(AO_RAW.filter(a=>a.s==='En attente de Réponse').reduce((s,a)=>s+(a.o||0),0))+' en jeu'},
-              {l:'Taux de succès',v:tauxSucces+'%',i:'★',c:tauxSucces>=15?'#10b981':tauxSucces>=8?'#f59e0b':'#ef4444',sub:aoGagnes.length+' gagnés / '+aoDecides+' décidés'},
+              {l:'Taux de succès',v:tauxSucces+'%',i:'🏆',c:tauxSucces>=15?'#10b981':tauxSucces>=8?'#f59e0b':'#ef4444',sub:aoGagnes.length+' gagnés / '+aoDecides+' décidés'},
               {l:'Pipeline budget',v:fmtEuro(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).reduce((s,a)=>s+(a.b||0),0)),i:'€',c:'#8b5cf6',sub:String(AO_RAW.filter(a=>['À Préparer','En préparation','Visite rdv à prendre'].includes(a.s)).length)+' dossiers actifs'}
             ],
             'ezel_preparation': [
@@ -67,28 +67,28 @@ export default function TabKpiDashboard(__props) {
               {l:'Réception & Clôture',v:'19',i:'☰',c:acc,sub:'10M€ de marché'},
               {l:'DGD en préparation',v:'9',i:'✎',c:'#f59e0b',sub:'décompte à préparer'},
               {l:'DGD envoyée',v:'6',i:'↥',c:'#3b82f6',sub:'en attente validation'},
-              {l:'GPA / RG bloquée',v:'11',i:'▬',c:'#8b5cf6',sub:'2.8M€ GPA en cours'}
+              {l:'GPA / RG bloquée',v:'11',i:'💳',c:'#8b5cf6',sub:'2.8M€ GPA en cours'}
             ],
             'ezel_logistique': [
               {l:'Véhicules actifs',v:'8',i:'🚐',c:acc,sub:'sur chantiers'},
               {l:'Engins loués',v:'3',i:'🚜',c:'#f59e0b',sub:'nacelle, chariot, benne'},
               {l:'Bons de commande',v:'14',i:'▣',c:'#3b82f6',sub:'en cours de livraison'},
-              {l:'Fournisseurs actifs',v:'22',i:'◈',c:'#8b5cf6',sub:'référencés 2026'}
+              {l:'Fournisseurs actifs',v:'22',i:'🤝',c:'#8b5cf6',sub:'référencés 2026'}
             ],
             'ezel_rh': [
-              {l:'Effectif actif',v:'34',i:'◉',c:acc,sub:'salariés Ezel'},
+              {l:'Effectif actif',v:'34',i:'👷',c:acc,sub:'salariés Ezel'},
               {l:'Habilitations',v:'4',i:'▲',c:'#ef4444',sub:'à renouveler'},
               {l:'Absences (mois)',v:'3',i:'◫',c:'#f59e0b',sub:'CP + maladie'},
               {l:'Recrutements',v:'2',i:'◉',c:'#3b82f6',sub:'postes ouverts'}
             ],
             'ezel_juridique': [
-              {l:'Litiges actifs',v:'2',i:'§',c:'#ef4444',sub:'en cours'},
+              {l:'Litiges actifs',v:'2',i:'⚖️',c:'#ef4444',sub:'en cours'},
               {l:'Contrats actifs',v:'28',i:'✎',c:acc,sub:'marchés en cours'},
-              {l:'Assurances',v:'3',i:'⬟',c:'#10b981',sub:'DC, RCP, dommages'},
+              {l:'Assurances',v:'3',i:'🛡️',c:'#10b981',sub:'DC, RCP, dommages'},
               {l:'Contentieux',v:'1',i:'🔴',c:'#ef4444',sub:'procédure engagée'}
             ],
             'ezel_comptabilite': [
-              {l:'Encours clients',v:'3.8M€',i:'▬',c:acc,sub:'créances à recouvrer'},
+              {l:'Encours clients',v:'3.8M€',i:'💳',c:acc,sub:'créances à recouvrer'},
               {l:'Factures à émettre',v:'11',i:'↥',c:'#3b82f6',sub:'situations validées'},
               {l:'Factures à payer',v:'18',i:'↧',c:'#f59e0b',sub:'fournisseurs + ST'},
               {l:'Délai moyen',v:'47j',i:'◷',c:'#8b5cf6',sub:'jours paiement client'}
@@ -96,7 +96,7 @@ export default function TabKpiDashboard(__props) {
             'ezel_administratif': [
               {l:'Docs en attente',v:'5',i:'▫',c:'#f59e0b',sub:'à signer ou valider'},
               {l:'Contrats actifs',v:'28',i:'✎',c:acc,sub:'marchés en portefeuille'},
-              {l:'Assurances',v:'2',i:'⬟',c:'#ef4444',sub:'à renouveler avant 06/2026'},
+              {l:'Assurances',v:'2',i:'🛡️',c:'#ef4444',sub:'à renouveler avant 06/2026'},
               {l:'Conformité',v:'100%',i:'✓',c:'#10b981',sub:'certifications à jour'}
             ],
             'roulotte_exploitation': [
@@ -113,7 +113,7 @@ export default function TabKpiDashboard(__props) {
             ],
             'roulotte_logistique': [
               {l:'Flotte véhicules',v:'12',i:'🚐',c:acc,sub:'camions + utilitaires'},
-              {l:'Tournées / sem.',v:'28',i:'⌖',c:'#3b82f6',sub:'livraisons + retraits'},
+              {l:'Tournées / sem.',v:'28',i:'📍',c:'#3b82f6',sub:'livraisons + retraits'},
               {l:'Conflits planning',v:'3',i:'▲',c:'#ef4444',sub:'à résoudre'},
               {l:'Ponctualité',v:'92%',i:'◷',c:'#10b981',sub:'dans les délais'}
             ],
@@ -121,12 +121,12 @@ export default function TabKpiDashboard(__props) {
               {l:'Effectif',v:'8',i:'◉',c:acc,sub:'chauffeurs + admin'},
               {l:'Permis C valides',v:'6 / 6',i:'✓',c:'#10b981',sub:'tous à jour'},
               {l:'Congés (mois)',v:'2',i:'◫',c:'#f59e0b',sub:'à planifier'},
-              {l:'Formation',v:'1',i:'▤',c:'#3b82f6',sub:'ce trimestre'}
+              {l:'Formation',v:'1',i:'📚',c:'#3b82f6',sub:'ce trimestre'}
             ],
             'roulotte_comptabilite': [
               {l:'Factures à émettre',v:'11',i:'↥',c:acc,sub:'contrats livrés'},
               {l:'Factures à payer',v:'8',i:'↧',c:'#ef4444',sub:'fournisseurs'},
-              {l:'Encours clients',v:'680k€',i:'▬',c:'#f59e0b',sub:'créances actives'},
+              {l:'Encours clients',v:'680k€',i:'💳',c:'#f59e0b',sub:'créances actives'},
               {l:'Délai paiement',v:'38j',i:'◷',c:'#8b5cf6',sub:'moyenne clients'}
             ],
             'roulotte_administratif': [
@@ -154,21 +154,21 @@ export default function TabKpiDashboard(__props) {
               {l:'Valeur parc',v:'2.8M€',i:'€',c:'#8b5cf6',sub:'immobilisations 2026'}
             ],
             'echafaudage_rh': [
-              {l:'Monteurs',v:'18',i:'◉',c:acc,sub:'effectif terrain'},
+              {l:'Monteurs',v:'18',i:'👷',c:acc,sub:'effectif terrain'},
               {l:'Habilitations',v:'4',i:'▲',c:'#ef4444',sub:'à renouveler'},
               {l:'Absences (mois)',v:'2',i:'◫',c:'#f59e0b',sub:'CP + maladie'},
-              {l:'Formation',v:'2',i:'▤',c:'#3b82f6',sub:'travaux en hauteur'}
+              {l:'Formation',v:'2',i:'📚',c:'#3b82f6',sub:'travaux en hauteur'}
             ],
             'echafaudage_comptabilite': [
               {l:'Factures à émettre',v:'16',i:'↥',c:acc,sub:'fin de mois'},
               {l:'Factures à payer',v:'19',i:'↧',c:'#ef4444',sub:'fournisseurs + ST'},
-              {l:'Encours clients',v:'1.8M€',i:'▬',c:'#f59e0b',sub:'créances actives'},
+              {l:'Encours clients',v:'1.8M€',i:'💳',c:'#f59e0b',sub:'créances actives'},
               {l:'Délai paiement',v:'52j',i:'◷',c:'#8b5cf6',sub:'moyenne clients'}
             ],
             'echafaudage_administratif': [
               {l:'Docs en attente',v:'5',i:'▫',c:'#f59e0b',sub:'à signer'},
               {l:'Contrats actifs',v:'34',i:'✎',c:acc,sub:'chantiers en portefeuille'},
-              {l:'Habilitations',v:'4',i:'⬟',c:'#ef4444',sub:'CACES à renouveler'},
+              {l:'Habilitations',v:'4',i:'🛡️',c:'#ef4444',sub:'CACES à renouveler'},
               {l:'Conformité',v:'95%',i:'✓',c:'#10b981',sub:'certifications'}
             ]
           };
@@ -230,7 +230,7 @@ export default function TabKpiDashboard(__props) {
                 return (<>
                   {aoUrgDash.length > 0 && (
                     <div style={{background:'#fef2f2',border:'1px solid #fecaca',borderRadius:crmRd,margin:'0 8px 14px',padding:'12px 14px'}}>
-                      <div style={{fontWeight:700,color:'#dc2626',fontSize:'0.82rem',marginBottom:8}}>▲ AO urgents — deadline dans les 7 jours ({aoUrgDash.length})</div>
+                      <div style={{fontWeight:700,color:'#dc2626',fontSize:'0.82rem',marginBottom:8}}>🚨 AO urgents — deadline dans les 7 jours ({aoUrgDash.length})</div>
                       <div style={{display:'flex',flexDirection:'column',gap:5}}>
                         {aoUrgDash.map((a,i) => { const dl=dlLeftDash(a.d); const ext=getExt(a.id); const resp=(ext.r||'David LEMAIRE').split(',')[0].trim(); return (
                           <div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'7px 10px',background:'#fff',borderRadius:crmRd,border:'1px solid #fecaca'}}>
@@ -322,7 +322,7 @@ export default function TabKpiDashboard(__props) {
                 return (
                   <div style={{background:$bgCard,borderRadius:crmRd,border:'1px solid #007ab533',margin:'0 8px 14px',overflow:'hidden'}}>
                     <div style={{padding:'10px 16px',borderBottom:'1px solid #007ab522',background:'#007ab508',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                      <div style={{fontWeight:700,color:'#007ab5',fontSize:'0.82rem'}}>⌗ Référentiels ID Group OY</div>
+                      <div style={{fontWeight:700,color:'#007ab5',fontSize:'0.82rem'}}>🏷️ Référentiels ID Group OY</div>
                       <div style={{display:'flex',gap:8}}>
                         <span style={{fontSize:'0.68rem',fontWeight:700,padding:'2px 8px',borderRadius:8,background:'#007ab515',color:'#007ab5'}}>DOS {dosActifs.length}</span>
                         <span style={{fontSize:'0.68rem',fontWeight:700,padding:'2px 8px',borderRadius:8,background:'#05966915',color:'#059669'}}>AFF {affActifs.length}</span>

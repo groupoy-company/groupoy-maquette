@@ -32,7 +32,7 @@ export default function TabOffboarding(__props) {
               {t:'Archivage dossier formation / habilitations',obligatoire:false,delai:'apres_depart'},
               {t:'Radiation registre unique du personnel',obligatoire:true,delai:'jour_depart'}
             ]},
-            {cat:'▸ Véhicule & Déplacements', items:[
+            {cat:'🚗 Véhicule & Déplacements', items:[
               {t:'Véhicule de société / fonction restitué',obligatoire:false,delai:'jour_depart'},
               {t:'État des lieux véhicule réalisé + signé',obligatoire:false,delai:'jour_depart'},
               {t:'Carte carburant restituée',obligatoire:false,delai:'jour_depart'},
@@ -40,7 +40,7 @@ export default function TabOffboarding(__props) {
               {t:'Assurance véhicule résiliée / transférée',obligatoire:false,delai:'apres_depart'},
               {t:'Contrôle technique si nécessaire',obligatoire:false,delai:'preparation'}
             ]},
-            {cat:'◉ EPI & Matériel terrain', items:[
+            {cat:'👷 EPI & Matériel terrain', items:[
               {t:'EPI restitués (casque, chaussures, gilet)',obligatoire:true,delai:'jour_depart'},
               {t:'Harnais antichute restitué',obligatoire:false,delai:'jour_depart'},
               {t:'Outillage personnel inventorié et restitué',obligatoire:false,delai:'jour_depart'},
@@ -48,13 +48,13 @@ export default function TabOffboarding(__props) {
               {t:'Badge accès restitué',obligatoire:true,delai:'jour_depart'},
               {t:'Vêtements de travail floqués restitués',obligatoire:false,delai:'jour_depart'}
             ]},
-            {cat:'▢ IT & Matériel informatique', items:[
+            {cat:'💻 IT & Matériel informatique', items:[
               {t:'PC portable / tablette restitué',obligatoire:false,delai:'jour_depart'},
               {t:'Smartphone professionnel restitué',obligatoire:false,delai:'jour_depart'},
               {t:'Chargeurs et accessoires restitués',obligatoire:false,delai:'jour_depart'},
               {t:'Écran externe / clavier restitués',obligatoire:false,delai:'jour_depart'}
             ]},
-            {cat:'✉ Désactivation accès & comptes', items:[
+            {cat:'📧 Désactivation accès & comptes', items:[
               {t:'Compte Google Workspace désactivé',obligatoire:true,delai:'jour_depart'},
               {t:'Email — réponse automatique configurée',obligatoire:true,delai:'jour_depart'},
               {t:'Email — transfert vers remplaçant configuré',obligatoire:true,delai:'preparation'},
@@ -74,7 +74,7 @@ export default function TabOffboarding(__props) {
               {t:'Clients / fournisseurs informés du changement',obligatoire:false,delai:'preparation'},
               {t:'Notes de passation rédigées',obligatoire:false,delai:'preparation'}
             ]},
-            {cat:'◈ Entretien & Clôture', items:[
+            {cat:'🤝 Entretien & Clôture', items:[
               {t:'Entretien de sortie réalisé (par RH ou direction)',obligatoire:true,delai:'preparation'},
               {t:'Feedback recueilli (questionnaire satisfaction)',obligatoire:false,delai:'preparation'},
               {t:'Clause de non-concurrence rappelée (si applicable)',obligatoire:false,delai:'jour_depart'},
@@ -219,7 +219,7 @@ export default function TabOffboarding(__props) {
             </div>
             {/* Modal */}
             {offEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setOffEdit(null)}><div style={{background:$bgCard,width:'90%',maxWidth:520,maxHeight:'85vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>+ Nouveau départ</span><button onClick={()=>setOffEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>➕ Nouveau départ</span><button onClick={()=>setOffEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
               <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                 {[{k:'collaborateur',l:'Collaborateur',span:2},{k:'poste',l:'Poste'},{k:'filiale',l:'Filiale',type:'select',opts:['YILMAZ SAS','Ezel Bâtiment',"L'Échafaudage",'La Roulotte',"L'Étanchéité"]},{k:'motif',l:'Motif',type:'select',opts:OFF_MOTIFS.map(m=>m.id),labels:OFF_MOTIFS.map(m=>m.label)},{k:'dateSortie',l:'Date de sortie',type:'date'}].map(f => (
                   <div key={f.k} style={{gridColumn:f.span?'span 2':'span 1'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>{f.l}</label>

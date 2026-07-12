@@ -12,7 +12,7 @@ export default function TabRoadmap(__props) {
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(1)+'M€' : v >= 1000 ? Math.round(v/1000)+'K€' : v.toFixed(0)+'€';
         const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:'#fefdfb'};
         const lbS = {display:'block', fontSize:'0.75rem', fontWeight:600, color:$textMut, marginBottom:3, textTransform:'uppercase'};
-        const iconOptions = ['◆','↗','➤','◎','✦','◎','◆','⭐','◇','🔥','↑','↯','❖','★','✧','⌖'];
+        const iconOptions = ['◆','↗','🚀','🌍','👑','◎','◆','⭐','💎','🔥','🌱','⚡','🎓','🏆','✧','📍'];
         const colorOptions = ['#8B6F47','#059669','#2563eb','#7c3aed','#dc2626','#d97706','#0891b2','#6366f1','#ec4899'];
 
         // ══ EDIT PANEL ══
@@ -38,7 +38,7 @@ export default function TabRoadmap(__props) {
               {[
                 {id:'jalons', label:'◫ Jalons', count: jalons.length},
                 {id:'projections', label:'▦ Projections', count: projections.length},
-                {id:'vision', label:'⌖ Carte Vision', count: visionCards.length},
+                {id:'vision', label:'🗺️ Carte Vision', count: visionCards.length},
                 {id:'objectifs', label:'◎ Objectifs', count: objectifs.length},
                 {id:'filiales', label:'▪ Par Filiale', count: projectionsFiliale.length}
               ].map(t => (
@@ -70,7 +70,7 @@ export default function TabRoadmap(__props) {
                       </div>
                       <div style={{textAlign:'center'}}><label style={lbS}>Fait</label><input type="checkbox" checked={!!j.done} onChange={e => { const nd = {...roadmapData}; nd.jalons = nd.jalons.map((jj,ii) => ii===i ? {...jj, done: e.target.checked, active: false} : jj); saveRoadmap(nd); }} style={{width:18, height:18, accentColor:'#059669'}} /></div>
                       <div style={{textAlign:'center'}}><label style={lbS}>Actif</label><input type="checkbox" checked={!!j.active} onChange={e => { const nd = {...roadmapData}; nd.jalons = nd.jalons.map((jj,ii) => ii===i ? {...jj, active: e.target.checked, done: false} : jj); saveRoadmap(nd); }} style={{width:18, height:18, accentColor:'#d97706'}} /></div>
-                      <button onClick={() => removeRoadmapItem('jalons', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer', alignSelf:'end'}}>⊘</button>
+                      <button onClick={() => removeRoadmapItem('jalons', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer', alignSelf:'end'}}>🗑️</button>
                     </div>
                     <div style={{display:'flex', flexDirection:'column', gap:4}}>
                       <label style={lbS}>Objectifs du jalon</label>
@@ -108,7 +108,7 @@ export default function TabRoadmap(__props) {
                           <td style={{padding:'6px 12px', borderBottom:`1px solid ${$border}`}}><input type="number" step="0.1" style={{...inS, width:80}} value={p.ca} onChange={e => updateRoadmapField('projections', i, 'ca', Number(e.target.value))} /></td>
                           <td style={{padding:'6px 12px', borderBottom:`1px solid ${$border}`}}><input type="number" step="0.01" style={{...inS, width:80}} value={p.ebe} onChange={e => updateRoadmapField('projections', i, 'ebe', Number(e.target.value))} /></td>
                           <td style={{padding:'6px 12px', borderBottom:`1px solid ${$border}`}}><input type="number" style={{...inS, width:80}} value={p.eff} onChange={e => updateRoadmapField('projections', i, 'eff', Number(e.target.value))} /></td>
-                          <td style={{padding:'6px 12px', borderBottom:`1px solid ${$border}`}}><button onClick={() => removeRoadmapItem('projections', i)} style={{padding:'2px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.8rem', cursor:'pointer'}}>⊘</button></td>
+                          <td style={{padding:'6px 12px', borderBottom:`1px solid ${$border}`}}><button onClick={() => removeRoadmapItem('projections', i)} style={{padding:'2px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.8rem', cursor:'pointer'}}>🗑️</button></td>
                         </tr>
                       ))}
                     </tbody>
@@ -134,7 +134,7 @@ export default function TabRoadmap(__props) {
                           ))}
                         </div>
                       </div>
-                      <button onClick={() => removeRoadmapItem('visionCards', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer'}}>⊘</button>
+                      <button onClick={() => removeRoadmapItem('visionCards', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer'}}>🗑️</button>
                     </div>
                     <div><label style={lbS}>Détails / Description</label><textarea style={{...inS, minHeight:60, resize:'vertical'}} value={v.details} onChange={e => updateRoadmapField('visionCards', i, 'details', e.target.value)} /></div>
                     <div style={{display:'grid', gridTemplateColumns:'60px 60px', gap:8, marginTop:8}}>
@@ -169,7 +169,7 @@ export default function TabRoadmap(__props) {
                           ))}
                         </div>
                       </div>
-                      <button onClick={() => removeRoadmapItem('objectifs', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer'}}>⊘</button>
+                      <button onClick={() => removeRoadmapItem('objectifs', i)} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid #fecaca', background:'#fff5f5', color:'#dc2626', fontSize:'0.85rem', cursor:'pointer'}}>🗑️</button>
                     </div>
                     <label style={lbS}>Actions / Objectifs</label>
                     {obj.items.map((item, idx) => (
@@ -206,7 +206,7 @@ export default function TabRoadmap(__props) {
                             <td key={key} style={{padding:'4px 4px', borderBottom:`1px solid ${$border}`}}><input style={{...inS, width:62, fontSize:'0.85rem', textAlign:'center'}} value={pf[key]} onChange={e => updateRoadmapField('projectionsFiliale', i, key, e.target.value)} /></td>
                           ))}
                           <td style={{padding:'4px 6px', borderBottom:`1px solid ${$border}`}}><input style={{...inS, width:120, fontSize:'0.85rem'}} value={pf.obj} onChange={e => updateRoadmapField('projectionsFiliale', i, 'obj', e.target.value)} /></td>
-                          <td style={{padding:'4px 6px', borderBottom:`1px solid ${$border}`}}><button onClick={() => removeRoadmapItem('projectionsFiliale', i)} style={{padding:'2px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.8rem', cursor:'pointer'}}>⊘</button></td>
+                          <td style={{padding:'4px 6px', borderBottom:`1px solid ${$border}`}}><button onClick={() => removeRoadmapItem('projectionsFiliale', i)} style={{padding:'2px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.8rem', cursor:'pointer'}}>🗑️</button></td>
                         </tr>
                       ))}
                     </tbody>
@@ -217,7 +217,7 @@ export default function TabRoadmap(__props) {
             )}
 
             <div style={{textAlign:'center', marginTop:20, padding:12, background:$success+'12', borderRadius:crmRd, fontSize:'0.85rem', color:'#059669'}}>
-              ↓ Sauvegarde automatique — toutes les modifications sont enregistrées instantanément
+              💾 Sauvegarde automatique — toutes les modifications sont enregistrées instantanément
             </div>
           </div>
         );
@@ -228,7 +228,7 @@ export default function TabRoadmap(__props) {
             {/* Header */}
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24}}>
               <div style={{textAlign:'center', flex:1}}>
-                <div style={{fontSize:'2.5rem', marginBottom:8}}>⌖</div>
+                <div style={{fontSize:'2.5rem', marginBottom:8}}>🗺️</div>
                 <h2 style={{fontSize:'1.6rem', fontWeight:800, color:$text, marginBottom:6}}>Feuille de Route Stratégique</h2>
                 <p style={{fontSize:'0.9rem', color:$textMut}}>Group OY — Vision 2025 → 2035</p>
               </div>
@@ -237,7 +237,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ CARTE VISION — 1/3/5/10 ans ══ */}
             <div style={{marginBottom:32}}>
-              <h3 style={{fontSize:'1rem', fontWeight:700, color:$accent, marginBottom:16, display:'flex', alignItems:'center', gap:8}}>⌖ Où serons-nous ?</h3>
+              <h3 style={{fontSize:'1rem', fontWeight:700, color:$accent, marginBottom:16, display:'flex', alignItems:'center', gap:8}}>🗺️ Où serons-nous ?</h3>
               <div style={{display:'grid', gridTemplateColumns:`repeat(${Math.min(visionCards.length, 4)}, 1fr)`, gap:12}}>
                 {visionCards.map(v => {
                   const bg = v.color + '10';
@@ -259,7 +259,7 @@ export default function TabRoadmap(__props) {
 
             {/* ══ SITUATION ACTUELLE ══ */}
             <div style={{...cardStyle, marginBottom:24, padding:20}}>
-              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>⌖ Situation Actuelle — 2026</h3>
+              <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>📍 Situation Actuelle — 2026</h3>
               <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:16}}>
                 {[
                   { label: 'CA Group', value: fmt(currentCA), color: '#059669', icon: '€' },

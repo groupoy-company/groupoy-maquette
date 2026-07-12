@@ -3,7 +3,7 @@
 
 export default function TabDonneesRef(__props) {
   const { $accent, $bgCard, $border, $danger, $shadow, $shadowLg, $text, $textMut, $textSec, autoData, ca, chantiers, collaborateurs, crmRd, drTab, employes, filiales, filialesDynamiques, niveau, setCollabDetailTab, setCollabOngletId, setDrTab, setEmployeForm, setModalEmploye, setOngletActif } = __props;
-        const drTabs = [{id:'filiales',label:'Filiales',icon:'▪'},{id:'collaborateurs',label:'Collaborateurs',icon:'◉'},{id:'vehicules',label:'Véhicules',icon:'▸'},{id:'materiel',label:'Matériel',icon:'✱'},{id:'chantiers',label:'Chantiers / Affaires',icon:'◆'},{id:'clients',label:'Clients',icon:'◈'},{id:'prestataires',label:'Prestataires',icon:'▣'}];
+        const drTabs = [{id:'filiales',label:'Filiales',icon:'▪'},{id:'collaborateurs',label:'Collaborateurs',icon:'◉'},{id:'vehicules',label:'Véhicules',icon:'🚗'},{id:'materiel',label:'Matériel',icon:'✱'},{id:'chantiers',label:'Chantiers / Affaires',icon:'◆'},{id:'clients',label:'Clients',icon:'🤝'},{id:'prestataires',label:'Prestataires',icon:'▣'}];
         const Tag = ({label,color}) => <span style={{display:'inline-block',padding:'2px 8px',background:(color||'#64748b')+'12',color:color||'#64748b',fontWeight:700,fontSize:'0.75rem',borderLeft:`2px solid ${color||'#64748b'}`}}>{label}</span>;
         const allChantiers = chantiers || [];
         const allClients = [...new Set(allChantiers.map(c=>c.client).filter(Boolean))].sort();

@@ -11,14 +11,14 @@ export default function TabPresentationGroupe(__props) {
           const totFiliales = filialesOp.length;
           const gradMap = {'La Roulotte':['#F5D78E','#C49A2A'],"L'Échafaudage":['#C39BD3','#6C3483'],'Ezel Bâtiment':['#85C1E9','#007ab5'],"L'Étanchéité":['#82E0AA','#0e6655']};
           const niveauxData = [
-            { niv: 'XXS', label: 'Butineur', ca: '0-0.5M€', color: '#a3e635', emoji: '↑' },
+            { niv: 'XXS', label: 'Butineur', ca: '0-0.5M€', color: '#a3e635', emoji: '🌱' },
             { niv: 'XS', label: 'Collecteur', ca: '0.5-1M€', color: '#84cc16', emoji: '◆' },
-            { niv: 'S', label: 'Bâtisseur', ca: '1-1.5M€', color: '#eab308', emoji: '⬡' },
+            { niv: 'S', label: 'Bâtisseur', ca: '1-1.5M€', color: '#eab308', emoji: '🍯' },
             { niv: 'M', label: 'Maître-Bâtisseur', ca: '1.5-3M€', color: '#f59e0b', emoji: '◆' },
-            { niv: 'L', label: 'Gardien de Ruche', ca: '3-5M€', color: '#f97316', emoji: '◆' },
-            { niv: 'XL', label: 'Régisseur de Ruche', ca: '5-7.5M€', color: '#ef4444', emoji: '◆' },
-            { niv: 'XXL', label: 'Maître-Apiculteur', ca: '7.5-12M€', color: '#dc2626', emoji: '✦' },
-            { niv: 'XXXL', label: 'Roi de la Ruche', ca: '12-15M€', color: '#b91c1c', emoji: '✦' }
+            { niv: 'L', label: 'Gardien de Ruche', ca: '3-5M€', color: '#f97316', emoji: '🏰' },
+            { niv: 'XL', label: 'Régisseur de Ruche', ca: '5-7.5M€', color: '#ef4444', emoji: '🏰' },
+            { niv: 'XXL', label: 'Maître-Apiculteur', ca: '7.5-12M€', color: '#dc2626', emoji: '👑' },
+            { niv: 'XXXL', label: 'Roi de la Ruche', ca: '12-15M€', color: '#b91c1c', emoji: '👑' }
           ];
           const responsables = employes.filter(e => e.isResponsable);
           const dirigeantsRows = (() => {
@@ -110,7 +110,7 @@ export default function TabPresentationGroupe(__props) {
               <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:20}}>
                 {[
                   {icon:'◎', title:'Performance', desc:'Rémunération liée à la performance réelle, mesurée par l\'EBE de chaque ruche.', color:'#059669'},
-                  {icon:'◈', title:'Autonomie', desc:'Chaque responsable gère sa ruche comme un entrepreneur avec le soutien du groupe.', color:'#2563eb'},
+                  {icon:'🤝', title:'Autonomie', desc:'Chaque responsable gère sa ruche comme un entrepreneur avec le soutien du groupe.', color:'#2563eb'},
                   {icon:'↗', title:'Croissance', desc:'De 10M€ à 30M€ de CA sur 10 ans, par croissance organique et acquisitions.', color:'#d97706'},
                   {icon:'◆', title:'Esprit Ruche', desc:'Intelligence collective et services mutualisés via YILMAZ pour chaque filiale.', color:$accent}
                 ].map((v, i) => (
@@ -140,7 +140,7 @@ export default function TabPresentationGroupe(__props) {
                     {end: totEffectif, suffix:'', label:'Collaborateurs', icon:'◉', desc:'Effectif total groupe'},
                     {end: totFiliales, suffix:'', label:'Filiales', icon:'▪', desc:'Entités opérationnelles'},
                     {end: totChantiers, suffix:'', label:'Chantiers en Cours', icon:'◆', desc:'Projets actifs'},
-                    {end: responsables.length, suffix:'', label:'Responsables', icon:'✦', desc:'Managers de ruches'},
+                    {end: responsables.length, suffix:'', label:'Responsables', icon:'👑', desc:'Managers de ruches'},
                     {end: 8, suffix:'', label:'Niveaux Ruche', icon:'◆', desc:'De XXS à XXXL'}
                   ].map((k,i) => (
                     <FadeIn key={i} delay={i*80}>
@@ -638,7 +638,7 @@ export default function TabPresentationGroupe(__props) {
                 </div>
                 <div style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap'}}>
                   <button onClick={() => { if (!isLoggedIn) { setShowLoginModal(true); return; } setOngletActif('collaborateurs'); setNavEntreprise('yilmaz'); setNavService('rh'); setDashboardFiliale('yilmaz'); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s', boxShadow:'0 4px 20px rgba(139,111,71,0.15)'}} onMouseOver={e=>e.target.style.background='#a68856'} onMouseOut={e=>e.target.style.background='#8B6F47'}>{isLoggedIn ? '◉ Voir nos équipes' : '🔐 Se connecter'}</button>
-                  <button onClick={() => { if (!isLoggedIn) setShowLoginModal(true); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'1.5px solid #c9b896', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s'}} onMouseOver={e=>{e.target.style.background='#8B6F47';e.target.style.color='white';e.target.style.borderColor='#8B6F47';}} onMouseOut={e=>{e.target.style.background='transparent';e.target.style.color='#8B6F47';e.target.style.borderColor='#c9b896';}}>✉ Nous contacter</button>
+                  <button onClick={() => { if (!isLoggedIn) setShowLoginModal(true); }} style={{padding:'14px 36px', borderRadius:crmRd, border:'1.5px solid #c9b896', background:'transparent', color:$accent, fontWeight:600, fontSize:'0.95rem', cursor:'pointer', transition:'all 0.3s'}} onMouseOver={e=>{e.target.style.background='#8B6F47';e.target.style.color='white';e.target.style.borderColor='#8B6F47';}} onMouseOut={e=>{e.target.style.background='transparent';e.target.style.color='#8B6F47';e.target.style.borderColor='#c9b896';}}>📧 Nous contacter</button>
                 </div>
                 <div style={{marginTop:80, paddingTop:32, borderTop:'1px solid #e0d5c5', fontSize:'0.82rem', color:$textMut}}>
                   © {new Date().getFullYear()} Group OY — Le Grand Rucher • Tous droits réservés

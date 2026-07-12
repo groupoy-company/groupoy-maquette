@@ -98,8 +98,8 @@ export default function TabTresorerie(__props) {
         const decouvertTotal = filiales.reduce((s,f) => s + (tresoDataAll[f]?.decouvert||0), 0);
 
         const sumCat = (type, cat, mois) => filiales.reduce((s,f) => s + ((tresoDataAll[f]?.[type]?.[cat]||[])[mois]||0), 0);
-        const encCats = [{id:'factures_clients',label:'Factures clients',icon:'▫'},{id:'refacturations',label:'Refacturations internes',icon:'↻'},{id:'subventions',label:'Subventions & aides',icon:'◆'},{id:'autres_encaiss',label:'Autres encaissements',icon:'◇'}];
-        const decCats = [{id:'fournisseurs',label:'Fournisseurs & matériaux',icon:'🧱'},{id:'salaires',label:'Salaires nets',icon:'◉'},{id:'charges_sociales',label:'Charges sociales',icon:'▦'},{id:'loyers',label:'Loyers & charges',icon:'▪'},{id:'assurances',label:'Assurances',icon:'⬟'},{id:'impots_taxes',label:'Impôts & taxes',icon:'⬡'},{id:'investissements',label:'Investissements',icon:'€'},{id:'remboursements_emprunt',label:'Remb. emprunts',icon:'↘'},{id:'autres_decaiss',label:'Autres décaissements',icon:'☰'}];
+        const encCats = [{id:'factures_clients',label:'Factures clients',icon:'▫'},{id:'refacturations',label:'Refacturations internes',icon:'↻'},{id:'subventions',label:'Subventions & aides',icon:'◆'},{id:'autres_encaiss',label:'Autres encaissements',icon:'💎'}];
+        const decCats = [{id:'fournisseurs',label:'Fournisseurs & matériaux',icon:'🧱'},{id:'salaires',label:'Salaires nets',icon:'◉'},{id:'charges_sociales',label:'Charges sociales',icon:'▦'},{id:'loyers',label:'Loyers & charges',icon:'▪'},{id:'assurances',label:'Assurances',icon:'🛡️'},{id:'impots_taxes',label:'Impôts & taxes',icon:'🏦'},{id:'investissements',label:'Investissements',icon:'€'},{id:'remboursements_emprunt',label:'Remb. emprunts',icon:'📉'},{id:'autres_decaiss',label:'Autres décaissements',icon:'☰'}];
 
         const totalEnc = (m) => encCats.reduce((s,c) => s + sumCat('encaissements',c.id,m), 0);
         const totalDec = (m) => decCats.reduce((s,c) => s + sumCat('decaissements',c.id,m), 0);
@@ -151,7 +151,7 @@ export default function TabTresorerie(__props) {
 
             {/* Tabs */}
             <div style={{display:'flex', gap:6, marginBottom:14}}>
-              {[{id:'tableau',label:'☰ Tableau mensuel'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'▲ Alertes ('+tresoAlertes.length+')'}].map(t => (
+              {[{id:'tableau',label:'☰ Tableau mensuel'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'🚨 Alertes ('+tresoAlertes.length+')'}].map(t => (
                 <button key={t.id} onClick={() => setTresoTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: tresoTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: tresoTab===t.id ? '#faf6ef' : 'white', color: tresoTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
               ))}
             </div>
@@ -193,7 +193,7 @@ export default function TabTresorerie(__props) {
                     </tr>
                     {/* Décaissements header */}
                     <tr style={{background:'#f8f0e8'}}>
-                      <td colSpan={14} style={{padding:'8px 14px', fontWeight:800, color:'#6a4a28', fontSize:'0.82rem'}}>↘ DÉCAISSEMENTS</td>
+                      <td colSpan={14} style={{padding:'8px 14px', fontWeight:800, color:'#6a4a28', fontSize:'0.82rem'}}>📉 DÉCAISSEMENTS</td>
                     </tr>
                     {decCats.map(c => (
                       <tr key={c.id} style={{borderBottom:`1px solid ${$border}`}}>
@@ -210,13 +210,13 @@ export default function TabTresorerie(__props) {
                     </tr>
                     {/* Solde net mensuel */}
                     <tr style={{background:$bgSub, fontWeight:800, borderTop:'2px solid #d4c5a9'}}>
-                      <td style={{padding:'10px 14px', position:'sticky', left:0, background:$bgSub, zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:$text, fontSize:'0.82rem'}}>↯ Flux net mensuel</td>
+                      <td style={{padding:'10px 14px', position:'sticky', left:0, background:$bgSub, zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:$text, fontSize:'0.82rem'}}>⚡ Flux net mensuel</td>
                       {moisN.map((m,i) => { const v = soldeNet(i); return <td key={i} style={{padding:'6px', textAlign:'right', color: v >= 0 ? '#3a6a2a' : '#c04030', fontSize:'0.82rem'}}>{v >= 0 ? '+' : ''}{fmt(v)}</td>; })}
                       <td style={{padding:'6px 10px', textAlign:'right', borderLeft:`2px solid ${$borderAlt}`, color:$text}}>{fmt(Array.from({length:12},(_,i)=>soldeNet(i)).reduce((a,v)=>a+v,0))}</td>
                     </tr>
                     {/* Solde cumulé */}
                     <tr style={{background:'#eae4d8', fontWeight:800, borderTop:'2px solid #c0b098'}}>
-                      <td style={{padding:'10px 14px', position:'sticky', left:0, background:'#eae4d8', zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:$text, fontSize:'0.85rem'}}>⬡ Solde cumulé</td>
+                      <td style={{padding:'10px 14px', position:'sticky', left:0, background:'#eae4d8', zIndex:1, borderRight:`2px solid ${$borderAlt}`, color:$text, fontSize:'0.85rem'}}>🏦 Solde cumulé</td>
                       {soldesCumul.map((s,i) => <td key={i} style={{padding:'6px', textAlign:'right', color: s >= 0 ? '#2d5016' : '#c04030', fontSize:'0.82rem', fontWeight:800}}>{fmt(s)}</td>)}
                       <td style={{padding:'6px 10px', textAlign:'right', borderLeft:`2px solid ${$borderAlt}`}}></td>
                     </tr>

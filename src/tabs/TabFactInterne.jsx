@@ -28,7 +28,7 @@ export default function TabFactInterne(__props) {
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24}}>
               <div>
                 <div style={{display:'flex', alignItems:'center', gap:10}}>
-                  <span style={{fontSize:'1.8rem'}}>▤</span>
+                  <span style={{fontSize:'1.8rem'}}>🧾</span>
                   <div>
                     <h2 style={{fontSize:'1.4rem', fontWeight:800, color:$text, margin:0}}>Facturation Interne</h2>
                     <p style={{fontSize:'0.9rem', color:$textMut, margin:0}}>Yilmaz → Filiales — Services partagés</p>
@@ -178,7 +178,7 @@ export default function TabFactInterne(__props) {
                     const count = genererFacture(m, a);
                     alert(`✓ ${count} factures générées pour ${moisOptions[m-1]} ${a}`);
                   }} style={{padding:'8px 20px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer', height:38}}>
-                    ▤ Générer {config.filter(c=>c.actif).length} factures
+                    🧾 Générer {config.filter(c=>c.actif).length} factures
                   </button>
                 </div>
               </div>
@@ -215,14 +215,14 @@ export default function TabFactInterne(__props) {
                             <td style={{padding:'8px 10px', borderBottom:`1px solid ${$border}`}}><span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background: st.bg, color: st.color, fontWeight:600}}>{st.label}</span></td>
                             <td style={{padding:'8px 10px', borderBottom:`1px solid ${$border}`}}>
                               <div style={{display:'flex', gap:4}}>
-                                <button onClick={() => setFactIntPreview(f)} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontSize:'0.75rem', cursor:'pointer', fontWeight:600}}>◎</button>
+                                <button onClick={() => setFactIntPreview(f)} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontSize:'0.75rem', cursor:'pointer', fontWeight:600}}>👁️</button>
                                 <select value={f.statut} onChange={e => updateFacture(f.id, 'statut', e.target.value)} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.8rem', cursor:'pointer', background:$bgCard}}>
                                   <option value="brouillon">✎ Brouillon</option>
                                   <option value="envoyee">↥ Envoyée</option>
                                   <option value="payee">✓ Payée</option>
                                   <option value="retard">▲ En retard</option>
                                 </select>
-                                <button onClick={() => deleteFacture(f.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.75rem', cursor:'pointer'}}>⊘</button>
+                                <button onClick={() => deleteFacture(f.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.75rem', cursor:'pointer'}}>🗑️</button>
                               </div>
                             </td>
                           </tr>
@@ -248,7 +248,7 @@ export default function TabFactInterne(__props) {
               <div style={{...cardStyle, padding:20, marginBottom:24}}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
                   <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>✱ Configuration par filiale</h3>
-                  <div style={{fontSize:'0.8rem', color:$textMut}}>↓ Sauvegarde automatique</div>
+                  <div style={{fontSize:'0.8rem', color:$textMut}}>💾 Sauvegarde automatique</div>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', gap:16}}>
                   {config.map((cfg, i) => (
@@ -459,8 +459,8 @@ export default function TabFactInterne(__props) {
                         </div>
                       </div>
                       <div style={{display:'flex', gap:8}}>
-                        <button onClick={handleEmail} style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:'#2563eb', fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>✉ Email</button>
-                        <button onClick={handlePrint} style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>⎙ Imprimer</button>
+                        <button onClick={handleEmail} style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:'#2563eb', fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>📧 Email</button>
+                        <button onClick={handlePrint} style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>🖨️ Imprimer</button>
                         <button onClick={() => setFactIntPreview(null)} style={{padding:'8px 12px', borderRadius:crmRd, border:'none', background:$bgSub, color:$textSec, fontWeight:700, fontSize:'0.95rem', cursor:'pointer'}}>✕</button>
                       </div>
                     </div>
@@ -586,8 +586,8 @@ export default function TabFactInterne(__props) {
                         </div>
                       </div>
                       <div style={{display:'flex', gap:8}}>
-                        <button onClick={handleEmail} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #2563eb, #1d4ed8)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>✉ Envoyer par email</button>
-                        <button onClick={handlePrint} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: factIntStyle==='noir' ? 'linear-gradient(135deg, #1a1a1a, #333)' : 'linear-gradient(135deg, #8B6F47, #6b5535)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>⎙ Télécharger & Imprimer</button>
+                        <button onClick={handleEmail} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #2563eb, #1d4ed8)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>📧 Envoyer par email</button>
+                        <button onClick={handlePrint} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: factIntStyle==='noir' ? 'linear-gradient(135deg, #1a1a1a, #333)' : 'linear-gradient(135deg, #8B6F47, #6b5535)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'}}>🖨️ Télécharger & Imprimer</button>
                       </div>
                     </div>
                   </div>

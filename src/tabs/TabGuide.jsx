@@ -8,13 +8,13 @@ export default function TabGuide(__props) {
             {key:'centres', label:'☰ Centre de Données', desc:'Saisie des données financières manuelles'},
             {key:'ruches', label:'◆ Système Ruches', desc:'Modèle de rémunération variable'},
             {key:'structure', label:'◆ Organisation du Group', desc:'Holdings, filiales, services partagés'},
-            {key:'glossaire', label:'▤ Glossaire BTP', desc:'Termes financiers et métier BTP'}
+            {key:'glossaire', label:'📖 Glossaire BTP', desc:'Termes financiers et métier BTP'}
           ];
 
           return (
           <div>
             <div style={{display:'flex', alignItems:'center', gap:12, marginBottom:28}}>
-              <div style={{fontSize:'2.5rem'}}>▤</div>
+              <div style={{fontSize:'2.5rem'}}>📖</div>
               <div>
                 <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>Guide & Documentation</h1>
                 <div style={{fontSize:'0.98rem', color:$textMut}}>Référentiel complet du Grand Rucher — Group OY</div>
@@ -52,7 +52,7 @@ export default function TabGuide(__props) {
                           <div style={{fontSize:'0.92rem', color:'#059669', fontWeight:600, marginBottom:8}}>{desc.short}</div>
                           <div style={{fontSize:'0.9rem', color:$textSec, lineHeight:1.55, marginBottom:12}}>{desc.detail}</div>
                           <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:'#f8f6f1', fontSize:'0.82rem', fontWeight:600, color:$accent}}>▸ {desc.categorie}</span>
+                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:'#f8f6f1', fontSize:'0.82rem', fontWeight:600, color:$accent}}>📂 {desc.categorie}</span>
                             <span style={{padding:'3px 10px', borderRadius:crmRd, background:$info+'12', fontSize:'0.82rem', fontWeight:600, color:'#2563eb'}}>↻ {desc.frequence}</span>
                             <span style={{padding:'3px 10px', borderRadius:crmRd, background:$success+'12', fontSize:'0.82rem', fontWeight:600, color:'#059669'}}>↧ {desc.source}</span>
                           </div>
@@ -118,7 +118,7 @@ export default function TabGuide(__props) {
                   <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:12}}>◆ Organisation du Group OY</h3>
                   <div style={{fontSize:'0.95rem', color:$textSec, lineHeight:1.7}}>
                     <p style={{marginBottom:12}}><strong>GROUP OY</strong> est la holding mère qui détient l'ensemble du groupe. Elle supervise deux sous-holdings :</p>
-                    <p style={{marginBottom:8, paddingLeft:16}}><strong>⬡ INVEST LOC</strong> — Holding Location : détient La Roulotte (location roulottes & matériel) et L'Échafaudage (location + montage/démontage d'échafaudages).</p>
+                    <p style={{marginBottom:8, paddingLeft:16}}><strong>🏦 INVEST LOC</strong> — Holding Location : détient La Roulotte (location roulottes & matériel) et L'Échafaudage (location + montage/démontage d'échafaudages).</p>
                     <p style={{marginBottom:8, paddingLeft:16}}><strong>◆ INVEST EXE</strong> — Holding Exécution : détient Ezel Bâtiment (entreprise générale de bâtiment) et L'Étanchéité (travaux d'imperméabilisation).</p>
                     <p style={{marginBottom:12}}><strong>◆ Yilmaz</strong> est la société de services partagés (Finance, RH, IT, Marketing) qui facture ses prestations à hauteur de 3% du CA opérationnel de chaque filiale.</p>
                   </div>
@@ -133,7 +133,7 @@ export default function TabGuide(__props) {
             {/* GLOSSAIRE */}
             {guideSection === 'glossaire' && (
               <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:24}}>
-                <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:16}}>▤ Glossaire BTP & Finance</h3>
+                <h3 style={{fontSize:'1.05rem', fontWeight:700, color:$text, marginBottom:16}}>📖 Glossaire BTP & Finance</h3>
                 <div style={{display:'grid', gridTemplateColumns:'1fr', gap:2}}>
                   {[
                     ['CA', 'Chiffre d\'Affaires — montant total des ventes HT sur la période'],

@@ -34,7 +34,7 @@ export default function TabLitiges(__props) {
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    <div style={{width:40,height:40,borderRadius:10,background:'#dc2626',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>§</div>
+                    <div style={{width:40,height:40,borderRadius:10,background:'#dc2626',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>⚖️</div>
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Suivi Litiges</h2>
@@ -118,7 +118,7 @@ export default function TabLitiges(__props) {
               ))}
             </div>
             {litEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setLitEdit(null)}><div style={{background:$bgCard,borderRadius:crmRd,width:'92%',maxWidth:600,maxHeight:'85vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$borderAlt}`,display:'flex',justifyContent:'space-between'}}><span style={{fontWeight:700}}>{data.find(d=>d.id===litEdit.id)?'✎ Modifier':'+ Nouveau'} litige</span><button onClick={()=>setLitEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$borderAlt}`,display:'flex',justifyContent:'space-between'}}><span style={{fontWeight:700}}>{data.find(d=>d.id===litEdit.id)?'✎ Modifier':'➕ Nouveau'} litige</span><button onClick={()=>setLitEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
               <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                 {[{k:'titre',l:'Titre',span:2},{k:'type',l:'Type',type:'select',opts:LIT_TYPES.map(t=>t.id),labels:LIT_TYPES.map(t=>t.label)},{k:'statut',l:'Statut',type:'select',opts:LIT_STATUTS.map(s=>s.id),labels:LIT_STATUTS.map(s=>s.label)},{k:'filiale',l:'Filiale',type:'select',opts:['YILMAZ SAS','Ezel Bâtiment',"L'Échafaudage",'La Roulotte']},{k:'adversaire',l:'Adversaire'},{k:'montantEnJeu',l:'Montant en jeu (€)',type:'number'},{k:'provision',l:'Provision (€)',type:'number'},{k:'dateOuverture',l:'Date ouverture',type:'date'},{k:'avocat',l:'Avocat'},{k:'description',l:'Description',span:2,type:'textarea'},{k:'historique',l:'Historique / Suivi',span:2,type:'textarea'}].map(f => (
                   <div key={f.k} style={{gridColumn:f.span?'span 2':'span 1'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>{f.l}</label>
