@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calculator, TrendingUp, DollarSign, Award, Users, BarChart3, Target, Briefcase, Search } from 'lucide-react';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { ROLES, NIVEAUX_HIERARCHIQUES, SERVICES, NIVEAUX_ACCES, PERMISSION_LEVELS, DEFAULT_PERMISSIONS, INITIAL_USERS } from './data/constants.js';
 
 // ═══ THEME SYSTEM ═══
 const CRM_THEMES={bee:{id:'bee',name:'🐝 Bee Modern',font:"'DM Sans',-apple-system,sans-serif",bg:'#faf8f4',bgCard:'#fff',bgSub:'#f5f0e6',bgCardHover:'#fdf8f0',border:'#e8e0d0',borderLight:'#f0ebe3',text:'#2d2216',textSec:'#7a6b55',textMut:'#b8a88e',success:'#059669',warn:'#d97706',danger:'#dc2626',info:'#7c3aed',shadow:'0 1px 3px rgba(45,34,22,0.06)',shadowLg:'0 8px 30px rgba(139,111,71,0.1)'},apple:{id:'apple',name:'🍎 Apple',font:"'SF Pro Display',-apple-system,sans-serif",bg:'#fff',bgCard:'#fff',bgSub:'#f5f5f7',bgCardHover:'#f9fafb',border:'#d2d2d7',borderLight:'#e8e8ed',text:'#1d1d1f',textSec:'#6e6e73',textMut:'#aeaeb2',success:'#34c759',warn:'#ff9f0a',danger:'#ff3b30',info:'#af52de',shadow:'0 1px 3px rgba(0,0,0,0.04)',shadowLg:'0 8px 30px rgba(0,0,0,0.06)'},claude:{id:'claude',name:'🟣 Claude',font:"'Georgia',serif",bg:'#faf9f6',bgCard:'#fff',bgSub:'#f0ede6',bgCardHover:'#f7f5f0',border:'#e8e4db',borderLight:'#f0ede6',text:'#2d2216',textSec:'#6b5d4d',textMut:'#b0a08a',success:'#2e7d32',warn:'#e68a00',danger:'#c62828',info:'#5b21b6',shadow:'0 1px 3px rgba(45,34,22,0.06)',shadowLg:'0 8px 30px rgba(45,34,22,0.08)'},vercel:{id:'vercel',name:'🔷 Vercel',font:"'Geist',-apple-system,sans-serif",bg:'#0a0a0a',bgCard:'#141414',bgSub:'#111',bgCardHover:'#1c1c1c',border:'#262626',borderLight:'#1e1e1e',text:'#fafafa',textSec:'#a1a1aa',textMut:'#71717a',success:'#22c55e',warn:'#f59e0b',danger:'#ef4444',info:'#8b5cf6',shadow:'0 1px 2px rgba(0,0,0,0.5)',shadowLg:'0 8px 32px rgba(0,0,0,0.6)',isDark:true}};
@@ -105,63 +106,8 @@ const filiales = {
   }
 };
 
-// === SYSTÈME D'AUTHENTIFICATION ET PERMISSIONS ===
-const ROLES = {
-  SUPER_ADMIN: { label: 'Super Admin', level: 4, color: '#dc2626', icon: '◆', description: 'Accès total + gestion de tous les droits' },
-  ADMIN: { label: 'Admin', level: 3, color: '#f59e0b', icon: '◆', description: 'Accès total sauf gestion Super Admin' },
-  MANAGER: { label: 'Manager', level: 2, color: '#3b82f6', icon: '◇', description: 'Accès aux onglets autorisés + gestion équipe' },
-  USER: { label: 'Utilisateur', level: 1, color: '#22c55e', icon: '○', description: 'Accès aux onglets autorisés' }
-};
-
-// Catégories de rôles
-const NIVEAUX_HIERARCHIQUES = [
-  { id: 'PDG', label: 'PDG', icon: '👑' },
-  { id: 'DG', label: 'Directeur Général', icon: '🏛️' },
-  { id: 'DAF', label: 'Directeur Administratif & Financier', icon: '💰' },
-  { id: 'DIRECTEUR', label: 'Directeur / Responsable', icon: '📋' },
-  { id: 'CHEF_SERVICE', label: 'Chef de Service', icon: '🔧' },
-  { id: 'CHARGE', label: 'Chargé(e) / Référent(e)', icon: '📌' },
-  { id: 'EMPLOYE', label: 'Employé(e)', icon: '👤' }
-];
-
-const SERVICES = [
-  { id: 'DIRECTION', label: 'Direction Générale', icon: '🏛️' },
-  { id: 'FINANCE', label: 'Finance / Comptabilité', icon: '💰' },
-  { id: 'RH', label: 'Ressources Humaines', icon: '👥' },
-  { id: 'OPERATIONS', label: 'Opérations / Production', icon: '🏗️' },
-  { id: 'COMMERCIAL', label: 'Commercial / Relation Client', icon: '🤝' },
-  { id: 'IT', label: 'IT / Digital', icon: '💻' },
-  { id: 'MARKETING', label: 'Marketing / Communication', icon: '📢' },
-  { id: 'QUALITE', label: 'Qualité / Sécurité', icon: '🛡️' }
-];
-
-const NIVEAUX_ACCES = [
-  { id: 'SUPER_ADMIN', label: 'Super Admin', icon: '◆', desc: 'Tout voir, tout modifier, gérer les droits' },
-  { id: 'ADMIN', label: 'Admin', icon: '◆', desc: 'Tout voir et modifier' },
-  { id: 'MANAGER', label: 'Manager', icon: '◇', desc: 'Voir + modifier son périmètre' },
-  { id: 'LECTEUR', label: 'Lecteur', icon: '○', desc: 'Consultation uniquement' }
-];
-
-const PERMISSION_LEVELS = { HIDDEN: 'hidden', READ: 'read', WRITE: 'write' };
-
-const DEFAULT_PERMISSIONS = {
-  SUPER_ADMIN: { dashboard: 'write', collaborateurs: 'write', postes: 'write', presentation: 'write', organigramme: 'write', organigramme_bis: 'write', simulateur: 'write', suivi: 'write', admin: 'write' },
-  ADMIN: { dashboard: 'write', collaborateurs: 'write', postes: 'write', presentation: 'write', organigramme: 'write', organigramme_bis: 'write', simulateur: 'write', suivi: 'write', admin: 'write' },
-  MANAGER: { dashboard: 'read', collaborateurs: 'write', postes: 'read', presentation: 'read', organigramme: 'read', organigramme_bis: 'read', simulateur: 'read', suivi: 'write', admin: 'hidden' },
-  USER: { dashboard: 'read', collaborateurs: 'read', postes: 'read', presentation: 'read', organigramme: 'read', organigramme_bis: 'read', simulateur: 'read', suivi: 'read', admin: 'hidden' }
-};
-
-const INITIAL_USERS = [
-  { id: 'USR001', login: 'ozdogan', password: 'admin2025', prenom: 'Özdoğan', nom: 'YILMAZ', role: 'SUPER_ADMIN', niveauHierarchique: 'PDG', service: 'DIRECTION', niveauAcces: 'SUPER_ADMIN', employeId: 'EMP001', permissions: {...DEFAULT_PERMISSIONS.SUPER_ADMIN}, actif: true, derniereConnexion: null },
-  { id: 'USR002', login: 'ozlem.yilmaz', password: 'oyilmaz25', prenom: 'Ozlem', nom: 'YILMAZ', role: 'ADMIN', niveauHierarchique: 'DG', service: 'DIRECTION', niveauAcces: 'ADMIN', employeId: 'EMP002', permissions: {...DEFAULT_PERMISSIONS.ADMIN}, actif: true, derniereConnexion: null },
-  { id: 'USR003', login: 'anthony.robert', password: 'arobert25', prenom: 'Anthony', nom: 'ROBERT', role: 'MANAGER', niveauHierarchique: 'DAF', service: 'FINANCE', niveauAcces: 'MANAGER', employeId: 'EMP003', permissions: {...DEFAULT_PERMISSIONS.MANAGER, postes: 'write'}, actif: true, derniereConnexion: null },
-  { id: 'USR004', login: 'sophie.martin', password: 'smartin25', prenom: 'Sophie', nom: 'MARTIN', role: 'MANAGER', niveauHierarchique: 'CHEF_SERVICE', service: 'RH', niveauAcces: 'MANAGER', employeId: 'EMP004', permissions: {...DEFAULT_PERMISSIONS.MANAGER, collaborateurs: 'write', postes: 'write'}, actif: true, derniereConnexion: null },
-  { id: 'USR005', login: 'laurent.petit', password: 'lpetit25', prenom: 'Laurent', nom: 'PETIT', role: 'MANAGER', niveauHierarchique: 'DIRECTEUR', service: 'OPERATIONS', niveauAcces: 'MANAGER', employeId: 'EMP005', permissions: {...DEFAULT_PERMISSIONS.MANAGER}, actif: true, derniereConnexion: null },
-  { id: 'USR006', login: 'loetitia.lequerrec', password: 'llequerrec25', prenom: 'Loetitia', nom: 'LEQUERREC', role: 'MANAGER', niveauHierarchique: 'DIRECTEUR', service: 'OPERATIONS', niveauAcces: 'MANAGER', employeId: 'EMP006', permissions: {...DEFAULT_PERMISSIONS.MANAGER}, actif: true, derniereConnexion: null },
-  { id: 'USR008', login: 'sarah.ciccolallo', password: 'sciccolallo25', prenom: 'Sarah', nom: 'CICCOLALLO', role: 'MANAGER', niveauHierarchique: 'CHARGE', service: 'RH', niveauAcces: 'MANAGER', employeId: 'EMP014', permissions: { dashboard: 'read', collaborateurs: 'write', postes: 'write', presentation: 'read', organigramme: 'read', simulateur: 'read', suivi: 'read', admin: 'hidden' }, actif: true, derniereConnexion: null },
-  { id: 'USR009', login: 'diane.arulsothy', password: 'darulsothy25', prenom: 'Diane', nom: 'ARULSOTHY', role: 'MANAGER', niveauHierarchique: 'DIRECTEUR', service: 'OPERATIONS', niveauAcces: 'MANAGER', employeId: 'EMP015', permissions: {...DEFAULT_PERMISSIONS.MANAGER}, actif: true, derniereConnexion: null },
-  { id: 'USR010', login: 'nadia.ferreira', password: 'nferreira25', prenom: 'Nadia', nom: 'FERREIRA', role: 'MANAGER', niveauHierarchique: 'DIRECTEUR', service: 'OPERATIONS', niveauAcces: 'MANAGER', employeId: 'EMP016', permissions: {...DEFAULT_PERMISSIONS.MANAGER}, actif: true, derniereConnexion: null }
-];
+// (ROLES, NIVEAUX_HIERARCHIQUES, SERVICES, NIVEAUX_ACCES, PERMISSION_LEVELS,
+//  DEFAULT_PERMISSIONS, INITIAL_USERS → déplacés dans ./data/constants.js — modularisation étape 1)
 
 // === PERSISTANCE window.storage (artifacts Claude) ===
 const DATA_VERSION = "v81";
