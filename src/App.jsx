@@ -4,6 +4,7 @@ import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 import { ROLES, NIVEAUX_HIERARCHIQUES, SERVICES, NIVEAUX_ACCES, PERMISSION_LEVELS, DEFAULT_PERMISSIONS, INITIAL_USERS } from './data/constants.js';
 import { AO_RAW, AO_EXT, getExt, DOS_IDS, AFF_IDS, getDosId, getAffId, getInternalId, getNextDosNum, SOUS_ELEMENTS } from './data/ao.js';
 import { CRM_THEMES, CRM_TINTS, CRM_TINT_BG, CRM_RAD, CRM_FIL_ACC, CRM_FIL_NAMES, CRM_FIL_ICONS } from './data/theme.js';
+import { DATA_VERSION, usePersistedState } from './hooks/usePersistedState.js';
 
 // ═══ THEME SYSTEM ═══
 // (CRM_THEMES, CRM_TINTS, CRM_TINT_BG, CRM_RAD, CRM_FIL_ACC, CRM_FIL_NAMES, CRM_FIL_ICONS → ./data/theme.js — modularisation étape 3)
@@ -106,46 +107,7 @@ const filiales = {
 //  DEFAULT_PERMISSIONS, INITIAL_USERS → déplacés dans ./data/constants.js — modularisation étape 1)
 
 // === PERSISTANCE window.storage (artifacts Claude) ===
-const DATA_VERSION = "v81";
-const usePersistedState = (key, defaultValue) => {
-  const fullKey = 'ruches_' + DATA_VERSION + '_' + key;
-  const [state, setState] = useState(defaultValue);
-  const [loaded, setLoaded] = useState(false);
-  const stateRef = React.useRef(state);
-  stateRef.current = state;
-
-  // Charger depuis storage au montage
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        if (window.storage) {
-          const result = await window.storage.get(fullKey);
-          if (!cancelled && result && result.value) {
-            const parsed = JSON.parse(result.value);
-            setState(parsed);
-          }
-        }
-      } catch(e) { /* pas de données sauvegardées */ }
-      if (!cancelled) setLoaded(true);
-    })();
-    return () => { cancelled = true; };
-  }, []);
-
-  // Sauvegarder à chaque changement (après le chargement initial)
-  useEffect(() => {
-    if (!loaded) return;
-    (async () => {
-      try {
-        if (window.storage) {
-          await window.storage.set(fullKey, JSON.stringify(stateRef.current));
-        }
-      } catch(e) { /* échec sauvegarde */ }
-    })();
-  }, [state, loaded]);
-
-  return [state, setState];
-};
+// (DATA_VERSION, usePersistedState → ./hooks/usePersistedState.js — modularisation étape 4)
 
 const SimulateurRuches = () => {
   // === AUTH STATES ===
