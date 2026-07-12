@@ -6,16 +6,16 @@ export default function TabCrmCommercial(__props) {
   const { $accent, $bg, $bgCard, $bgCardHover, $bgSub, $border, $borderAlt, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, $warn, addChecklistItem, ca, checklistEditOpen, checklistEditTab, clDragId, clDragOver, crmActiveGroup, crmAffaires, crmColWidths, crmCollapsed, crmFicheId, crmFicheTab, crmFil, crmFilterOpen, crmGroupBy, crmLoading, crmModuleRef, crmMondayKey, crmRd, crmScrollRef, crmSearch, crmShowArchive, crmTab, crmVisibleCols, ctActivities, ctContactMeta, ctGroupBy, ctNewActType, ctNewNote, ctPipeFilter, ctSearch, ctSelectedContact, ctView, drawerResizing, drawerWidth, ficheTabDragId, ficheTabDragOver, ficheTabOrder, ficheTabScrollRef, filiales, ganttZoom, getChecklistData, gpColCode, gpColDate, gpExpanded, gpFilter, gpFontSize, gpGroupBy, gpLabelW, gpScale, gpScrollRef, gpSpacing, gpZoom, navEntreprise, navService, newItemText, prepColWidths, prepCollapsed, prepGroupBy, removeChecklistItem, reorderChecklistItem, reorderFicheTabs, setChecklistEditOpen, setChecklistEditTab, setClDragId, setClDragOver, setCrmActiveGroup, setCrmAffaires, setCrmColWidths, setCrmCollapsed, setCrmFicheId, setCrmFicheTab, setCrmFil, setCrmFilterOpen, setCrmGroupBy, setCrmLoading, setCrmMondayKey, setCrmSearch, setCrmShowArchive, setCrmTab, setCrmVisibleCols, setCtActivities, setCtContactMeta, setCtGroupBy, setCtNewActType, setCtNewNote, setCtPipeFilter, setCtSearch, setCtSelectedContact, setCtView, setFicheTabDragId, setFicheTabDragOver, setGanttZoom, setGpColCode, setGpColDate, setGpExpanded, setGpFilter, setGpFontSize, setGpGroupBy, setGpLabelW, setGpScale, setGpSpacing, setGpZoom, setNewItemText, setPrepColWidths, setPrepCollapsed, setPrepGroupBy, startColResize, startDrawerResize, updateChecklistItem } = __props;
           const filColor = CRM_FIL_ACC[navEntreprise] || $accent;
           const filNom = CRM_FIL_NAMES[navEntreprise] || navEntreprise;
-          const filIcon = CRM_FIL_ICONS[navEntreprise] || '🏢';
+          const filIcon = CRM_FIL_ICONS[navEntreprise] || '▪';
 
           const PHASES = [
             { id:1, label:'P1 — Lancement',     color:'#0369a1', icon:'🚀' },
-            { id:2, label:'P2 — Prépa & OS',     color:'#b45309', icon:'📋' },
-            { id:3, label:'P3 — Exécution',      color:'#1d4ed8', icon:'🏗️' },
-            { id:4, label:'P4 — Pré-réception',  color:'#6d28d9', icon:'🔍' },
-            { id:5, label:'P5 — Réception',      color:'#047857', icon:'✅' },
+            { id:2, label:'P2 — Prépa & OS',     color:'#b45309', icon:'☰' },
+            { id:3, label:'P3 — Exécution',      color:'#1d4ed8', icon:'◆' },
+            { id:4, label:'P4 — Pré-réception',  color:'#6d28d9', icon:'⌕' },
+            { id:5, label:'P5 — Réception',      color:'#047857', icon:'✓' },
             { id:6, label:'P6 — GPA & RG',       color:'#c2410c', icon:'🛡️' },
-            { id:7, label:'P7 — Archivage',      color:'#334155', icon:'📦' },
+            { id:7, label:'P7 — Archivage',      color:'#334155', icon:'▣' },
           ];
           const STATUTS_PAR_PHASE = {
             1:['Affaire remportée','Préparation initiale','Dossier transféré'],
@@ -140,15 +140,15 @@ export default function TabCrmCommercial(__props) {
           const totalPipeline = affairesToShow.filter(a => getPhase(a) < 7).reduce((s,a) => s + parseMontant(a.m || a.montant), 0);
 
           const CRM_TABS = [
-            { id: 'entreprises', label: 'Entreprises', icon: '🏢', count: 31 },
-            { id: 'contacts', label: 'Contacts', icon: '👤', count: 10 },
+            { id: 'entreprises', label: 'Entreprises', icon: '▪', count: 31 },
+            { id: 'contacts', label: 'Contacts', icon: '◉', count: 10 },
             { id: 'kanban', label: 'Pipeline Kanban', icon: '🗂️' },
-            { id: 'affaires', label: 'Affaires', icon: '📋', count: affairesToShow.length },
-            { id: 'planning_global', label: 'Planning', icon: '📅' },
-            { id: 'preparation_crm', label: 'Préparation', icon: '🔧' },
-            { id: 'devis', label: 'Devis', icon: '📄' },
-            { id: 'activites', label: 'Activités', icon: '📅' },
-            { id: 'dashboard_crm', label: 'Dashboard', icon: '📊' },
+            { id: 'affaires', label: 'Affaires', icon: '☰', count: affairesToShow.length },
+            { id: 'planning_global', label: 'Planning', icon: '◫' },
+            { id: 'preparation_crm', label: 'Préparation', icon: '✱' },
+            { id: 'devis', label: 'Devis', icon: '▫' },
+            { id: 'activites', label: 'Activités', icon: '◫' },
+            { id: 'dashboard_crm', label: 'Dashboard', icon: '▦' },
           ];
 
           const fetchMondayAffaires = async () => {
@@ -183,52 +183,52 @@ export default function TabCrmCommercial(__props) {
             {id:'9306355599',nom:'Gabriela RASCAO',entreprise:'',poste:'',email:'rascao.gabriela@hotmail.fr',tel:'',statut:'🟡 À contacter',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'appeler'},
             {id:'7464805737',nom:'David Pottin',entreprise:'Abc Domus',poste:'Économiste en bâtiment',email:'d.pottin@abcdomus.com',tel:'06 31 51 90 46',statut:'🔁 À relancer',remarques:'Expatrié en Bretagne (Pont Aven). Missions parisiennes encore possibles.',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
             {id:'7483943954',nom:'Thierry VALENTINO',entreprise:'Valentino Architectes',poste:'Dirigeant',email:'TVALENTINO@valentinoarchitectes.fr',tel:'06 08 99 23 16',statut:'',remarques:'',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'appeler'},
-            {id:'7548127035',nom:'Thomas FRERY',entreprise:'Baty Nova',poste:'',email:'thomas.frery@batynova.fr',tel:'06 33 25 08 07',statut:'❌ Pas intéressé',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'basse',pipe0:'froid',act0:'rien'},
-            {id:'7549068428',nom:'Philippe DE MAGALHAES',entreprise:'Alto Ingénierie',poste:'Responsable Pôle Electricité / CVC-PLB',email:'Philippe.demagalhaes@alto-ingenierie.fr',tel:'06 22 82 22 63',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7548127035',nom:'Thomas FRERY',entreprise:'Baty Nova',poste:'',email:'thomas.frery@batynova.fr',tel:'06 33 25 08 07',statut:'✕ Pas intéressé',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'basse',pipe0:'froid',act0:'rien'},
+            {id:'7549068428',nom:'Philippe DE MAGALHAES',entreprise:'Alto Ingénierie',poste:'Responsable Pôle Electricité / CVC-PLB',email:'Philippe.demagalhaes@alto-ingenierie.fr',tel:'06 22 82 22 63',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
             {id:'8189235045',nom:'Mosquée de Noisy',entreprise:'Mosquée de Noisy',poste:'',email:'mosqueedenoisy@gmail.com',tel:'',statut:'🟡 À contacter',remarques:'Lots hors GO : Étanchéité, Coupole, Menuiseries ext., Habillage pierre, Ravalement',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'froid',act0:'appeler'},
             {id:'7464736512',nom:'Marie Océane Douzon',entreprise:'Abc Domus',poste:'Chef de projet technique',email:'mo.douzon@abcdomus.com',tel:'07 84 53 01 55',statut:'🟡 À contacter',remarques:'Suivi de chantier copro',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'emailer'},
             {id:'7548112762',nom:'Alexis VERNET',entreprise:'Pve Conseil',poste:'',email:'a.vernet@pveconseil.com',tel:'06 62 69 95 61',statut:'',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'appeler'},
-            {id:'7549116624',nom:'Vincent BARTHELEMI',entreprise:'Emile Dufour',poste:'Directeur',email:'',tel:'06 85 01 96 83',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7463500269',nom:'Nicolas HUE',entreprise:'Pve Conseil',poste:'',email:'nicolas.hue@ralphlauren.com',tel:'06 14 75 25 84',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7549116624',nom:'Vincent BARTHELEMI',entreprise:'Emile Dufour',poste:'Directeur',email:'',tel:'06 85 01 96 83',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7463500269',nom:'Nicolas HUE',entreprise:'Pve Conseil',poste:'',email:'nicolas.hue@ralphlauren.com',tel:'06 14 75 25 84',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
             {id:'7548116447',nom:'Emmanuel SINAPPA',entreprise:'Pve Conseil',poste:'',email:'e.sinappa@pveconseil.com',tel:'07 85 71 01 67',statut:'',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'appeler'},
-            {id:'7464678427',nom:'Benoit Demée',entreprise:'Abc Domus',poste:'Responsable d\'agence',email:'b.demee@abcdomus.com',tel:'06 31 56 54 04',statut:'📞 Premier appel fait',remarques:'Consultation rénovation énergétique et TCE',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7464678427',nom:'Benoit Demée',entreprise:'Abc Domus',poste:'Responsable d\'agence',email:'b.demee@abcdomus.com',tel:'06 31 56 54 04',statut:'✆ Premier appel fait',remarques:'Consultation rénovation énergétique et TCE',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
             {id:'7548134582',nom:'Laure LERUSTE',entreprise:'Habitat 77',poste:'Chargée d\'opération',email:'laure.leruste@habitat77.fr',tel:'06 38 48 36 73',statut:'',remarques:'',linkedin:'',tc:'bailleur',sect:'public',ref:'Ozdogan',prio:'haute',pipe0:'froid',act0:'appeler'},
-            {id:'7464868784',nom:'Virginie Comarteau',entreprise:'Atelier Comarteau',poste:'Architecte',email:'comarteau.architecte@free.fr',tel:'06 83 15 12 86',statut:'📞 Premier appel fait',remarques:'Marché parisien : ravalement, couverture, étanchéité',linkedin:'https://fr.linkedin.com/in/virginie-comarteau-b5829114b',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7464868784',nom:'Virginie Comarteau',entreprise:'Atelier Comarteau',poste:'Architecte',email:'comarteau.architecte@free.fr',tel:'06 83 15 12 86',statut:'✆ Premier appel fait',remarques:'Marché parisien : ravalement, couverture, étanchéité',linkedin:'https://fr.linkedin.com/in/virginie-comarteau-b5829114b',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
             {id:'7482491444',nom:'Giulio ben Conti',entreprise:'Atelier Giulio Conti',poste:'Architecte',email:'giuliobenconti@gmail.com',tel:'06 67 25 63 06',statut:'🟡 À contacter',remarques:'Travaille avec Benoit Leleu en collaboration',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'froid',act0:'emailer'},
-            {id:'7464962290',nom:'Essan Ferrooghi',entreprise:'Urban Makers',poste:'Architecte associé',email:'e.farooghi@urbanmakers.eu',tel:'06 02 59 34 00',statut:'📞 Premier appel fait',remarques:'Agence Paris + Nantes',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7464962290',nom:'Essan Ferrooghi',entreprise:'Urban Makers',poste:'Architecte associé',email:'e.farooghi@urbanmakers.eu',tel:'06 02 59 34 00',statut:'✆ Premier appel fait',remarques:'Agence Paris + Nantes',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
             {id:'7482672800',nom:'Martin Sobierajski',entreprise:'Orfeo Développement',poste:'Directeur associé',email:'ms@orfeo-developpement.com',tel:'06 40 51 20 63',statut:'',remarques:'',linkedin:'',tc:'promoteur',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'froid',act0:'appeler'},
             {id:'11375202180',nom:'Pascal CLERGEAUD',entreprise:'EPA Sénart',poste:'Responsable de pôle',email:'',tel:'01 64 10 15 15',statut:'🟡 À contacter',remarques:'1709 - EPA Sénart / poste de garde. Message répondeur.',linkedin:'',tc:'bailleur',sect:'public',ref:'Ozdogan',prio:'haute',pipe0:'froid',act0:'appeler'},
-            {id:'7470772238',nom:'Jeson Cavaignac',entreprise:'Jrm Ingénierie',poste:'Maître d\'oeuvre',email:'jrm.ingenierie@gmail.com',tel:'06 64 82 41 33',statut:'📞 Premier appel fait',remarques:"Travaille sur des projets d\'Unibail",linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7470772238',nom:'Jeson Cavaignac',entreprise:'Jrm Ingénierie',poste:'Maître d\'oeuvre',email:'jrm.ingenierie@gmail.com',tel:'06 64 82 41 33',statut:'✆ Premier appel fait',remarques:"Travaille sur des projets d\'Unibail",linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
             {id:'8102251196',nom:'Corinne Cattiaux',entreprise:'Bsgi',poste:"Chef d\'entreprise",email:'cattiauxcorinne.bsgi@gmail.com',tel:'06 11 31 61 09',statut:'',remarques:'Déjà avec des entreprises depuis de nombreuses années',linkedin:'',tc:'autre',sect:'privé',ref:'Ozdogan',prio:'basse',pipe0:'froid',act0:'appeler'},
-            {id:'7472354614',nom:'Gianni Vittilo',entreprise:'Agence Du Centre Vincennes Immo.',poste:"Chef d\'entreprise",email:'ariane.immo93100@orange.fr',tel:'06 30 58 44 37',statut:'📞 Premier appel fait',remarques:'Gérant agences immo, SCI — nombreux contacts immobilier',linkedin:'',tc:'immo',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'9439297678',nom:'Philippe Bouttier',entreprise:'Renovation Man / Habitat Conseil',poste:"Chef d\'entreprise + Resp. sud IDF",email:'',tel:'06 49 19 02 66',statut:'✅ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'en_attente'},
-            {id:'7482462140',nom:'Benoit Leleu',entreprise:'Atelier Benoit Leleu',poste:'Architecte',email:'bntleleu@gmail.com',tel:'07 60 03 17 20',statut:'📞 Premier appel fait',remarques:'Bureau, coque, brasserie, restaurant...',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
-            {id:'7482539188',nom:'Emilie Roulleau',entreprise:'Orfeo Développement',poste:'Directrice travaux',email:'ms@orfeo-developpement.com',tel:'06 50 35 45 34',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'promoteur',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
-            {id:'7482572392',nom:'Benjamin Bon',entreprise:'Total Energie',poste:'Chef du service sécurité et performance',email:'',tel:'',statut:'📞 Premier appel fait',remarques:'Ancien responsable technique Parly 2 (Unibail)',linkedin:'',tc:'industriel',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'en_attente'},
-            {id:'11364713190',nom:'Mme Maud LAMBERT',entreprise:'',poste:'',email:'maudl@hotmail.com',tel:'06 99 20 05 31',statut:'✅ Qualifié',remarques:'',linkedin:'',tc:'particulier',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
-            {id:'7482612694',nom:'Antoine Rousseau',entreprise:'Particulier',poste:'Particulier',email:'antoinerousseau89@gmail.com',tel:'',statut:'📞 Premier appel fait',remarques:"Projet d\'Extension sur Champigny Sur Marne",linkedin:'',tc:'particulier',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'en_echange',act0:'en_attente'},
-            {id:'7549087190',nom:'De Poncheville',entreprise:'Maville Immobilier',poste:"Gérant de l\'agence",email:'',tel:'01 78 09 02 84',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7549097955',nom:'Rodriguez',entreprise:'Maville Immobilier',poste:'Gestionnaire copropriété',email:'',tel:'01 78 09 02 88',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7549109916',nom:'Fournier',entreprise:'Maville Immobilier',poste:'Gestionnaire de copropriété',email:'',tel:'01 78 09 02 83',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7549121314',nom:'Lalle',entreprise:'David Gestion Fontenay',poste:'Gestionnaire de copropriété',email:'',tel:'01 48 73 11 11',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7549133317',nom:'Lalle',entreprise:'David Gestion Nogent',poste:'Gestionnaire de copropriété',email:'gestioncopro1@davidgestion.fr',tel:'01 48 76 68 63',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7645397797',nom:'Karl PIGNOL',entreprise:'Cabinet Preclaire',poste:'Gestionnaire copropriété',email:'contact@preclaire.fr',tel:'',statut:'📞 Premier appel fait',remarques:'',linkedin:'https://cabinetpreclaire.fr/',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7687859930',nom:'Lefebvre Jimmy',entreprise:'David Gestion Nogent',poste:'',email:'gestioncopro1@davidgestion.fr',tel:'01 48 76 68 63',statut:'📞 Premier appel fait',remarques:'Agence de Nogent sur Marne',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7687874920',nom:'Koupelle Cyrille',entreprise:'David Gestion Fontenay',poste:'',email:'gestioncopro4@davidgestion.fr',tel:'01 48 73 11 11',statut:'📞 Premier appel fait',remarques:'Agence de Fontenay sous Bois',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7500835620',nom:'Haissam MOHARRAM',entreprise:'I3f',poste:'Chef de secteur',email:'',tel:'07 58 91 82 21',statut:'📞 Premier appel fait',remarques:'Prise de contact effectuée, RDV programmé',linkedin:'',tc:'bailleur',sect:'public',ref:'Ozdogan',prio:'haute',pipe0:'en_echange',act0:'rdv'},
-            {id:'7548345112',nom:'Guillaume PIFFETEAU',entreprise:'Gp Consultancy Services',poste:'Directeur',email:'gpiffeteau.consultancyservices@gmail.com',tel:'',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
-            {id:'7548593513',nom:'Pierre-André BUISSON',entreprise:'Vinci Immobilier Promotion',poste:'Directeur technique Île-de-France',email:'pierre-andre.buisson@vinci-immobilier.com',tel:'06 01 31 90 82',statut:'📞 Premier appel fait',remarques:'',linkedin:'',tc:'promoteur',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
-            {id:'9439313884',nom:'La Maison des Travaux Brie comte robert',entreprise:'La Maison des Travaux',poste:'',email:'',tel:'',statut:'✅ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
-            {id:'9439315843',nom:'La Maison des Travaux Noisy le Grand',entreprise:'La Maison des Travaux',poste:'',email:'',tel:'',statut:'✅ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
+            {id:'7472354614',nom:'Gianni Vittilo',entreprise:'Agence Du Centre Vincennes Immo.',poste:"Chef d\'entreprise",email:'ariane.immo93100@orange.fr',tel:'06 30 58 44 37',statut:'✆ Premier appel fait',remarques:'Gérant agences immo, SCI — nombreux contacts immobilier',linkedin:'',tc:'immo',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'9439297678',nom:'Philippe Bouttier',entreprise:'Renovation Man / Habitat Conseil',poste:"Chef d\'entreprise + Resp. sud IDF",email:'',tel:'06 49 19 02 66',statut:'✓ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'en_attente'},
+            {id:'7482462140',nom:'Benoit Leleu',entreprise:'Atelier Benoit Leleu',poste:'Architecte',email:'bntleleu@gmail.com',tel:'07 60 03 17 20',statut:'✆ Premier appel fait',remarques:'Bureau, coque, brasserie, restaurant...',linkedin:'',tc:'architecte',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7482539188',nom:'Emilie Roulleau',entreprise:'Orfeo Développement',poste:'Directrice travaux',email:'ms@orfeo-developpement.com',tel:'06 50 35 45 34',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'promoteur',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'7482572392',nom:'Benjamin Bon',entreprise:'Total Energie',poste:'Chef du service sécurité et performance',email:'',tel:'',statut:'✆ Premier appel fait',remarques:'Ancien responsable technique Parly 2 (Unibail)',linkedin:'',tc:'industriel',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'en_attente'},
+            {id:'11364713190',nom:'Mme Maud LAMBERT',entreprise:'',poste:'',email:'maudl@hotmail.com',tel:'06 99 20 05 31',statut:'✓ Qualifié',remarques:'',linkedin:'',tc:'particulier',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
+            {id:'7482612694',nom:'Antoine Rousseau',entreprise:'Particulier',poste:'Particulier',email:'antoinerousseau89@gmail.com',tel:'',statut:'✆ Premier appel fait',remarques:"Projet d\'Extension sur Champigny Sur Marne",linkedin:'',tc:'particulier',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'en_echange',act0:'en_attente'},
+            {id:'7549087190',nom:'De Poncheville',entreprise:'Maville Immobilier',poste:"Gérant de l\'agence",email:'',tel:'01 78 09 02 84',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7549097955',nom:'Rodriguez',entreprise:'Maville Immobilier',poste:'Gestionnaire copropriété',email:'',tel:'01 78 09 02 88',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7549109916',nom:'Fournier',entreprise:'Maville Immobilier',poste:'Gestionnaire de copropriété',email:'',tel:'01 78 09 02 83',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7549121314',nom:'Lalle',entreprise:'David Gestion Fontenay',poste:'Gestionnaire de copropriété',email:'',tel:'01 48 73 11 11',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7549133317',nom:'Lalle',entreprise:'David Gestion Nogent',poste:'Gestionnaire de copropriété',email:'gestioncopro1@davidgestion.fr',tel:'01 48 76 68 63',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7645397797',nom:'Karl PIGNOL',entreprise:'Cabinet Preclaire',poste:'Gestionnaire copropriété',email:'contact@preclaire.fr',tel:'',statut:'✆ Premier appel fait',remarques:'',linkedin:'https://cabinetpreclaire.fr/',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7687859930',nom:'Lefebvre Jimmy',entreprise:'David Gestion Nogent',poste:'',email:'gestioncopro1@davidgestion.fr',tel:'01 48 76 68 63',statut:'✆ Premier appel fait',remarques:'Agence de Nogent sur Marne',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7687874920',nom:'Koupelle Cyrille',entreprise:'David Gestion Fontenay',poste:'',email:'gestioncopro4@davidgestion.fr',tel:'01 48 73 11 11',statut:'✆ Premier appel fait',remarques:'Agence de Fontenay sous Bois',linkedin:'',tc:'gestionnaire',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7500835620',nom:'Haissam MOHARRAM',entreprise:'I3f',poste:'Chef de secteur',email:'',tel:'07 58 91 82 21',statut:'✆ Premier appel fait',remarques:'Prise de contact effectuée, RDV programmé',linkedin:'',tc:'bailleur',sect:'public',ref:'Ozdogan',prio:'haute',pipe0:'en_echange',act0:'rdv'},
+            {id:'7548345112',nom:'Guillaume PIFFETEAU',entreprise:'Gp Consultancy Services',poste:'Directeur',email:'gpiffeteau.consultancyservices@gmail.com',tel:'',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'moe',sect:'privé',ref:'Ozdogan',prio:'normale',pipe0:'contacté',act0:'relancer'},
+            {id:'7548593513',nom:'Pierre-André BUISSON',entreprise:'Vinci Immobilier Promotion',poste:'Directeur technique Île-de-France',email:'pierre-andre.buisson@vinci-immobilier.com',tel:'06 01 31 90 82',statut:'✆ Premier appel fait',remarques:'',linkedin:'',tc:'promoteur',sect:'privé',ref:'Ozdogan',prio:'haute',pipe0:'contacté',act0:'relancer'},
+            {id:'9439313884',nom:'La Maison des Travaux Brie comte robert',entreprise:'La Maison des Travaux',poste:'',email:'',tel:'',statut:'✓ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
+            {id:'9439315843',nom:'La Maison des Travaux Noisy le Grand',entreprise:'La Maison des Travaux',poste:'',email:'',tel:'',statut:'✓ Qualifié',remarques:'',linkedin:'',tc:'autre',sect:'privé',ref:'Ozlem',prio:'normale',pipe0:'qualifié',act0:'proposition'},
           ];
                     const STATUT_CONTACT_COLOR = {
             '🟡 À contacter': '#f59e0b',
-            '📞 Premier appel fait': '#3b82f6',
+            '✆ Premier appel fait': '#3b82f6',
             '⏳ En attente de réponse': '#f97316',
-            '📅 RDV fixé': '#8b5cf6',
-            '✅ Qualifié': '#10b981',
+            '◫ RDV fixé': '#8b5cf6',
+            '✓ Qualifié': '#10b981',
             '🔁 À relancer': '#d97706',
-            '❌ Pas intéressé': '#ef4444',
+            '✕ Pas intéressé': '#ef4444',
             '💤 Stand-by': '#64748b',
             '📵 Mauvais contact': '#757575',
             '🧹 À nettoyer': '#225091',
@@ -255,17 +255,17 @@ export default function TabCrmCommercial(__props) {
                       <button onClick={fetchMondayAffaires} style={{padding:'4px 10px', borderRadius:Math.max(crmRd-2,0), border:'none', background:filColor, color:'#fff', fontSize:'0.75rem', cursor:'pointer', fontWeight:600}}>Sync</button>
                     </div>
                   )}
-                  {crmMondayKey && <button onClick={fetchMondayAffaires} disabled={crmLoading} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$text, fontSize:'0.78rem', cursor:'pointer'}}>{crmLoading ? '⏳ Sync...' : '🔄 Sync Monday'}</button>}
-                  <input value={crmSearch} onChange={e => setCrmSearch(e.target.value)} placeholder="🔍 Rechercher..." style={{padding:'6px 12px', border:`1px solid ${$border}`, borderRadius:crmRd, background:$bgCard, color:$text, fontSize:'0.82rem', outline:'none', width:180}} />
+                  {crmMondayKey && <button onClick={fetchMondayAffaires} disabled={crmLoading} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$text, fontSize:'0.78rem', cursor:'pointer'}}>{crmLoading ? '⏳ Sync...' : '↻ Sync Monday'}</button>}
+                  <input value={crmSearch} onChange={e => setCrmSearch(e.target.value)} placeholder="⌕ Rechercher..." style={{padding:'6px 12px', border:`1px solid ${$border}`, borderRadius:crmRd, background:$bgCard, color:$text, fontSize:'0.82rem', outline:'none', width:180}} />
                 </div>
               </div>
 
               {/* KPI Strip — absences style */}
               <div style={{display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:12, marginBottom:20}}>
                 {[
-                  {l:'Chantiers actifs', v:affairesToShow.filter(a=>getPhase(a)===3).length, c:'#3b82f6', ic:'🏗️'},
-                  {l:'En réception',     v:affairesToShow.filter(a=>[4,5].includes(getPhase(a))).length, c:'#22c55e', ic:'✅'},
-                  {l:'Montant actif',    v:fmtE(affairesToShow.filter(a=>getPhase(a)<7).reduce((s,a)=>s+parseMontant(a.m||a.montant),0)), c:'#f59e0b', ic:'💰'},
+                  {l:'Chantiers actifs', v:affairesToShow.filter(a=>getPhase(a)===3).length, c:'#3b82f6', ic:'◆'},
+                  {l:'En réception',     v:affairesToShow.filter(a=>[4,5].includes(getPhase(a))).length, c:'#22c55e', ic:'✓'},
+                  {l:'Montant actif',    v:fmtE(affairesToShow.filter(a=>getPhase(a)<7).reduce((s,a)=>s+parseMontant(a.m||a.montant),0)), c:'#f59e0b', ic:'€'},
                   {l:'GPA & RG en cours',v:affairesToShow.filter(a=>getPhase(a)===6).length, c:'#f97316', ic:'🛡️'},
                   {l:'Litiges actifs',   v:litCount, c:'#e74c3c', ic:'⚖️'},
                 ].map((k,i)=>(
@@ -307,17 +307,17 @@ export default function TabCrmCommercial(__props) {
                   <div style={{width:1, height:18, background:$border, margin:'0 2px'}}/>
                   <select value={crmFil} onChange={e => setCrmFil(e.target.value)} style={{fontSize:'0.74rem', padding:'4px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, background:$bgCard, color:$textSec, cursor:'pointer', outline:'none', fontFamily:'inherit'}}>
                     <option value="all">Tous marchés</option>
-                    <option value="public">🏛️ Public</option>
-                    <option value="prive">🏢 Privé</option>
-                    <option value="particulier">👤 Particulier</option>
+                    <option value="public">◆ Public</option>
+                    <option value="prive">▪ Privé</option>
+                    <option value="particulier">◉ Particulier</option>
                   </select>
                   <button onClick={() => setCrmShowArchive(v => !v)} style={{padding:'4px 12px', borderRadius:crmRd>0?99:2, border:`1px solid ${crmShowArchive ? '#6b7280' : $border}`, background:crmShowArchive ? '#6b728015' : $bgCard, color:crmShowArchive ? '#6b7280' : $textMut, fontSize:'0.74rem', cursor:'pointer', fontWeight:crmShowArchive?600:400, fontFamily:'inherit', transition:'all 0.15s', display:'flex', alignItems:'center', gap:5}}>
-                    📦 {crmShowArchive ? 'Masquer archivés' : 'Afficher archivés'}
+                    ▣ {crmShowArchive ? 'Masquer archivés' : 'Afficher archivés'}
                     {crmShowArchive && <span style={{background:'#6b7280', color:'#fff', borderRadius:crmRd>0?99:2, padding:'0 6px', fontSize:'0.65rem', fontWeight:700}}>{ARCHIVES_REAL.length}</span>}
                   </button>
                   <div style={{marginLeft:'auto', position:'relative'}}>
                     <button onClick={() => setCrmFilterOpen(v => !v)} style={{padding:'5px 14px', borderRadius:crmRd, border:`1px solid ${crmFilterOpen ? filColor : $border}`, background:crmFilterOpen ? filColor+'12' : $bgCard, color:crmFilterOpen ? filColor : $textMut, fontSize:'0.74rem', cursor:'pointer', fontFamily:'inherit', fontWeight:600, display:'flex', alignItems:'center', gap:6, transition:'all 0.15s'}}>
-                      ⚙ Filtres &amp; Colonnes
+                      ✱ Filtres &amp; Colonnes
                       {Object.values(crmVisibleCols).some(v => !v) && <span style={{width:6, height:6, borderRadius:'50%', background:$warn, display:'inline-block'}}/>}
                     </button>
                   </div>
@@ -329,13 +329,13 @@ export default function TabCrmCommercial(__props) {
                 <>
                   <div onClick={() => setCrmFilterOpen(false)} style={{position:'fixed', inset:0, background:'transparent', zIndex:9997}}/>
                   <div style={{position:'fixed', top:210, right:20, width:320, maxHeight:'72vh', overflow:'auto', background:$bgCard, border:`1px solid ${$borderAlt}`, borderRadius:crmRd, padding:20, boxShadow:'0 12px 40px rgba(0,0,0,0.15)', zIndex:9998}} onClick={e => e.stopPropagation()}>
-                    <div style={{fontWeight:700, fontSize:'0.82rem', color:$text, marginBottom:16}}>⚙ Filtres &amp; Colonnes</div>
+                    <div style={{fontWeight:700, fontSize:'0.82rem', color:$text, marginBottom:16}}>✱ Filtres &amp; Colonnes</div>
 
                     {/* Archive toggle */}
                     <div style={{marginBottom:16}}>
                       <div style={{fontSize:'0.68rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:8}}>Affaires archivées (P7)</div>
                       <button onClick={() => setCrmShowArchive(v => !v)} style={{padding:'5px 14px', borderRadius:crmRd, border:`1px solid ${crmShowArchive ? '#6b7280' : $border}`, background:crmShowArchive ? '#6b728015' : $bgCard, color:crmShowArchive ? '#6b7280' : $textSec, fontSize:'0.74rem', cursor:'pointer', fontFamily:'inherit', fontWeight:600}}>
-                        {crmShowArchive ? '📦 Archivés visibles — cliquer pour masquer' : '📦 Archivés masqués — cliquer pour afficher'}
+                        {crmShowArchive ? '▣ Archivés visibles — cliquer pour masquer' : '▣ Archivés masqués — cliquer pour afficher'}
                       </button>
                     </div>
 
@@ -343,7 +343,7 @@ export default function TabCrmCommercial(__props) {
                     <div style={{marginBottom:16}}>
                       <div style={{fontSize:'0.68rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:8}}>Marché</div>
                       <div style={{display:'flex', gap:5, flexWrap:'wrap'}}>
-                        {[{id:'all',l:'Tous'},{id:'public',l:'🏛️ Public'},{id:'prive',l:'🏢 Privé'},{id:'particulier',l:'👤 Particulier'}].map(f => (
+                        {[{id:'all',l:'Tous'},{id:'public',l:'◆ Public'},{id:'prive',l:'▪ Privé'},{id:'particulier',l:'◉ Particulier'}].map(f => (
                           <button key={f.id} onClick={() => setCrmFil(f.id)} style={{padding:'4px 10px', borderRadius:crmRd, border:`1px solid ${crmFil===f.id ? filColor : $border}`, background:crmFil===f.id ? filColor+'15' : 'transparent', color:crmFil===f.id ? filColor : $textSec, fontSize:'0.72rem', fontWeight:crmFil===f.id?600:400, cursor:'pointer', fontFamily:'inherit'}}>
                             {f.l}
                           </button>
@@ -383,9 +383,9 @@ export default function TabCrmCommercial(__props) {
                 const buildGroups = () => {
                   if (crmGroupBy === 'phase') return PHASES.map(ph => ({ key:String(ph.id), label:ph.label, icon:ph.icon, color:ph.color, items:affairesToShow.filter(a=>getPhase(a)===ph.id) })).filter(g=>g.items.length>0);
                   if (crmGroupBy === 'statut') { const sts=[...new Set(affairesToShow.map(a=>a.st||a.statut||'—'))]; return sts.map(st=>{ const ph=PHASES.find(p=>p.id===getPhase(affairesToShow.find(a=>(a.st||a.statut)===st)||{}))||PHASES[0]; return {key:st,label:st,icon:ph.icon,color:ph.color,items:affairesToShow.filter(a=>(a.st||a.statut||'—')===st)}; }).filter(g=>g.items.length>0); }
-                  if (crmGroupBy === 'marche') return [{key:'Public',label:'Marché Public',icon:'🏛️',color:'#3b82f6',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Public')},{key:'Privé',label:'Marché Privé',icon:'🏢',color:'#f59e0b',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Privé')},{key:'Particulier',label:'Particulier',icon:'👤',color:'#8b5cf6',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Particulier')}].filter(g=>g.items.length>0);
-                  if (crmGroupBy === 'equipe') { const eqs=[...new Set(affairesToShow.map(a=>a.eq||a.equipe||'—'))]; return eqs.map((eq,i)=>({key:eq,label:eq||'Non assigné',icon:'👤',color:['#3b82f6','#8b5cf6','#f59e0b','#22c55e','#f97316'][i%5],items:affairesToShow.filter(a=>(a.eq||a.equipe||'—')===eq)})); }
-                  return [{key:'all',label:'Toutes les affaires',icon:'📋',color:filColor,items:affairesToShow}];
+                  if (crmGroupBy === 'marche') return [{key:'Public',label:'Marché Public',icon:'◆',color:'#3b82f6',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Public')},{key:'Privé',label:'Marché Privé',icon:'▪',color:'#f59e0b',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Privé')},{key:'Particulier',label:'Particulier',icon:'◉',color:'#8b5cf6',items:affairesToShow.filter(a=>(a.mk||a.marche)==='Particulier')}].filter(g=>g.items.length>0);
+                  if (crmGroupBy === 'equipe') { const eqs=[...new Set(affairesToShow.map(a=>a.eq||a.equipe||'—'))]; return eqs.map((eq,i)=>({key:eq,label:eq||'Non assigné',icon:'◉',color:['#3b82f6','#8b5cf6','#f59e0b','#22c55e','#f97316'][i%5],items:affairesToShow.filter(a=>(a.eq||a.equipe||'—')===eq)})); }
+                  return [{key:'all',label:'Toutes les affaires',icon:'☰',color:filColor,items:affairesToShow}];
                 };
                 const groups = buildGroups();
                 const mkColor = mk => mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';
@@ -393,11 +393,11 @@ export default function TabCrmCommercial(__props) {
                   const s = st||'';
                   if(s.includes('cours')) return {c:'#3b82f6',ic:'▶'};
                   if(s.includes('suspendu')||s.includes('Suspendu')) return {c:'#f97316',ic:'⏸'};
-                  if(s.includes('DGD')) return {c:'#8b5cf6',ic:'📄'};
+                  if(s.includes('DGD')) return {c:'#8b5cf6',ic:'▫'};
                   if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'🛡'};
                   if(s.includes('Terminé')||s.includes('libérée')) return {c:'#6b7280',ic:'✓'};
-                  if(s.includes('reçu')||s.includes('remportée')) return {c:'#22c55e',ic:'✅'};
-                  if(s.includes('réserves')||s.includes('Levée')) return {c:'#8b5cf6',ic:'🔍'};
+                  if(s.includes('reçu')||s.includes('remportée')) return {c:'#22c55e',ic:'✓'};
+                  if(s.includes('réserves')||s.includes('Levée')) return {c:'#8b5cf6',ic:'⌕'};
                   if(s.includes('transféré')) return {c:$textMut,ic:'→'};
                   return {c:$textSec,ic:'·'};
                 };
@@ -444,7 +444,7 @@ export default function TabCrmCommercial(__props) {
                 return (
                   <div style={{border:`1px solid ${$border}`,borderRadius:crmRd,overflow:'hidden',boxShadow:$shadow,background:$bgCard}}>
                     <div style={{padding:'10px 16px',borderBottom:`1px solid ${$border}`,background:$bgSub,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                      <span style={{fontSize:'0.8rem',fontWeight:700,color:$text}}>📋 {affairesToShow.length} affaires · {groups.length} groupe{groups.length>1?'s':''}</span>
+                      <span style={{fontSize:'0.8rem',fontWeight:700,color:$text}}>☰ {affairesToShow.length} affaires · {groups.length} groupe{groups.length>1?'s':''}</span>
                       {litCount>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:'#e74c3c18',color:'#e74c3c',display:'inline-flex',alignItems:'center',gap:4}}>⚖️ {litCount} litige{litCount>1?'s':''} en cours</span>}
                     </div>
                     {/* Sticky group indicator — Monday.com style */}
@@ -531,7 +531,7 @@ export default function TabCrmCommercial(__props) {
                     </div>
                     {affairesToShow.length===0&&<div style={{padding:48,textAlign:'center',color:$textMut}}>Aucune affaire correspondante</div>}
                     <div style={{padding:'7px 16px',borderTop:`1px solid ${$border}`,fontSize:'0.62rem',color:$textMut,display:'flex',justifyContent:'space-between',background:$bgSub+'80'}}>
-                      <span>📊 Monday.com · board 4113177037 · 44 actives / 81 total</span>
+                      <span>▦ Monday.com · board 4113177037 · 44 actives / 81 total</span>
                       <span>Sync : 11/03/2026</span>
                     </div>
                   </div>
@@ -561,7 +561,7 @@ export default function TabCrmCommercial(__props) {
                                 <div style={{fontSize:'0.78rem', fontWeight:700, color:ph.color}}>{fmtE(parseMontant(a.m||a.montant))}</div>
                                 <span style={{fontSize:'0.65rem', background:a.mk==='Public'||a.marche==='Public'?'#3b82f615':'#f59e0b15', color:a.mk==='Public'||a.marche==='Public'?'#3b82f6':'#f59e0b', padding:'1px 6px', borderRadius:crmRd>0?99:2}}>{a.mk||a.marche}</span>
                               </div>
-                              {(a.eq||a.equipe) && <div style={{fontSize:'0.65rem', color:$textMut, marginTop:4}}>👤 {a.eq||a.equipe}</div>}
+                              {(a.eq||a.equipe) && <div style={{fontSize:'0.65rem', color:$textMut, marginTop:4}}>◉ {a.eq||a.equipe}</div>}
                             </div>
                           ))}
                           {items.length === 0 && <div style={{textAlign:'center', color:$textMut, fontSize:'0.72rem', padding:'20px 0', opacity:0.5}}>Vide</div>}
@@ -579,7 +579,7 @@ export default function TabCrmCommercial(__props) {
               {crmTab === 'entreprises' && (
                 <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
                   <div style={{padding:'12px 16px', borderBottom:`1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    <span style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>🏢 Répertoire Entreprises</span>
+                    <span style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>▪ Répertoire Entreprises</span>
                     <button style={{padding:'5px 14px', borderRadius:crmRd, border:`1px solid ${filColor}`, background:filColor+'10', color:filColor, fontSize:'0.78rem', cursor:'pointer', fontWeight:600, fontFamily:'inherit'}}>+ Nouvelle entreprise</button>
                   </div>
                   <table style={{width:'100%', borderCollapse:'collapse', fontSize:'0.8rem'}}>
@@ -606,39 +606,39 @@ export default function TabCrmCommercial(__props) {
                 // ─── Config ───────────────────────────────────────────────
                 const PIPE_STAGES = [
                   {id:'froid',      label:'Froid',       icon:'🧊', color:'#94a3b8'},
-                  {id:'contacté',   label:'Contacté',    icon:'📤', color:'#3b82f6'},
+                  {id:'contacté',   label:'Contacté',    icon:'↥', color:'#3b82f6'},
                   {id:'en_echange', label:'En échange',  icon:'💬', color:'#f97316'},
-                  {id:'qualifié',   label:'Qualifié',    icon:'🎯', color:'#10b981'},
-                  {id:'proposition',label:'Proposition', icon:'📝', color:'#8b5cf6'},
+                  {id:'qualifié',   label:'Qualifié',    icon:'◎', color:'#10b981'},
+                  {id:'proposition',label:'Proposition', icon:'✎', color:'#8b5cf6'},
                   {id:'affaire',    label:'Affaire',     icon:'🤝', color:'#007ab5'},
                 ];
                 const NEXT_ACTIONS = [
-                  {id:'appeler',    label:'À appeler',    icon:'📞', color:'#3b82f6'},
+                  {id:'appeler',    label:'À appeler',    icon:'✆', color:'#3b82f6'},
                   {id:'emailer',    label:'À emailer',    icon:'✉️',  color:'#6366f1'},
                   {id:'relancer',   label:'À relancer',  icon:'🔁', color:'#f59e0b'},
                   {id:'en_attente', label:'En attente',  icon:'⏳', color:'#94a3b8'},
-                  {id:'rdv',        label:'RDV à prép.', icon:'📅', color:'#8b5cf6'},
-                  {id:'proposition',label:'Envoyer offre',icon:'📄',color:'#10b981'},
+                  {id:'rdv',        label:'RDV à prép.', icon:'◫', color:'#8b5cf6'},
+                  {id:'proposition',label:'Envoyer offre',icon:'▫',color:'#10b981'},
                   {id:'rien',       label:'Rien',         icon:'🚫', color:'#d1d5db'},
                 ];
                 const ACT_TYPES = [
-                  {id:'appel',   label:'Appel',   icon:'📞', color:'#3b82f6'},
+                  {id:'appel',   label:'Appel',   icon:'✆', color:'#3b82f6'},
                   {id:'email',   label:'Email',   icon:'✉️',  color:'#6366f1'},
-                  {id:'rdv',     label:'RDV',     icon:'📅', color:'#8b5cf6'},
+                  {id:'rdv',     label:'RDV',     icon:'◫', color:'#8b5cf6'},
                   {id:'relance', label:'Relance', icon:'🔁', color:'#f59e0b'},
-                  {id:'note',    label:'Note',    icon:'📝', color:'#64748b'},
-                  {id:'offre',   label:'Offre',   icon:'📄', color:'#10b981'},
+                  {id:'note',    label:'Note',    icon:'✎', color:'#64748b'},
+                  {id:'offre',   label:'Offre',   icon:'▫', color:'#10b981'},
                 ];
                 const TC_TYPES = [
-                  {id:'architecte', label:'Architecte',  icon:'📐', color:'#8b5cf6'},
+                  {id:'architecte', label:'Architecte',  icon:'◺', color:'#8b5cf6'},
                   {id:'moe',        label:'MOE / Ingé.', icon:'📏', color:'#3b82f6'},
-                  {id:'promoteur',  label:'Promoteur',   icon:'🏗️', color:'#f97316'},
+                  {id:'promoteur',  label:'Promoteur',   icon:'◆', color:'#f97316'},
                   {id:'immo',       label:'Immo.',        icon:'🏠', color:'#f59e0b'},
                   {id:'gestionnaire',label:'Gest. Copro',icon:'🗂️', color:'#10b981'},
-                  {id:'bailleur',   label:'Bailleur soc.',icon:'🏛️',color:'#007ab5'},
-                  {id:'industriel', label:'Industriel',  icon:'⚙️', color:'#6b7280'},
-                  {id:'particulier',label:'Particulier', icon:'👤', color:'#ec4899'},
-                  {id:'autre',      label:'Autre',        icon:'📌', color:'#94a3b8'},
+                  {id:'bailleur',   label:'Bailleur soc.',icon:'◆',color:'#007ab5'},
+                  {id:'industriel', label:'Industriel',  icon:'✱', color:'#6b7280'},
+                  {id:'particulier',label:'Particulier', icon:'◉', color:'#ec4899'},
+                  {id:'autre',      label:'Autre',        icon:'▪', color:'#94a3b8'},
                 ];
                 const PRIO_LIST = [
                   {id:'haute',   label:'Haute',   icon:'🔴', color:'#ef4444'},
@@ -705,8 +705,8 @@ export default function TabCrmCommercial(__props) {
                   }
                   if(ctGroupBy === 'secteur') {
                     return [
-                      {key:'privé',  label:'Secteur Privé',  icon:'🏢', color:'#3b82f6', items:filtered.filter(c=>getSect(c)==='privé')},
-                      {key:'public', label:'Secteur Public',  icon:'🏛️', color:'#10b981', items:filtered.filter(c=>getSect(c)==='public')},
+                      {key:'privé',  label:'Secteur Privé',  icon:'▪', color:'#3b82f6', items:filtered.filter(c=>getSect(c)==='privé')},
+                      {key:'public', label:'Secteur Public',  icon:'◆', color:'#10b981', items:filtered.filter(c=>getSect(c)==='public')},
                       {key:'mixte',  label:'Mixte',            icon:'🔀', color:'#8b5cf6', items:filtered.filter(c=>getSect(c)==='mixte')},
                     ].filter(g=>g.items.length>0);
                   }
@@ -715,7 +715,7 @@ export default function TabCrmCommercial(__props) {
                   }
                   if(ctGroupBy === 'referent') {
                     const refs = [...new Set(CONTACTS_REAL.map(c=>getRef(c)))].sort();
-                    return refs.map(r => ({key:r, label:r||'Non assigné', icon:'👤', color:getRefColor(r), items:filtered.filter(c=>getRef(c)===r)})).filter(g=>g.items.length>0);
+                    return refs.map(r => ({key:r, label:r||'Non assigné', icon:'◉', color:getRefColor(r), items:filtered.filter(c=>getRef(c)===r)})).filter(g=>g.items.length>0);
                   }
                   return [{key:'all', label:'', icon:'', color:filColor, items:filtered}];
                 };
@@ -765,10 +765,10 @@ export default function TabCrmCommercial(__props) {
                       {/* Footer */}
                       <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:6}}>
                         <div style={{display:'flex', gap:6}}>
-                          {c.tel && <span style={{fontSize:'0.65rem', color:$textMut}}>📞 {c.tel}</span>}
+                          {c.tel && <span style={{fontSize:'0.65rem', color:$textMut}}>✆ {c.tel}</span>}
                         </div>
                         <div style={{display:'flex', gap:4, alignItems:'center'}}>
-                          {actCnt>0 && <span style={{padding:'1px 5px', borderRadius:99, background:filColor+'15', color:filColor, fontSize:'0.6rem', fontWeight:700}}>📝{actCnt}</span>}
+                          {actCnt>0 && <span style={{padding:'1px 5px', borderRadius:99, background:filColor+'15', color:filColor, fontSize:'0.6rem', fontWeight:700}}>✎{actCnt}</span>}
                           <span style={{fontSize:'0.62rem', color:getRefColor(getRef(c)), fontWeight:600}}>{getRef(c)?.[0]}</span>
                         </div>
                       </div>
@@ -977,7 +977,7 @@ export default function TabCrmCommercial(__props) {
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10}}>
                           <div style={{background:$bgSub, borderRadius:crmRd, padding:'10px 12px', border:`1px solid ${$border}`}}>
                             <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:8}}>Coordonnées</div>
-                            {selContact.tel && <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:5}}><span>📞</span><a href={"tel:"+selContact.tel} style={{fontSize:'0.76rem', color:filColor, textDecoration:'none', fontWeight:600}}>{selContact.tel}</a></div>}
+                            {selContact.tel && <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:5}}><span>✆</span><a href={"tel:"+selContact.tel} style={{fontSize:'0.76rem', color:filColor, textDecoration:'none', fontWeight:600}}>{selContact.tel}</a></div>}
                             {selContact.email && <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:5, overflow:'hidden'}}><span style={{flexShrink:0}}>✉️</span><a href={"mailto:"+selContact.email} style={{fontSize:'0.7rem', color:filColor, textDecoration:'none', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{selContact.email}</a></div>}
                             {selContact.linkedin && selContact.linkedin.startsWith('http') && <div style={{display:'flex', alignItems:'center', gap:6}}><span>🔗</span><a href={selContact.linkedin} target="_blank" rel="noopener noreferrer" style={{fontSize:'0.7rem', color:'#0077b5'}}>LinkedIn</a></div>}
                           </div>
@@ -1010,7 +1010,7 @@ export default function TabCrmCommercial(__props) {
 
                         {selContact.remarques && (
                           <div style={{background:$bgSub, borderRadius:crmRd, padding:'10px 12px', border:`1px solid ${$border+'80'}`}}>
-                            <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:5}}>📎 Contexte</div>
+                            <div style={{fontSize:'0.62rem', fontWeight:700, color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', marginBottom:5}}>§ Contexte</div>
                             <div style={{fontSize:'0.78rem', color:$textSec, lineHeight:1.55}}>{selContact.remarques}</div>
                           </div>
                         )}
@@ -1259,14 +1259,14 @@ export default function TabCrmCommercial(__props) {
                 <div style={{display:'flex',flexDirection:'column',gap:16}}>
                   {/* Toolbar */}
                   <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
-                    <div style={{fontWeight:700,fontSize:'0.88rem',color:$text,marginRight:4}}>📅 Planning Général</div>
+                    <div style={{fontWeight:700,fontSize:'0.88rem',color:$text,marginRight:4}}>◫ Planning Général</div>
                     {isHoldingCtx ? (
-                      <span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:'#6366f118',color:'#6366f1',fontWeight:600,border:'1px solid #6366f130'}}>🏛️ Tous groupes</span>
+                      <span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:'#6366f118',color:'#6366f1',fontWeight:600,border:'1px solid #6366f130'}}>◆ Tous groupes</span>
                     ) : (
                       <span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:filColor+'18',color:filColor,fontWeight:600,border:`1px solid ${filColor}30`}}>{FIL_LABELS[currentFilCtx]||currentFilCtx}</span>
                     )}
                     <span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:'#3b82f618',color:'#3b82f6',fontWeight:600,border:'1px solid #3b82f630'}}>{affFiltered.length} affaires</span>
-                    {retardCount>0&&<span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:'#e74c3c18',color:'#e74c3c',fontWeight:700,border:'1px solid #e74c3c30'}}>⚠️ {retardCount} retard(s)</span>}
+                    {retardCount>0&&<span style={{fontSize:'0.72rem',padding:'2px 8px',borderRadius:crmRd>0?10:2,background:'#e74c3c18',color:'#e74c3c',fontWeight:700,border:'1px solid #e74c3c30'}}>▲ {retardCount} retard(s)</span>}
                     <div style={{flex:1}}/>
                     {/* Filiale filter — Yilmaz/Holding only */}
                     {isHoldingCtx&&<select value={gpFilter.fil} onChange={e=>setGpFilter(f=>({...f,fil:e.target.value}))} style={{padding:'5px 8px',borderRadius:crmRd>0?6:2,border:`1px solid ${$border}`,background:$bgCard,color:$text,fontSize:'0.75rem',fontFamily:'inherit',cursor:'pointer'}}>
@@ -1282,11 +1282,11 @@ export default function TabCrmCommercial(__props) {
                     </select>
                     <select value={gpFilter.marche} onChange={e=>setGpFilter(f=>({...f,marche:e.target.value}))} style={{padding:'5px 8px',borderRadius:crmRd>0?6:2,border:`1px solid ${$border}`,background:$bgCard,color:$text,fontSize:'0.75rem',fontFamily:'inherit',cursor:'pointer'}}>
                       <option value="all">Tous marchés</option>
-                      <option value="Public">🏛️ Public</option>
-                      <option value="Privé">🏢 Privé</option>
-                      <option value="Particulier">👤 Particulier</option>
+                      <option value="Public">◆ Public</option>
+                      <option value="Privé">▪ Privé</option>
+                      <option value="Particulier">◉ Particulier</option>
                     </select>
-                    <button onClick={()=>setGpFilter(f=>({...f,retard:!f.retard}))} style={{padding:'5px 10px',borderRadius:crmRd>0?6:2,border:`1px solid ${gpFilter.retard?'#e74c3c':$border}`,background:gpFilter.retard?'#e74c3c15':$bgCard,color:gpFilter.retard?'#e74c3c':$textMut,fontSize:'0.75rem',cursor:'pointer',fontFamily:'inherit',fontWeight:600}}>⚠️ Retards</button>
+                    <button onClick={()=>setGpFilter(f=>({...f,retard:!f.retard}))} style={{padding:'5px 10px',borderRadius:crmRd>0?6:2,border:`1px solid ${gpFilter.retard?'#e74c3c':$border}`,background:gpFilter.retard?'#e74c3c15':$bgCard,color:gpFilter.retard?'#e74c3c':$textMut,fontSize:'0.75rem',cursor:'pointer',fontFamily:'inherit',fontWeight:600}}>▲ Retards</button>
                     <div style={{display:'flex',gap:2,background:$bgSub,borderRadius:crmRd>0?8:2,padding:3,border:`1px solid ${$border}`}}>
                       {[{id:'filiale',l:'Filiale'},{id:'phase',l:'Phase'},{id:'marche',l:'Marché'},{id:'none',l:'Aucun'}].map(g=>(
                         <button key={g.id} onClick={()=>setGpGroupBy(g.id)} style={{padding:'4px 10px',borderRadius:crmRd>0?6:2,border:'none',background:gpGroupBy===g.id?$bgCard:'transparent',color:gpGroupBy===g.id?$text:$textMut,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit',fontWeight:gpGroupBy===g.id?600:400,boxShadow:gpGroupBy===g.id?'0 1px 3px rgba(0,0,0,0.1)':'none'}}>{g.l}</button>
@@ -1460,7 +1460,7 @@ export default function TabCrmCommercial(__props) {
                               <text x={NAME_X+3} y={y+rowH/2+FS.base*0.38} fontSize={FS.base} fill={$text} fontWeight="500">{nomTxt}</text>
                               <text x={DATE1_X+3} y={y+rowH/2+FS.sm*0.38} fontSize={FS.sm} fill={$textMut}>{fmtDate(g.osDate)}</text>
                               <text x={DATE2_X+3} y={y+rowH/2+FS.sm*0.38} fontSize={FS.sm} fill={g.hasRetard?'#e74c3c':$textMut}>{fmtDate(g.finEst)}</text>
-                              {g.hasRetard && <text x={LW-4} y={y+rowH/2+FS.xs*0.38} fontSize={FS.xs} fill="#e74c3c" textAnchor="end">⚠</text>}
+                              {g.hasRetard && <text x={LW-4} y={y+rowH/2+FS.xs*0.38} fontSize={FS.xs} fill="#e74c3c" textAnchor="end">▲</text>}
                             </g>
                             );
                           }
@@ -1504,7 +1504,7 @@ export default function TabCrmCommercial(__props) {
               {crmTab === 'dashboard_crm' && (
                 <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:20}}>
                   <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:20}}>
-                    <div style={{fontWeight:700, color:$text, fontSize:'0.9rem', marginBottom:16}}>📊 Répartition par Phase</div>
+                    <div style={{fontWeight:700, color:$text, fontSize:'0.9rem', marginBottom:16}}>▦ Répartition par Phase</div>
                     {PHASES.map(ph => {
                       const items = affairesToShow.filter(a => getPhase(a) === ph.id);
                       const pct = affairesToShow.length ? Math.round(items.length / affairesToShow.length * 100) : 0;
@@ -1517,7 +1517,7 @@ export default function TabCrmCommercial(__props) {
                     })}
                   </div>
                   <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:20}}>
-                    <div style={{fontWeight:700, color:$text, fontSize:'0.9rem', marginBottom:16}}>💰 Montants par Phase</div>
+                    <div style={{fontWeight:700, color:$text, fontSize:'0.9rem', marginBottom:16}}>€ Montants par Phase</div>
                     {PHASES.filter(ph => affairesToShow.some(a=>getPhase(a)===ph.id)).map(ph => {
                       const total = affairesToShow.filter(a=>getPhase(a)===ph.id).reduce((s,a)=>s+parseMontant(a.m||a.montant),0);
                       const maxTotal = Math.max(...PHASES.map(p => affairesToShow.filter(a=>getPhase(a)===p.id).reduce((s,a)=>s+parseMontant(a.m||a.montant),0)));
@@ -1537,15 +1537,15 @@ export default function TabCrmCommercial(__props) {
               {crmTab === 'preparation_crm' && (() => {
                 const PREP_STATUTS = [
                   {id:'a_demarrer', l:'À démarrer',     c:'#94a3b8', ic:'⬜'},
-                  {id:'en_cours',   l:'En cours',        c:'#3b82f6', ic:'🔄'},
+                  {id:'en_cours',   l:'En cours',        c:'#3b82f6', ic:'↻'},
                   {id:'bloque',     l:'Bloqué',          c:'#e74c3c', ic:'🚫'},
-                  {id:'pret',       l:'Prêt à démarrer', c:'#059669', ic:'✅'},
+                  {id:'pret',       l:'Prêt à démarrer', c:'#059669', ic:'✓'},
                 ];
                 const PREP_GROUPS_DEF = [
-                  {ic:'📋',l:'Transfert Études→Travaux',steps:5},
+                  {ic:'☰',l:'Transfert Études→Travaux',steps:5},
                   {ic:'📜',l:'Admin & Réglementaire',steps:6},
                   {ic:'🗺️',l:'PIC',steps:6},
-                  {ic:'🏗️',l:'Installation physique',steps:7},
+                  {ic:'◆',l:'Installation physique',steps:7},
                 ];
                 const getStatut = (a) => {
                   if(a.donePct>=100) return 'pret';
@@ -1583,7 +1583,7 @@ export default function TabCrmCommercial(__props) {
                     items: PREP_AFFAIRES.filter(a=>(a.eq||'Non assigné')===ct)
                   }));
                 } else {
-                  groups = [{id:'all',label:'Toutes les affaires',color:filColor,ic:'📋',items:PREP_AFFAIRES}];
+                  groups = [{id:'all',label:'Toutes les affaires',color:filColor,ic:'☰',items:PREP_AFFAIRES}];
                 }
 
                 const PREP_COLS = [
@@ -1598,10 +1598,10 @@ export default function TabCrmCommercial(__props) {
                     {/* KPI strip */}
                     <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10}}>
                       {[
-                        {l:'En préparation',v:PREP_AFFAIRES.length,c:filColor,ic:'🔧'},
-                        {l:'Prêts à démarrer',v:prets,c:'#059669',ic:'✅'},
-                        {l:'En cours',v:encours,c:'#3b82f6',ic:'🔄'},
-                        {l:'Alertes actives',v:alertCount,c:'#e74c3c',ic:'⚠️'},
+                        {l:'En préparation',v:PREP_AFFAIRES.length,c:filColor,ic:'✱'},
+                        {l:'Prêts à démarrer',v:prets,c:'#059669',ic:'✓'},
+                        {l:'En cours',v:encours,c:'#3b82f6',ic:'↻'},
+                        {l:'Alertes actives',v:alertCount,c:'#e74c3c',ic:'▲'},
                       ].map((k,i)=>(
                         <div key={i} style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${i===3&&alertCount>0?'#e74c3c40':$border}`,padding:'12px 14px',position:'relative',overflow:'hidden'}}>
                           <div style={{fontSize:'0.6rem',color:$textMut,fontWeight:600,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{k.l}</div>
@@ -1711,7 +1711,7 @@ export default function TabCrmCommercial(__props) {
                                           {a.alerts.length===0
                                             ? <span style={{fontSize:'0.68rem',color:'#059669',fontWeight:600}}>✓ OK</span>
                                             : a.alerts.map((al,ai)=>(
-                                                <span key={ai} style={{fontSize:'0.63rem',padding:'2px 6px',borderRadius:crmRd>0?10:2,background:'#e74c3c10',border:'1px solid #e74c3c28',color:'#e74c3c',fontWeight:600,whiteSpace:'nowrap'}}>⚠️ {al}</span>
+                                                <span key={ai} style={{fontSize:'0.63rem',padding:'2px 6px',borderRadius:crmRd>0?10:2,background:'#e74c3c10',border:'1px solid #e74c3c28',color:'#e74c3c',fontWeight:600,whiteSpace:'nowrap'}}>▲ {al}</span>
                                               ))
                                           }
                                         </div>
@@ -1744,7 +1744,7 @@ export default function TabCrmCommercial(__props) {
                         ))}
                       </div>
                       <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,padding:'12px 14px'}}>
-                        <div style={{fontWeight:700,fontSize:'0.78rem',color:$text,marginBottom:8}}>📋 Groupes checklist (24 étapes)</div>
+                        <div style={{fontWeight:700,fontSize:'0.78rem',color:$text,marginBottom:8}}>☰ Groupes checklist (24 étapes)</div>
                         {PREP_GROUPS_DEF.map((g,i)=>(
                           <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:i<PREP_GROUPS_DEF.length-1?`1px solid ${$borderLight}`:'none'}}>
                             <span style={{fontSize:'0.85rem'}}>{g.ic}</span>
@@ -1761,7 +1761,7 @@ export default function TabCrmCommercial(__props) {
               {/* ===== TABS: DEVIS & ACTIVITÉS (placeholder) ===== */}
               {(crmTab === 'devis' || crmTab === 'activites') && (
                 <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, padding:40, textAlign:'center'}}>
-                  <div style={{fontSize:'2rem', marginBottom:12}}>{crmTab === 'devis' ? '📄' : '📅'}</div>
+                  <div style={{fontSize:'2rem', marginBottom:12}}>{crmTab === 'devis' ? '▫' : '◫'}</div>
                   <div style={{fontWeight:700, color:$text, fontSize:'1rem', marginBottom:8}}>{crmTab === 'devis' ? 'Gestion des Devis' : 'Journal des Activités'}</div>
                   <div style={{color:$textMut, fontSize:'0.82rem'}}>Module en cours de développement — disponible prochainement</div>
                 </div>
@@ -1777,11 +1777,11 @@ export default function TabCrmCommercial(__props) {
                   const s = st||'';
                   if(s.includes('cours')) return {c:'#3b82f6',ic:'▶'};
                   if(s.includes('suspendu')||s.includes('Suspendu')) return {c:'#f97316',ic:'⏸'};
-                  if(s.includes('DGD')) return {c:'#8b5cf6',ic:'📄'};
+                  if(s.includes('DGD')) return {c:'#8b5cf6',ic:'▫'};
                   if(s.includes('GPA')||s.includes('RG')) return {c:'#f97316',ic:'🛡'};
-                  if(s.includes('reçu')||s.includes('OS')) return {c:'#22c55e',ic:'✅'};
+                  if(s.includes('reçu')||s.includes('OS')) return {c:'#22c55e',ic:'✓'};
                   if(s.includes('remportée')||s.includes('transféré')) return {c:'#3b82f6',ic:'→'};
-                  if(s.includes('Levée')||s.includes('Réception')) return {c:'#22c55e',ic:'✅'};
+                  if(s.includes('Levée')||s.includes('Réception')) return {c:'#22c55e',ic:'✓'};
                   return {c:'#94a3b8',ic:'·'};
                 };
                 const ph = PHASES.find(p=>p.id===(aff.ph||aff.phase)) || PHASES[0];
@@ -1828,9 +1828,9 @@ export default function TabCrmCommercial(__props) {
                     {n:'PIC - Plan Installation', type:'PDF', date:'18/01/2025'},
                   ],
                   commandes: [
-                    {n:'Grue Liebherr 42L', fournisseur:'Hup Grue IDF', montant:'8.5K€/mois', statut:'Livré', date:'20/01/2025', ic:'🏗️'},
+                    {n:'Grue Liebherr 42L', fournisseur:'Hup Grue IDF', montant:'8.5K€/mois', statut:'Livré', date:'20/01/2025', ic:'◆'},
                     {n:'Béton BPE (contrat cadre)', fournisseur:'Cemex Île-de-France', montant:'Cadre 180K€', statut:'En cours', date:'15/01/2025', ic:'🪣'},
-                    {n:'Armatures HA', fournisseur:'ArcelorMittal', montant:'42K€', statut:'Livré', date:'25/01/2025', ic:'⚙️'},
+                    {n:'Armatures HA', fournisseur:'ArcelorMittal', montant:'42K€', statut:'Livré', date:'25/01/2025', ic:'✱'},
                     {n:'Banches coffrages', fournisseur:'Doka France', montant:'3.2K€/mois', statut:'Livré', date:'22/01/2025', ic:'🧱'},
                     {n:'Cantonnement bungalows', fournisseur:'La Roulotte (Group OY)', montant:'1.8K€/mois', statut:'Livré', date:'18/01/2025', ic:'🏠'},
                     {n:'EPI & Sécurité', fournisseur:'Würth France', montant:'4.2K€', statut:'Commandé', date:'28/01/2025', ic:'🦺'},
@@ -1883,7 +1883,7 @@ export default function TabCrmCommercial(__props) {
                     const isPart = mk==='Particulier';
                     const all = [
                       // Groupe Contractuel
-                      { grp:'📋 Contractuel', items: [
+                      { grp:'☰ Contractuel', items: [
                         { l:'Notification marché / OS reçu', done:ph.id>=1, types:[] },
                         { l:'Commission d\'appel d\'offres — décision', done:ph.id>=1, types:['Public'] },
                         { l:'Négociation & signature marché', done:ph.id>=1, types:['Privé'] },
@@ -1893,7 +1893,7 @@ export default function TabCrmCommercial(__props) {
                         { l:'DC4 sous-traitants signés & agréés', done:ph.id>=2, types:['Public'] },
                       ].filter(x=>x.types.length===0||x.types.includes(mk)) },
                       // Groupe Préparation
-                      { grp:'🔧 Préparation', items: [
+                      { grp:'✱ Préparation', items: [
                         { l:'Réunion de transfert Études → Travaux', done:ph.id>=2, types:[] },
                         { l:'PIC validé + VISA MOE obtenu', done:ph.id>=2, types:['Public'] },
                         { l:'PIC dessiné et validé', done:ph.id>=2, types:['Privé'] },
@@ -1904,7 +1904,7 @@ export default function TabCrmCommercial(__props) {
                         { l:'Installation chantier complète', done:ph.id>=2, types:[] },
                       ].filter(x=>x.types.length===0||x.types.includes(mk)) },
                       // Groupe Exécution
-                      { grp:'🏗️ Exécution', items: [
+                      { grp:'◆ Exécution', items: [
                         { l:'Gros œuvre démarré', done:ph.id>=3, types:[] },
                         { l:'PV réunions de chantier hebdo (MOE signé)', done:ph.id>=3, types:['Public'] },
                         { l:'Réunions de chantier hebdo', done:ph.id>=3, types:['Privé'] },
@@ -1917,7 +1917,7 @@ export default function TabCrmCommercial(__props) {
                         { l:'Pré-réception interne — levée réserves', done:ph.id>=4, types:[] },
                       ].filter(x=>x.types.length===0||x.types.includes(mk)) },
                       // Groupe Réception
-                      { grp:'✅ Réception & Clôture', items: [
+                      { grp:'✓ Réception & Clôture', items: [
                         { l:'OPR avec bureau de contrôle', done:ph.id>=5, types:['Public'] },
                         { l:'OPR — visite contradictoire MOE', done:ph.id>=5, types:['Privé'] },
                         { l:'Réception travaux avec client', done:ph.id>=5, types:['Particulier'] },
@@ -1953,7 +1953,7 @@ export default function TabCrmCommercial(__props) {
                     const show = (types) => types.length===0 || types.includes(mk);
                     return [
                     {
-                      titre:'Transfert Études → Travaux', ic:'📋', color:'#3b82f6',
+                      titre:'Transfert Études → Travaux', ic:'☰', color:'#3b82f6',
                       items:[
                         {l:'Réunion de transfert organisée',done:ph.id>=2,types:[]},
                         {l:'Budget études remis (déboursés par poste)',done:ph.id>=2,types:[]},
@@ -1994,7 +1994,7 @@ export default function TabCrmCommercial(__props) {
                       ].filter(it=>show(it.types))
                     },
                     {
-                      titre:'Installation Physique du Chantier', ic:'🏗️', color:'#059669',
+                      titre:'Installation Physique du Chantier', ic:'◆', color:'#059669',
                       items:[
                         {l:'Clôture de chantier et panneau posés',done:ph.id>=3,types:[]},
                         {l:'Terrassement de la plateforme réalisé',done:ph.id>=3,types:[]},
@@ -2010,25 +2010,25 @@ export default function TabCrmCommercial(__props) {
                   })(),
                   consultations: [
                     {fourniture:'Béton BPE C30/37',fournisseurs:['Cemex IDF','Lafarge','Unibéton'],retenu:'Cemex IDF',prix:'118€/m³',statut:'Retenu',ic:'🪣',urgent:false},
-                    {fourniture:'Armatures HA / Treillis',fournisseurs:['ArcelorMittal','Fimurex'],retenu:'Fimurex',prix:'-3% vs budget',statut:'En cours',ic:'⚙️',urgent:true},
+                    {fourniture:'Armatures HA / Treillis',fournisseurs:['ArcelorMittal','Fimurex'],retenu:'Fimurex',prix:'-3% vs budget',statut:'En cours',ic:'✱',urgent:true},
                     {fourniture:'Coffrages banches',fournisseurs:['Doka France','Hussor','COFNORD'],retenu:'Doka France',prix:'3.2K€/mois',statut:'Retenu',ic:'🧱',urgent:false},
                     {fourniture:'Terrassement (ST)',fournisseurs:['Terrabat','Géosol IDF','Eurovia'],retenu:'Terrabat',prix:'42K€ forfait',statut:'Signé',ic:'🚜',urgent:false},
-                    {fourniture:'Étanchéité terrasse (ST)',fournisseurs:['L\'Étanchéité (Group OY)','Soprema'],retenu:'En attente',prix:'—',statut:'À consulter',ic:'💧',urgent:true},
+                    {fourniture:'Étanchéité terrasse (ST)',fournisseurs:['L\'Étanchéité (Group OY)','Soprema'],retenu:'En attente',prix:'—',statut:'À consulter',ic:'◦',urgent:true},
                     {fourniture:'Électricité courants forts (ST)',fournisseurs:['Elec IDF','Spie Batignolles'],retenu:'—',prix:'—',statut:'À consulter',ic:'⚡',urgent:false},
                   ],
                 };
 
                 const FTABS_DEF = {
-                  intervenants:{id:'intervenants',l:'Intervenants',ic:'👥'},
-                  financier:{id:'financier',l:'Financier',ic:'💰'},
-                  preparation:{id:'preparation',l:'Préparation',ic:'🔧'},
+                  intervenants:{id:'intervenants',l:'Intervenants',ic:'◉'},
+                  financier:{id:'financier',l:'Financier',ic:'€'},
+                  preparation:{id:'preparation',l:'Préparation',ic:'✱'},
                   consultations:{id:'consultations',l:'Consultations',ic:'📩'},
-                  commandes:{id:'commandes',l:'Commandes',ic:'📦'},
-                  planning:{id:'planning',l:'Planning',ic:'📅'},
-                  documents:{id:'documents',l:'Documents',ic:'📁'},
+                  commandes:{id:'commandes',l:'Commandes',ic:'▣'},
+                  planning:{id:'planning',l:'Planning',ic:'◫'},
+                  documents:{id:'documents',l:'Documents',ic:'▸'},
                   litiges:{id:'litiges',l:'Litiges',ic:'⚖️'},
-                  avancement:{id:'avancement',l:'Avancement',ic:'📊'},
-                  activites:{id:'activites',l:'Activités',ic:'🕐'},
+                  avancement:{id:'avancement',l:'Avancement',ic:'▦'},
+                  activites:{id:'activites',l:'Activités',ic:'◷'},
                 };
                 const FTABS = ficheTabOrder
                   .filter(id => id!=='litiges' || aff.lit)
@@ -2058,7 +2058,7 @@ export default function TabCrmCommercial(__props) {
                             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                               <span style={{fontFamily:'monospace',fontSize:'0.85rem',fontWeight:700,color:filColor,background:filColor+'15',padding:'2px 8px',borderRadius:rd>0?6:0}}>{aff.cd||aff.id}</span>
                               <span style={{padding:'3px 10px',borderRadius:rd>0?20:2,fontSize:'0.72rem',fontWeight:700,background:ph.color+'18',color:ph.color}}>{ph.icon} {ph.label}</span>
-                              {(()=>{const mk=aff.mk||aff.marche;const mkC=mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';const mkIc=mk==='Public'?'🏛️':mk==='Particulier'?'👤':'🏢';return mk?<span style={{padding:'3px 10px',borderRadius:rd>0?20:2,fontSize:'0.72rem',fontWeight:700,background:mkC+'18',color:mkC,border:`1px solid ${mkC}30`}}>{mkIc} {mk}</span>:null;})()}
+                              {(()=>{const mk=aff.mk||aff.marche;const mkC=mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';const mkIc=mk==='Public'?'◆':mk==='Particulier'?'◉':'▪';return mk?<span style={{padding:'3px 10px',borderRadius:rd>0?20:2,fontSize:'0.72rem',fontWeight:700,background:mkC+'18',color:mkC,border:`1px solid ${mkC}30`}}>{mkIc} {mk}</span>:null;})()}
                               {aff.lit&&<span style={{padding:'3px 8px',borderRadius:rd>0?20:2,fontSize:'0.7rem',fontWeight:700,background:'#e74c3c18',color:'#e74c3c'}}>⚖️ Litige</span>}
                             </div>
                             <div style={{fontWeight:700,fontSize:'1.05rem',color:$text,lineHeight:1.3,marginBottom:4}}>{aff.n||aff.nom}</div>
@@ -2076,11 +2076,11 @@ export default function TabCrmCommercial(__props) {
                         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
                           {[
                             {l:'📍 '+MOCK_FICHE.adresse},
-                            {l:'🏗️ '+MOCK_FICHE.ct},
+                            {l:'◆ '+MOCK_FICHE.ct},
                             {l:'✉️ '+MOCK_FICHE.email},
-                            {l:'📅 OS: '+MOCK_FICHE.dateOS},
+                            {l:'◫ OS: '+MOCK_FICHE.dateOS},
                             {l:'🏁 Fin: '+MOCK_FICHE.dateFin},
-                            {l:'⏱️ '+MOCK_FICHE.duree},
+                            {l:'◷ '+MOCK_FICHE.duree},
                           ].map((p,i)=>(
                             <span key={i} style={{fontSize:'0.7rem',padding:'2px 8px',borderRadius:rd>0?20:2,background:$bgCard,border:`1px solid ${$border}`,color:$textSec}}>{p.l}</span>
                           ))}
@@ -2124,11 +2124,11 @@ export default function TabCrmCommercial(__props) {
                           <div style={{display:'flex',flexDirection:'column',gap:16}}>
                             {/* Équipe interne */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12,display:'flex',alignItems:'center',gap:6}}>🏢 Équipe interne Ezel</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12,display:'flex',alignItems:'center',gap:6}}>▪ Équipe interne Ezel</div>
                               {[
                                 {role:'Conducteur de travaux',nom:MOCK_FICHE.ct,ic:'👷'},
                                 {role:'Chef de chantier',nom:MOCK_FICHE.chef,ic:'🪖'},
-                                {role:'Chargé d\'études',nom:MOCK_FICHE.etudes,ic:'📐'},
+                                {role:'Chargé d\'études',nom:MOCK_FICHE.etudes,ic:'◺'},
                               ].map((p,i)=>(
                                 <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'7px 0',borderBottom:i<2?`1px solid ${$borderLight}`:'none'}}>
                                   <div style={{width:32,height:32,borderRadius:'50%',background:filColor+'18',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.9rem',flexShrink:0}}>{p.ic}</div>
@@ -2156,7 +2156,7 @@ export default function TabCrmCommercial(__props) {
                             </div>
                             {/* Sous-traitants */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>🔧 Sous-traitants</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>✱ Sous-traitants</div>
                               {MOCK_FICHE.soustraitants.length===0?(
                                 <div style={{color:$textMut,fontSize:'0.78rem',textAlign:'center',padding:'12px 0'}}>Aucun sous-traitant enregistré</div>
                               ):MOCK_FICHE.soustraitants.map((st,i)=>(
@@ -2181,12 +2181,12 @@ export default function TabCrmCommercial(__props) {
                             {/* KPI top row */}
                             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10}}>
                               {[
-                                {l:'Montant marché',v:MOCK_FICHE.montant,c:filColor,ic:'💼'},
-                                {l:'Marge brute',v:MOCK_FICHE.margePct+'% — '+fmtE(MOCK_FICHE.margeB),c:'#059669',ic:'📈'},
+                                {l:'Montant marché',v:MOCK_FICHE.montant,c:filColor,ic:'▪'},
+                                {l:'Marge brute',v:MOCK_FICHE.margePct+'% — '+fmtE(MOCK_FICHE.margeB),c:'#059669',ic:'↗'},
                                 {l:'Retenue de garantie',v:fmtE(MOCK_FICHE.rgMontant),c:'#d97706',ic:'🔒'},
-                                {l:'Avancement physique',v:MOCK_FICHE.avancPhy+'%',c:'#3b82f6',ic:'🏗️'},
-                                {l:'Avancement financier',v:MOCK_FICHE.avancFin+'%',c:'#8b5cf6',ic:'💰'},
-                                {l:'TS / Avenants',v:'+'+fmtE(MOCK_FICHE.ts),c:'#f97316',ic:'📋'},
+                                {l:'Avancement physique',v:MOCK_FICHE.avancPhy+'%',c:'#3b82f6',ic:'◆'},
+                                {l:'Avancement financier',v:MOCK_FICHE.avancFin+'%',c:'#8b5cf6',ic:'€'},
+                                {l:'TS / Avenants',v:'+'+fmtE(MOCK_FICHE.ts),c:'#f97316',ic:'☰'},
                               ].map((k,i)=>(
                                 <div key={i} style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'11px 13px',position:'relative',overflow:'hidden'}}>
                                   <div style={{fontSize:'0.6rem',color:$textMut,fontWeight:600,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:3}}>{k.l}</div>
@@ -2197,7 +2197,7 @@ export default function TabCrmCommercial(__props) {
                             </div>
                             {/* Avancement physique vs financier */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
-                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>📊 Avancement physique vs financier</div>
+                              <div style={{fontWeight:700,fontSize:'0.82rem',color:$text,marginBottom:12}}>▦ Avancement physique vs financier</div>
                               {[
                                 {l:'Avancement physique',v:MOCK_FICHE.avancPhy,c:'#3b82f6'},
                                 {l:'Avancement financier',v:MOCK_FICHE.avancFin,c:'#8b5cf6'},
@@ -2214,14 +2214,14 @@ export default function TabCrmCommercial(__props) {
                               ))}
                               {MOCK_FICHE.avancPhy - MOCK_FICHE.avancFin > 5 && (
                                 <div style={{marginTop:8,padding:'6px 10px',background:'#d9770610',borderRadius:rd,border:'1px solid #d9770630',fontSize:'0.72rem',color:'#d97706'}}>
-                                  ⚠️ Écart de {MOCK_FICHE.avancPhy-MOCK_FICHE.avancFin}% — facturation en retard sur l'avancement physique
+                                  ▲ Écart de {MOCK_FICHE.avancPhy-MOCK_FICHE.avancFin}% — facturation en retard sur l'avancement physique
                                 </div>
                               )}
                             </div>
                             {/* Situations */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'14px 16px'}}>
                               <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
-                                <div style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>📋 Situations de travaux</div>
+                                <div style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>☰ Situations de travaux</div>
                                 <span style={{fontSize:'0.72rem',color:$textMut}}>Cumulé facturé : {fmtE(MOCK_FICHE.situations.reduce((s,x)=>s+x.montant,0)*1000)}</span>
                               </div>
                               {MOCK_FICHE.situations.map((s,i)=>(
@@ -2267,7 +2267,7 @@ export default function TabCrmCommercial(__props) {
                         {crmFicheTab==='preparation'&&(()=>{
                           const mk = aff.mk||aff.marche||'Privé';
                           const mkC = mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';
-                          const mkIc = mk==='Public'?'🏛️':mk==='Particulier'?'👤':'🏢';
+                          const mkIc = mk==='Public'?'◆':mk==='Particulier'?'◉':'▪';
                           const affId = aff.cd||aff.id;
                           // Flatten default items avec IDs stables
                           const defaultFlat = MOCK_FICHE.preparation.flatMap((grp,gi)=>
@@ -2282,7 +2282,7 @@ export default function TabCrmCommercial(__props) {
                           const grpMap = {};
                           allItems.forEach(item => {
                             const k = item.grpTitre||'Autres';
-                            if (!grpMap[k]) grpMap[k] = {titre:k, color:item.grpColor||'#64748b', ic:item.grpIc||'📋', items:[]};
+                            if (!grpMap[k]) grpMap[k] = {titre:k, color:item.grpColor||'#64748b', ic:item.grpIc||'☰', items:[]};
                             grpMap[k].items.push(item);
                           });
                           const grps = Object.values(grpMap);
@@ -2304,7 +2304,7 @@ export default function TabCrmCommercial(__props) {
                               <div style={{display:'flex',alignItems:'center',gap:6}}>
                                 <span style={{fontSize:'0.75rem',padding:'3px 10px',borderRadius:rd>0?20:2,background:mkC+'20',color:mkC,fontWeight:700,border:`1px solid ${mkC}40`,whiteSpace:'nowrap'}}>{done}/{total} ({pct}%)</span>
                                 <button onClick={()=>{setChecklistEditOpen(v=>!v);setChecklistEditTab('preparation');}} style={{padding:'4px 10px',borderRadius:rd>0?8:2,border:`1px solid ${isEditOpen?filColor:$border}`,background:isEditOpen?filColor+'15':$bgCard,color:isEditOpen?filColor:$textMut,fontSize:'0.7rem',cursor:'pointer',fontFamily:'inherit',fontWeight:600,display:'flex',alignItems:'center',gap:4,whiteSpace:'nowrap'}}>
-                                  ✏️ {isEditOpen?'Fermer':'Gérer'}
+                                  ✎ {isEditOpen?'Fermer':'Gérer'}
                                 </button>
                               </div>
                             </div>
@@ -2315,7 +2315,7 @@ export default function TabCrmCommercial(__props) {
                               return (
                               <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${filColor}40`,overflow:'hidden'}}>
                                 <div style={{padding:'10px 14px',background:filColor+'12',borderBottom:`1px solid ${filColor}25`,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                  <span style={{fontWeight:700,fontSize:'0.8rem',color:filColor}}>✏️ Éditeur de checklist — Préparation</span>
+                                  <span style={{fontWeight:700,fontSize:'0.8rem',color:filColor}}>✎ Éditeur de checklist — Préparation</span>
                                   <span style={{fontSize:'0.7rem',color:$textMut}}>{allFlat.length} étapes · cliquer pour masquer/afficher</span>
                                 </div>
                                 <div style={{maxHeight:340,overflowY:'auto'}}>
@@ -2356,14 +2356,14 @@ export default function TabCrmCommercial(__props) {
                             {/* Progress bar */}
                             <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`,padding:'12px 16px'}}>
                               <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
-                                <span style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>🔧 Avancement global</span>
+                                <span style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>✱ Avancement global</span>
                                 <span style={{fontWeight:800,fontSize:'0.9rem',color:pct===100?'#059669':pct>60?'#d97706':'#e74c3c'}}>{pct}%</span>
                               </div>
                               <div style={{height:8,background:$bgCard,borderRadius:rd>0?4:0,border:`1px solid ${$border}`,overflow:'hidden'}}>
                                 <div style={{height:'100%',width:pct+'%',background:pct===100?'#059669':pct>60?'#d97706':'#3b82f6',borderRadius:rd>0?4:0,transition:'width 0.5s'}}/>
                               </div>
-                              {pct===100&&<div style={{marginTop:8,padding:'6px 12px',background:'#05966912',borderRadius:rd,border:'1px solid #05966930',fontSize:'0.75rem',color:'#059669',fontWeight:700}}>✅ Chantier prêt à démarrer</div>}
-                              {pct<100&&pct>0&&<div style={{marginTop:8,padding:'6px 12px',background:'#d9770612',borderRadius:rd,border:'1px solid #d9770630',fontSize:'0.75rem',color:'#d97706',fontWeight:600}}>⚠️ {total-done} étape(s) restante(s)</div>}
+                              {pct===100&&<div style={{marginTop:8,padding:'6px 12px',background:'#05966912',borderRadius:rd,border:'1px solid #05966930',fontSize:'0.75rem',color:'#059669',fontWeight:700}}>✓ Chantier prêt à démarrer</div>}
+                              {pct<100&&pct>0&&<div style={{marginTop:8,padding:'6px 12px',background:'#d9770612',borderRadius:rd,border:'1px solid #d9770630',fontSize:'0.75rem',color:'#d97706',fontWeight:600}}>▲ {total-done} étape(s) restante(s)</div>}
                             </div>
 
                             {/* Groups — items cliquables */}
@@ -2384,7 +2384,7 @@ export default function TabCrmCommercial(__props) {
                                 {grp.items.map((item,ii)=>{
                                   const isSpec = item.types&&item.types.length>0;
                                   const tC = isSpec?(item.types[0]==='Public'?'#3b82f6':item.types[0]==='Particulier'?'#8b5cf6':'#f59e0b'):null;
-                                  const tIc = isSpec?(item.types[0]==='Public'?'🏛️':item.types[0]==='Particulier'?'👤':'🏢'):null;
+                                  const tIc = isSpec?(item.types[0]==='Public'?'◆':item.types[0]==='Particulier'?'◉':'▪'):null;
                                   return (
                                   <div key={item.id||ii} onClick={()=>updateChecklistItem(affId,item.id||`prep_${gi}_${ii}`,{done:!item.done},defaultFlat)} style={{display:'flex',alignItems:'center',gap:10,padding:'9px 16px',borderBottom:ii<grp.items.length-1?`1px solid ${$borderLight}`:'none',background:isSpec?tC+'06':'transparent',cursor:'pointer',transition:'background 0.1s'}} onMouseEnter={e=>e.currentTarget.style.background=item.done?grp.color+'08':$bgCard} onMouseLeave={e=>e.currentTarget.style.background=isSpec?tC+'06':'transparent'}>
                                     <div style={{width:18,height:18,borderRadius:rd>0?'50%':2,background:item.done?grp.color:'transparent',border:`2px solid ${item.done?grp.color:$border}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,transition:'all 0.2s'}}>
@@ -2444,7 +2444,7 @@ export default function TabCrmCommercial(__props) {
                                         </div>
                                       </div>
                                     </div>
-                                    {c.prix!=='—'&&<div style={{fontSize:'0.75rem',color:$text,fontWeight:600}}>💰 {c.prix}</div>}
+                                    {c.prix!=='—'&&<div style={{fontSize:'0.75rem',color:$text,fontWeight:600}}>€ {c.prix}</div>}
                                     {c.statut==='À consulter'&&<div style={{marginTop:6,padding:'5px 10px',background:'#e74c3c08',borderRadius:rd,border:'1px solid #e74c3c25',fontSize:'0.72rem',color:'#e74c3c'}}>Aucune consultation lancée — à faire avant démarrage</div>}
                                   </div>
                                 </div>
@@ -2510,7 +2510,7 @@ export default function TabCrmCommercial(__props) {
                             {/* Toolbar */}
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:8,flexWrap:'wrap'}}>
                               <div>
-                                <div style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>📅 Planning général — Jan 2023 → Déc 2027</div>
+                                <div style={{fontWeight:700,fontSize:'0.82rem',color:$text}}>◫ Planning général — Jan 2023 → Déc 2027</div>
                                 <div style={{fontSize:'0.7rem',color:$textMut,marginTop:2}}>Études · Travaux · Garanties · Décennale</div>
                               </div>
                               <div style={{display:'flex',alignItems:'center',gap:6}}>
@@ -2655,7 +2655,7 @@ export default function TabCrmCommercial(__props) {
                             </div>
                             {MOCK_FICHE.docs.map((d,i)=>(
                               <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:$bgSub,borderRadius:rd,border:`1px solid ${$border}`}}>
-                                <span style={{fontSize:'0.9rem'}}>{d.type==='PDF'?'📄':'📐'}</span>
+                                <span style={{fontSize:'0.9rem'}}>{d.type==='PDF'?'▫':'◺'}</span>
                                 <div style={{flex:1}}>
                                   <div style={{fontWeight:600,fontSize:'0.8rem',color:$text}}>{d.n}</div>
                                   <div style={{fontSize:'0.68rem',color:$textMut}}>{d.type} · {d.date}</div>
@@ -2700,12 +2700,12 @@ export default function TabCrmCommercial(__props) {
                         {crmFicheTab==='avancement'&&(()=>{
                           const mk = aff.mk||aff.marche||'Privé';
                           const mkC = mk==='Public'?'#3b82f6':mk==='Particulier'?'#8b5cf6':'#f59e0b';
-                          const mkIc = mk==='Public'?'🏛️':mk==='Particulier'?'👤':'🏢';
+                          const mkIc = mk==='Public'?'◆':mk==='Particulier'?'◉':'▪';
                           const affId = (aff.cd||aff.id)+'_ava';
                           const defaultFlat = MOCK_FICHE.avancement.flatMap((grp,gi)=>
                             grp.items.map((item,ii)=>({...item, id:`ava_${gi}_${ii}`, grpLabel:grp.grp}))
                           );
-                          const grpColors = {'📋 Contractuel':'#6366f1','🔧 Préparation':'#d97706','🏗️ Exécution':'#3b82f6','✅ Réception & Clôture':'#059669'};
+                          const grpColors = {'☰ Contractuel':'#6366f1','✱ Préparation':'#d97706','◆ Exécution':'#3b82f6','✓ Réception & Clôture':'#059669'};
                           const allItems = getChecklistData(affId, defaultFlat).filter(x=>!x.hidden);
                           const done = allItems.filter(x=>x.done).length;
                           const total = allItems.length;
@@ -2735,7 +2735,7 @@ export default function TabCrmCommercial(__props) {
                               <div style={{display:'flex',alignItems:'center',gap:6}}>
                                 <span style={{fontSize:'0.75rem',padding:'3px 10px',borderRadius:rd>0?20:2,background:mkC+'20',color:mkC,fontWeight:700,border:`1px solid ${mkC}40`,whiteSpace:'nowrap'}}>{pct}%</span>
                                 <button onClick={()=>{setChecklistEditOpen(v=>!v);setChecklistEditTab('avancement');}} style={{padding:'4px 10px',borderRadius:rd>0?8:2,border:`1px solid ${isEditOpen?filColor:$border}`,background:isEditOpen?filColor+'15':$bgCard,color:isEditOpen?filColor:$textMut,fontSize:'0.7rem',cursor:'pointer',fontFamily:'inherit',fontWeight:600,whiteSpace:'nowrap'}}>
-                                  ✏️ {isEditOpen?'Fermer':'Gérer'}
+                                  ✎ {isEditOpen?'Fermer':'Gérer'}
                                 </button>
                               </div>
                             </div>
@@ -2745,7 +2745,7 @@ export default function TabCrmCommercial(__props) {
                               return (
                               <div style={{background:$bgSub,borderRadius:rd,border:`1px solid ${filColor}40`,overflow:'hidden'}}>
                                 <div style={{padding:'10px 14px',background:filColor+'12',borderBottom:`1px solid ${filColor}25`,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                                  <span style={{fontWeight:700,fontSize:'0.8rem',color:filColor}}>✏️ Éditeur — Jalons Avancement</span>
+                                  <span style={{fontWeight:700,fontSize:'0.8rem',color:filColor}}>✎ Éditeur — Jalons Avancement</span>
                                   <span style={{fontSize:'0.7rem',color:$textMut}}>{allFlat.length} jalons</span>
                                 </div>
                                 <div style={{maxHeight:320,overflowY:'auto'}}>
@@ -2811,7 +2811,7 @@ export default function TabCrmCommercial(__props) {
                                 {grp.items.map((item,ii)=>{
                                   const isSpec=item.types&&item.types.length>0;
                                   const tC=isSpec?(item.types[0]==='Public'?'#3b82f6':item.types[0]==='Particulier'?'#8b5cf6':'#f59e0b'):null;
-                                  const tIc=isSpec?(item.types[0]==='Public'?'🏛️':item.types[0]==='Particulier'?'👤':'🏢'):null;
+                                  const tIc=isSpec?(item.types[0]==='Public'?'◆':item.types[0]==='Particulier'?'◉':'▪'):null;
                                   return (
                                   <div key={item.id||ii} onClick={()=>updateChecklistItem(affId,item.id||`ava_${gi}_${ii}`,{done:!item.done},defaultFlat)} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 14px',borderBottom:ii<grp.items.length-1?`1px solid ${$borderLight}`:'none',cursor:'pointer',background:'transparent'}} onMouseEnter={e=>e.currentTarget.style.background=$bgCard} onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
                                     <div style={{width:18,height:18,borderRadius:rd>0?'50%':2,background:item.done?grp.color:'transparent',border:`2px solid ${item.done?grp.color:$border}`,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,transition:'all 0.2s'}}>

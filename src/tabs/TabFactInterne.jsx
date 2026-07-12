@@ -8,7 +8,7 @@ export default function TabFactInterne(__props) {
         const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:'#fefdfb'};
         const lbS = {display:'block', fontSize:'0.75rem', fontWeight:600, color:$textMut, marginBottom:3, textTransform:'uppercase'};
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(2)+'M€' : v >= 1000 ? (v/1000).toFixed(1)+'K€' : v.toFixed(0)+'€';
-        const statutColors = { brouillon: {bg:'#fef3c7', color:'#92400e', label:'📝 Brouillon'}, envoyee: {bg:'#dbeafe', color:'#1e40af', label:'📤 Envoyée'}, payee: {bg:'#dcfce7', color:'#166534', label:'✅ Payée'}, retard: {bg:'#fecaca', color:'#991b1b', label:'⚠️ En retard'} };
+        const statutColors = { brouillon: {bg:'#fef3c7', color:'#92400e', label:'✎ Brouillon'}, envoyee: {bg:'#dbeafe', color:'#1e40af', label:'↥ Envoyée'}, payee: {bg:'#dcfce7', color:'#166534', label:'✓ Payée'}, retard: {bg:'#fecaca', color:'#991b1b', label:'▲ En retard'} };
         const totalForfaitMensuel = config.filter(c=>c.actif).reduce((s,c) => s + c.forfaitMensuel, 0);
         const totalVariableEstime = config.filter(c=>c.actif).reduce((s,c) => {
           const fil = filialesEnrichies.find(f => f.nom === c.filialeNom);
@@ -38,7 +38,7 @@ export default function TabFactInterne(__props) {
               <div style={{display:'flex', gap:8}}>
                 {['dashboard','factures','config'].map(t => (
                   <button key={t} onClick={() => setFactIntTab(t)} style={{padding:'8px 14px', borderRadius:crmRd, border: factIntTab === t ? '2px solid #059669' : `1px solid ${$borderAlt}`, background: factIntTab === t ? '#f0fdf4' : 'white', color: factIntTab === t ? '#059669' : '#6b5d4d', fontWeight: factIntTab === t ? 700 : 500, fontSize:'0.88rem', cursor:'pointer'}}>
-                    {t === 'dashboard' ? '📊 Dashboard' : t === 'factures' ? '📋 Factures' : '⚙️ Config'}
+                    {t === 'dashboard' ? '▦ Dashboard' : t === 'factures' ? '☰ Factures' : '✱ Config'}
                   </button>
                 ))}
               </div>
@@ -49,9 +49,9 @@ export default function TabFactInterne(__props) {
               {/* KPIs */}
               <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:14, marginBottom:24}}>
                 {[
-                  { label: 'Forfait mensuel', value: fmt(totalForfaitMensuel), sub: '/mois', icon: '📋', color: '#8B6F47' },
-                  { label: 'Variable estimé', value: fmt(totalVariableEstime), sub: '/mois', icon: '📈', color: '#7c3aed' },
-                  { label: 'Total encaissé', value: fmt(totalEncaisse), sub: `${facturesPayees.length} factures`, icon: '✅', color: '#059669' },
+                  { label: 'Forfait mensuel', value: fmt(totalForfaitMensuel), sub: '/mois', icon: '☰', color: '#8B6F47' },
+                  { label: 'Variable estimé', value: fmt(totalVariableEstime), sub: '/mois', icon: '↗', color: '#7c3aed' },
+                  { label: 'Total encaissé', value: fmt(totalEncaisse), sub: `${facturesPayees.length} factures`, icon: '✓', color: '#059669' },
                   { label: 'En cours / impayé', value: fmt(totalEnCours), sub: `${facturesEnCours.length} factures`, icon: '⏳', color: totalEnCours > 0 ? '#d97706' : '#b0a08a' }
                 ].map(kpi => (
                   <div key={kpi.label} style={{...cardStyle, padding:16}}>
@@ -67,7 +67,7 @@ export default function TabFactInterne(__props) {
 
               {/* Répartition par filiale */}
               <div style={{...cardStyle, padding:20, marginBottom:24}}>
-                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>🏢 Répartition par filiale</h3>
+                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>▪ Répartition par filiale</h3>
                 <table style={{width:'100%', borderCollapse:'collapse', fontSize:'0.9rem'}}>
                   <thead>
                     <tr style={{background:$bgSub}}>
@@ -117,7 +117,7 @@ export default function TabFactInterne(__props) {
               {/* Dernières factures */}
               <div style={{...cardStyle, padding:20}}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
-                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>📋 Dernières factures</h3>
+                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>☰ Dernières factures</h3>
                   <button onClick={() => setFactIntTab('factures')} style={{padding:'6px 12px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontSize:'0.85rem', fontWeight:600, cursor:'pointer'}}>Voir tout →</button>
                 </div>
                 {factures.length === 0 ? (
@@ -158,7 +158,7 @@ export default function TabFactInterne(__props) {
             {factIntTab === 'factures' && (<>
               {/* Génération */}
               <div style={{...cardStyle, padding:20, marginBottom:24}}>
-                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>🔄 Générer les factures du mois</h3>
+                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:16}}>↻ Générer les factures du mois</h3>
                 <div style={{display:'flex', gap:12, alignItems:'end', flexWrap:'wrap'}}>
                   <div>
                     <label style={lbS}>Mois</label>
@@ -176,7 +176,7 @@ export default function TabFactInterne(__props) {
                     const m = Number(document.getElementById('factint-mois').value);
                     const a = Number(document.getElementById('factint-annee').value);
                     const count = genererFacture(m, a);
-                    alert(`✅ ${count} factures générées pour ${moisOptions[m-1]} ${a}`);
+                    alert(`✓ ${count} factures générées pour ${moisOptions[m-1]} ${a}`);
                   }} style={{padding:'8px 20px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer', height:38}}>
                     🧾 Générer {config.filter(c=>c.actif).length} factures
                   </button>
@@ -186,7 +186,7 @@ export default function TabFactInterne(__props) {
               {/* Liste factures */}
               <div style={{...cardStyle, padding:20}}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
-                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>📋 Toutes les factures ({factures.length})</h3>
+                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>☰ Toutes les factures ({factures.length})</h3>
                 </div>
                 {factures.length === 0 ? (
                   <div style={{textAlign:'center', padding:40, color:$textMut}}>
@@ -217,10 +217,10 @@ export default function TabFactInterne(__props) {
                               <div style={{display:'flex', gap:4}}>
                                 <button onClick={() => setFactIntPreview(f)} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$accent, fontSize:'0.75rem', cursor:'pointer', fontWeight:600}}>👁️</button>
                                 <select value={f.statut} onChange={e => updateFacture(f.id, 'statut', e.target.value)} style={{padding:'3px 6px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.8rem', cursor:'pointer', background:$bgCard}}>
-                                  <option value="brouillon">📝 Brouillon</option>
-                                  <option value="envoyee">📤 Envoyée</option>
-                                  <option value="payee">✅ Payée</option>
-                                  <option value="retard">⚠️ En retard</option>
+                                  <option value="brouillon">✎ Brouillon</option>
+                                  <option value="envoyee">↥ Envoyée</option>
+                                  <option value="payee">✓ Payée</option>
+                                  <option value="retard">▲ En retard</option>
                                 </select>
                                 <button onClick={() => deleteFacture(f.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.75rem', cursor:'pointer'}}>🗑️</button>
                               </div>
@@ -247,7 +247,7 @@ export default function TabFactInterne(__props) {
             {factIntTab === 'config' && (<>
               <div style={{...cardStyle, padding:20, marginBottom:24}}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
-                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>⚙️ Configuration par filiale</h3>
+                  <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, margin:0}}>✱ Configuration par filiale</h3>
                   <div style={{fontSize:'0.8rem', color:$textMut}}>💾 Sauvegarde automatique</div>
                 </div>
                 <div style={{display:'flex', flexDirection:'column', gap:16}}>
@@ -256,7 +256,7 @@ export default function TabFactInterne(__props) {
                       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                         <div style={{display:'flex', alignItems:'center', gap:10}}>
                           <span style={{fontSize:'1.1rem', fontWeight:800, color:$text}}>{cfg.filialeNom}</span>
-                          <span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background: cfg.actif ? '#dcfce7' : '#fef3c7', color: cfg.actif ? '#166534' : '#92400e', fontWeight:600}}>{cfg.actif ? '✅ Actif' : '⏸️ Inactif'}</span>
+                          <span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background: cfg.actif ? '#dcfce7' : '#fef3c7', color: cfg.actif ? '#166534' : '#92400e', fontWeight:600}}>{cfg.actif ? '✓ Actif' : '⏸️ Inactif'}</span>
                         </div>
                         <label style={{display:'flex', alignItems:'center', gap:6, cursor:'pointer', fontSize:'0.85rem', color:$textSec}}>
                           <input type="checkbox" checked={cfg.actif} onChange={e => updateFactIntConfig(i, 'actif', e.target.checked)} style={{width:16, height:16, accentColor:'#059669'}} />
@@ -309,7 +309,7 @@ export default function TabFactInterne(__props) {
 
               {/* Récap annuel */}
               <div style={{...cardStyle, padding:20}}>
-                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:12}}>📊 Récapitulatif annuel estimé</h3>
+                <h3 style={{fontSize:'0.9rem', fontWeight:700, color:$accent, marginBottom:12}}>▦ Récapitulatif annuel estimé</h3>
                 <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:16}}>
                   <div style={{textAlign:'center', padding:16, background:$bgSub, borderRadius:crmRd}}>
                     <div style={{fontSize:'0.8rem', color:$textMut, fontWeight:600, marginBottom:4}}>Forfaits annuels</div>
@@ -409,7 +409,7 @@ export default function TabFactInterne(__props) {
 </style></head><body>
 <div class="page">
   <div class="top-bar"></div>
-  <div class="header"><div><div class="logo">🐝 YILMAZ</div><div class="logo-sub">Services Partagés — Group OY<br/>12 rue de l'Industrie, 67190 Mutzig<br/>SIRET : XXX XXX XXX XXXXX<br/>TVA : FR XX XXX XXX XXX</div></div>
+  <div class="header"><div><div class="logo">◆ YILMAZ</div><div class="logo-sub">Services Partagés — Group OY<br/>12 rue de l'Industrie, 67190 Mutzig<br/>SIRET : XXX XXX XXX XXXXX<br/>TVA : FR XX XXX XXX XXX</div></div>
   <div class="ref-block"><div class="facture-label">Facture</div><div class="facture-num">${f.id}</div><div class="facture-date">Date d'émission : ${f.dateCreation}<br/>Période : ${moisNoms[f.mois]} ${f.annee}</div></div></div>
   <div class="sep"></div>
   <div class="parties"><div class="party"><div class="party-title">Émetteur</div><div class="party-name">YILMAZ SAS</div><div class="party-detail">Services Partagés<br/>Group OY<br/>12 rue de l'Industrie<br/>67190 Mutzig</div></div>
@@ -449,7 +449,7 @@ export default function TabFactInterne(__props) {
                     {/* Modal header */}
                     <div style={{padding:'20px 24px', borderBottom:`1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center', position:'sticky', top:0, background:$bgCard, zIndex:2, borderRadius:'20px 20px 0 0'}}>
                       <div>
-                        <div style={{fontSize:'1.1rem', fontWeight:800, color: factIntStyle==='noir' ? '#1a1a1a' : '#8B6F47'}}>📄 Facture {f.id}</div>
+                        <div style={{fontSize:'1.1rem', fontWeight:800, color: factIntStyle==='noir' ? '#1a1a1a' : '#8B6F47'}}>▫ Facture {f.id}</div>
                         <div style={{fontSize:'0.85rem', color:$textMut, display:'flex', alignItems:'center', gap:8}}>
                           {moisNoms[f.mois]} {f.annee} — {f.filiale}
                           <div style={{display:'flex', borderRadius:crmRd, overflow:'hidden', border:'1px solid #e0e0e0', marginLeft:6}}>
@@ -471,7 +471,7 @@ export default function TabFactInterne(__props) {
                       {/* En-tête */}
                       <div style={{display:'flex', justifyContent:'space-between', marginBottom:32}}>
                         <div>
-                          <div style={{fontSize:'1.4rem', fontWeight:800, color: factIntStyle==='noir' ? '#1a1a1a' : '#8B6F47'}}>🐝 YILMAZ</div>
+                          <div style={{fontSize:'1.4rem', fontWeight:800, color: factIntStyle==='noir' ? '#1a1a1a' : '#8B6F47'}}>◆ YILMAZ</div>
                           <div style={{fontSize:'0.82rem', color: factIntStyle==='noir' ? '#888' : '#b0a08a', lineHeight:1.8}}>Services Partagés — Group OY<br/>12 rue de l'Industrie, 67190 Mutzig<br/>SIRET : XXX XXX XXX XXXXX</div>
                         </div>
                         <div style={{textAlign:'right'}}>
@@ -575,14 +575,14 @@ export default function TabFactInterne(__props) {
                     <div style={{padding:'16px 24px', borderTop:`1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center', background:$bgSub, borderRadius:'0 0 20px 20px', flexWrap:'wrap', gap:10}}>
                       <div style={{display:'flex', gap:6, alignItems:'center'}}>
                         <select value={f.statut} onChange={e => { updateFacture(f.id, 'statut', e.target.value); setFactIntPreview({...f, statut: e.target.value}); }} style={{padding:'6px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', cursor:'pointer', background:$bgCard}}>
-                          <option value="brouillon">📝 Brouillon</option>
-                          <option value="envoyee">📤 Envoyée</option>
-                          <option value="payee">✅ Payée</option>
-                          <option value="retard">⚠️ En retard</option>
+                          <option value="brouillon">✎ Brouillon</option>
+                          <option value="envoyee">↥ Envoyée</option>
+                          <option value="payee">✓ Payée</option>
+                          <option value="retard">▲ En retard</option>
                         </select>
                         <div style={{display:'flex', borderRadius:crmRd, overflow:'hidden', border:`1px solid ${$borderAlt}`}}>
                           <button onClick={() => setFactIntStyle('noir')} style={{padding:'5px 12px', border:'none', fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='noir' ? '#1a1a1a' : 'white', color: factIntStyle==='noir' ? 'white' : '#999', transition:'all 0.2s'}}>⬛ Noir</button>
-                          <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'5px 12px', border:'none', borderLeft:`1px solid ${$borderAlt}`, fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : 'white', color: factIntStyle==='groupoy' ? 'white' : '#999', transition:'all 0.2s'}}>🐝 Group OY</button>
+                          <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'5px 12px', border:'none', borderLeft:`1px solid ${$borderAlt}`, fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : 'white', color: factIntStyle==='groupoy' ? 'white' : '#999', transition:'all 0.2s'}}>◆ Group OY</button>
                         </div>
                       </div>
                       <div style={{display:'flex', gap:8}}>

@@ -37,7 +37,7 @@ export default function TabFormation(__props) {
                   <div>
                     <div style={{display:'flex', alignItems:'center', gap:7, marginBottom:2}}>
                       <h2 style={{margin:0, fontSize:'1.05rem', fontWeight:800, color:$text, letterSpacing:'-0.01em'}}>Formations & Habilitations BTP</h2>
-                      {alertes.length > 0 && <span style={{fontSize:'0.68rem', padding:'2px 7px', borderRadius:8, background:'#dc262615', color:'#dc2626', fontWeight:700, border:'1px solid #dc262630'}}>⚠ {alertes.length} alerte{alertes.length>1?'s':''}</span>}
+                      {alertes.length > 0 && <span style={{fontSize:'0.68rem', padding:'2px 7px', borderRadius:8, background:'#dc262615', color:'#dc2626', fontWeight:700, border:'1px solid #dc262630'}}>▲ {alertes.length} alerte{alertes.length>1?'s':''}</span>}
                     </div>
                     <p style={{margin:0, fontSize:'0.8rem', color:$textMut}}>Certifications · Habilitations · Alertes expiration · Conformité BTP</p>
                   </div>
@@ -60,7 +60,7 @@ export default function TabFormation(__props) {
           <div style={{background:$bgCard, border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:14, overflow:'hidden'}}>
             <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'8px 14px', borderBottom:`1px solid ${$border}`}}>
               <div style={{display:'flex', gap:2, background:$bgSub, borderRadius:crmRd, padding:3}}>
-                {[{id:'alertes',l:'⚠ Alertes',cnt:alertes.length},{id:'liste',l:'☰ Liste complète',cnt:data.length}].map(v => (
+                {[{id:'alertes',l:'▲ Alertes',cnt:alertes.length},{id:'liste',l:'☰ Liste complète',cnt:data.length}].map(v => (
                   <button key={v.id} onClick={()=>setFormAlertView(v.id)} style={{display:'flex', alignItems:'center', gap:5, padding:'5px 11px', borderRadius:crmRd, border:formAlertView===v.id?`1px solid ${$border}`:'1px solid transparent', cursor:'pointer', background:formAlertView===v.id?$bgCard:'transparent', color:formAlertView===v.id?$text:$textMut, fontWeight:formAlertView===v.id?700:500, fontSize:'0.78rem', boxShadow:formAlertView===v.id?'0 1px 3px rgba(0,0,0,0.06)':'none'}}>
                     {v.l}
                     <span style={{fontSize:'0.65rem', padding:'1px 5px', borderRadius:8, background:formAlertView===v.id?(v.id==='alertes'?'#dc262520':'#05966920'):'transparent', color:formAlertView===v.id?(v.id==='alertes'?'#dc2626':'#059669'):$textMut, fontWeight:700}}>{v.cnt}</span>
@@ -79,7 +79,7 @@ export default function TabFormation(__props) {
             </div>
           </div>
 
-          {/* ⚙ Filtres panel */}
+          {/* ✱ Filtres panel */}
           {formSettingsOpen&&<><div onClick={()=>setFormSettingsOpen(false)} style={{position:'fixed',inset:0,background:'transparent',zIndex:9997}}/><div style={{position:'fixed',top:210,right:20,width:320,maxHeight:'70vh',overflow:'auto',background:$bgCard,border:`1px solid ${$borderAlt}`,borderRadius:crmRd,padding:20,boxShadow:'0 12px 40px rgba(0,0,0,0.15)',zIndex:9998}} onClick={e=>e.stopPropagation()}>
             {isYilmazContext&&<div style={{marginBottom:14}}>
               <div style={{fontSize:'0.7rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:8}}>Filtrer par filiale</div>
@@ -118,8 +118,8 @@ export default function TabFormation(__props) {
               {l:'Habilitations valides',v:data.filter(f=>f.statut==='valide').length,sub:'conformes à jour',c:'#059669',bg:'#05966912',icon:'✓',bar:tauxConformite},
               {l:'Expirées',v:expires.length,sub:expires.length>0?'action requise':'RAS',c:'#dc2626',bg:'#dc262612',icon:'🚨',urgent:expires.length>0},
               {l:'Expire ≤90 jours',v:expireBientot.length,sub:'recyclage à planifier',c:'#d97706',bg:'#d9770612',icon:'⏳',urgent:expireBientot.length>0},
-              {l:'Planifiées',v:data.filter(f=>f.statut==='planifie').length,sub:'en cours de planif.',c:'#3b82f6',bg:'#3b82f612',icon:'📅'},
-              {l:'Budget total',v:fmtCout(totalCout),sub:data.length+' habilitation'+(data.length>1?'s':''),c:'#7c3aed',bg:'#7c3aed12',icon:'💰'},
+              {l:'Planifiées',v:data.filter(f=>f.statut==='planifie').length,sub:'en cours de planif.',c:'#3b82f6',bg:'#3b82f612',icon:'◫'},
+              {l:'Budget total',v:fmtCout(totalCout),sub:data.length+' habilitation'+(data.length>1?'s':''),c:'#7c3aed',bg:'#7c3aed12',icon:'€'},
             ];
             return (
               <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:10,marginBottom:14}}>
@@ -158,7 +158,7 @@ export default function TabFormation(__props) {
                       onClick={()=>setFormEdit({...f})}>
                     <div style={{padding:'12px 16px',display:'flex',justifyContent:'space-between',alignItems:'center',cursor:'pointer'}}>
                       <div>
-                        <div style={{fontWeight:700,fontSize:'0.92rem',color:isExpired?'#991b1b':'#92400e'}}>{isExpired ? '🚨' : '⚠️'} {f.intitule}</div>
+                        <div style={{fontWeight:700,fontSize:'0.92rem',color:isExpired?'#991b1b':'#92400e'}}>{isExpired ? '🚨' : '▲'} {f.intitule}</div>
                         <div style={{fontSize:'0.78rem',color:$textSec,marginTop:2}}><EmpLink id={f.employeId}/> — <FilLink id={f.filialeId}/></div>
                         <div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>Type: {tp.label} — Validité: {DUREES_VALIDITE[f.type]} — Organisme: {f.organisme}</div>
                       </div>
@@ -167,7 +167,7 @@ export default function TabFormation(__props) {
                         <div style={{fontSize:'0.72rem',color:$textMut,marginTop:4}}>Exp: {f.dateExpiration}</div>
                       </div>
                     </div>
-                    {f.notes && <div style={{padding:'8px 16px 10px',fontSize:'0.72rem',color:$textSec,background:$bgSub,borderTop:`1px solid ${$borderLight}`}}>📝 {f.notes}</div>}
+                    {f.notes && <div style={{padding:'8px 16px 10px',fontSize:'0.72rem',color:$textSec,background:$bgSub,borderTop:`1px solid ${$borderLight}`}}>✎ {f.notes}</div>}
                   </div>
                 );
               })}
@@ -197,7 +197,7 @@ export default function TabFormation(__props) {
           </>)}
           {/* Modal formation */}
           {formEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setFormEdit(null)}><div style={{background:$bgCard,width:'92%',maxWidth:580,maxHeight:'85vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-            <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(f=>f.id===formEdit.id)?'✏️ Modifier':'➕ Nouvelle'} formation</span><button onClick={()=>setFormEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+            <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(f=>f.id===formEdit.id)?'✎ Modifier':'➕ Nouvelle'} formation</span><button onClick={()=>setFormEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
             <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
               {[{k:'collaborateur',l:'Collaborateur',span:2},{k:'filiale',l:'Filiale',type:'select',opts:['YILMAZ SAS','Ezel Bâtiment',"L'Échafaudage",'La Roulotte',"L'Étanchéité"]},{k:'type',l:'Type',type:'select',opts:FORM_TYPES.map(t=>t.id),labels:FORM_TYPES.map(t=>t.label)},{k:'intitule',l:'Intitulé formation',span:2},{k:'organisme',l:'Organisme'},{k:'cout',l:'Coût (€)',type:'number'},{k:'dateObtention',l:'Date obtention',type:'date'},{k:'dateExpiration',l:'Date expiration',type:'date'},{k:'statut',l:'Statut',type:'select',opts:FORM_STATUTS.map(s=>s.id),labels:FORM_STATUTS.map(s=>s.label)},{k:'notes',l:'Notes',span:2,type:'textarea'}].map(f => (
                 <div key={f.k} style={{gridColumn:f.span?'span 2':'span 1'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>{f.l}</label>

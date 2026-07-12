@@ -33,7 +33,7 @@ export default function TabBudget(__props) {
             {/* Header */}
             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20}}>
               <div>
-                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>📊 Budget Prévisionnel</h1>
+                <h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>▦ Budget Prévisionnel</h1>
                 <div style={{fontSize:'0.88rem', color:$textMut, marginTop:2}}>Suivi budgétaire détaillé — Prévu vs Réalisé</div>
               </div>
               <div style={{display:'flex', gap:8, alignItems:'center'}}>
@@ -43,7 +43,7 @@ export default function TabBudget(__props) {
                 <select value={budgetAnnee} onChange={e => setBudgetAnnee(Number(e.target.value))} style={{padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', fontWeight:600, background:$bgCard}}>
                   {[2025,2026,2027].map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
-                <button onClick={() => { if(window.confirm('Réinitialiser le budget avec les données par défaut ?')) { saveBudget(defaultBudgetData); }}} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', color:'#dc2626', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>🔄 Réinit.</button>
+                <button onClick={() => { if(window.confirm('Réinitialiser le budget avec les données par défaut ?')) { saveBudget(defaultBudgetData); }}} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', color:'#dc2626', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>↻ Réinit.</button>
                 <button onClick={() => {
                   const bd = getBudgetForFiliale(budgetFiliale, budgetAnnee);
                   const rows = [['Catégorie','Type',...moisCourts.flatMap(m=>[m+' Prévu',m+' Réel',m+' Écart%']),'TOTAL Prévu','TOTAL Réel','TOTAL Écart%'].join(';')];
@@ -56,15 +56,15 @@ export default function TabBudget(__props) {
                     rows.push(cols.join(';'));
                   });
                   setCsvExportText(rows.join('\n'));
-                }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d4c5a9', background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📥 Export CSV</button>
+                }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d4c5a9', background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>↧ Export CSV</button>
                 {budgetFiliale !== 'all' && <>
-                  <button onClick={() => { setBudgetImportModal('csv'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:'#f0f7f0', color:'#3a6a2a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📤 Import CSV</button>
-                  <button onClick={() => { setBudgetImportModal('paste'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:'#f0f2f7', color:'#3a4a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📋 Coller Excel</button>
-                  <button onClick={() => { setBudgetImportModal('copy_year'); setBudgetCopyPct(5); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'#f7f0f7', color:'#6a3a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>🔄 Copier N-1</button>
+                  <button onClick={() => { setBudgetImportModal('csv'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:'#f0f7f0', color:'#3a6a2a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>↥ Import CSV</button>
+                  <button onClick={() => { setBudgetImportModal('paste'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:'#f0f2f7', color:'#3a4a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>☰ Coller Excel</button>
+                  <button onClick={() => { setBudgetImportModal('copy_year'); setBudgetCopyPct(5); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'#f7f0f7', color:'#6a3a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>↻ Copier N-1</button>
                 </>}
               </div>
             </div>
-            {budgetFiliale === 'all' && <div style={{padding:'8px 14px', background:$accent+'15', borderRadius:crmRd, border:'1px solid #fde68a', marginBottom:12, fontSize:'0.78rem', color:'#92400e', fontWeight:600}}>📊 Vue consolidée (lecture seule) — Sélectionnez une filiale pour modifier les montants</div>}
+            {budgetFiliale === 'all' && <div style={{padding:'8px 14px', background:$accent+'15', borderRadius:crmRd, border:'1px solid #fde68a', marginBottom:12, fontSize:'0.78rem', color:'#92400e', fontWeight:600}}>▦ Vue consolidée (lecture seule) — Sélectionnez une filiale pour modifier les montants</div>}
 
                         {/* KPI Cards */}
             <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:14, marginBottom:18}}>
@@ -105,7 +105,7 @@ export default function TabBudget(__props) {
               return (
                 <div style={{display:'flex', gap:12, marginBottom:16}}>
                   <div style={{flex:1, padding:'8px 14px', borderRadius:crmRd, background:$bgSub, border:`1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    <span style={{fontSize:'0.78rem', color:$textSec}}>📊 Comparaison {budgetAnnee} vs {budgetAnnee-1}</span>
+                    <span style={{fontSize:'0.78rem', color:$textSec}}>▦ Comparaison {budgetAnnee} vs {budgetAnnee-1}</span>
                     <div style={{display:'flex', gap:16}}>
                       <span style={{fontSize:'0.78rem'}}>Revenus: <strong style={{color: evRev >= 0 ? '#5a8a48' : '#a04020'}}>{evRev > 0 ? '+' : ''}{evRev}%</strong></span>
                       <span style={{fontSize:'0.78rem'}}>Charges: <strong style={{color: evChg <= 0 ? '#5a8a48' : '#a04020'}}>{evChg > 0 ? '+' : ''}{evChg}%</strong></span>
@@ -118,7 +118,7 @@ export default function TabBudget(__props) {
 
             {/* Taux exécution bar */}
             <div style={{background:$bgCard, borderRadius:crmRd, padding:'14px 18px', border:`1px solid ${$border}`, marginBottom:20, display:'flex', alignItems:'center', gap:16}}>
-              <div style={{fontSize:'0.82rem', fontWeight:700, color:$text, whiteSpace:'nowrap'}}>📊 Taux d'exécution budgétaire</div>
+              <div style={{fontSize:'0.82rem', fontWeight:700, color:$text, whiteSpace:'nowrap'}}>▦ Taux d'exécution budgétaire</div>
               <div style={{flex:1, height:18, background:$bgSub, borderRadius:crmRd, overflow:'hidden'}}>
                 <div style={{width: Math.min(100, tauxExec)+'%', height:'100%', background: tauxExec > 100 ? 'linear-gradient(90deg, #dc2626, #ef4444)' : tauxExec > 80 ? 'linear-gradient(90deg, #7a9a6a, #5a8a48)' : 'linear-gradient(90deg, #c0a060, #a08840)', borderRadius:crmRd, transition:'width 0.5s'}}/>
               </div>
@@ -128,7 +128,7 @@ export default function TabBudget(__props) {
 
             {/* Tab buttons */}
             <div style={{display:'flex', gap:6, marginBottom:16}}>
-              {[{id:'tableau',label:'📋 Tableau détaillé'},{id:'graphiques',label:'📈 Graphiques'},{id:'alertes',label:'🚨 Alertes ('+alertes.length+')'},{id:'api',label:'🔌 API & Intégrations'}].map(t => (
+              {[{id:'tableau',label:'☰ Tableau détaillé'},{id:'graphiques',label:'↗ Graphiques'},{id:'alertes',label:'🚨 Alertes ('+alertes.length+')'},{id:'api',label:'🔌 API & Intégrations'}].map(t => (
                 <button key={t.id} onClick={() => setBudgetTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: budgetTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: budgetTab===t.id ? '#faf6ef' : 'white', color: budgetTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
               ))}
             </div>
@@ -164,7 +164,7 @@ export default function TabBudget(__props) {
                     </thead>
                     <tbody>
                       {/* Section headers + rows */}
-                      {[{type:'revenu', label:'💰 REVENUS', color:'#059669'}, {type:'charge', label:'💸 CHARGES', color:'#dc2626'}, {type:'invest', label:'🏭 INVESTISSEMENTS', color:'#7c3aed'}, {type:'financier', label:'🏦 FINANCIER', color:'#0891b2'}].map(section => {
+                      {[{type:'revenu', label:'€ REVENUS', color:'#059669'}, {type:'charge', label:'💸 CHARGES', color:'#dc2626'}, {type:'invest', label:'🏭 INVESTISSEMENTS', color:'#7c3aed'}, {type:'financier', label:'🏦 FINANCIER', color:'#0891b2'}].map(section => {
                         const cats = BUDGET_CATS.filter(c => c.type === section.type);
                         if(cats.length === 0) return null;
                         return (
@@ -182,7 +182,7 @@ export default function TabBudget(__props) {
                                     onClick={() => { if(budgetFiliale !== 'all') setBudgetRowEdit({cat: cat.id, field:'prevu', values: [...(row.prevu || Array(12).fill(0))], reelValues: [...(row.reel || Array(12).fill(0))]}); }}
                                     title={budgetFiliale !== 'all' ? 'Cliquer pour éditer toute la ligne' : ''}>
                                     <span style={{marginRight:4}}>{cat.icon}</span>{cat.label}
-                                    {budgetFiliale !== 'all' && <span style={{fontSize:'0.6rem', color:$textMut, marginLeft:4}}>✏️</span>}
+                                    {budgetFiliale !== 'all' && <span style={{fontSize:'0.6rem', color:$textMut, marginLeft:4}}>✎</span>}
                                   </td>
                                   {moisCourts.map((m,i) => {
                                     const p = row.prevu[i]||0;
@@ -250,7 +250,7 @@ export default function TabBudget(__props) {
                       })}
                       {/* RÉSULTAT */}
                       <tr style={{background:'#2d2216'}}>
-                        <td style={{padding:'10px 12px', fontWeight:900, color:'white', position:'sticky', left:0, background:'#2d2216', zIndex:1, borderRight:'2px solid #4a3f2f'}}>📊 RÉSULTAT (Revenus − Charges)</td>
+                        <td style={{padding:'10px 12px', fontWeight:900, color:'white', position:'sticky', left:0, background:'#2d2216', zIndex:1, borderRight:'2px solid #4a3f2f'}}>▦ RÉSULTAT (Revenus − Charges)</td>
                         {moisCourts.map((m,mi) => {
                           const rp = revenus.reduce((s,c) => s + ((bd[c.id]?.prevu||[])[mi]||0), 0) - charges.reduce((s,c) => s + ((bd[c.id]?.prevu||[])[mi]||0), 0);
                           const rr = revenus.reduce((s,c) => s + ((bd[c.id]?.reel||[])[mi]||0), 0) - charges.reduce((s,c) => s + ((bd[c.id]?.reel||[])[mi]||0), 0);
@@ -269,7 +269,7 @@ export default function TabBudget(__props) {
                     </tbody>
                   </table>
                 </div>
-                {budgetFiliale !== 'all' && <div style={{padding:'8px 16px', background:$bgSub, fontSize:'0.72rem', color:$textMut, borderTop:`1px solid ${$border}`}}>💡 Cliquez sur une cellule Prévu ou Réel pour la modifier</div>}
+                {budgetFiliale !== 'all' && <div style={{padding:'8px 16px', background:$bgSub, fontSize:'0.72rem', color:$textMut, borderTop:`1px solid ${$border}`}}>✧ Cliquez sur une cellule Prévu ou Réel pour la modifier</div>}
               </div>
             )}
 
@@ -377,7 +377,7 @@ export default function TabBudget(__props) {
               <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden', boxShadow:'0 2px 8px rgba(0,0,0,0.03)'}}>
                 <div style={{padding:'14px 18px', background:$bgSub, borderBottom:`1px solid ${$border}`, fontWeight:700, color:'#991b1b', fontSize:'0.92rem'}}>🚨 Alertes budgétaires — Dépassements YTD ({moisActuel >= 0 ? moisCourts[moisActuel] : '—'} {budgetAnnee})</div>
                 <div style={{padding:'16px'}}>
-                  {alertes.length === 0 && <div style={{padding:20, textAlign:'center', color:'#059669', fontWeight:600, fontSize:'0.95rem'}}>✅ Aucun dépassement budgétaire — Tout est sous contrôle !</div>}
+                  {alertes.length === 0 && <div style={{padding:20, textAlign:'center', color:'#059669', fontWeight:600, fontSize:'0.95rem'}}>✓ Aucun dépassement budgétaire — Tout est sous contrôle !</div>}
                   {alertes.sort((a,b) => b.ecart - a.ecart).map((a,i) => (
                     <div key={i} style={{padding:'12px 16px', borderRadius:crmRd, background: a.ecart > 20 ? '#fef2f2' : '#fffbeb', border: a.ecart > 20 ? '1px solid #fecaca' : '1px solid #fde68a', marginBottom:8}}>
                       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
@@ -424,7 +424,7 @@ export default function TabBudget(__props) {
                     <div style={{display:'flex', alignItems:'center', gap:12}}>
                       <div style={{width:10, height:10, borderRadius:'50%', background: isConnected ? '#5a8a48' : '#c0a060', boxShadow: isConnected ? '0 0 8px #5a8a4880' : 'none'}}/>
                       <div>
-                        <div style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>{isConnected ? '✅ Connecté' : '⏳ Non connecté'} — <span style={{display:'inline-flex', alignItems:'center', justifyContent:'center', width:20, height:20, borderRadius:5, background:currentProvider.iconBg, color:'white', fontSize:'0.6rem', fontWeight:800, verticalAlign:'middle', marginRight:4}}>{currentProvider.icon}</span>{currentProvider.label}</div>
+                        <div style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>{isConnected ? '✓ Connecté' : '⏳ Non connecté'} — <span style={{display:'inline-flex', alignItems:'center', justifyContent:'center', width:20, height:20, borderRadius:5, background:currentProvider.iconBg, color:'white', fontSize:'0.6rem', fontWeight:800, verticalAlign:'middle', marginRight:4}}>{currentProvider.icon}</span>{currentProvider.label}</div>
                         <div style={{fontSize:'0.72rem', color:$textMut}}>{cfg.lastSync ? 'Dernière sync: ' + new Date(cfg.lastSync).toLocaleString('fr-FR') : 'Aucune synchronisation effectuée'}</div>
                       </div>
                     </div>
@@ -433,14 +433,14 @@ export default function TabBudget(__props) {
                         const now = new Date().toISOString();
                         const log = [...(cfg.syncLog||[]), {date: now, status:'success', message:'Sync manuelle — ' + Object.values(cfg.endpoints).filter(e=>e.enabled).length + ' endpoints', items: Math.floor(Math.random()*50+10)}].slice(-20);
                         saveBudgetApi({...cfg, lastSync: now, syncLog: log});
-                      }} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'#5a8a48', color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>🔄 Sync maintenant</button>
+                      }} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background:'#5a8a48', color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>↻ Sync maintenant</button>
                     )}
                   </div>
 
                   <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
                     {/* ─── Provider Selection ─── */}
                     <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
-                      <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>🏢 Fournisseur comptable</div>
+                      <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>▪ Fournisseur comptable</div>
                       <div style={{padding:'16px'}}>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
                           {apiProviders.map(p => (
@@ -474,8 +474,8 @@ export default function TabBudget(__props) {
                           <input value={cfg.companyId} onChange={e => updateCfg('companyId', e.target.value)} placeholder="company_xxxx ou N° dossier" style={{width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.82rem', boxSizing:'border-box', fontFamily:'monospace'}}/>
                         </div>
                         <div style={{display:'flex', gap:8}}>
-                          <button onClick={() => { if(cfg.apiKey) { alert('✅ Connexion réussie à ' + currentProvider.label + '\nCompany: ' + (cfg.companyId || 'default')); updateCfg('lastSync', new Date().toISOString()); } else { alert('❌ Veuillez renseigner une API Key'); }}} style={{flex:1, padding:'8px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>🔗 Tester la connexion</button>
-                          {currentProvider.docs && <a href={currentProvider.docs} target="_blank" rel="noopener noreferrer" style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', textDecoration:'none', display:'flex', alignItems:'center'}}>📄 Docs</a>}
+                          <button onClick={() => { if(cfg.apiKey) { alert('✓ Connexion réussie à ' + currentProvider.label + '\nCompany: ' + (cfg.companyId || 'default')); updateCfg('lastSync', new Date().toISOString()); } else { alert('✕ Veuillez renseigner une API Key'); }}} style={{flex:1, padding:'8px', borderRadius:crmRd, border:'none', background:$accent, color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>🔗 Tester la connexion</button>
+                          {currentProvider.docs && <a href={currentProvider.docs} target="_blank" rel="noopener noreferrer" style={{padding:'8px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', textDecoration:'none', display:'flex', alignItems:'center'}}>▫ Docs</a>}
                         </div>
                       </div>
                     </div>
@@ -505,12 +505,12 @@ export default function TabBudget(__props) {
 
                     {/* ─── Sync Settings ─── */}
                     <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
-                      <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>⚙️ Paramètres de synchronisation</div>
+                      <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, fontWeight:700, color:$text, fontSize:'0.88rem'}}>✱ Paramètres de synchronisation</div>
                       <div style={{padding:'16px', display:'flex', flexDirection:'column', gap:12}}>
                         <div>
                           <label style={{fontSize:'0.72rem', fontWeight:700, color:$accent, display:'block', marginBottom:4}}>Direction</label>
                           <div style={{display:'flex', gap:6}}>
-                            {[{id:'import',label:'📥 Import (API → Budget)',desc:'Données réelles depuis la compta'},{id:'export',label:'📤 Export (Budget → API)',desc:'Envoyer le prévisionnel'},{id:'bidirectional',label:'🔄 Bidirectionnel',desc:'Sync dans les deux sens'}].map(d => (
+                            {[{id:'import',label:'↧ Import (API → Budget)',desc:'Données réelles depuis la compta'},{id:'export',label:'↥ Export (Budget → API)',desc:'Envoyer le prévisionnel'},{id:'bidirectional',label:'↻ Bidirectionnel',desc:'Sync dans les deux sens'}].map(d => (
                               <div key={d.id} onClick={() => updateCfg('syncDirection', d.id)} style={{flex:1, padding:'8px 10px', borderRadius:crmRd, border: cfg.syncDirection === d.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.syncDirection === d.id ? '#faf6ef' : 'white', cursor:'pointer', textAlign:'center'}}>
                                 <div style={{fontWeight:700, fontSize:'0.75rem'}}>{d.label}</div>
                                 <div style={{fontSize:'0.65rem', color:$textMut, marginTop:2}}>{d.desc}</div>
@@ -584,7 +584,7 @@ export default function TabBudget(__props) {
                       ) : (
                         (cfg.syncLog||[]).slice().reverse().map((log, i) => (
                           <div key={i} style={{display:'flex', alignItems:'center', gap:10, padding:'6px 0', borderBottom:`1px solid ${$border}`}}>
-                            <span style={{fontSize:'0.85rem'}}>{log.status === 'success' ? '✅' : log.status === 'error' ? '❌' : '⏳'}</span>
+                            <span style={{fontSize:'0.85rem'}}>{log.status === 'success' ? '✓' : log.status === 'error' ? '✕' : '⏳'}</span>
                             <div style={{flex:1}}>
                               <div style={{fontSize:'0.78rem', fontWeight:600, color:$text}}>{log.message}</div>
                               <div style={{fontSize:'0.68rem', color:$textMut}}>{new Date(log.date).toLocaleString('fr-FR')}{log.items ? ' — ' + log.items + ' écritures' : ''}</div>
@@ -663,9 +663,9 @@ for inv in invoices:
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setCsvExportText(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:900, maxHeight:'80vh', display:'flex', flexDirection:'column', borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
                   <div style={{padding:'16px 20px', background:$bgSub, borderBottom:`1px solid ${$borderAlt}`, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:8, flexShrink:0}}>
-                    <div style={{fontWeight:700, color:$text, fontSize:'1rem'}}>📥 Export CSV — {(BUDGET_FILIALES.find(f=>f.id===budgetFiliale)||{}).label} {budgetAnnee}</div>
+                    <div style={{fontWeight:700, color:$text, fontSize:'1rem'}}>↧ Export CSV — {(BUDGET_FILIALES.find(f=>f.id===budgetFiliale)||{}).label} {budgetAnnee}</div>
                     <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                      <button onClick={() => { navigator.clipboard ? navigator.clipboard.writeText(csvExportText).then(() => alert('Copié !')).catch(() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} }) : (() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} })(); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:$accent, color:'#fff', fontWeight:600, fontSize:'0.8rem', cursor:'pointer', transition:'all 0.15s', fontFamily:'inherit'}}>📋 Copier</button>
+                      <button onClick={() => { navigator.clipboard ? navigator.clipboard.writeText(csvExportText).then(() => alert('Copié !')).catch(() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} }) : (() => { const ta = document.getElementById('csv-export-area'); if(ta){ta.select(); document.execCommand('copy');} })(); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:$accent, color:'#fff', fontWeight:600, fontSize:'0.8rem', cursor:'pointer', transition:'all 0.15s', fontFamily:'inherit'}}>☰ Copier</button>
                       <button onClick={() => { const bom = String.fromCharCode(0xFEFF); const blob = new Blob([bom+csvExportText], {type:'text/csv;charset=utf-8;'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'budget_'+(budgetFiliale||'all')+'_'+budgetAnnee+'.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }} style={{padding:'6px 14px', borderRadius:crmRd, border:'none', background:'#5a8a48', color:'white', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>💾 Télécharger .csv</button>
                       <button onClick={() => setCsvExportText(null)} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>✕ Fermer</button>
                     </div>
@@ -683,7 +683,7 @@ for inv in invoices:
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:700, maxHeight:'85vh', overflow:'auto', borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
                   <div style={{padding:'16px 20px', background:'#f0f7f0', borderBottom:'1px solid #d5e8d5', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    <div><div style={{fontWeight:700, color:'#2d5016', fontSize:'1rem'}}>📤 Import CSV</div><div style={{fontSize:'0.75rem', color:'#6b8a5e'}}>Importez depuis Pennylane ou fichier comptable</div></div>
+                    <div><div style={{fontWeight:700, color:'#2d5016', fontSize:'1rem'}}>↥ Import CSV</div><div style={{fontSize:'0.75rem', color:'#6b8a5e'}}>Importez depuis Pennylane ou fichier comptable</div></div>
                     <button onClick={() => setBudgetImportModal(null)} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:$bgCard, color:$textSec, fontWeight:700, cursor:'pointer'}}>✕</button>
                   </div>
                   <div style={{padding:'20px'}}>
@@ -716,7 +716,7 @@ for inv in invoices:
                             setBudgetImportModal(null);
                           } catch(err) { alert('Erreur: ' + err.message); }
                         }} style={{padding:'8px 20px', borderRadius:crmRd, border: target==='reel' ? 'none' : '1px solid #d5e8d5', background: target==='reel' ? '#5a8a48' : '#f0f7f0', color: target==='reel' ? 'white' : '#3a6a2a', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>
-                          {target === 'reel' ? '✅ Importer → Réel' : '📋 Importer → Prévu'}
+                          {target === 'reel' ? '✓ Importer → Réel' : '☰ Importer → Prévu'}
                         </button>
                       ))}
                     </div>
@@ -730,7 +730,7 @@ for inv in invoices:
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:700, maxHeight:'85vh', overflow:'auto', borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
                   <div style={{padding:'16px 20px', background:'#f0f2f7', borderBottom:'1px solid #d5d8e8', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    <div><div style={{fontWeight:700, color:'#2a3a5a', fontSize:'1rem'}}>📋 Coller depuis Excel</div><div style={{fontSize:'0.75rem', color:'#6a7a9a'}}>Sélectionnez dans Excel → Ctrl+C → Collez ici Ctrl+V</div></div>
+                    <div><div style={{fontWeight:700, color:'#2a3a5a', fontSize:'1rem'}}>☰ Coller depuis Excel</div><div style={{fontSize:'0.75rem', color:'#6a7a9a'}}>Sélectionnez dans Excel → Ctrl+C → Collez ici Ctrl+V</div></div>
                     <button onClick={() => setBudgetImportModal(null)} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:$bgCard, color:$textSec, fontWeight:700, cursor:'pointer'}}>✕</button>
                   </div>
                   <div style={{padding:'20px'}}>
@@ -764,7 +764,7 @@ for inv in invoices:
                             setBudgetImportModal(null);
                           } catch(err) { alert('Erreur: ' + err.message); }
                         }} style={{padding:'8px 20px', borderRadius:crmRd, border: target==='reel' ? 'none' : '1px solid #d5d8e8', background: target==='reel' ? '#3a4a6a' : '#f0f2f7', color: target==='reel' ? 'white' : '#3a4a6a', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>
-                          {target === 'reel' ? '✅ → Réel' : '📋 → Prévu'}
+                          {target === 'reel' ? '✓ → Réel' : '☰ → Prévu'}
                         </button>
                       ))}
                     </div>
@@ -778,7 +778,7 @@ for inv in invoices:
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:520, borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
                   <div style={{padding:'16px 20px', background:'#f7f0f7', borderBottom:'1px solid #e8d5e8'}}>
-                    <div style={{fontWeight:700, color:'#5a2a5a', fontSize:'1rem'}}>🔄 Copier depuis {budgetAnnee - 1}</div>
+                    <div style={{fontWeight:700, color:'#5a2a5a', fontSize:'1rem'}}>↻ Copier depuis {budgetAnnee - 1}</div>
                     <div style={{fontSize:'0.75rem', color:'#9a6a9a'}}>Recopier N-1 avec ajustement %</div>
                   </div>
                   <div style={{padding:'20px'}}>
@@ -875,7 +875,7 @@ for inv in invoices:
                           <button onClick={() => {
                             const v0 = budgetRowEdit.field === 'prevu' ? budgetRowEdit.values[0] : budgetRowEdit.reelValues[0];
                             setBudgetRowEdit(prev => { const up = {...prev}; if(prev.field==='prevu') up.values=Array(12).fill(v0); else up.reelValues=Array(12).fill(v0); return up; });
-                          }} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgSub, color:$textSec, fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📋 Jan → tous</button>
+                          }} style={{padding:'6px 14px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgSub, color:$textSec, fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>☰ Jan → tous</button>
                           <button onClick={() => {
                             const nd = JSON.parse(JSON.stringify(budgetData));
                             if(!nd[budgetFiliale]) nd[budgetFiliale]={}; if(!nd[budgetFiliale][budgetAnnee]) nd[budgetFiliale][budgetAnnee]={};

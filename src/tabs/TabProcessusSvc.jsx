@@ -4,17 +4,17 @@
 export default function TabProcessusSvc(__props) {
   const { $accent, $bgCard, $bgSub, $border, $text, $textMut, $textSec, crmRd, filialesDynamiques, navEntreprise, navService, processusOuvert, setProcessusOuvert } = __props;
           const ACC = navEntreprise==='ezel'?'#007ab5':navEntreprise==='roulotte'?'#C49A2A':navEntreprise==='echafaudage'?'#9f58bd':navEntreprise==='etancheite'?'#12856f':navEntreprise==='yilmaz'?'#555555':'#007ab5';
-          const fil = filialesDynamiques.find(f => f.id === parseInt(navEntreprise)) || {nom: navEntreprise, icon: '🏢'};
+          const fil = filialesDynamiques.find(f => f.id === parseInt(navEntreprise)) || {nom: navEntreprise, icon: '▪'};
           const svc = navService;
           const processusParService = {
             etudes_prix: {
               titre: "Bureau d'Études de Prix — Ezel Bâtiment",
               couleur: '#007ab5',
               processus: [
-                { nom: 'Phase 1 — Veille AO & Sélection', icon: '🔍', duree: 'Continu', couleur: '#3b82f6', etapes: ['Surveillance BOAMP/SPIGAO quotidienne (IDF + CPV 45xxx)', 'Import AO dans le module Veille AO', 'Screening rapide (objet, lot, zone géographique)', 'Analyse go/no-go (compatibilité technique, délai, ressources)', 'Arbitrage Direction si nécessaire (> 500k€ ou stratégique)', 'Passage en Suivi Dossiers si GO'], kpis: ['Nb AO détectés/mois', 'Taux go/no-go', 'Délai screening'], outils: ['Module Veille AO', 'BOAMP API', 'Monday.com board Études'] },
-                { nom: 'Phase 2 — Visite & Précisions', icon: '🏗️', duree: '1–5 jours', couleur: '#0284c7', etapes: ['Planification visite si obligatoire (contact MOA)', 'Confirmation RDV (email auto Monday → MOA)', 'Réalisation visite de chantier', 'Prise de photos + notes terrain', 'Soumission Q&R si besoin (demandes de précisions)', 'Réception réponses MOA + mise à jour dossier', 'Décision : poursuivre ou Visite abandonnée'], kpis: ['% visites planifiées dans les délais', 'Délai Q&R moyen', 'Nb visites problématiques'], outils: ['Module Suivi Dossiers', 'Google Drive — dossier visite', 'Module Calendrier'] },
-                { nom: 'Phase 3 — Consultation ST & Préparation', icon: '🔧', duree: '5–20 jours', couleur: ACC, etapes: ['Envoi DCE aux sous-traitants sélectionnés (après NDA)', 'Réception et analyse chiffrages ST', 'Établissement DQE (Décomposition Quantitative Estimative)', 'Chiffrage interne + marge', 'Consultation freelance spécialisé si besoin (NDA obligatoire)', 'Validation David (Responsable Bureau d\'Études)', 'Validation Özdogan si montant > 500k€', 'Rédaction mémoire technique', 'Constitution dossier administratif (DC1, DC2, KBIS, attestations)'], kpis: ['Délai moyen préparation', 'Écart budget estimé/offre', '% dossiers complets J-1 deadline', 'Coût préparation < 0,5% montant'], outils: ['Module Suivi Dossiers', 'Google Drive — templates', 'Catalogue ST', 'Yousign (signatures)'] },
-                { nom: 'Phase 4 — Dépôt & Soumission', icon: '📤', duree: '1–2 jours', couleur: '#ea580c', etapes: ['Vérification complétude dossier (checklist)', 'Génération fichiers PDF finaux', 'Signature électronique DGE/DQE si requis (Yousign)', 'Dépôt sur plateforme dématérialisée (Achatpublic, AWS, PLACE...)', 'Confirmation réception accusé dépôt', 'Archivage dossier déposé (Google Drive)', 'Mise à jour statut Monday → En attente de Réponse', 'Email auto envoyé à MOA + équipe'], kpis: ['Taux dépôts dans les délais', '% dossiers complets au dépôt', 'Délai moyen J(prépa→dépôt)'], outils: ['Plateformes AO', 'Yousign', 'Google Drive — dossiers déposés', 'Monday.com'] },
+                { nom: 'Phase 1 — Veille AO & Sélection', icon: '⌕', duree: 'Continu', couleur: '#3b82f6', etapes: ['Surveillance BOAMP/SPIGAO quotidienne (IDF + CPV 45xxx)', 'Import AO dans le module Veille AO', 'Screening rapide (objet, lot, zone géographique)', 'Analyse go/no-go (compatibilité technique, délai, ressources)', 'Arbitrage Direction si nécessaire (> 500k€ ou stratégique)', 'Passage en Suivi Dossiers si GO'], kpis: ['Nb AO détectés/mois', 'Taux go/no-go', 'Délai screening'], outils: ['Module Veille AO', 'BOAMP API', 'Monday.com board Études'] },
+                { nom: 'Phase 2 — Visite & Précisions', icon: '◆', duree: '1–5 jours', couleur: '#0284c7', etapes: ['Planification visite si obligatoire (contact MOA)', 'Confirmation RDV (email auto Monday → MOA)', 'Réalisation visite de chantier', 'Prise de photos + notes terrain', 'Soumission Q&R si besoin (demandes de précisions)', 'Réception réponses MOA + mise à jour dossier', 'Décision : poursuivre ou Visite abandonnée'], kpis: ['% visites planifiées dans les délais', 'Délai Q&R moyen', 'Nb visites problématiques'], outils: ['Module Suivi Dossiers', 'Google Drive — dossier visite', 'Module Calendrier'] },
+                { nom: 'Phase 3 — Consultation ST & Préparation', icon: '✱', duree: '5–20 jours', couleur: ACC, etapes: ['Envoi DCE aux sous-traitants sélectionnés (après NDA)', 'Réception et analyse chiffrages ST', 'Établissement DQE (Décomposition Quantitative Estimative)', 'Chiffrage interne + marge', 'Consultation freelance spécialisé si besoin (NDA obligatoire)', 'Validation David (Responsable Bureau d\'Études)', 'Validation Özdogan si montant > 500k€', 'Rédaction mémoire technique', 'Constitution dossier administratif (DC1, DC2, KBIS, attestations)'], kpis: ['Délai moyen préparation', 'Écart budget estimé/offre', '% dossiers complets J-1 deadline', 'Coût préparation < 0,5% montant'], outils: ['Module Suivi Dossiers', 'Google Drive — templates', 'Catalogue ST', 'Yousign (signatures)'] },
+                { nom: 'Phase 4 — Dépôt & Soumission', icon: '↥', duree: '1–2 jours', couleur: '#ea580c', etapes: ['Vérification complétude dossier (checklist)', 'Génération fichiers PDF finaux', 'Signature électronique DGE/DQE si requis (Yousign)', 'Dépôt sur plateforme dématérialisée (Achatpublic, AWS, PLACE...)', 'Confirmation réception accusé dépôt', 'Archivage dossier déposé (Google Drive)', 'Mise à jour statut Monday → En attente de Réponse', 'Email auto envoyé à MOA + équipe'], kpis: ['Taux dépôts dans les délais', '% dossiers complets au dépôt', 'Délai moyen J(prépa→dépôt)'], outils: ['Plateformes AO', 'Yousign', 'Google Drive — dossiers déposés', 'Monday.com'] },
                 { nom: 'Phase 5 — Attente Réponse & Négociation', icon: '⏳', duree: '15–90 jours', couleur: '#64748b', etapes: ['Suivi date notification marché', 'Relance MOA si silence > 30j', 'Réception résultat (attributaire/non-attributaire)', 'En cas de rejet : demande de rapport de notation si droit', 'En cas de négociation : préparation arguments prix', 'Mise à jour Monday avec résultat', 'Archivage avec retour d\'expérience'], kpis: ['Taux de succès global', 'Taux par type de marché', 'Délai moyen notification', 'Montant moyen marché gagné'], outils: ['Module Suivi Dossiers', 'Monday.com', 'Module Statistiques'] }
               ]
             },
@@ -91,7 +91,7 @@ export default function TabProcessusSvc(__props) {
               <div style={{height:3,background:`linear-gradient(90deg,${ACC},${ACC}60)`}}/>
               <div style={{padding:'16px 22px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                 <div style={{display:'flex',alignItems:'center',gap:12}}>
-                  <div style={{width:40,height:40,borderRadius:10,background:ACC+'15',border:`1px solid ${ACC}30`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.3rem'}}>{fil.icon||'📋'}</div>
+                  <div style={{width:40,height:40,borderRadius:10,background:ACC+'15',border:`1px solid ${ACC}30`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.3rem'}}>{fil.icon||'☰'}</div>
                   <div>
                     <h1 style={{fontSize:'1.05rem',fontWeight:800,letterSpacing:'-0.02em',margin:0,color:$text}}>Processus & Procédures</h1>
                     <div style={{fontSize:'0.78rem',color:$textMut,marginTop:2}}>{fil.nom} · {svcData.titre} · {svcData.processus.length} phases</div>
@@ -112,7 +112,7 @@ export default function TabProcessusSvc(__props) {
                     onMouseOut={e => { if (!isOpen) e.currentTarget.style.background=$bgCard; }}
                   >
                     <div style={{display:'flex', alignItems:'center', gap:12}}>
-                      <span style={{width:32,height:32,borderRadius:8,background:proc.couleur?proc.couleur+'15':ACC+'15',border:`1px solid ${proc.couleur||ACC}30`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1rem',flexShrink:0}}>{proc.icon||'📋'}</span>
+                      <span style={{width:32,height:32,borderRadius:8,background:proc.couleur?proc.couleur+'15':ACC+'15',border:`1px solid ${proc.couleur||ACC}30`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1rem',flexShrink:0}}>{proc.icon||'☰'}</span>
                       <div>
                         <div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{proc.nom}</div>
                         <div style={{fontSize:'0.85rem', color:$textMut}}>{proc.etapes.length} étapes · {proc.kpis.length} KPIs · {(proc.outils || []).length} outils</div>
@@ -143,7 +143,7 @@ export default function TabProcessusSvc(__props) {
                       <div style={{fontSize:'0.88rem', fontWeight:700, color:$accent, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:10}}>Indicateurs de performance (KPIs)</div>
                       <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
                         {proc.kpis.map((kpi, ki) => (
-                          <span key={ki} style={{padding:'6px 14px', borderRadius:crmRd, background:$bgSub, border:`1px solid ${$border}`, fontSize:'0.82rem', fontWeight:600, color:$textSec}}>📐 {kpi}</span>
+                          <span key={ki} style={{padding:'6px 14px', borderRadius:crmRd, background:$bgSub, border:`1px solid ${$border}`, fontSize:'0.82rem', fontWeight:600, color:$textSec}}>◺ {kpi}</span>
                         ))}
                       </div>
                     </div>
@@ -153,7 +153,7 @@ export default function TabProcessusSvc(__props) {
                       <div style={{fontSize:'0.88rem', fontWeight:700, color:$accent, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:10}}>Widgets & Outils associés</div>
                       <div style={{display:'flex', flexWrap:'wrap', gap:8}}>
                         {proc.outils.map((outil, oi) => (
-                          <span key={oi} style={{padding:'6px 14px', borderRadius:crmRd, background:ACC+'10', border:`1px solid ${ACC}25`, fontSize:'0.82rem', fontWeight:600, color:ACC}}>🔧 {outil}</span>
+                          <span key={oi} style={{padding:'6px 14px', borderRadius:crmRd, background:ACC+'10', border:`1px solid ${ACC}25`, fontSize:'0.82rem', fontWeight:600, color:ACC}}>✱ {outil}</span>
                         ))}
                       </div>
                     </div>
@@ -173,7 +173,7 @@ export default function TabProcessusSvc(__props) {
                 <div style={{marginTop:8,padding:'14px 20px',background:$bgSub,borderRadius:crmRd,border:'1px solid '+$border,display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
                   <span style={{fontSize:'0.68rem',fontWeight:700,color:$textMut,textTransform:'uppercase',letterSpacing:'0.06em',flexShrink:0}}>Outils liés</span>
                   {allOutils.map((o,i) => (
-                    <span key={i} style={{padding:'3px 10px',borderRadius:crmRd,background:ACC+'10',border:'1px solid '+ACC+'25',fontSize:'0.75rem',fontWeight:600,color:ACC}}>🔧 {o}</span>
+                    <span key={i} style={{padding:'3px 10px',borderRadius:crmRd,background:ACC+'10',border:'1px solid '+ACC+'25',fontSize:'0.75rem',fontWeight:600,color:ACC}}>✱ {o}</span>
                   ))}
                 </div>
               );

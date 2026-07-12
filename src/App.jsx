@@ -67,7 +67,7 @@ class WidgetErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return <div style={{padding:16, background:$danger+'12', borderRadius:12, border:'1px solid #fca5a5', color:'#dc2626', fontSize:'0.92rem', width:'100%'}}>
-        <span style={{fontWeight:700}}>⚠️ Erreur widget: {this.props.name}</span>
+        <span style={{fontWeight:700}}>▲ Erreur widget: {this.props.name}</span>
         <button onClick={() => this.setState({hasError: false, error: null})} style={{marginLeft:12, padding:'4px 12px', borderRadius:6, border:'1px solid #fca5a5', background:'white', cursor:'pointer', fontSize:'0.85rem'}}>Réessayer</button>
       </div>;
     }
@@ -78,8 +78,8 @@ class WidgetErrorBoundary extends React.Component {
 // Nouveau barème basé sur l'écart avec l'EBE Cible (système relatif)
 // L'EBE cible varie selon le niveau
 const baremeRelatif = [
-  { ecartMin: -999, ecartMax: -0.001, coeff: 0, label: "< Cible", emoji: "❌", commentaire: "Objectif non atteint" },
-  { ecartMin: 0, ecartMax: 0.019, coeff: 0.5, label: "Cible atteinte", emoji: "✅", commentaire: "Objectif atteint (50% variable)" },
+  { ecartMin: -999, ecartMax: -0.001, coeff: 0, label: "< Cible", emoji: "✕", commentaire: "Objectif non atteint" },
+  { ecartMin: 0, ecartMax: 0.019, coeff: 0.5, label: "Cible atteinte", emoji: "✓", commentaire: "Objectif atteint (50% variable)" },
   { ecartMin: 0.02, ecartMax: 0.039, coeff: 0.6, label: "Cible +2pts", emoji: "●", commentaire: "Légèrement au-dessus" },
   { ecartMin: 0.04, ecartMax: 0.059, coeff: 0.75, label: "Cible +4pts", emoji: "✓", commentaire: "Bonne performance" },
   { ecartMin: 0.06, ecartMax: 0.079, coeff: 0.9, label: "Cible +6pts", emoji: "🌟", commentaire: "Très bonne performance" },
@@ -93,7 +93,7 @@ const baremeRelatif = [
 const filiales = {
   roulotte: {
     nom: "La Roulotte (Location Roulottes & Matériel)",
-    icon: "🚛",
+    icon: "▸",
     holdingParent: "INVEST LOC",
     grille: [
       { niveau: "XXS", nom: "Alvéole Apprenti", posteInterne: "Butineur", posteExterne: "Assistant Commercial Location / Préparateur", caCible: "0–0,3 M€", caMin: 0, caMax: 300000, fixe: 30000, prime: 2000, plafond: 34000, ebeCible: 0.05 },
@@ -108,7 +108,7 @@ const filiales = {
   },
   echafaudage: {
     nom: "Échafaudage (Location + Montage/Démontage)",
-    icon: "🏗️",
+    icon: "◆",
     holdingParent: "INVEST LOC",
     grille: [
       { niveau: "XXS", nom: "Alvéole Apprenti", posteInterne: "Butineur", posteExterne: "Assistant Conducteur de Travaux / Technicien", caCible: "0–0,5 M€", caMin: 0, caMax: 500000, fixe: 32000, prime: 2000, plafond: 35500, ebeCible: 0.05 },
@@ -123,7 +123,7 @@ const filiales = {
   },
   ezel: {
     nom: "Ezel (Entreprise Générale de Bâtiment)",
-    icon: "🏢",
+    icon: "▪",
     holdingParent: "INVEST EXE",
     grille: [
       { niveau: "XXS", nom: "Alvéole Apprenti", posteInterne: "Butineur", posteExterne: "Assistant Conducteur de Travaux / Technicien", caCible: "0–0,5 M€", caMin: 0, caMax: 500000, fixe: 32000, prime: 2000, plafond: 35500, ebeCible: 0.05 },
@@ -138,7 +138,7 @@ const filiales = {
   },
   etancheite: {
     nom: "L'Étanchéité (Travaux d'étanchéité)",
-    icon: "💧",
+    icon: "◦",
     holdingParent: "INVEST EXE",
     grille: [
       { niveau: "XXS", nom: "Alvéole Apprenti", posteInterne: "Butineur", posteExterne: "Aide-Étancheur / Apprenti", caCible: "0–0,3 M€", caMin: 0, caMax: 300000, fixe: 28000, prime: 1500, plafond: 32000, ebeCible: 0.06 },
@@ -227,13 +227,13 @@ const SimulateurRuches = () => {
 
   const handleChangePassword = () => {
     if (!currentUser) return;
-    if (passwordForm.ancien !== currentUser.password) { setPasswordMsg('❌ Ancien mot de passe incorrect'); return; }
-    if (passwordForm.nouveau.length < 4) { setPasswordMsg('❌ Le nouveau mot de passe doit faire au moins 4 caractères'); return; }
-    if (passwordForm.nouveau !== passwordForm.confirmation) { setPasswordMsg('❌ La confirmation ne correspond pas'); return; }
+    if (passwordForm.ancien !== currentUser.password) { setPasswordMsg('✕ Ancien mot de passe incorrect'); return; }
+    if (passwordForm.nouveau.length < 4) { setPasswordMsg('✕ Le nouveau mot de passe doit faire au moins 4 caractères'); return; }
+    if (passwordForm.nouveau !== passwordForm.confirmation) { setPasswordMsg('✕ La confirmation ne correspond pas'); return; }
     const updated = {...currentUser, password: passwordForm.nouveau};
     setUsers(prev => prev.map(u => u.id === currentUser.id ? updated : u));
     setCurrentUser(updated);
-    setPasswordMsg('✅ Mot de passe modifié avec succès !');
+    setPasswordMsg('✓ Mot de passe modifié avec succès !');
     setPasswordForm({ ancien: '', nouveau: '', confirmation: '' });
     setTimeout(() => { setPasswordMsg(''); setShowChangePassword(false); }, 2000);
   };
@@ -282,19 +282,19 @@ const SimulateurRuches = () => {
     'groupoy': {
       nom: 'Group OY', icon: '🐝', desc: 'Vue consolidée du groupe\net pilotage stratégique',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'presentation_groupe', 'presentation', 'admin'] },
-        { id: 'finance', label: 'Finance Group', icon: '💰', modules: ['dashboard', 'simulateur', 'suivi'] },
-        { id: 'rh', label: 'RH Group', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme'] }
+        { id: 'direction', label: 'Direction Générale', icon: '◆', modules: ['dashboard', 'presentation_groupe', 'presentation', 'admin'] },
+        { id: 'finance', label: 'Finance Group', icon: '€', modules: ['dashboard', 'simulateur', 'suivi'] },
+        { id: 'rh', label: 'RH Group', icon: '◉', modules: ['collaborateurs', 'postes', 'organigramme'] }
       ]
     },
     'yilmaz': {
-      nom: 'Yilmaz', icon: '🏢', desc: 'Services partagés : Finance,\nRH, IT et Marketing',
+      nom: 'Yilmaz', icon: '▪', desc: 'Services partagés : Finance,\nRH, IT et Marketing',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
+        { id: 'direction', label: 'Direction Générale', icon: '◆', modules: ['dashboard', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
         { id: 'crm', label: 'CRM Groupe', icon: '🤝', modules: ['crm_commercial'], desc: 'Vue consolidée des affaires, contacts et pipeline de toutes les filiales' },
         { id: 'finance', label: 'Finance & Gestion', icon: '🏦', modules: ['dashboard', 'fact_interne', 'fact_externe', 'budget', 'tresorerie', 'analytique'], desc: 'Contrôle de gestion, facturation interne/externe, trésorerie, budget' },
-        { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh', 'presentation', 'simulateur', 'suivi'], desc: 'Personnel, recrutement, rémunération, formation, gestion RH complète' },
-        { id: 'execution', label: 'Exécution / Chantiers', icon: '🏗️', modules: ['ordres_travail'], desc: 'Ordres de travail, suivi chantiers (vue consolidée groupe)' },
+        { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'organigramme', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh', 'presentation', 'simulateur', 'suivi'], desc: 'Personnel, recrutement, rémunération, formation, gestion RH complète' },
+        { id: 'execution', label: 'Exécution / Chantiers', icon: '◆', modules: ['ordres_travail'], desc: 'Ordres de travail, suivi chantiers (vue consolidée groupe)' },
         { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', modules: ['bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta'], desc: 'Bons de commande, freelances, suivi prestataires, facturation' },
         { id: 'it', label: 'IT / Digital', icon: '💻', modules: ['admin', 'outils', 'tickets', 'parc_info', 'donnees_ref'], desc: 'Infrastructure, parc informatique, données de référence' },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'], desc: 'Parc automobile, matériel BTP, état des lieux, TCO' },
@@ -303,59 +303,59 @@ const SimulateurRuches = () => {
       ]
     },
     'ezel': {
-      nom: 'Ezel Bâtiment', icon: '🏗️', desc: 'Entreprise générale BTP',
+      nom: 'Ezel Bâtiment', icon: '◆', desc: 'Entreprise générale BTP',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'ezel_tableau'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard', 'ezel_tableau'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
-        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
-        { id: 'execution', label: 'Exécution Chantier', icon: '🏗️', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
+        { id: 'etudes_prix', label: 'Études de Prix', icon: '◺', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
+        { id: 'preparation', label: 'Préparation Chantier', icon: '☰', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
+        { id: 'execution', label: 'Exécution Chantier', icon: '◆', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'cloture', label: 'Réception & Clôture', icon: '✓', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
-        { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
+        { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     },
     'roulotte': {
-      nom: 'La Roulotte', icon: '🚛', desc: 'Location roulottes & matériel',
+      nom: 'La Roulotte', icon: '▸', desc: 'Location roulottes & matériel',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'exploitation', label: 'Exploitation & Planification', icon: '🚛', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
-        { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['parc_automobile', 'materiel'] },
-        { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'exploitation', label: 'Exploitation & Planification', icon: '▸', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
+        { id: 'logistique', label: 'Parc & Matériel', icon: '✱', modules: ['parc_automobile', 'materiel'] },
+        { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
     'echafaudage': {
-      nom: "L'Échafaudage", icon: '⚙️', desc: 'Location + Montage échafaudage',
+      nom: "L'Échafaudage", icon: '✱', desc: 'Location + Montage échafaudage',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'exploitation', label: 'Exploitation & Montage', icon: '⚙️', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
-        { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['materiel', 'parc_automobile'] },
-        { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'exploitation', label: 'Exploitation & Montage', icon: '✱', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
+        { id: 'logistique', label: 'Parc & Matériel', icon: '✱', modules: ['materiel', 'parc_automobile'] },
+        { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
     'etancheite': {
-      nom: "L'Étanchéité", icon: '💧', desc: "Travaux d'étanchéité\net imperméabilisation",
+      nom: "L'Étanchéité", icon: '◦', desc: "Travaux d'étanchéité\net imperméabilisation",
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
-        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
+        { id: 'etudes_prix', label: 'Études de Prix', icon: '◺', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
+        { id: 'preparation', label: 'Préparation Chantier', icon: '☰', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
         { id: 'execution', label: 'Exécution Chantier', icon: '🔨', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
+        { id: 'cloture', label: 'Réception & Clôture', icon: '✓', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
         { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
-        { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
+        { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     }
@@ -713,30 +713,30 @@ const SimulateurRuches = () => {
     setDragOverWidget(null);
   };
   const widgetLabels = {
-    kpiCards: '📊 KPI Cards (CA, EBE, Effectif, Filiales)',
-    structure: '🏛️ Structure du Group',
-    compteResultat: '📋 Compte de Résultat Consolidé',
-    evolutionCA: '📈 Évolution CA & EBE',
-    caParFiliale: '🏢 CA par Filiale',
-    tableauFiliales: '📋 Tableau des Filiales',
+    kpiCards: '▦ KPI Cards (CA, EBE, Effectif, Filiales)',
+    structure: '◆ Structure du Group',
+    compteResultat: '☰ Compte de Résultat Consolidé',
+    evolutionCA: '↗ Évolution CA & EBE',
+    caParFiliale: '▪ CA par Filiale',
+    tableauFiliales: '☰ Tableau des Filiales',
     donutCA: '🍩 Répartition CA (Donut)',
-    comparatifMarges: '📊 Comparatif Marges par Filiale',
-    masseSalariale: '💰 Masse Salariale / CA',
+    comparatifMarges: '▦ Comparatif Marges par Filiale',
+    masseSalariale: '€ Masse Salariale / CA',
     tresorerieBFR: '🏦 Trésorerie / BFR',
     pipelineAO: '📑 Pipeline Commercial (AO)',
-    caParCollab: '👤 CA / Collaborateur',
-    topChantiers: '🏗️ Top 5 Chantiers en cours',
+    caParCollab: '◉ CA / Collaborateur',
+    topChantiers: '◆ Top 5 Chantiers en cours',
     alertes: '🚨 Alertes / Points d\'attention',
-    evolutionEffectif: '👥 Évolution Effectif',
-    objectifsVsRealise: '🎯 Objectifs CA vs Réalisé',
-    sousTraitanceChart: '🔧 Taux Sous-traitance par Filiale',
+    evolutionEffectif: '◉ Évolution Effectif',
+    objectifsVsRealise: '◎ Objectifs CA vs Réalisé',
+    sousTraitanceChart: '✱ Taux Sous-traitance par Filiale',
     detailFrais: '📉 Décomposition des Charges',
     rentabiliteNette: '💹 Rentabilité Nette par Filiale',
-    objectifsEBE: '🎯 Objectifs EBE vs Réalisé',
+    objectifsEBE: '◎ Objectifs EBE vs Réalisé',
     radarPerformance: '🕸️ Radar Performance Filiales',
     carnetCommandes: '📒 Carnet de Commandes',
-    repartitionEffectif: '👥 Répartition Effectif par Filiale',
-    ratiosFinanciers: '📐 Ratios Financiers BTP',
+    repartitionEffectif: '◉ Répartition Effectif par Filiale',
+    ratiosFinanciers: '◺ Ratios Financiers BTP',
     margeParChantier: '💶 Marge par Chantier'
   };
   // widgetDescriptions — structure de référence des widgets dashboard
@@ -775,13 +775,13 @@ const SimulateurRuches = () => {
   const [roadmapEditTab, setRoadmapEditTab] = useState('jalons');
   const defaultRoadmapData = {
     jalons: [
-      { id: 'j1', year: 2025, label: 'Fondations', icon: '🏗️', color: '#8B6F47', items: ['Structuration YILMAZ','Mise en place Ruches','4 filiales opérationnelles','CA ~4M€'], done: true },
-      { id: 'j2', year: 2026, label: 'Consolidation', icon: '📈', color: '#059669', items: ['Rentabilité EBE positif','Recrutement +5 collaborateurs','Digitalisation complète','Lancement L\'Étanchéité'], active: true },
+      { id: 'j1', year: 2025, label: 'Fondations', icon: '◆', color: '#8B6F47', items: ['Structuration YILMAZ','Mise en place Ruches','4 filiales opérationnelles','CA ~4M€'], done: true },
+      { id: 'j2', year: 2026, label: 'Consolidation', icon: '↗', color: '#059669', items: ['Rentabilité EBE positif','Recrutement +5 collaborateurs','Digitalisation complète','Lancement L\'Étanchéité'], active: true },
       { id: 'j3', year: 2027, label: 'Croissance', icon: '🚀', color: '#2563eb', items: ['CA 6M€ objectif','Première acquisition externe','Expansion géographique','15 collaborateurs'] },
       { id: 'j4', year: 2028, label: 'Expansion', icon: '🌍', color: '#7c3aed', items: ['CA 8M€','2ème acquisition','Nouveaux métiers BTP','20 collaborateurs'] },
       { id: 'j5', year: 2029, label: 'Leadership', icon: '👑', color: '#dc2626', items: ['CA 10M€','Leader régional BTP','Diversification services','25 collaborateurs'] },
-      { id: 'j6', year: 2030, label: 'Cap 10M€', icon: '🎯', color: '#d97706', items: ['CA 10-12M€','5+ filiales','Innovation BTP','30 collaborateurs'] },
-      { id: 'j7', year: 2032, label: 'Maturité', icon: '🏛️', color: '#0891b2', items: ['CA 15M€','Groupe structuré','Marque reconnue','40 collaborateurs'] },
+      { id: 'j6', year: 2030, label: 'Cap 10M€', icon: '◎', color: '#d97706', items: ['CA 10-12M€','5+ filiales','Innovation BTP','30 collaborateurs'] },
+      { id: 'j7', year: 2032, label: 'Maturité', icon: '◆', color: '#0891b2', items: ['CA 15M€','Groupe structuré','Marque reconnue','40 collaborateurs'] },
       { id: 'j8', year: 2035, label: 'Vision 30M€', icon: '⭐', color: '#8B6F47', items: ['CA 25-30M€','Groupe multi-régional','Transmission possible','50+ collaborateurs'] }
     ],
     projections: [
@@ -796,22 +796,22 @@ const SimulateurRuches = () => {
     ],
     visionCards: [
       { id: 'v1', horizon: '1 an', year: '2027', icon: '📍', color: '#059669', objectif: 'CA 6M€', details: 'EBE positif consolidé, 18 collaborateurs, 4 filiales rentables, lancement L\'Étanchéité' },
-      { id: 'v2', horizon: '3 ans', year: '2029', icon: '🎯', color: '#2563eb', objectif: 'CA 10M€', details: 'Leader régional, 1-2 acquisitions réalisées, 25 collaborateurs, diversification métiers' },
+      { id: 'v2', horizon: '3 ans', year: '2029', icon: '◎', color: '#2563eb', objectif: 'CA 10M€', details: 'Leader régional, 1-2 acquisitions réalisées, 25 collaborateurs, diversification métiers' },
       { id: 'v3', horizon: '5 ans', year: '2031', icon: '🚀', color: '#7c3aed', objectif: 'CA 15M€', details: 'Groupe structuré multi-filiales, marque reconnue, 35 collaborateurs, innovation BTP' },
       { id: 'v4', horizon: '10 ans', year: '2035', icon: '⭐', color: '#d97706', objectif: 'CA 25-30M€', details: 'Groupe multi-régional, 50+ collaborateurs, possibilité transmission ou partenariat stratégique' }
     ],
     objectifs: [
       { id: 'o1', cat: 'Croissance Organique', icon: '🌱', color: '#059669', items: ['Augmenter CA Ezel de 15%/an','Développer La Roulotte (9→20 unités)','Monter L\'Échafaudage en autonomie','Lancer L\'Étanchéité (CA cible 500K€)'] },
-      { id: 'o2', cat: 'Croissance Externe', icon: '🏢', color: '#2563eb', items: ['Identifier cibles acquisition Alsace','Budget acquisition : 200-500K€','Intégration via modèle YILMAZ','Mutualisation services post-acquisition'] },
+      { id: 'o2', cat: 'Croissance Externe', icon: '▪', color: '#2563eb', items: ['Identifier cibles acquisition Alsace','Budget acquisition : 200-500K€','Intégration via modèle YILMAZ','Mutualisation services post-acquisition'] },
       { id: 'o3', cat: 'Excellence Opérationnelle', icon: '⚡', color: '#7c3aed', items: ['Marge brute >40% sur chaque filiale','EBE/CA >8% objectif groupe','Digitalisation 100% processus','Certifications Qualibat / RGE'] },
-      { id: 'o4', cat: 'Capital Humain', icon: '👥', color: '#d97706', items: ['Fidélisation via Ruches (turnover <10%)','Plan formation continue','Recrutement pipeline permanent','Montée en compétences managers'] }
+      { id: 'o4', cat: 'Capital Humain', icon: '◉', color: '#d97706', items: ['Fidélisation via Ruches (turnover <10%)','Plan formation continue','Recrutement pipeline permanent','Montée en compétences managers'] }
     ],
     projectionsFiliale: [
-      { id: 'pf1', nom: '🏗️ Ezel Bâtiment', ca25: '3.5M€', ca26: '3.9M€', ca27: '4.5M€', ca28: '5.5M€', ca29: '6.5M€', ca30: '7M€', ca32: '11M€', ca35: '15M€', obj: 'Leader TCE régional' },
-      { id: 'pf2', nom: '🚛 La Roulotte', ca25: '0.10M€', ca26: '0.13M€', ca27: '0.20M€', ca28: '0.3M€', ca29: '0.4M€', ca30: '0.5M€', ca32: '1M€', ca35: '1.5M€', obj: '20 unités, 3 départements' },
-      { id: 'pf3', nom: '⚙️ L\'Échafaudage', ca25: '0.20M€', ca26: '0.27M€', ca27: '0.40M€', ca28: '0.6M€', ca29: '0.8M€', ca30: '1M€', ca32: '2M€', ca35: '3M€', obj: 'Autonomie complète' },
-      { id: 'pf4', nom: '💧 L\'Étanchéité', ca25: '—', ca26: '—', ca27: '0.15M€', ca28: '0.3M€', ca29: '0.5M€', ca30: '0.8M€', ca32: '2M€', ca35: '3M€', obj: 'Spécialiste étanchéité' },
-      { id: 'pf5', nom: '🏢 Acquisitions', ca25: '—', ca26: '—', ca27: '—', ca28: '1.3M€', ca29: '2.0M€', ca30: '2.7M€', ca32: '5M€', ca35: '7.5M€', obj: '2-3 acquisitions BTP' }
+      { id: 'pf1', nom: '◆ Ezel Bâtiment', ca25: '3.5M€', ca26: '3.9M€', ca27: '4.5M€', ca28: '5.5M€', ca29: '6.5M€', ca30: '7M€', ca32: '11M€', ca35: '15M€', obj: 'Leader TCE régional' },
+      { id: 'pf2', nom: '▸ La Roulotte', ca25: '0.10M€', ca26: '0.13M€', ca27: '0.20M€', ca28: '0.3M€', ca29: '0.4M€', ca30: '0.5M€', ca32: '1M€', ca35: '1.5M€', obj: '20 unités, 3 départements' },
+      { id: 'pf3', nom: '✱ L\'Échafaudage', ca25: '0.20M€', ca26: '0.27M€', ca27: '0.40M€', ca28: '0.6M€', ca29: '0.8M€', ca30: '1M€', ca32: '2M€', ca35: '3M€', obj: 'Autonomie complète' },
+      { id: 'pf4', nom: '◦ L\'Étanchéité', ca25: '—', ca26: '—', ca27: '0.15M€', ca28: '0.3M€', ca29: '0.5M€', ca30: '0.8M€', ca32: '2M€', ca35: '3M€', obj: 'Spécialiste étanchéité' },
+      { id: 'pf5', nom: '▪ Acquisitions', ca25: '—', ca26: '—', ca27: '—', ca28: '1.3M€', ca29: '2.0M€', ca30: '2.7M€', ca32: '5M€', ca35: '7.5M€', obj: '2-3 acquisitions BTP' }
     ]
   };
   const [roadmapData, setRoadmapData] = useState(defaultRoadmapData);
@@ -868,9 +868,9 @@ const SimulateurRuches = () => {
   const [factIntPreview, setFactIntPreview] = useState(null);
   const [factIntStyle, setFactIntStyle] = useState('noir');
   const servicesYilmaz = [
-    { id: 'direction', label: 'Direction / Stratégie', icon: '🏛️', color: '#8B6F47' },
+    { id: 'direction', label: 'Direction / Stratégie', icon: '◆', color: '#8B6F47' },
     { id: 'finance', label: 'Finance / Comptabilité', icon: '🏦', color: '#059669' },
-    { id: 'rh', label: 'RH / Paie', icon: '👥', color: '#2563eb' },
+    { id: 'rh', label: 'RH / Paie', icon: '◉', color: '#2563eb' },
     { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', color: '#7c3aed' },
     { id: 'it', label: 'IT / Digital', icon: '💻', color: '#0891b2' },
     { id: 'juridique', label: 'Juridique / Conformité', icon: '⚖️', color: '#d97706' },
@@ -966,27 +966,27 @@ const SimulateurRuches = () => {
   });
   const saveBudgetApi = (cfg) => { setBudgetApiConfig(cfg); try { localStorage.setItem('oy_budget_api', JSON.stringify(cfg)); } catch(e) {} };
   const BUDGET_CATS = [
-    { id:'ca', label:'Chiffre d\'affaires', type:'revenu', icon:'📈' },
-    { id:'prestations_internes', label:'Prestations YILMAZ (refacturées)', type:'revenu', icon:'🔄' },
+    { id:'ca', label:'Chiffre d\'affaires', type:'revenu', icon:'↗' },
+    { id:'prestations_internes', label:'Prestations YILMAZ (refacturées)', type:'revenu', icon:'↻' },
     { id:'autres_produits', label:'Autres produits', type:'revenu', icon:'💎' },
     { id:'achats_materiaux', label:'Achats matériaux & fournitures', type:'charge', icon:'🧱' },
-    { id:'sous_traitance', label:'Sous-traitance', type:'charge', icon:'🏗️' },
-    { id:'masse_salariale', label:'Masse salariale (brut + charges)', type:'charge', icon:'👥' },
+    { id:'sous_traitance', label:'Sous-traitance', type:'charge', icon:'◆' },
+    { id:'masse_salariale', label:'Masse salariale (brut + charges)', type:'charge', icon:'◉' },
     { id:'prestataires_ext', label:'Prestataires externes', type:'charge', icon:'🤝' },
-    { id:'loyers_locaux', label:'Loyers & charges locaux', type:'charge', icon:'🏢' },
+    { id:'loyers_locaux', label:'Loyers & charges locaux', type:'charge', icon:'▪' },
     { id:'vehicules', label:'Véhicules & déplacements', type:'charge', icon:'🚗' },
     { id:'assurances', label:'Assurances', type:'charge', icon:'🛡️' },
-    { id:'frais_generaux', label:'Frais généraux & admin', type:'charge', icon:'📋' },
+    { id:'frais_generaux', label:'Frais généraux & admin', type:'charge', icon:'☰' },
     { id:'it_outils', label:'IT, logiciels & outils', type:'charge', icon:'💻' },
     { id:'marketing_comm', label:'Marketing & communication', type:'charge', icon:'📣' },
-    { id:'investissements', label:'Investissements (CAPEX)', type:'invest', icon:'💰' },
+    { id:'investissements', label:'Investissements (CAPEX)', type:'invest', icon:'€' },
     { id:'remboursements', label:'Remboursements emprunts', type:'financier', icon:'🏦' }
   ];
   const BUDGET_FILIALES = [
-    { id:'all', label:'🏛️ Consolidé (Group OY)', color:'#2d2216' },
+    { id:'all', label:'◆ Consolidé (Group OY)', color:'#2d2216' },
     { id:'yilmaz', label:'🐝 YILMAZ SAS', color:'#8B6F47' },
-    { id:'ezel', label:'🏗️ Ezel Bâtiment', color:'#1e40af' },
-    { id:'echafaudage', label:'🏗️ L\'Échafaudage', color:'#059669' },
+    { id:'ezel', label:'◆ Ezel Bâtiment', color:'#1e40af' },
+    { id:'echafaudage', label:'◆ L\'Échafaudage', color:'#059669' },
     { id:'roulotte', label:'🚽 La Roulotte', color:'#d97706' }
   ];
   const defaultApiConfig = {
@@ -1140,55 +1140,55 @@ const SimulateurRuches = () => {
 
   // Modes de facturation possibles
   const MODES_FACT = {
-    tjm: { label:'Forfait jour (TJM)', unite:'€/jour', icon:'📅', desc:'Taux journalier moyen — idéal consultants, DAF externe' },
-    horaire: { label:'Temps passé (horaire)', unite:'€/h', icon:'⏱️', desc:'Facturation à l\'heure — avocats, développeurs' },
+    tjm: { label:'Forfait jour (TJM)', unite:'€/jour', icon:'◫', desc:'Taux journalier moyen — idéal consultants, DAF externe' },
+    horaire: { label:'Temps passé (horaire)', unite:'€/h', icon:'◷', desc:'Facturation à l\'heure — avocats, développeurs' },
     forfait_mensuel: { label:'Forfait mensuel', unite:'€/mois', icon:'📆', desc:'Abonnement mensuel fixe — expert-comptable, hébergement' },
-    forfait_mission: { label:'Forfait mission', unite:'€/mission', icon:'🎯', desc:'Prix fixe pour un livrable défini — audit, site web' },
-    forfait_annuel: { label:'Forfait annuel', unite:'€/an', icon:'📋', desc:'Contrat annuel — assurance, maintenance, certification' },
+    forfait_mission: { label:'Forfait mission', unite:'€/mission', icon:'◎', desc:'Prix fixe pour un livrable défini — audit, site web' },
+    forfait_annuel: { label:'Forfait annuel', unite:'€/an', icon:'☰', desc:'Contrat annuel — assurance, maintenance, certification' },
     success_fee: { label:'Au résultat (success fee)', unite:'% ou fixe', icon:'🏆', desc:'Commission sur résultat — cabinet recrutement' },
-    regie: { label:'Régie (temps + matériel)', unite:'€/h + frais', icon:'🔧', desc:'Temps passé + fournitures/déplacements — artisans BTP' },
+    regie: { label:'Régie (temps + matériel)', unite:'€/h + frais', icon:'✱', desc:'Temps passé + fournitures/déplacements — artisans BTP' },
     mixte: { label:'Mixte (base + variable)', unite:'€/mois + var.', icon:'⚡', desc:'Forfait de base + complément variable — DAF, consultant' }
   };
 
   const TYPES_PRESTA = {
-    freelance: { label:'Freelance / Indépendant', icon:'👤', color:'#7c3aed' },
+    freelance: { label:'Freelance / Indépendant', icon:'◉', color:'#7c3aed' },
     auto_entrepreneur: { label:'Auto-entrepreneur', icon:'🏠', color:'#2563eb' },
-    societe: { label:'Société (SARL/SAS/EURL)', icon:'🏢', color:'#059669' },
+    societe: { label:'Société (SARL/SAS/EURL)', icon:'▪', color:'#059669' },
     portage: { label:'Portage salarial', icon:'🤝', color:'#d97706' },
-    cabinet: { label:'Cabinet / Agence', icon:'🏛️', color:'#dc2626' },
+    cabinet: { label:'Cabinet / Agence', icon:'◆', color:'#dc2626' },
     organisme: { label:'Organisme agréé', icon:'🎓', color:'#0891b2' },
     interim: { label:'Agence intérim', icon:'👷', color:'#ea580c' },
     association: { label:'Association', icon:'💚', color:'#16a34a' }
   };
 
   const CATS_PRESTA = {
-    finance: { label:'Finance & Comptabilité', icon:'💰', color:'#059669' },
-    rh: { label:'Ressources Humaines', icon:'👥', color:'#7c3aed' },
+    finance: { label:'Finance & Comptabilité', icon:'€', color:'#059669' },
+    rh: { label:'Ressources Humaines', icon:'◉', color:'#7c3aed' },
     it: { label:'IT & Digital', icon:'💻', color:'#2563eb' },
     juridique: { label:'Juridique', icon:'⚖️', color:'#dc2626' },
     marketing: { label:'Marketing & Communication', icon:'📣', color:'#ec4899' },
     formation: { label:'Formation', icon:'🎓', color:'#d97706' },
     btp_sous_traitant: { label:'Sous-traitance BTP', icon:'🔨', color:'#ea580c' },
-    bureau_etude: { label:'Bureau d\'études / Contrôle', icon:'📐', color:'#0891b2' },
-    transport: { label:'Transport / Logistique', icon:'🚛', color:'#6b7280' },
-    autre: { label:'Autre', icon:'📦', color:'#9ca3af' }
+    bureau_etude: { label:'Bureau d\'études / Contrôle', icon:'◺', color:'#0891b2' },
+    transport: { label:'Transport / Logistique', icon:'▸', color:'#6b7280' },
+    autre: { label:'Autre', icon:'▣', color:'#9ca3af' }
   };
 
   const STATUTS_FACTEXT = {
-    reception: { label:'📥 Réceptionnée', bg:'#f3f4f6', color:'#374151', step:1 },
-    validation_manager: { label:'👤 Validation manager', bg:'#fef3c7', color:'#92400e', step:2 },
-    validation_daf: { label:'💼 Validation DAF', bg:'#dbeafe', color:'#1e40af', step:3 },
-    bon_a_payer: { label:'✅ Bon à payer', bg:'#d1fae5', color:'#065f46', step:4 },
-    payee: { label:'💰 Payée', bg:'#dcfce7', color:'#166534', step:5 },
-    rejetee: { label:'❌ Rejetée', bg:'#fecaca', color:'#991b1b', step:0 },
-    litige: { label:'⚠️ Litige', bg:'#fef3c7', color:'#dc2626', step:0 }
+    reception: { label:'↧ Réceptionnée', bg:'#f3f4f6', color:'#374151', step:1 },
+    validation_manager: { label:'◉ Validation manager', bg:'#fef3c7', color:'#92400e', step:2 },
+    validation_daf: { label:'▪ Validation DAF', bg:'#dbeafe', color:'#1e40af', step:3 },
+    bon_a_payer: { label:'✓ Bon à payer', bg:'#d1fae5', color:'#065f46', step:4 },
+    payee: { label:'€ Payée', bg:'#dcfce7', color:'#166534', step:5 },
+    rejetee: { label:'✕ Rejetée', bg:'#fecaca', color:'#991b1b', step:0 },
+    litige: { label:'▲ Litige', bg:'#fef3c7', color:'#dc2626', step:0 }
   };
 
   const CONTRAT_STATUTS = {
-    a_preparer: { label:'À préparer', icon:'📝', bg:'#fef3c7', color:'#92400e' },
+    a_preparer: { label:'À préparer', icon:'✎', bg:'#fef3c7', color:'#92400e' },
     en_redaction: { label:'En rédaction', icon:'✍️', bg:'#e0e7ff', color:'#4338ca' },
-    envoye: { label:'Envoyé', icon:'📤', bg:'#dbeafe', color:'#1e40af' },
-    signe: { label:'Signé', icon:'✅', bg:'#dcfce7', color:'#166534' },
+    envoye: { label:'Envoyé', icon:'↥', bg:'#dbeafe', color:'#1e40af' },
+    signe: { label:'Signé', icon:'✓', bg:'#dcfce7', color:'#166534' },
     expire: { label:'Expiré', icon:'⏰', bg:'#fecaca', color:'#991b1b' },
     resilie: { label:'Résilié', icon:'🚫', bg:'#f3f4f6', color:'#6b7280' }
   };
@@ -1237,32 +1237,32 @@ const SimulateurRuches = () => {
   const [newComment, setNewComment] = useState('');
 
   const DOC_TYPES = {
-    cv: { label:'CV / Portfolio', icon:'📄', category:'recu' },
-    urssaf: { label:'Attestation URSSAF', icon:'🏛️', category:'recu', renewable:true, delaiMois:3 },
+    cv: { label:'CV / Portfolio', icon:'▫', category:'recu' },
+    urssaf: { label:'Attestation URSSAF', icon:'◆', category:'recu', renewable:true, delaiMois:3 },
     rc_pro: { label:'RC Professionnelle', icon:'🛡️', category:'recu', renewable:true, delaiMois:12 },
-    decennale: { label:'Décennale', icon:'🏗️', category:'recu', renewable:true, delaiMois:12 },
+    decennale: { label:'Décennale', icon:'◆', category:'recu', renewable:true, delaiMois:12 },
     rib: { label:'RIB', icon:'🏦', category:'recu' },
-    kbis: { label:'Kbis / SIRENE', icon:'📋', category:'recu', renewable:true, delaiMois:3 },
+    kbis: { label:'Kbis / SIRENE', icon:'☰', category:'recu', renewable:true, delaiMois:3 },
     certif: { label:'Certification / Habilitation', icon:'🎖️', category:'recu', renewable:true },
     contrat_signe: { label:'Contrat signé', icon:'📜', category:'emis' },
-    bon_commande: { label:'Bon de commande', icon:'📝', category:'emis' },
-    ordre_mission: { label:'Ordre de mission', icon:'📋', category:'emis' },
+    bon_commande: { label:'Bon de commande', icon:'✎', category:'emis' },
+    ordre_mission: { label:'Ordre de mission', icon:'☰', category:'emis' },
     evaluation: { label:'Évaluation annuelle', icon:'⭐', category:'emis' },
-    autre: { label:'Autre', icon:'📎', category:'recu' }
+    autre: { label:'Autre', icon:'§', category:'recu' }
   };
 
   const MISSION_STATUTS = {
     en_attente: { label:'En attente', icon:'⏳', bg:'#f3f4f6', color:'#6b7280' },
-    en_cours: { label:'En cours', icon:'🔄', bg:'#dbeafe', color:'#1e40af' },
-    livre: { label:'Livré', icon:'📦', bg:'#fef3c7', color:'#92400e' },
-    valide: { label:'Validé', icon:'✅', bg:'#dcfce7', color:'#166534' },
-    annule: { label:'Annulé', icon:'❌', bg:'#fecaca', color:'#991b1b' }
+    en_cours: { label:'En cours', icon:'↻', bg:'#dbeafe', color:'#1e40af' },
+    livre: { label:'Livré', icon:'▣', bg:'#fef3c7', color:'#92400e' },
+    valide: { label:'Validé', icon:'✓', bg:'#dcfce7', color:'#166534' },
+    annule: { label:'Annulé', icon:'✕', bg:'#fecaca', color:'#991b1b' }
   };
   const TACHE_STATUTS = {
-    a_faire: { label:'À faire', icon:'📋', bg:'#f3f4f6', color:'#6b7280' },
-    en_cours: { label:'En cours', icon:'🔄', bg:'#dbeafe', color:'#1e40af' },
+    a_faire: { label:'À faire', icon:'☰', bg:'#f3f4f6', color:'#6b7280' },
+    en_cours: { label:'En cours', icon:'↻', bg:'#dbeafe', color:'#1e40af' },
     en_revue: { label:'En revue', icon:'👀', bg:'#fef3c7', color:'#92400e' },
-    terminee: { label:'Terminée', icon:'✅', bg:'#dcfce7', color:'#166534' }
+    terminee: { label:'Terminée', icon:'✓', bg:'#dcfce7', color:'#166534' }
   };
   const TACHE_PRIORITES = {
     haute: { label:'Haute', icon:'▲', color:'#dc2626' },
@@ -1384,7 +1384,7 @@ const SimulateurRuches = () => {
     let updated = [...filialesDynamiques];
     if (updated.length > 0 && !updated.find(f => f.nom === "L'Étanchéité")) {
       const investExeIdx = updated.findIndex(f => f.nom === 'INVEST EXE');
-      const etancheite = { id: 6, nom: "L'Étanchéité", holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '💧', ca: 2000000, effectif: 4, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
+      const etancheite = { id: 6, nom: "L'Étanchéité", holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '◦', ca: 2000000, effectif: 4, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
         historique: [{ annee: '2024', ca: 0.8, ebe: 0.06 }, { annee: '2025', ca: 2.0, ebe: 0.18 }]
       };
       if (investExeIdx >= 0) { updated.splice(investExeIdx, 0, etancheite); } else { updated.push(etancheite); }
@@ -1392,7 +1392,7 @@ const SimulateurRuches = () => {
       needsUpdate = true;
     }
     const colorSync = { 'La Roulotte': '#C49A2A', "L'Échafaudage": '#6C3483', 'Ezel Bâtiment': '#007ab5', "L'Étanchéité": '#0e6655' };
-    const iconSync = { 'La Roulotte': '🚛', "L'Échafaudage": '⚙️', 'Ezel Bâtiment': '🏗️', "L'Étanchéité": '💧' };
+    const iconSync = { 'La Roulotte': '▸', "L'Échafaudage": '✱', 'Ezel Bâtiment': '◆', "L'Étanchéité": '◦' };
     updated = updated.map(f => {
       let changed = false; let newF = {...f};
       if (colorSync[f.nom] && f.couleur !== colorSync[f.nom]) { changed = true; newF.couleur = colorSync[f.nom]; }
@@ -1464,7 +1464,7 @@ const SimulateurRuches = () => {
   const ajouterFiliale = () => {
     if (!nouvelleFiliale.nom) return;
     setFilialesDynamiques([...filialesDynamiques, {
-      id: Date.now(), ...nouvelleFiliale, icon: '🏢',
+      id: Date.now(), ...nouvelleFiliale, icon: '▪',
       ca: Number(nouvelleFiliale.ca), effectif: Number(nouvelleFiliale.effectif),
       sousTraitancePct: Number(nouvelleFiliale.sousTraitancePct),
       fraisInternesPct: Number(nouvelleFiliale.fraisInternesPct),
@@ -1726,12 +1726,12 @@ const SimulateurRuches = () => {
   // ═══ POSTES STATUTS & TYPES ═══
   const POSTE_STATUTS = [
     {id:'gele',label:'Gelé',color:'#9CA3AF',icon:'⏸️',desc:'Besoin identifié mais pas de budget'},
-    {id:'a_creer',label:'À créer',color:'#7C3AED',icon:'📝',desc:'Budget validé, fiche à rédiger'},
+    {id:'a_creer',label:'À créer',color:'#7C3AED',icon:'✎',desc:'Budget validé, fiche à rédiger'},
     {id:'ouvert',label:'Ouvert',color:'#D97706',icon:'🟡',desc:'Fiche prête, recrutement peut démarrer'},
-    {id:'recrutement',label:'Recrutement en cours',color:'#3B82F6',icon:'🔍',desc:'Pipeline actif, candidats en évaluation'},
-    {id:'proposition',label:'Proposition envoyée',color:'#EA580C',icon:'📄',desc:'Candidat sélectionné, offre en attente'},
-    {id:'pourvu',label:'Pourvu',color:'#059669',icon:'✅',desc:'Collaborateur en poste'},
-    {id:'remplacement_temp',label:'Remplacement temporaire',color:'#DC2626',icon:'🔄',desc:'Titulaire absent — CDD/intérim'}
+    {id:'recrutement',label:'Recrutement en cours',color:'#3B82F6',icon:'⌕',desc:'Pipeline actif, candidats en évaluation'},
+    {id:'proposition',label:'Proposition envoyée',color:'#EA580C',icon:'▫',desc:'Candidat sélectionné, offre en attente'},
+    {id:'pourvu',label:'Pourvu',color:'#059669',icon:'✓',desc:'Collaborateur en poste'},
+    {id:'remplacement_temp',label:'Remplacement temporaire',color:'#DC2626',icon:'↻',desc:'Titulaire absent — CDD/intérim'}
   ];
   const POSTE_BESOIN_TYPES = [
     {id:'remplacement',label:'Remplacement',color:'#DC2626'},
@@ -1794,12 +1794,12 @@ const SimulateurRuches = () => {
   const [aoGroupBy, setAoGroupBy] = useState('statut');
   const [aoVueActive, setAoVueActive] = useState('tous');
   const [aoVues, setAoVues] = useState([
-    { id: 'tous', label: 'Tous', icon: '📁', filters: { type: 'tous', prio: 'tous', statuts: [], groupBy: 'statut' } },
-    { id: 'en_cours', label: 'En cours', icon: '🔄', filters: { type: 'tous', prio: 'tous', statuts: ['Visite RDV pris','En préparation','En attente de réponse','À présenter'], groupBy: 'statut' } },
-    { id: 'public', label: 'Marchés Publics', icon: '🏛️', filters: { type: 'Public', prio: 'tous', statuts: [], groupBy: 'statut' } },
-    { id: 'prive', label: 'Marchés Privés', icon: '🏢', filters: { type: 'Privé', prio: 'tous', statuts: [], groupBy: 'client' } },
+    { id: 'tous', label: 'Tous', icon: '▸', filters: { type: 'tous', prio: 'tous', statuts: [], groupBy: 'statut' } },
+    { id: 'en_cours', label: 'En cours', icon: '↻', filters: { type: 'tous', prio: 'tous', statuts: ['Visite RDV pris','En préparation','En attente de réponse','À présenter'], groupBy: 'statut' } },
+    { id: 'public', label: 'Marchés Publics', icon: '◆', filters: { type: 'Public', prio: 'tous', statuts: [], groupBy: 'statut' } },
+    { id: 'prive', label: 'Marchés Privés', icon: '▪', filters: { type: 'Privé', prio: 'tous', statuts: [], groupBy: 'client' } },
     { id: 'haute_prio', label: 'Haute Priorité', icon: '▲', filters: { type: 'tous', prio: 'Haute', statuts: [], groupBy: 'statut' } },
-    { id: 'resultats', label: 'Résultats', icon: '📊', filters: { type: 'tous', prio: 'tous', statuts: ['Remporté','Non retenu','Suite Refus'], groupBy: 'statut' } },
+    { id: 'resultats', label: 'Résultats', icon: '▦', filters: { type: 'tous', prio: 'tous', statuts: ['Remporté','Non retenu','Suite Refus'], groupBy: 'statut' } },
     { id: 'courrier', label: 'Courriers & Suites', icon: '✉️', filters: { type: 'tous', prio: 'tous', statuts: ['Courrier demande de précisions','Suite Refus'], groupBy: 'statut' } },
   ]);
 
@@ -1835,23 +1835,23 @@ const SimulateurRuches = () => {
   };
 
   const AO_PHASES = [
-    { id: 'Visite', label: 'Visite', color: '#f59e0b', icon: '📅' },
+    { id: 'Visite', label: 'Visite', color: '#f59e0b', icon: '◫' },
     { id: 'Chiffrage', label: 'Chiffrage', color: '#3b82f6', icon: '🧮' },
-    { id: 'Mémoire technique', label: 'Mémoire technique', color: '#8b5cf6', icon: '📝' },
-    { id: 'Montage dossier', label: 'Montage dossier', color: '#06b6d4', icon: '📁' },
-    { id: 'Relecture', label: 'Relecture', color: '#f97316', icon: '🔍' },
-    { id: 'Prêt à déposer', label: 'Prêt à déposer', color: '#22c55e', icon: '✅' },
-    { id: 'Déposé', label: 'Déposé', color: '#6366f1', icon: '📤' },
+    { id: 'Mémoire technique', label: 'Mémoire technique', color: '#8b5cf6', icon: '✎' },
+    { id: 'Montage dossier', label: 'Montage dossier', color: '#06b6d4', icon: '▸' },
+    { id: 'Relecture', label: 'Relecture', color: '#f97316', icon: '⌕' },
+    { id: 'Prêt à déposer', label: 'Prêt à déposer', color: '#22c55e', icon: '✓' },
+    { id: 'Déposé', label: 'Déposé', color: '#6366f1', icon: '↥' },
     { id: 'Terminé', label: 'Terminé', color: '#b0a08a', icon: '🏁' }
   ];
 
   const AO_STATUTS = {
-    'Visite RDV pris': { color: '#d97706', bg: '#fffbeb', icon: '📅' },
-    'En préparation': { color: '#007ab5', bg: '#eff6ff', icon: '📝' },
+    'Visite RDV pris': { color: '#d97706', bg: '#fffbeb', icon: '◫' },
+    'En préparation': { color: '#007ab5', bg: '#eff6ff', icon: '✎' },
     'En attente de réponse': { color: '#2563eb', bg: '#dbeafe', icon: '⏳' },
-    'À présenter': { color: '#0284c7', bg: '#e0f2fe', icon: '📤' },
+    'À présenter': { color: '#0284c7', bg: '#e0f2fe', icon: '↥' },
     'Remporté': { color: '#059669', bg: '#ecfdf5', icon: '🏆' },
-    'Non retenu': { color: '#6b7280', bg: '#f3f4f6', icon: '❌' },
+    'Non retenu': { color: '#6b7280', bg: '#f3f4f6', icon: '✕' },
     'Courrier demande de précisions': { color: '#7c3aed', bg: '#f5f3ff', icon: '✉️' },
     'Suite Refus': { color: '#94a3b8', bg: '#f8fafc', icon: '📨' },
   };
@@ -1861,7 +1861,7 @@ const SimulateurRuches = () => {
     { id: 'nouveau', label: 'Nouveau', icon: '🆕', color: '#64748b', bg: '#f8fafc', groupe: 'nouveaux' },
     { id: 'a_regarder', label: 'À Regarder', icon: '🐟', color: '#d97706', bg: '#fffbeb', groupe: 'suivis' },
     { id: 'en_attente_dce', label: 'En attente de DCE', icon: '📂', color: '#7c3aed', bg: '#f5f3ff', groupe: 'suivis' },
-    { id: 'en_analyse', label: 'En Analyse', icon: '🔍', color: '#0369a1', bg: '#f0f9ff', groupe: 'suivis' },
+    { id: 'en_analyse', label: 'En Analyse', icon: '⌕', color: '#0369a1', bg: '#f0f9ff', groupe: 'suivis' },
     { id: 'go_a_traiter', label: 'GO – À Traiter', icon: '⭐', color: '#15803d', bg: '#f0fdf4', groupe: 'suivis' },
     { id: 'no_go', label: 'No Go', icon: '👎', color: '#be123c', bg: '#fff1f2', groupe: 'archives' },
     { id: 'hors_cible', label: 'Hors cible', icon: '🚫', color: '#9ca3af', bg: '#f9fafb', groupe: 'archives' },
@@ -1981,20 +1981,20 @@ const SimulateurRuches = () => {
 
   // Planning Gantt
   const PLAN_PHASES = [
-    { id:'visite', label:'Visite', icon:'🏗️', color:'#f39c12' },
+    { id:'visite', label:'Visite', icon:'◆', color:'#f39c12' },
     { id:'chiffrage', label:'Chiffrage', icon:'🧮', color:'#e67e22' },
-    { id:'memoire', label:'Mémoire technique', icon:'📝', color:'#9b59b6' },
-    { id:'montage', label:'Montage dossier', icon:'📁', color:'#3498db' },
-    { id:'relecture', label:'Relecture', icon:'🔍', color:'#0ea5e9' },
-    { id:'depose', label:'Déposé', icon:'📤', color:'#e74c3c' },
+    { id:'memoire', label:'Mémoire technique', icon:'✎', color:'#9b59b6' },
+    { id:'montage', label:'Montage dossier', icon:'▸', color:'#3498db' },
+    { id:'relecture', label:'Relecture', icon:'⌕', color:'#0ea5e9' },
+    { id:'depose', label:'Déposé', icon:'↥', color:'#e74c3c' },
     { id:'execution', label:'Exécution', icon:'⚡', color:'#27ae60' },
-    { id:'termine', label:'Terminé', icon:'✅', color:'#16a34a' }
+    { id:'termine', label:'Terminé', icon:'✓', color:'#16a34a' }
   ];
   const PLAN_STATUTS = [
-    { id:'en_cours', label:'En cours', color:'#3498db', icon:'🔄' },
-    { id:'planifie', label:'Planifié', color:'#b0a08a', icon:'📅' },
-    { id:'en_retard', label:'En retard', color:'#e74c3c', icon:'⚠️' },
-    { id:'termine', label:'Terminé', color:'#27ae60', icon:'✅' },
+    { id:'en_cours', label:'En cours', color:'#3498db', icon:'↻' },
+    { id:'planifie', label:'Planifié', color:'#b0a08a', icon:'◫' },
+    { id:'en_retard', label:'En retard', color:'#e74c3c', icon:'▲' },
+    { id:'termine', label:'Terminé', color:'#27ae60', icon:'✓' },
     { id:'en_pause', label:'En pause', color:'#f39c12', icon:'⏸️' }
   ];
   const [planProjets, setPlanProjets] = useState([
@@ -2234,9 +2234,9 @@ const SimulateurRuches = () => {
   const [assTab, setAssTab] = useState('polices');
 
   // ═══════════════════════════════════════════════════════════════
-  // 🏗️ VERI OMURGASI — Entity Resolver & Cross-Navigation
+  // ◆ VERI OMURGASI — Entity Resolver & Cross-Navigation
   // ═══════════════════════════════════════════════════════════════
-  const FILIALES_REF = [{id:'yilmaz',label:'Yilmaz SAS',icon:'🐝'},{id:1,label:'La Roulotte',icon:'🚛'},{id:2,label:"L'Échafaudage",icon:'⚙️'},{id:3,label:'Ezel Bâtiment',icon:'🏢'},{id:6,label:"L'Étanchéité",icon:'💧'}];
+  const FILIALES_REF = [{id:'yilmaz',label:'Yilmaz SAS',icon:'🐝'},{id:1,label:'La Roulotte',icon:'▸'},{id:2,label:"L'Échafaudage",icon:'✱'},{id:3,label:'Ezel Bâtiment',icon:'▪'},{id:6,label:"L'Étanchéité",icon:'◦'}];
   const getEmploye = (id) => employes.find(e => e.id === id);
   const getEmployeNom = (id) => { const e = getEmploye(id); return e ? `${e.prenom} ${e.nom}` : '—'; };
   const getChantier = (id) => chantiers.find(c => c.id === id);
@@ -2249,7 +2249,7 @@ const SimulateurRuches = () => {
     return ref ? { id:ref.id, nom:ref.label, icon:ref.icon } : { nom:'—', icon:'❓' };
   };
   const getFilialeNom = (id) => getFiliale(id)?.nom || '—';
-  const getFilialeIcon = (id) => getFiliale(id)?.icon || '🏢';
+  const getFilialeIcon = (id) => getFiliale(id)?.icon || '▪';
   const getPresta = (id) => factExtData?.prestataires?.find(p => p.id === id);
   const getPrestaNom = (id) => getPresta(id)?.nom || '—';
   // ═══ ENTITY HIGHLIGHT STATE (for cross-module navigation) ═══
@@ -2292,7 +2292,7 @@ const SimulateurRuches = () => {
   );
   // ═══ DISPLAY HELPERS — derive names from central store ═══
   const EmpLink = ({id, style}) => { const e = getEmploye(id); return e ? <EntityLink type="employe" id={id} style={style}>{e.prenom} {e.nom}</EntityLink> : <span style={{color:'#999'}}>—</span>; };
-  const FilLink = ({id, style}) => { const f = getFiliale(id); return f ? <EntityLink type="filiale" id={id} style={style}>{f.icon || '🏢'} {f.nom}</EntityLink> : <span style={{color:'#999'}}>YILMAZ SAS</span>; };
+  const FilLink = ({id, style}) => { const f = getFiliale(id); return f ? <EntityLink type="filiale" id={id} style={style}>{f.icon || '▪'} {f.nom}</EntityLink> : <span style={{color:'#999'}}>YILMAZ SAS</span>; };
   const ChLink = ({id, style}) => { const c = getChantier(id); return c ? <EntityLink type="chantier" id={id} style={style}>{c.nom}</EntityLink> : <span style={{color:'#999'}}>—</span>; };
   const PrestaLink = ({id, style}) => { const p = getPresta(id); return p ? <EntityLink type="prestataire" id={id} style={style}>{p.nom}</EntityLink> : <span style={{color:'#999'}}>—</span>; };
   // Name-only helpers (for compact displays)
@@ -2325,10 +2325,10 @@ const SimulateurRuches = () => {
   };
   const isYilmazContext = !navEntreprise || navEntreprise === 'groupoy' || navEntreprise === 'yilmaz';
   const FILIALE_FILTER_OPTIONS = [
-    {id:1, nom:'La Roulotte', icon:'🚛', couleur:'#C49A2A'},
-    {id:2, nom:"L'Échafaudage", icon:'⚙️', couleur:'#6C3483'},
-    {id:3, nom:'Ezel Bâtiment', icon:'🏢', couleur:'#007ab5'},
-    {id:6, nom:"L'Étanchéité", icon:'💧', couleur:'#0e6655'}
+    {id:1, nom:'La Roulotte', icon:'▸', couleur:'#C49A2A'},
+    {id:2, nom:"L'Échafaudage", icon:'✱', couleur:'#6C3483'},
+    {id:3, nom:'Ezel Bâtiment', icon:'▪', couleur:'#007ab5'},
+    {id:6, nom:"L'Étanchéité", icon:'◦', couleur:'#0e6655'}
   ];
   const toggleFilialeFilter = (id) => {
     setFilialeFilter(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -2342,7 +2342,7 @@ const SimulateurRuches = () => {
       <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 20px',background:$bgSub,borderBottom:`1px solid ${$borderAlt}`,flexWrap:'wrap'}}>
         <span style={{fontSize:'0.72rem',color:$textSec,fontWeight:600,marginRight:4}}>Filtrer par filiale :</span>
         <button onClick={()=>setFilialeFilter([])} style={{padding:'4px 12px',borderRadius:crmRd,border:'1px solid '+(filialeFilter.length===0?'#8B6F47':'#d4cfc7'),background:filialeFilter.length===0?'#8B6F47':'white',color:filialeFilter.length===0?'white':'#6b5d4d',fontSize:'0.72rem',fontWeight:600,cursor:'pointer',transition:'all 0.2s'}}>
-          🏛️ Toutes
+          ◆ Toutes
         </button>
         {FILIALE_FILTER_OPTIONS.map(f => {
           const active = filialeFilter.includes(f.id);
@@ -2376,14 +2376,14 @@ const SimulateurRuches = () => {
     const formActive = formData.length > 0 ? formData : sampleFormDefault;
     formActive.filter(f => f.dateExpiration).forEach(f => {
       const d = daysDiff(f.dateExpiration);
-      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'formation',icon:'📋',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} expire dans ${d}j`,entityType:'formation',entityId:f.id,employeId:f.employeId});
+      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'formation',icon:'☰',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} expire dans ${d}j`,entityType:'formation',entityId:f.id,employeId:f.employeId});
       else if (d <= 0) alerts.push({type:'critical',module:'formation',icon:'🚨',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} EXPIRÉE (${Math.abs(d)}j)`,entityType:'formation',entityId:f.id,employeId:f.employeId});
     });
     // Contrats expiring
     const ctrActive = ctrData.length > 0 ? ctrData : sampleCtrDefault;
     ctrActive.filter(c => c.dateFin).forEach(c => {
       const d = daysDiff(c.dateFin);
-      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'contrats',icon:'📄',text:`Contrat "${c.titre}" expire dans ${d}j`,entityType:'contrat',entityId:c.id});
+      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'contrats',icon:'▫',text:`Contrat "${c.titre}" expire dans ${d}j`,entityType:'contrat',entityId:c.id});
       else if (d <= 0 && c.statut !== 'resilie') alerts.push({type:'critical',module:'contrats',icon:'🚨',text:`Contrat "${c.titre}" EXPIRÉ (${Math.abs(d)}j)`,entityType:'contrat',entityId:c.id});
     });
     // Assurances expiring
@@ -2396,7 +2396,7 @@ const SimulateurRuches = () => {
     // Absences en attente
     const absActive = absData.length > 0 ? absData : [];
     const pendingAbs = absActive.filter(a => a.statut === 'en_attente').length;
-    if (pendingAbs > 0) alerts.push({type:'info',module:'absences',icon:'📅',text:`${pendingAbs} demande${pendingAbs>1?'s':''} d'absence en attente`,entityType:'absence'});
+    if (pendingAbs > 0) alerts.push({type:'info',module:'absences',icon:'◫',text:`${pendingAbs} demande${pendingAbs>1?'s':''} d'absence en attente`,entityType:'absence'});
     // Tickets ouverts
     const tktActive = tktData.length > 0 ? tktData : [];
     const openTkts = tktActive.filter(t => t.statut === 'ouvert' || t.priorite === 'critique').length;
@@ -2408,11 +2408,11 @@ const SimulateurRuches = () => {
     // Factures à valider
     const rfActive = rfData.length > 0 ? rfData : [];
     const pendingRf = rfActive.filter(r => r.statut === 'a_valider').length;
-    if (pendingRf > 0) alerts.push({type:'info',module:'reception_factures',icon:'📥',text:`${pendingRf} facture${pendingRf>1?'s':''} en attente de validation`,entityType:'reception_facture'});
+    if (pendingRf > 0) alerts.push({type:'info',module:'reception_factures',icon:'↧',text:`${pendingRf} facture${pendingRf>1?'s':''} en attente de validation`,entityType:'reception_facture'});
     // BC non validés
     const bcActive = bcData.length > 0 ? bcData : [];
     const pendingBc = bcActive.filter(b => b.statut === 'brouillon' || b.statut === 'emis').length;
-    if (pendingBc > 0) alerts.push({type:'info',module:'bon_commande',icon:'📦',text:`${pendingBc} bon${pendingBc>1?'s':''} de commande en attente`,entityType:'bon_commande'});
+    if (pendingBc > 0) alerts.push({type:'info',module:'bon_commande',icon:'▣',text:`${pendingBc} bon${pendingBc>1?'s':''} de commande en attente`,entityType:'bon_commande'});
     // Onboarding en cours
     const obActive = obData.length > 0 ? obData : [];
     const activeOb = obActive.filter(o => o.statut === 'en_cours').length;
@@ -2420,26 +2420,26 @@ const SimulateurRuches = () => {
     // Dossier RH expirants
     const rhActive = rhData.length > 0 ? rhData : [];
     const expiringRh = rhActive.filter(r => r.statut === 'expire' || r.statut === 'expire_bientot').length;
-    if (expiringRh > 0) alerts.push({type:'warning',module:'dossier_rh',icon:'📁',text:`${expiringRh} document${expiringRh>1?'s':''} RH expiré${expiringRh>1?'s':''}`,entityType:'dossier_rh'});
+    if (expiringRh > 0) alerts.push({type:'warning',module:'dossier_rh',icon:'▸',text:`${expiringRh} document${expiringRh>1?'s':''} RH expiré${expiringRh>1?'s':''}`,entityType:'dossier_rh'});
     // Ordres de travail urgents
     const odtActive = odtData.length > 0 ? odtData : [];
     const urgentOdt = odtActive.filter(o => o.priorite === 'urgente' && !['termine','annule'].includes(o.statut)).length;
-    if (urgentOdt > 0) alerts.push({type:'critical',module:'ordres_travail',icon:'🏗️',text:`${urgentOdt} ordre${urgentOdt>1?'s':''} de travail URGENT${urgentOdt>1?'S':''}`,entityType:'ordre_travail'});
+    if (urgentOdt > 0) alerts.push({type:'critical',module:'ordres_travail',icon:'◆',text:`${urgentOdt} ordre${urgentOdt>1?'s':''} de travail URGENT${urgentOdt>1?'S':''}`,entityType:'ordre_travail'});
     const retardOdt = odtActive.filter(o => o.dateFin && new Date(o.dateFin) < now && !['termine','annule'].includes(o.statut)).length;
     if (retardOdt > 0) alerts.push({type:'warning',module:'ordres_travail',icon:'⏰',text:`${retardOdt} OT en retard`,entityType:'ordre_travail'});
     // Matériel — VGP/CT proches
     const matActive = matData.length > 0 ? matData : [];
     matActive.filter(m => m.dateVGP && m.statut !== 'reforme').forEach(m => {
       const d = daysDiff(m.dateVGP);
-      if (d > 0 && d <= 60) alerts.push({type:'warning',module:'materiel',icon:'🔧',text:`VGP ${m.nom} dans ${d}j`,entityType:'materiel'});
+      if (d > 0 && d <= 60) alerts.push({type:'warning',module:'materiel',icon:'✱',text:`VGP ${m.nom} dans ${d}j`,entityType:'materiel'});
       else if (d <= 0) alerts.push({type:'critical',module:'materiel',icon:'🚨',text:`VGP ${m.nom} DÉPASSÉ (${Math.abs(d)}j)`,entityType:'materiel'});
     });
     matActive.filter(m => m.dateCT && m.statut !== 'reforme').forEach(m => {
       const d = daysDiff(m.dateCT);
-      if (d > 0 && d <= 60) alerts.push({type:'warning',module:'materiel',icon:'🚛',text:`CT ${m.nom} dans ${d}j`,entityType:'materiel'});
+      if (d > 0 && d <= 60) alerts.push({type:'warning',module:'materiel',icon:'▸',text:`CT ${m.nom} dans ${d}j`,entityType:'materiel'});
     });
     const enPanneMat = matActive.filter(m => m.statut === 'panne').length;
-    if (enPanneMat > 0) alerts.push({type:'warning',module:'materiel',icon:'⚠️',text:`${enPanneMat} matériel${enPanneMat>1?'s':''} en panne`,entityType:'materiel'});
+    if (enPanneMat > 0) alerts.push({type:'warning',module:'materiel',icon:'▲',text:`${enPanneMat} matériel${enPanneMat>1?'s':''} en panne`,entityType:'materiel'});
     return alerts.sort((a,b) => {
       const prio = {critical:0, warning:1, info:2};
       return (prio[a.type]||9) - (prio[b.type]||9);
@@ -2502,7 +2502,7 @@ const SimulateurRuches = () => {
   };
 
   const viderEssaim = () => {
-    if (window.confirm('⚠️ ATTENTION ! Voulez-vous vraiment supprimer TOUT l\'Essaim ?')) {
+    if (window.confirm('▲ ATTENTION ! Voulez-vous vraiment supprimer TOUT l\'Essaim ?')) {
       setEmployes([]);
     }
   };
@@ -2588,10 +2588,10 @@ const SimulateurRuches = () => {
 
   const configBlocsPresentation = {
     histoire: { label: "L'Histoire de la Ruche", icon: '📖' },
-    bareme: { label: 'Barème de Performance', icon: '📊' },
+    bareme: { label: 'Barème de Performance', icon: '▦' },
     architecture: { label: "L'Architecture de la Ruche", icon: '🐝' },
-    grilles: { label: 'Grilles de Rémunération', icon: '💰' },
-    composition: { label: 'Composition de la Part Variable', icon: '📈' }
+    grilles: { label: 'Grilles de Rémunération', icon: '€' },
+    composition: { label: 'Composition de la Part Variable', icon: '↗' }
   };
 
   const configColonnes = {
@@ -2601,11 +2601,11 @@ const SimulateurRuches = () => {
     caMax:   { label: 'CA Max', sub: 'k€', group: 'CA' },
     fixe:    { label: '💵 Fixe', sub: null },
     prime:   { label: '🎁 Prime', sub: null },
-    varMin:  { label: '📈 Var. Min', sub: 'coeff 0.5', group: 'Variable' },
-    varMax:  { label: '📈 Var. Max', sub: 'coeff 1.3', group: 'Variable' },
-    salMin:  { label: '💰 Sal. Min', sub: null, group: 'Salaire' },
-    salMax:  { label: '💰 Sal. Max', sub: null, group: 'Salaire' },
-    ebe:     { label: '🎯 EBE Cible', sub: null },
+    varMin:  { label: '↗ Var. Min', sub: 'coeff 0.5', group: 'Variable' },
+    varMax:  { label: '↗ Var. Max', sub: 'coeff 1.3', group: 'Variable' },
+    salMin:  { label: '€ Sal. Min', sub: null, group: 'Salaire' },
+    salMax:  { label: '€ Sal. Max', sub: null, group: 'Salaire' },
+    ebe:     { label: '◎ EBE Cible', sub: null },
     plafond: { label: '🔝 Plafond', sub: null }
   };
 
@@ -2706,7 +2706,7 @@ const SimulateurRuches = () => {
         return { coeff: baremeRelatif[i].coeff, emoji: baremeRelatif[i].emoji, commentaire: baremeRelatif[i].commentaire, label: baremeRelatif[i].label };
       }
     }
-    return { coeff: 0, emoji: "❌", commentaire: "Objectif non atteint", label: "< Cible" };
+    return { coeff: 0, emoji: "✕", commentaire: "Objectif non atteint", label: "< Cible" };
   };
 
   // Calculs simulateur général
@@ -2950,7 +2950,7 @@ const SimulateurRuches = () => {
               {navEntreprise ? (
                 <>
                   <span onClick={() => { setNavService(null); setOngletActif('dashboard'); }} style={{cursor:'pointer', opacity: navService ? 0.6 : 1, transition:'opacity 0.2s'}} onMouseOver={e=>{ if(navService) e.currentTarget.style.opacity=1; }} onMouseOut={e=>{ if(navService) e.currentTarget.style.opacity=0.6; }}>
-                    {(() => { const e2 = {groupoy:'',yilmaz:'🏢',ezel:'🏗️',roulotte:'🚛',echafaudage:'⚙️',etancheite:'💧'}; return e2[navEntreprise]||''; })()} {SERVICES_CONFIG[navEntreprise]?.nom}
+                    {(() => { const e2 = {groupoy:'',yilmaz:'▪',ezel:'◆',roulotte:'▸',echafaudage:'✱',etancheite:'◦'}; return e2[navEntreprise]||''; })()} {SERVICES_CONFIG[navEntreprise]?.nom}
                   </span>
                   {navService && (
                     <>
@@ -2982,7 +2982,7 @@ const SimulateurRuches = () => {
             </div>
             {navEntreprise === 'yilmaz' && navService === 'direction' && crmLayout!=='sidebar' && (
               <div style={{display:'flex', gap:4, flexShrink:0}}>
-                {[{key:'widgets', label:'📊'}, {key:'services', label:'🏢'}, {key:'groupe', label:'🐝'}].map(tab => (
+                {[{key:'widgets', label:'▦'}, {key:'services', label:'▪'}, {key:'groupe', label:'🐝'}].map(tab => (
                   <div key={tab.key} onClick={() => setYilmazVue(tab.key)}
                     style={{padding:'3px 8px', borderRadius:crmRd, fontSize:'0.8rem', fontWeight:700, background: yilmazVue === tab.key ? '#8B6F47' : '#f0ebe3', color: yilmazVue === tab.key ? 'white' : '#b0a08a', cursor:'pointer', transition:'all 0.2s'}}>
                     {tab.label}
@@ -3055,7 +3055,7 @@ const SimulateurRuches = () => {
               <input type="password" placeholder="Ancien mot de passe" value={passwordForm.ancien} onChange={e => setPasswordForm({...passwordForm, ancien: e.target.value})} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
               <input type="password" placeholder="Nouveau mot de passe" value={passwordForm.nouveau} onChange={e => setPasswordForm({...passwordForm, nouveau: e.target.value})} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
               <input type="password" placeholder="Confirmer" value={passwordForm.confirmation} onChange={e => setPasswordForm({...passwordForm, confirmation: e.target.value})} onKeyDown={e => e.key==='Enter' && handleChangePassword()} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
-              {passwordMsg && <div style={{fontSize:'0.85rem', marginBottom:8, color: passwordMsg.startsWith('✅') ? '#16a34a' : '#dc2626'}}>{passwordMsg}</div>}
+              {passwordMsg && <div style={{fontSize:'0.85rem', marginBottom:8, color: passwordMsg.startsWith('✓') ? '#16a34a' : '#dc2626'}}>{passwordMsg}</div>}
               <div style={{display:'flex', gap:6}}>
                 <button onClick={handleChangePassword} style={{flex:1, padding:'6px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'0.9rem', cursor:'pointer', fontWeight:600}}>Valider</button>
                 <button onClick={() => { setShowChangePassword(false); setPasswordMsg(''); }} style={{padding:'6px 12px', background:'#eee', border:'none', borderRadius:crmRd, fontSize:'0.9rem', cursor:'pointer'}}>✕</button>
@@ -3256,7 +3256,7 @@ const SimulateurRuches = () => {
                 <span style={{fontSize:'0.85rem'}}>📂</span> Services de {SERVICES_CONFIG[navEntreprise].nom}
                 {navEntreprise === 'yilmaz' && isSuperAdmin() && (
                   <span onClick={(e) => { e.stopPropagation(); setShowServicesPanel(p => !p); }} style={{marginLeft:'auto', cursor:'pointer', fontSize:'0.82rem', color:$textMut, display:'flex', alignItems:'center', gap:4, padding:'2px 8px', borderRadius:crmRd, background: showServicesPanel ? $bgSub : 'transparent', transition:'background 0.2s'}}>
-                    ⚙️ <span style={{fontSize:'0.7rem', color:'#d4d0c8'}}>{SERVICES_CONFIG.yilmaz.services.filter(s => !hiddenServicesYilmaz.includes(s.id)).length}/{SERVICES_CONFIG.yilmaz.services.length}</span>
+                    ✱ <span style={{fontSize:'0.7rem', color:'#d4d0c8'}}>{SERVICES_CONFIG.yilmaz.services.filter(s => !hiddenServicesYilmaz.includes(s.id)).length}/{SERVICES_CONFIG.yilmaz.services.length}</span>
                   </span>
                 )}
               </div>
@@ -3282,7 +3282,7 @@ const SimulateurRuches = () => {
                       <div style={{textAlign:'right'}}>
                         {svc.hidden && hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.65rem', fontWeight:700, background:'#d97706', color:'white', padding:'1px 6px', borderRadius:crmRd}}>BIENTÔT</span>}
                         {!svc.hidden && hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#9ca3af', fontWeight:600}}>🔒 Masqué</span>}
-                        {!hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#059669', fontWeight:600}}>✅ Affiché</span>}
+                        {!hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#059669', fontWeight:600}}>✓ Affiché</span>}
                       </div>
                     </div>
                   ))}
@@ -3365,7 +3365,7 @@ const SimulateurRuches = () => {
           {navService && navEntreprise && !navKeepCards && (() => {
             const filAcc = CRM_FIL_ACC[navEntreprise] || crmAcc;
             const svcLabel = SERVICES_CONFIG[navEntreprise]?.services.find(s=>s.id===navService)?.label || navService;
-            const svcIcon = SERVICES_CONFIG[navEntreprise]?.services.find(s=>s.id===navService)?.icon || '📁';
+            const svcIcon = SERVICES_CONFIG[navEntreprise]?.services.find(s=>s.id===navService)?.icon || '▸';
             return (
               <div style={{display:'flex', alignItems:'center', gap:0, marginBottom:'0.75rem', borderRadius:crmRd, overflow:'hidden', border:`1px solid ${filAcc}40`, background:$bgCard, boxShadow:`0 2px 8px ${filAcc}18`}}>
                 <button onClick={() => navigateToGroupe()} style={{display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:'transparent', border:'none', cursor:'pointer', color:$textMut, fontSize:'0.8rem', fontWeight:500, fontFamily:'inherit', transition:'background 0.15s', flexShrink:0}} onMouseOver={e=>e.currentTarget.style.background=$bgSub} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
@@ -3394,59 +3394,59 @@ const SimulateurRuches = () => {
           {navService && navEntreprise && (() => {
             const moduleIcons = {
               crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
-              kpi_dashboard: { icon: '📊', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
-              dashboard: { icon: '📊', label: 'Tableau de Bord', desc: "KPI, finances et vue d'ensemble", color: '#e67e22' },
-              ezel_tableau: { icon: '🏗️', label: 'Monday · Affaires Live', desc: '81 affaires · Études AO · données temps réel', color: '#007ab5' },
-              suivi_dossiers: { icon: '📋', label: 'Suivi des Dossiers AO', desc: '345 dossiers · filtre statut/marché/délai · Monday live', color: '#dc2626' },
-              svc_kpi: { icon: '📈', label: 'Statistiques', desc: 'Taux de succès · pipeline · analyse par type de marché', color: '#7c3aed' },
-              veille_ao: { icon: '🔍', label: 'Veille AO', desc: 'Recherche et import AO publics (SPIGAO / BOAMP)', color: '#3b82f6' },
-              planning_gantt: { icon: '📊', label: 'Planning Gantt', desc: 'Vue chronologique des projets', color: '#ea580c' },
-              calendrier_svc: { icon: '📅', label: 'Calendrier', desc: 'Vue calendrier et sync Google', color: '#dc2626' },
-              processus_svc: { icon: '📋', label: 'Processus & Procédures', desc: 'Étapes et workflow du service', color: '#7c3aed' },
-              collaborateurs: { icon: '👥', label: 'Collaborateurs', desc: 'Gestion des employés et équipes', color: '#2ecc71' },
-              postes: { icon: '💼', label: 'Postes & Fiches', desc: 'Fiches de poste et référentiel', color: '#3498db' },
+              kpi_dashboard: { icon: '▦', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
+              dashboard: { icon: '▦', label: 'Tableau de Bord', desc: "KPI, finances et vue d'ensemble", color: '#e67e22' },
+              ezel_tableau: { icon: '◆', label: 'Monday · Affaires Live', desc: '81 affaires · Études AO · données temps réel', color: '#007ab5' },
+              suivi_dossiers: { icon: '☰', label: 'Suivi des Dossiers AO', desc: '345 dossiers · filtre statut/marché/délai · Monday live', color: '#dc2626' },
+              svc_kpi: { icon: '↗', label: 'Statistiques', desc: 'Taux de succès · pipeline · analyse par type de marché', color: '#7c3aed' },
+              veille_ao: { icon: '⌕', label: 'Veille AO', desc: 'Recherche et import AO publics (SPIGAO / BOAMP)', color: '#3b82f6' },
+              planning_gantt: { icon: '▦', label: 'Planning Gantt', desc: 'Vue chronologique des projets', color: '#ea580c' },
+              calendrier_svc: { icon: '◫', label: 'Calendrier', desc: 'Vue calendrier et sync Google', color: '#dc2626' },
+              processus_svc: { icon: '☰', label: 'Processus & Procédures', desc: 'Étapes et workflow du service', color: '#7c3aed' },
+              collaborateurs: { icon: '◉', label: 'Collaborateurs', desc: 'Gestion des employés et équipes', color: '#2ecc71' },
+              postes: { icon: '▪', label: 'Postes & Fiches', desc: 'Fiches de poste et référentiel', color: '#3498db' },
               presentation: { icon: '🐝', label: 'Modèle Ruches', desc: 'Philosophie, niveaux de rémunération, fonctionnement du système ruches', color: '#9b59b6' },
-              organigramme: { icon: '🏢', label: 'Organigramme', desc: 'Structure et hiérarchie', color: '#1abc9c' },
+              organigramme: { icon: '▪', label: 'Organigramme', desc: 'Structure et hiérarchie', color: '#1abc9c' },
               simulateur: { icon: '🧮', label: 'Simulateur', desc: 'Simulation de rémunération', color: '#f39c12' },
-              suivi: { icon: '📈', label: 'Suivi de l\'Essaim', desc: 'Suivi des performances', color: '#e74c3c' },
-              admin: { icon: '⚙️', label: 'Administration', desc: 'Gestion des droits et structure', color: '#7f8c8d' },
+              suivi: { icon: '↗', label: 'Suivi de l\'Essaim', desc: 'Suivi des performances', color: '#e74c3c' },
+              admin: { icon: '✱', label: 'Administration', desc: 'Gestion des droits et structure', color: '#7f8c8d' },
               presentation_groupe: { icon: '🌐', label: 'Présentation Group', desc: 'Vitrine interactive du groupe', color: '#8B6F47' },
               // Direction
               roadmap: { icon: '🗺️', label: 'Feuille de Route', desc: 'Vision stratégique 2025-2035', color: '#6366f1' },
               // Finance
               fact_interne: { icon: '🧾', label: 'Facturation Interne', desc: 'Devis & factures YILMAZ → Filiales, temps passé', color: '#059669' },
-              fact_externe: { icon: '📥', label: 'Facturation Externe', desc: 'Réception factures prestataires → Pennylane', color: '#dc2626' },
-              budget: { icon: '📊', label: 'Budget Prévisionnel', desc: 'Budget annuel par filiale, suivi écarts prévu vs réel', color: '#8B6F47' },
-              tresorerie: { icon: '💰', label: 'Trésorerie', desc: 'Plan de trésorerie, prévisions cash-flow', color: '#d97706' },
-              analytique: { icon: '📊', label: 'Analytique', desc: 'Suivi analytique par chantier, filiale, projet', color: '#7c3aed' },
+              fact_externe: { icon: '↧', label: 'Facturation Externe', desc: 'Réception factures prestataires → Pennylane', color: '#dc2626' },
+              budget: { icon: '▦', label: 'Budget Prévisionnel', desc: 'Budget annuel par filiale, suivi écarts prévu vs réel', color: '#8B6F47' },
+              tresorerie: { icon: '€', label: 'Trésorerie', desc: 'Plan de trésorerie, prévisions cash-flow', color: '#d97706' },
+              analytique: { icon: '▦', label: 'Analytique', desc: 'Suivi analytique par chantier, filiale, projet', color: '#7c3aed' },
               // RH
-              recrutement: { icon: '📋', label: 'Recrutement', desc: 'Pipeline : Offre → Sélection → Entretien → Promesse', color: '#3b82f6' },
+              recrutement: { icon: '☰', label: 'Recrutement', desc: 'Pipeline : Offre → Sélection → Entretien → Promesse', color: '#3b82f6' },
               onboarding: { icon: '🚀', label: 'Onboarding', desc: 'Accueil nouveau collaborateur, checklist intégration', color: '#10b981' },
               offboarding: { icon: '👋', label: 'Offboarding', desc: 'Départ collaborateur, checklist sortie, solde de tout compte', color: '#ef4444' },
-              dossier_rh: { icon: '📁', label: 'Dossier du Personnel', desc: 'Documents administratifs, contrats, pièces justificatives', color: '#8B6F47' },
+              dossier_rh: { icon: '▸', label: 'Dossier du Personnel', desc: 'Documents administratifs, contrats, pièces justificatives', color: '#8B6F47' },
               formation: { icon: '🎓', label: 'Formation', desc: 'Plan de formation, habilitations BTP, CACES', color: '#8b5cf6' },
               absences: { icon: '🏖️', label: 'Absences & Congés', desc: 'Congés, arrêts maladie, planning absences', color: '#f97316' },
               // Achats & Prestataires
-              bon_commande: { icon: '📝', label: 'Bons de Commande', desc: 'Création et suivi BC vers prestataires/freelances', color: '#0891b2' },
-              suivi_presta: { icon: '👤', label: 'Suivi Prestataires', desc: 'Missions en cours, livrables, évaluation', color: '#7c3aed' },
-              reception_factures: { icon: '📥', label: 'Réception Factures', desc: 'Validation, rapprochement BC, export Pennylane', color: '#dc2626' },
+              bon_commande: { icon: '✎', label: 'Bons de Commande', desc: 'Création et suivi BC vers prestataires/freelances', color: '#0891b2' },
+              suivi_presta: { icon: '◉', label: 'Suivi Prestataires', desc: 'Missions en cours, livrables, évaluation', color: '#7c3aed' },
+              reception_factures: { icon: '↧', label: 'Réception Factures', desc: 'Validation, rapprochement BC, export Pennylane', color: '#dc2626' },
               catalogue_presta: { icon: '📇', label: 'Catalogue Prestataires', desc: 'Base freelances, compétences, tarifs, évaluations', color: '#059669' },
               // IT
-              outils: { icon: '🔧', label: 'Outils & Licences', desc: 'Inventaire logiciels, Monday, Pennylane, licences', color: '#6366f1' },
+              outils: { icon: '✱', label: 'Outils & Licences', desc: 'Inventaire logiciels, Monday, Pennylane, licences', color: '#6366f1' },
               tickets: { icon: '🎫', label: 'Tickets Support', desc: 'Demandes IT, incidents, résolution', color: '#ef4444' },
               // Juridique
               contrats: { icon: '📜', label: 'Contrats', desc: 'Suivi contrats clients, fournisseurs, sous-traitants', color: '#1e40af' },
               litiges: { icon: '⚡', label: 'Litiges', desc: 'Litiges en cours, provisions, suivi juridique', color: '#dc2626' },
               assurances: { icon: '🛡️', label: 'Assurances', desc: 'Polices, échéances, sinistres, décennale', color: '#059669' },
-              conformite: { icon: '✅', label: 'Conformité BTP', desc: 'DUERP, registres obligatoires, certifications', color: '#7c3aed' },
+              conformite: { icon: '✓', label: 'Conformité BTP', desc: 'DUERP, registres obligatoires, certifications', color: '#7c3aed' },
               // Exécution
-              ordres_travail: { icon: '📋', label: 'Ordres de Travail', desc: 'OT chantiers, consignes sécurité, suivi heures', color: '#f97316' },
+              ordres_travail: { icon: '☰', label: 'Ordres de Travail', desc: 'OT chantiers, consignes sécurité, suivi heures', color: '#f97316' },
               // Logistique & Parc
               parc_automobile: { icon: '🚗', label: 'Parc Automobile', desc: 'Véhicules, CT, assurance, km, conducteurs', color: '#0ea5e9' },
-              materiel: { icon: '🔧', label: 'Parc Matériel', desc: 'Engins, échafaudages, outillage, VGP', color: '#0891b2' },
+              materiel: { icon: '✱', label: 'Parc Matériel', desc: 'Engins, échafaudages, outillage, VGP', color: '#0891b2' },
               // Marketing
               identite: { icon: '🎨', label: 'Identité Visuelle', desc: 'Charte graphique, logos, couleurs, templates', color: '#ec4899' },
-              supports: { icon: '📄', label: 'Supports Commerciaux', desc: 'Plaquettes, cartes de visite, signalétique', color: '#f59e0b' },
+              supports: { icon: '▫', label: 'Supports Commerciaux', desc: 'Plaquettes, cartes de visite, signalétique', color: '#f59e0b' },
               web: { icon: '🌐', label: 'Présence Web', desc: 'Sites web, réseaux sociaux, e-réputation', color: '#3b82f6' },
               donnees_ref: { icon: '🗄️', label: 'Données de Référence', desc: 'Filiales, collaborateurs, véhicules, matériel, chantiers', color: '#6366f1' },
               parc_info: { icon: '💻', label: 'Parc Informatique', desc: 'Téléphones, ordinateurs, écrans, imprimantes, accessoires', color: '#7c3aed' }
@@ -3460,7 +3460,7 @@ const SimulateurRuches = () => {
                 </div>
                 <div style={{display:'grid', gridTemplateColumns:`repeat(auto-fill, minmax(${modCardSize==='xs'?'80px':modCardSize==='sm'?'110px':modCardSize==='md'?'130px':'150px'}, 1fr))`, gap: modCardSize==='xs'?'0.2rem':modCardSize==='sm'?'0.35rem':'0.5rem'}}>
                   {orderedMods.filter(modId => canView(modId)).map(modId => {
-                    const mod = moduleIcons[modId] || { icon: '📄', label: modId, desc: '', color: '#999' };
+                    const mod = moduleIcons[modId] || { icon: '▫', label: modId, desc: '', color: '#999' };
                     const isActiveModule = ongletActif === modId;
                     return (
                       <div key={modId}
@@ -3658,7 +3658,7 @@ const SimulateurRuches = () => {
       {modalEmploye && (
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:200}} onClick={() => setModalEmploye(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, padding:28, maxWidth:600, width:'100%', margin:'0 16px', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:`1px solid ${$border}`, maxHeight:'92vh', overflowY:'auto'}} onClick={e => e.stopPropagation()}>
-                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalEmploye === 'add' ? '➕ Nouveau Collaborateur' : '✏️ Modifier Collaborateur'}</div>
+                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalEmploye === 'add' ? '➕ Nouveau Collaborateur' : '✎ Modifier Collaborateur'}</div>
                   {(() => {
                     const f = employeForm; const u = (k,v) => setEmployeForm({...f, [k]:v});
                     const inS = {width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$border}`, fontSize:'0.95rem', outline:'none'};
@@ -3674,7 +3674,7 @@ const SimulateurRuches = () => {
                       </div>
                       <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
                         <div><label style={lbS}>Filiale</label><select style={inS} value={f.filialeId || ''} onChange={e => { const v = e.target.value; u('filialeId', v === 'yilmaz' ? 'yilmaz' : v ? Number(v) : 'yilmaz'); }}>
-                          <option value="yilmaz">🏛️ Yilmaz (Services Partagés)</option>
+                          <option value="yilmaz">◆ Yilmaz (Services Partagés)</option>
                           {filialesDynamiques.filter(f => f.holding !== 'GROUP OY').map(fi => <option key={fi.id} value={fi.id}>{fi.icon} {fi.nom}</option>)}
                         </select></div>
                         <div><label style={lbS}>Niveau Ruche</label><select style={inS} value={f.niveau} onChange={e => u('niveau', e.target.value)}>
@@ -3707,7 +3707,7 @@ const SimulateurRuches = () => {
                         <div><label style={lbS}>Anniversaire</label><input style={inS} type="date" value={f.anniversaire || ''} onChange={e => u('anniversaire', e.target.value)} /></div>
                       </div>
                       <div style={{background:$bgSub, borderRadius:crmRd, padding:14}}>
-                        <div style={{fontSize:'0.82rem', fontWeight:700, color:$accent, marginBottom:10, textTransform:'uppercase'}}>💰 Rémunération annuelle (€)</div>
+                        <div style={{fontSize:'0.82rem', fontWeight:700, color:$accent, marginBottom:10, textTransform:'uppercase'}}>€ Rémunération annuelle (€)</div>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12}}>
                           <div><label style={lbS}>Salaire Fixe</label><input style={inS} type="number" value={f.salaireFix} onChange={e => u('salaireFix', Number(e.target.value))} /></div>
                           <div><label style={lbS}>Prime Fixe</label><input style={inS} type="number" value={f.primeFix} onChange={e => u('primeFix', Number(e.target.value))} /></div>
@@ -3720,7 +3720,7 @@ const SimulateurRuches = () => {
                       </div>
                       {f.isResponsable && (
                       <div style={{background:$success+'12', borderRadius:crmRd, padding:14}}>
-                        <div style={{fontSize:'0.82rem', fontWeight:700, color:'#059669', marginBottom:10, textTransform:'uppercase'}}>📊 KPI Responsable</div>
+                        <div style={{fontSize:'0.82rem', fontWeight:700, color:'#059669', marginBottom:10, textTransform:'uppercase'}}>▦ KPI Responsable</div>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12}}>
                           <div><label style={lbS}>CA Géré (€)</label><input style={inS} type="number" value={f.caGere} onChange={e => u('caGere', Number(e.target.value))} /></div>
                           <div><label style={lbS}>Marge Brute %</label><input style={inS} type="number" value={f.margeBrutePct} onChange={e => u('margeBrutePct', Number(e.target.value))} min="0" max="100" /></div>
@@ -3728,7 +3728,7 @@ const SimulateurRuches = () => {
                         </div>
                       </div>)}
                       <div style={{display:'flex', gap:10, marginTop:8}}>
-                        <button onClick={saveEmploye} disabled={!f.nom || !f.prenom} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.prenom) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.prenom) ? 'not-allowed' : 'pointer'}}>{modalEmploye === 'add' ? '✅ Créer' : '💾 Enregistrer'}</button>
+                        <button onClick={saveEmploye} disabled={!f.nom || !f.prenom} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.prenom) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.prenom) ? 'not-allowed' : 'pointer'}}>{modalEmploye === 'add' ? '✓ Créer' : '💾 Enregistrer'}</button>
                         <button onClick={() => setModalEmploye(null)} style={{padding:'10px 20px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>Annuler</button>
                       </div>
                     </div>);
@@ -3741,7 +3741,7 @@ const SimulateurRuches = () => {
       {modalChantier && (
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:200}} onClick={() => setModalChantier(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, padding:28, maxWidth:600, width:'100%', margin:'0 16px', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:`1px solid ${$border}`, maxHeight:'92vh', overflowY:'auto'}} onClick={e => e.stopPropagation()}>
-                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalChantier === 'add' ? '➕ Nouveau Chantier' : '✏️ Modifier Chantier'}</div>
+                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalChantier === 'add' ? '➕ Nouveau Chantier' : '✎ Modifier Chantier'}</div>
                   {(() => {
                     const f = chantierForm; const u = (k,v) => setChantierForm({...f, [k]:v});
                     const inS = {width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$border}`, fontSize:'0.95rem', outline:'none'};
@@ -3776,7 +3776,7 @@ const SimulateurRuches = () => {
                         <div><label style={lbS}>Date fin prévue</label><input style={inS} type="date" value={f.dateFin} onChange={e => u('dateFin', e.target.value)} /></div>
                       </div>
                       <div style={{background:$success+'12', borderRadius:crmRd, padding:14}}>
-                        <div style={{fontSize:'0.82rem', fontWeight:700, color:'#059669', marginBottom:10, textTransform:'uppercase'}}>💰 Montants (€ HT)</div>
+                        <div style={{fontSize:'0.82rem', fontWeight:700, color:'#059669', marginBottom:10, textTransform:'uppercase'}}>€ Montants (€ HT)</div>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12}}>
                           <div><label style={lbS}>Montant Vente</label><input style={inS} type="number" value={f.montantVente} onChange={e => u('montantVente', e.target.value)} /></div>
                           <div><label style={lbS}>Budget HT</label><input style={inS} type="number" value={f.budgetHT} onChange={e => u('budgetHT', e.target.value)} /></div>
@@ -3789,7 +3789,7 @@ const SimulateurRuches = () => {
                         </div>)}
                       </div>
                       <div style={{display:'flex', gap:10, marginTop:8}}>
-                        <button onClick={saveChantier} disabled={!f.nom || !f.client} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.client) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.client) ? 'not-allowed' : 'pointer'}}>{modalChantier === 'add' ? '✅ Créer' : '💾 Enregistrer'}</button>
+                        <button onClick={saveChantier} disabled={!f.nom || !f.client} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.client) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.client) ? 'not-allowed' : 'pointer'}}>{modalChantier === 'add' ? '✓ Créer' : '💾 Enregistrer'}</button>
                         <button onClick={() => setModalChantier(null)} style={{padding:'10px 20px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>Annuler</button>
                       </div>
                     </div>);
@@ -3896,7 +3896,7 @@ const SimulateurRuches = () => {
       {confirmDelete && (
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:210}} onClick={() => setConfirmDelete(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, padding:28, maxWidth:420, width:'100%', margin:'0 16px', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:'1px solid #fecaca', textAlign:'center'}} onClick={e => e.stopPropagation()}>
-                  <div style={{fontSize:'2.5rem', marginBottom:12}}>⚠️</div>
+                  <div style={{fontSize:'2.5rem', marginBottom:12}}>▲</div>
                   <div style={{fontSize:'1rem', fontWeight:800, color:$text, marginBottom:8}}>Confirmer la suppression</div>
                   <div style={{fontSize:'0.95rem', color:$textSec, marginBottom:20}}>
                     Voulez-vous vraiment supprimer <strong style={{color:'#dc2626'}}>{confirmDelete.nom}</strong> ?

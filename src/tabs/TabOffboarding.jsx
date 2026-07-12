@@ -7,7 +7,7 @@ export default function TabOffboarding(__props) {
         const OFF_PHASES = [{id:'notification',l:'Notification',c:'#ef4444'},{id:'preparation',l:'Préparation du départ',c:'#f59e0b'},{id:'jour_depart',l:'Le jour du départ',c:'#3b82f6'},{id:'apres_depart',l:'Après le départ',c:'#10b981'}];
         const OFF_CHECKLISTS = {
           default: [
-            {cat:'📋 Administratif & Paie', items:[
+            {cat:'☰ Administratif & Paie', items:[
               {t:'Notification officielle (lettre RAR / convocation)',obligatoire:true,delai:'notification'},
               {t:'Certificat de travail préparé',obligatoire:true,delai:'preparation'},
               {t:'Attestation Pôle Emploi établie',obligatoire:true,delai:'jour_depart'},
@@ -22,7 +22,7 @@ export default function TabOffboarding(__props) {
               {t:'Lettre de notification remise en main propre / RAR',obligatoire:true,delai:'notification'},
               {t:'PV restitution signé',obligatoire:true,delai:'jour_depart'}
             ]},
-            {cat:'🏗️ BTP spécifique', items:[
+            {cat:'◆ BTP spécifique', items:[
               {t:'Radiation CIBTP (Caisse Congés Payés BTP)',obligatoire:true,delai:'apres_depart'},
               {t:'Restitution carte BTP',obligatoire:true,delai:'jour_depart'},
               {t:'Radiation mutuelle BTP (AG2R / PRO BTP)',obligatoire:true,delai:'apres_depart'},
@@ -67,7 +67,7 @@ export default function TabOffboarding(__props) {
               {t:'Signature email supprimée',obligatoire:true,delai:'jour_depart'},
               {t:'Retrait des listes de diffusion',obligatoire:true,delai:'jour_depart'}
             ]},
-            {cat:'📁 Dossiers & Archivage', items:[
+            {cat:'▸ Dossiers & Archivage', items:[
               {t:'Dossiers Google Drive transférés au successeur',obligatoire:true,delai:'preparation'},
               {t:'Archivage dossier salarié (contrat, avenants, etc.)',obligatoire:true,delai:'apres_depart'},
               {t:'Passation dossiers chantiers en cours',obligatoire:true,delai:'preparation'},
@@ -121,11 +121,11 @@ export default function TabOffboarding(__props) {
                 <div style={{fontSize:'0.82rem',color:$textMut,marginBottom:16}}>{offPosteDecision.collaborateur} — {offPosteDecision.poste}</div>
                 <div style={{display:'flex',flexDirection:'column',gap:8}}>
                   {[
-                    {id:'remplacer_cdi',label:'🔄 Remplacer (CDI)',desc:'Ouvrir le poste pour recrutement CDI',color:'#DC2626',action:()=>{const linkedPoste=postes.find(p=>p.titulaire===offPosteDecision.employeId);if(linkedPoste){setPostes(prev=>prev.map(p=>p.id===linkedPoste.id?{...p,statut:'ouvert',titulaire:null,besoinType:'remplacement',sousMotif:offPosteDecision.motif||'demission',urgence:'1_mois',dateBesoin:offPosteDecision.dateSortie||new Date().toISOString().slice(0,10),justification:'Remplacement suite départ '+offPosteDecision.collaborateur,historique:[...(p.historique||[]),{date:new Date().toISOString().slice(0,10),action:'Poste ouvert — remplacement CDI suite départ '+offPosteDecision.collaborateur,par:currentUser?.prenom||''}]}:p));}setOffPosteDecision(null);}},
-                    {id:'remplacer_temp',label:'⏱️ Remplacement temporaire (CDD/Intérim)',desc:'Remplacement provisoire — le titulaire reviendra',color:'#F59E0B',action:()=>{const linkedPoste=postes.find(p=>p.titulaire===offPosteDecision.employeId);if(linkedPoste){setPostes(prev=>prev.map(p=>p.id===linkedPoste.id?{...p,statut:'remplacement_temp',besoinType:'remplacement',sousMotif:offPosteDecision.motif||'arret_maladie',typeContrat:'cdd',urgence:'immediate',dateBesoin:new Date().toISOString().slice(0,10),justification:'Remplacement temporaire — '+offPosteDecision.collaborateur+' absent',historique:[...(p.historique||[]),{date:new Date().toISOString().slice(0,10),action:'Remplacement temporaire suite absence '+offPosteDecision.collaborateur,par:currentUser?.prenom||''}]}:p));}setOffPosteDecision(null);}},
+                    {id:'remplacer_cdi',label:'↻ Remplacer (CDI)',desc:'Ouvrir le poste pour recrutement CDI',color:'#DC2626',action:()=>{const linkedPoste=postes.find(p=>p.titulaire===offPosteDecision.employeId);if(linkedPoste){setPostes(prev=>prev.map(p=>p.id===linkedPoste.id?{...p,statut:'ouvert',titulaire:null,besoinType:'remplacement',sousMotif:offPosteDecision.motif||'demission',urgence:'1_mois',dateBesoin:offPosteDecision.dateSortie||new Date().toISOString().slice(0,10),justification:'Remplacement suite départ '+offPosteDecision.collaborateur,historique:[...(p.historique||[]),{date:new Date().toISOString().slice(0,10),action:'Poste ouvert — remplacement CDI suite départ '+offPosteDecision.collaborateur,par:currentUser?.prenom||''}]}:p));}setOffPosteDecision(null);}},
+                    {id:'remplacer_temp',label:'◷ Remplacement temporaire (CDD/Intérim)',desc:'Remplacement provisoire — le titulaire reviendra',color:'#F59E0B',action:()=>{const linkedPoste=postes.find(p=>p.titulaire===offPosteDecision.employeId);if(linkedPoste){setPostes(prev=>prev.map(p=>p.id===linkedPoste.id?{...p,statut:'remplacement_temp',besoinType:'remplacement',sousMotif:offPosteDecision.motif||'arret_maladie',typeContrat:'cdd',urgence:'immediate',dateBesoin:new Date().toISOString().slice(0,10),justification:'Remplacement temporaire — '+offPosteDecision.collaborateur+' absent',historique:[...(p.historique||[]),{date:new Date().toISOString().slice(0,10),action:'Remplacement temporaire suite absence '+offPosteDecision.collaborateur,par:currentUser?.prenom||''}]}:p));}setOffPosteDecision(null);}},
                     {id:'geler',label:'⏸️ Geler le poste',desc:'Besoin identifié mais pas de budget ou pas prioritaire',color:'#7C3AED',action:()=>{const linkedPoste=postes.find(p=>p.titulaire===offPosteDecision.employeId);if(linkedPoste){setPostes(prev=>prev.map(p=>p.id===linkedPoste.id?{...p,statut:'gele',titulaire:null,besoinType:'remplacement',sousMotif:offPosteDecision.motif||'demission',justification:'Poste gelé suite départ '+offPosteDecision.collaborateur+' — en attente décision',historique:[...(p.historique||[]),{date:new Date().toISOString().slice(0,10),action:'Poste gelé suite départ '+offPosteDecision.collaborateur,par:currentUser?.prenom||''}]}:p));}setOffPosteDecision(null);}},
-                    {id:'supprimer',label:'❌ Supprimer le poste',desc:'Le poste n\'est plus nécessaire',color:'#9CA3AF',action:()=>{setPostes(prev=>prev.filter(p=>p.titulaire!==offPosteDecision.employeId));setOffPosteDecision(null);}},
-                    {id:'rien',label:'📌 Ne rien faire pour l\'instant',desc:'Décision reportée — le poste reste Pourvu',color:'#6B7280',action:()=>setOffPosteDecision(null)},
+                    {id:'supprimer',label:'✕ Supprimer le poste',desc:'Le poste n\'est plus nécessaire',color:'#9CA3AF',action:()=>{setPostes(prev=>prev.filter(p=>p.titulaire!==offPosteDecision.employeId));setOffPosteDecision(null);}},
+                    {id:'rien',label:'▪ Ne rien faire pour l\'instant',desc:'Décision reportée — le poste reste Pourvu',color:'#6B7280',action:()=>setOffPosteDecision(null)},
                   ].map(opt=>(
                     <button key={opt.id} onClick={opt.action} style={{display:'flex',alignItems:'center',gap:12,padding:'12px 16px',borderRadius:crmRd,border:`1px solid ${opt.color}30`,background:opt.color+'08',cursor:'pointer',fontFamily:'inherit',textAlign:'left',transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=opt.color+'18'} onMouseLeave={e=>e.currentTarget.style.background=opt.color+'08'}>
                       <div><div style={{fontSize:'0.85rem',fontWeight:600,color:opt.color}}>{opt.label}</div><div style={{fontSize:'0.68rem',color:$textMut,marginTop:2}}>{opt.desc}</div></div>
@@ -138,12 +138,12 @@ export default function TabOffboarding(__props) {
             {/* Filtres row */}
             <div style={{display:'flex',justifyContent:'flex-end',alignItems:'center',marginBottom:20,flexWrap:'wrap',gap:6}}>
               <button onClick={()=>setOffSettingsOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${offSettingsOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:offSettingsOpen?$accentSub:'transparent',color:offSettingsOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                ⚙ Filtres & Colonnes {(offStatutFilter!=='tous'||offMotifFilter!=='tous')&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                ✱ Filtres & Colonnes {(offStatutFilter!=='tous'||offMotifFilter!=='tous')&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
               </button>
               {offStatutFilter!=='tous'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setOffStatutFilter('tous')}>✕ {offStatutFilter==='en_cours'?'En cours':'Terminé'}</span>}
               {offMotifFilter!=='tous'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setOffMotifFilter('tous')}>✕ {OFF_MOTIFS.find(m=>m.id===offMotifFilter)?.label||offMotifFilter}</span>}
             </div>
-            {/* ⚙ Filtres panel */}
+            {/* ✱ Filtres panel */}
             {offSettingsOpen&&<><div onClick={()=>setOffSettingsOpen(false)} style={{position:'fixed',inset:0,background:'transparent',zIndex:9997}}/><div style={{position:'fixed',top:210,right:20,width:320,maxHeight:'70vh',overflow:'auto',background:$bgCard,border:`1px solid ${$borderAlt}`,borderRadius:crmRd,padding:20,boxShadow:'0 12px 40px rgba(0,0,0,0.15)',zIndex:9998}} onClick={e=>e.stopPropagation()}>
               <div style={{marginBottom:14}}>
                 <div style={{fontSize:'0.7rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:8}}>Filtrer par statut</div>
@@ -190,7 +190,7 @@ export default function TabOffboarding(__props) {
                         <div style={{width:pct+'%', height:'100%', background: pct===100?`linear-gradient(90deg, ${$success}, #34d399)`:`linear-gradient(90deg, ${$warn}, #fbbf24)`, borderRadius:crmRd, transition:'width 0.5s ease-out'}}/>
                       </div>
                       {ob.statut==='en_cours'&&ob.employeId&&<div style={{marginBottom:10}}>
-                        <button onClick={(e)=>{e.stopPropagation();setOffPosteDecision({employeId:ob.employeId,collaborateur:ob.employeId?empNom(ob.employeId):ob.collaborateur,poste:ob.poste,motif:ob.motif,dateSortie:ob.dateSortie});}} style={{padding:'6px 12px',borderRadius:crmRd,border:`1px solid ${$warn}`,background:$warn+'08',color:$warn,fontSize:'0.72rem',fontWeight:600,cursor:'pointer',fontFamily:'inherit',display:'flex',alignItems:'center',gap:6,transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=$warn+'20'} onMouseLeave={e=>e.currentTarget.style.background=$warn+'08'}>📋 Décision du poste — Que faire après le départ ?</button>
+                        <button onClick={(e)=>{e.stopPropagation();setOffPosteDecision({employeId:ob.employeId,collaborateur:ob.employeId?empNom(ob.employeId):ob.collaborateur,poste:ob.poste,motif:ob.motif,dateSortie:ob.dateSortie});}} style={{padding:'6px 12px',borderRadius:crmRd,border:`1px solid ${$warn}`,background:$warn+'08',color:$warn,fontSize:'0.72rem',fontWeight:600,cursor:'pointer',fontFamily:'inherit',display:'flex',alignItems:'center',gap:6,transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=$warn+'20'} onMouseLeave={e=>e.currentTarget.style.background=$warn+'08'}>☰ Décision du poste — Que faire après le départ ?</button>
                       </div>}
                       {cats.map(cat => {
                         const catItems = ob.checklist.filter(c => c.cat === cat && (!obDetailCat || c.delai === obDetailCat));

@@ -66,7 +66,7 @@ export default function TabCollaborateurs(__props) {
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    <div style={{width:40,height:40,borderRadius:10,background:$accent,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>👥</div>
+                    <div style={{width:40,height:40,borderRadius:10,background:$accent,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>◉</div>
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Collaborateurs</h2>
@@ -100,7 +100,7 @@ export default function TabCollaborateurs(__props) {
               </div>
               <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
                 <button onClick={()=>setCollabFilterOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${collabFilterOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:collabFilterOpen?$accentSub:'transparent',color:collabFilterOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                  ⚙ Filtres & Colonnes {(collabFiltreFiliale.length>0||collabStatutFilter.length!==3||collabConditionFilter.length>0)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                  ✱ Filtres & Colonnes {(collabFiltreFiliale.length>0||collabStatutFilter.length!==3||collabConditionFilter.length>0)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
                 </button>
                 {collabFiltreFiliale.length>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setCollabFiltreFiliale([])}>✕ {collabFiltreFiliale.length} filiale{collabFiltreFiliale.length>1?'s':''}</span>}
                 {collabStatutFilter.length!==3&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$warn+'18',color:$warn,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setCollabStatutFilter(['actif','en_cours_arriver','en_cours_depart'])}>✕ Filtre statut</span>}
@@ -124,7 +124,7 @@ export default function TabCollaborateurs(__props) {
                     <span style={{fontSize:'0.7rem',fontWeight:700,color:$textMut}}>{count}</span>
                   </div>);
                   return(<div style={{display:'flex',flexDirection:'column',gap:2}}>
-                    <Chk id="yilmaz" label="🏢 Yilmaz" count={countByFil('yilmaz')} color="#2d2d2d"/>
+                    <Chk id="yilmaz" label="▪ Yilmaz" count={countByFil('yilmaz')} color="#2d2d2d"/>
                     <div style={{padding:'6px 8px 2px',fontSize:'0.65rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em'}}>Invest Loc</div>
                     {invLoc.map(f=><Chk key={f.id} id={f.id} label={f.icon+' '+f.nom} count={countByFil(f.id)} color={f.couleur} indent/>)}
                     <div style={{padding:'6px 8px 2px',fontSize:'0.65rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em'}}>Invest Exe</div>
@@ -190,7 +190,7 @@ export default function TabCollaborateurs(__props) {
                 const avgAnc=(()=>{const d=actifs.filter(e=>e.dateEntree).map(e=>(Date.now()-new Date(e.dateEntree))/(365.25*24*3600000));return d.length?(d.reduce((a,b)=>a+b,0)/d.length).toFixed(1)+' ans':'—';})();
                 const departs12m=anciens.filter(e=>e.dateFin&&new Date(e.dateFin)>new Date(Date.now()-365*24*3600000)).length;
                 const turnover=actifs.length>0?((departs12m/(actifs.length+departs12m))*100).toFixed(1)+'%':'0%';
-                return [{l:'Effectif actif',v:actifs.length,ic:'👥',c:$accent},{l:'Masse salariale',v:(masse/1000000).toFixed(2)+'M€',ic:'💰',c:$success},{l:'Arrêts / Conditions',v:conds.length,ic:'🏥',c:'#ff007f'},{l:'Ancienneté moy.',v:avgAnc,ic:'📅',c:$info},{l:'Turnover 12 mois',v:turnover,ic:'📊',c:$warn}];
+                return [{l:'Effectif actif',v:actifs.length,ic:'◉',c:$accent},{l:'Masse salariale',v:(masse/1000000).toFixed(2)+'M€',ic:'€',c:$success},{l:'Arrêts / Conditions',v:conds.length,ic:'🏥',c:'#ff007f'},{l:'Ancienneté moy.',v:avgAnc,ic:'◫',c:$info},{l:'Turnover 12 mois',v:turnover,ic:'▦',c:$warn}];
               })().map((c,i) => (
                 <div key={i} style={{background:$bgCard, border:`1px solid ${$border}`, borderRadius:crmRd, padding:'16px 18px', boxShadow:$shadow, position:'relative', overflow:'hidden', transition:'all 0.2s', cursor:'default'}}
                   onMouseEnter={e=>{e.currentTarget.style.borderColor=c.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
@@ -218,7 +218,7 @@ export default function TabCollaborateurs(__props) {
                 link.setAttribute('download','collaborateurs_groupoy.csv');
                 document.body.appendChild(link);link.click();document.body.removeChild(link);
                 }catch(err){console.error('CSV export error:',err);}
-              }} style={{padding:'7px 14px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,color:$textSec,fontWeight:600,fontSize:'0.78rem',cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=$bgCardHover} onMouseLeave={e=>e.currentTarget.style.background=$bgCard}>📤 CSV</button>
+              }} style={{padding:'7px 14px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,color:$textSec,fontWeight:600,fontSize:'0.78rem',cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=$bgCardHover} onMouseLeave={e=>e.currentTarget.style.background=$bgCard}>↥ CSV</button>
               <button onClick={()=>{window.print();}} style={{padding:'7px 14px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,color:$textSec,fontWeight:600,fontSize:'0.78rem',cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s'}} onMouseEnter={e=>e.currentTarget.style.background=$bgCardHover} onMouseLeave={e=>e.currentTarget.style.background=$bgCard}>🖨 Imprimer</button>
             </div>
             {/* ── Table ── */}
@@ -236,7 +236,7 @@ export default function TabCollaborateurs(__props) {
                     // Group by filiale for sticky headers
                     let lastFil = null;
                     return sortedEmployes.flatMap((emp, idx) => {
-                      const fil = filialesDynamiques.find(f=>f.id===(emp.filialeId||'yilmaz')) || {id:'yilmaz',nom:'Yilmaz SAS',icon:'🏢',couleur:'#555555'};
+                      const fil = filialesDynamiques.find(f=>f.id===(emp.filialeId||'yilmaz')) || {id:'yilmaz',nom:'Yilmaz SAS',icon:'▪',couleur:'#555555'};
                       const filId = fil.id;
                       const showHeader = filId !== lastFil;
                       if(showHeader) lastFil = filId;
@@ -251,7 +251,7 @@ export default function TabCollaborateurs(__props) {
                       const row = (()=>{
                         const idx2 = idx;
                     const total = (emp.salaireFix||0) + (emp.primeFix||0) + (emp.variable||0);
-                    const fil = filialesDynamiques.find(f => f.id === emp.filialeId) || {id:'yilmaz',nom:'Yilmaz',icon:'🏢',couleur:'#2d2d2d'};
+                    const fil = filialesDynamiques.find(f => f.id === emp.filialeId) || {id:'yilmaz',nom:'Yilmaz',icon:'▪',couleur:'#2d2d2d'};
                     const nbCh = getChantiersCollab(emp.id).length;
                     return (<tr key={emp.id} style={{borderBottom:`1px solid ${$borderLight}`, cursor:'pointer', transition:'background 0.1s', background:$bgSub+'60', opacity:(emp.statut||'actif')==='ancien'?0.5:1}} onMouseEnter={e=>e.currentTarget.style.background=$bgCardHover} onMouseLeave={e=>e.currentTarget.style.background=$bgSub+'60'}>
                       {collabVisibleCols.nom!==false&&(()=>{const empCond=emp.condition||(emp.arretMaladie?'arret_maladie':'');const condObj=empCond?COLLAB_CONDITIONS.find(c=>c.id===empCond):null;return <td onClick={() => {setCollabOngletId(emp.id);setCollabDetailTab('profil');}} style={{padding:'12px 14px'}}><div style={{fontWeight:600,fontSize:'0.84rem',color:condObj?$textMut:$text}}>{emp.prenom} {emp.nom}{condObj&&<span style={{fontSize:'0.6rem',padding:'1px 6px',background:condObj.color+'18',color:condObj.color,fontWeight:700,marginLeft:5,borderRadius:crmRd>0?20:2}}>{condObj.label}</span>}</div><div style={{fontSize:'0.7rem',color:$textMut}}>{emp.posteExterne||''}{emp.statutContrat==='externe'&&<span style={{fontSize:'0.6rem',padding:'1px 5px',background:$info+'15',color:$info,fontWeight:700,marginLeft:4,borderRadius:crmRd>0?20:2}}>EXTERNE</span>}{emp.statutContrat==='freelance'&&<span style={{fontSize:'0.6rem',padding:'1px 5px',background:$warn+'15',color:$warn,fontWeight:700,marginLeft:4,borderRadius:crmRd>0?20:2}}>FREE-LANCE</span>}</div></td>;})()}
@@ -272,7 +272,7 @@ export default function TabCollaborateurs(__props) {
                       {collabVisibleCols.resp!==false&&<td onClick={() => {setCollabOngletId(emp.id);setCollabDetailTab('profil');}} style={{padding:'12px 14px', textAlign:'center'}}>{emp.isResponsable ? '👑' : ''}</td>}
                       {collabVisibleCols.ch!==false&&<td onClick={() => {setCollabOngletId(emp.id);setCollabDetailTab('profil');}} style={{padding:'12px 14px', textAlign:'center', fontWeight:600, color:$textSec}}>{nbCh > 0 ? nbCh : '-'}</td>}
                       {collabVisibleCols.act!==false&&<td style={{padding:'6px 8px', textAlign:'center', whiteSpace:'nowrap'}}>
-                        <button onClick={(e) => { e.stopPropagation(); setEmployeForm({...emp}); setModalEmploye('edit'); }} style={{padding:'4px 8px', borderRadius:crmRd, border:`1px solid ${$border}`, background:'transparent', cursor:'pointer', fontSize:'0.78rem', color:$accent, marginRight:4}} title="Modifier">✏️</button>
+                        <button onClick={(e) => { e.stopPropagation(); setEmployeForm({...emp}); setModalEmploye('edit'); }} style={{padding:'4px 8px', borderRadius:crmRd, border:`1px solid ${$border}`, background:'transparent', cursor:'pointer', fontSize:'0.78rem', color:$accent, marginRight:4}} title="Modifier">✎</button>
                         <button onClick={(e) => { e.stopPropagation(); setConfirmDelete({type:'employe', id:emp.id, nom:`${emp.prenom} ${emp.nom}`}); }} style={{padding:'4px 8px', borderRadius:crmRd, border:'1px solid '+$danger+'30', background:$danger+'08', cursor:'pointer', fontSize:'0.78rem', color:$danger}} title="Supprimer">🗑️</button>
                       </td>}
                     </tr>);
@@ -291,7 +291,7 @@ export default function TabCollaborateurs(__props) {
               </div>
               <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(300px, 1fr))',gap:12}}>
                 {sortedEmployes.map(emp=>{
-                  const fil=filialesDynamiques.find(f=>f.id===emp.filialeId)||{id:'yilmaz',nom:'Yilmaz',icon:'🏢',couleur:'#2d2d2d'};
+                  const fil=filialesDynamiques.find(f=>f.id===emp.filialeId)||{id:'yilmaz',nom:'Yilmaz',icon:'▪',couleur:'#2d2d2d'};
                   const total=(emp.salaireFix||0)+(emp.primeFix||0)+(emp.variable||0);
                   const empSt=emp.statut||'actif';
                   const st=COLLAB_STATUTS.find(s=>s.id===empSt)||COLLAB_STATUTS[0];
@@ -332,7 +332,7 @@ export default function TabCollaborateurs(__props) {
                     const n=countByFil(f.id);const pct=employes.length>0?n/employes.length*100:0;
                     return(<div key={f.id||'yilmaz'} style={{marginBottom:10}}>
                       <div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}>
-                        <span style={{fontSize:'0.78rem',color:$textSec}}>{f.icon||'🏢'} {f.nom}</span>
+                        <span style={{fontSize:'0.78rem',color:$textSec}}>{f.icon||'▪'} {f.nom}</span>
                         <span style={{fontSize:'0.78rem',fontWeight:700,color:f.couleur||$accent}}>{n}</span>
                       </div>
                       <div style={{height:6,background:$bgSub,borderRadius:crmRd,overflow:'hidden'}}>
@@ -399,7 +399,7 @@ export default function TabCollaborateurs(__props) {
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}>
                 <button onClick={() => { setCollabOngletId(null); cancelEditCollab(); }} style={{padding:'8px 16px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.92rem', fontWeight:600, color:$textSec}}>← Retour</button>
                 <div style={{display:'flex', gap:8}}>
-                  <button onClick={() => { setEmployeForm({...emp}); setModalEmploye('edit'); }} style={{padding:'7px 14px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.88rem', fontWeight:600, color:'#2563eb'}}>✏️ Modifier</button>
+                  <button onClick={() => { setEmployeForm({...emp}); setModalEmploye('edit'); }} style={{padding:'7px 14px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, cursor:'pointer', fontSize:'0.88rem', fontWeight:600, color:'#2563eb'}}>✎ Modifier</button>
                   <button onClick={() => setConfirmDelete({type:'employe', id:emp.id, nom:`${emp.prenom} ${emp.nom}`})} style={{padding:'7px 14px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.88rem', fontWeight:600, color:'#dc2626'}}>🗑️ Supprimer</button>
                 </div>
               </div>
@@ -415,21 +415,21 @@ export default function TabCollaborateurs(__props) {
                       <div style={{fontSize:'0.88rem', color:$accent, fontWeight:700, marginTop:2}}>{emp.posteExterne} — <span style={{color:$textMut, fontWeight:500}}>{emp.posteInterne}</span></div>
                       <div style={{display:'flex', gap:6, marginTop:6, flexWrap:'wrap'}}>
                         <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:$accent+'15', color:$accent, fontWeight:800, fontSize:'0.75rem', border:`1px solid ${$border}`}}>{emp.niveau}</span>
-                        <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:$bgSub, color:$textSec, fontSize:'0.72rem', fontWeight:500}}>{fil ? `${fil.icon} ${fil.nom}` : '🏛️ Yilmaz'}</span>
-                        <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:(emp.statut==='actif'?$success:emp.statut==='ancien'?$danger:$warn)+'15', color:emp.statut==='actif'?$success:emp.statut==='ancien'?$danger:$warn, fontSize:'0.72rem', fontWeight:600}}>{emp.statut==='actif'?'✅ Actif':emp.statut==='ancien'?'🔴 Ancien':'🟡 '+emp.statut}</span>
+                        <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:$bgSub, color:$textSec, fontSize:'0.72rem', fontWeight:500}}>{fil ? `${fil.icon} ${fil.nom}` : '◆ Yilmaz'}</span>
+                        <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:(emp.statut==='actif'?$success:emp.statut==='ancien'?$danger:$warn)+'15', color:emp.statut==='actif'?$success:emp.statut==='ancien'?$danger:$warn, fontSize:'0.72rem', fontWeight:600}}>{emp.statut==='actif'?'✓ Actif':emp.statut==='ancien'?'🔴 Ancien':'🟡 '+emp.statut}</span>
                         {emp.isResponsable && <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:$warn+'15', color:$warn, fontSize:'0.72rem', fontWeight:600}}>👑 Responsable</span>}
                         <span style={{padding:'2px 10px', borderRadius:crmRd>0?20:2, background:$bgSub, color:$textMut, fontSize:'0.72rem'}}>{emp.statutContrat==='cdi'?'CDI':emp.statutContrat==='cdd'?'CDD':emp.statutContrat||'CDI'} — {calcAnciennete(emp.dateEntree)}</span>
                       </div>
                     </div>
                   </div>
                   <div style={{display:'flex', gap:4, alignItems:'flex-start'}}>
-                    {(() => { const posteLink = postes.find(p => p.titulaire === emp.id); return posteLink ? <button onClick={() => { setOngletActif('postes'); setPosteSelectionne(posteLink.id); }} style={{padding:'5px 12px', borderRadius:crmRd, background:$info+'12', border:'1px solid #bfdbfe', color:'#2563eb', fontSize:'0.72rem', fontWeight:600, cursor:'pointer'}}>📋 Fiche de poste</button> : null; })()}
+                    {(() => { const posteLink = postes.find(p => p.titulaire === emp.id); return posteLink ? <button onClick={() => { setOngletActif('postes'); setPosteSelectionne(posteLink.id); }} style={{padding:'5px 12px', borderRadius:crmRd, background:$info+'12', border:'1px solid #bfdbfe', color:'#2563eb', fontSize:'0.72rem', fontWeight:600, cursor:'pointer'}}>☰ Fiche de poste</button> : null; })()}
                   </div>
                 </div>
               </div>
               {/* Tabs */}
               <div style={{display:'flex',borderBottom:`1px solid ${$border}`,marginBottom:16,gap:0}}>
-                {[{id:'profil',l:'👤 Profil',},{id:'contrat',l:'📋 Contrat'},{id:'remuneration',l:'💰 Rémunération'},{id:'documents',l:'📁 Documents'},{id:'chantiers',l:'🏗️ Chantiers'},{id:'historique',l:'📈 Historique'}].map(t=>(
+                {[{id:'profil',l:'◉ Profil',},{id:'contrat',l:'☰ Contrat'},{id:'remuneration',l:'€ Rémunération'},{id:'documents',l:'▸ Documents'},{id:'chantiers',l:'◆ Chantiers'},{id:'historique',l:'↗ Historique'}].map(t=>(
                   <button key={t.id} onClick={()=>setCollabDetailTab(t.id)} style={{padding:'10px 16px',border:'none',borderBottom:collabDetailTab===t.id?`2px solid ${$accent}`:'2px solid transparent',background:'transparent',color:collabDetailTab===t.id?$accent:$textMut,fontWeight:collabDetailTab===t.id?700:400,fontSize:'0.78rem',cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s'}}>{t.l}</button>
                 ))}
               </div>
@@ -463,7 +463,7 @@ export default function TabCollaborateurs(__props) {
                       {[
                         {l:'Email professionnel',v:emp.email,icon:'📧'},
                         {l:'Email personnel',v:emp.emailPerso,icon:'📬'},
-                        {l:'Téléphone fixe',v:emp.telFixe,icon:'📞'},
+                        {l:'Téléphone fixe',v:emp.telFixe,icon:'✆'},
                         {l:'Portable',v:emp.portable,icon:'📱'},
                         {l:'Téléphone personnel',v:emp.telPerso,icon:'📲'},
                         {l:'Adresse',v:emp.adresse,icon:'🏠'},
@@ -484,19 +484,19 @@ export default function TabCollaborateurs(__props) {
                 {/* Quick stats */}
                 <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12, marginTop:16}}>
                   <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>🎂 Naissance</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{emp.dateNaissance ? new Date(emp.dateNaissance).toLocaleDateString('fr-FR') : '-'}</div><div style={{fontSize:'0.82rem', color:$textMut}}>{calcAge(emp.dateNaissance)} ans</div></div>
-                  <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>📅 Entrée</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{emp.dateEntree ? new Date(emp.dateEntree).toLocaleDateString('fr-FR') : '-'}</div><div style={{fontSize:'0.82rem', color:$textMut}}>{calcAnciennete(emp.dateEntree)}</div></div>
-                  <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>🏢 Filiale</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{fil ? `${fil.icon} ${fil.nom}` : '🏛️ Yilmaz'}</div></div>
+                  <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>◫ Entrée</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{emp.dateEntree ? new Date(emp.dateEntree).toLocaleDateString('fr-FR') : '-'}</div><div style={{fontSize:'0.82rem', color:$textMut}}>{calcAnciennete(emp.dateEntree)}</div></div>
+                  <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>▪ Filiale</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{fil ? `${fil.icon} ${fil.nom}` : '◆ Yilmaz'}</div></div>
                   <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}><div style={{fontSize:'0.78rem', color:$textMut, fontWeight:600}}>📧 Email</div><div style={{fontWeight:700, fontSize:'0.95rem', color:$text}}>{emp.email || '-'}</div></div>
                 </div>
               </>)}
               {/* RÉMUNÉRATION TAB */}
               {collabDetailTab==='remuneration'&&(<>
-                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>💰 Rémunération Annuelle</div>
+                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>€ Rémunération Annuelle</div>
                 <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12, marginBottom:12}}>
                   <div style={{background:$info+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>💵 Fixe</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$info}}>{((emp.salaireFix||0)/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{((emp.salaireFix||0)/12).toFixed(0)}€/mois</div></div>
                   <div style={{background:$info+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>🎁 Prime</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$info}}>{((emp.primeFix||0)/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{((emp.primeFix||0)/12).toFixed(0)}€/mois</div></div>
-                  <div style={{background:$success+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>📈 Variable</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$success}}>{((emp.variable||0)/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{totalSalaire > 0 ? ((emp.variable||0)/totalSalaire*100).toFixed(0) : 0}% du total</div></div>
-                  <div style={{background:$warn+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$warn}30`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>💰 Total</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$warn}}>{(totalSalaire/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{(totalSalaire/12).toFixed(0)}€/mois</div></div>
+                  <div style={{background:$success+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>↗ Variable</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$success}}>{((emp.variable||0)/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{totalSalaire > 0 ? ((emp.variable||0)/totalSalaire*100).toFixed(0) : 0}% du total</div></div>
+                  <div style={{background:$warn+'08', borderRadius:crmRd, padding:14, border:`1px solid ${$warn}30`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>€ Total</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$warn}}>{(totalSalaire/1000).toFixed(0)}k€</div><div style={{fontSize:'0.68rem', color:$textMut}}>{(totalSalaire/12).toFixed(0)}€/mois</div></div>
                 </div>
                 <div style={{width:'100%', height:8, borderRadius:crmRd, overflow:'hidden', display:'flex', marginBottom:20}}>
                   <div style={{width:`${totalSalaire>0?(emp.salaireFix||0)/totalSalaire*100:0}%`, background:'#2563eb', height:'100%'}}></div>
@@ -507,8 +507,8 @@ export default function TabCollaborateurs(__props) {
                   <div style={{marginBottom:20}}>
                     <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>👑 KPI Responsable de Group</div>
                     <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:12}}>
-                      <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>📊 CA Géré</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$success}}>{(emp.caGere/1000000).toFixed(1)}M€</div></div>
-                      <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>📈 Marge Brute</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$info}}>{emp.margeBrutePct}%</div><div style={{fontSize:'0.78rem', color:$textMut}}>{(emp.caGere*emp.margeBrutePct/100/1000000).toFixed(2)}M€</div></div>
+                      <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>▦ CA Géré</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$success}}>{(emp.caGere/1000000).toFixed(1)}M€</div></div>
+                      <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>↗ Marge Brute</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$info}}>{emp.margeBrutePct}%</div><div style={{fontSize:'0.78rem', color:$textMut}}>{(emp.caGere*emp.margeBrutePct/100/1000000).toFixed(2)}M€</div></div>
                       <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>💎 EBE</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$info}}>{emp.ebePct}%</div><div style={{fontSize:'0.78rem', color:$textMut}}>{(emp.caGere*emp.ebePct/100/1000000).toFixed(2)}M€</div></div>
                       <div style={{background:$bgCard, borderRadius:crmRd, padding:14, border:`1px solid ${$border}`}}><div style={{fontSize:'0.7rem', color:$textMut, fontWeight:500, textTransform:'uppercase', letterSpacing:'0.04em'}}>🏆 Bénéfice</div><div style={{fontSize:'1.15rem', fontWeight:700, color:$warn}}>{(emp.caGere*emp.ebePct/100*0.75/1000000).toFixed(2)}M€</div><div style={{fontSize:'0.78rem', color:$textMut}}>après IS 25%</div></div>
                     </div>
@@ -517,17 +517,17 @@ export default function TabCollaborateurs(__props) {
               </>)}
               {/* CONTRAT TAB */}
               {collabDetailTab==='contrat'&&(<>
-                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>📋 Informations Contrat</div>
+                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>☰ Informations Contrat</div>
                 <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginBottom:16}}>
                   {[
-                    {l:'Type de contrat',v:emp.statutContrat==='cdi'?'CDI':emp.statutContrat==='cdd'?'CDD':emp.statutContrat==='interim'?'Intérim':emp.statutContrat||'CDI',icon:'📝'},
-                    {l:'Date d\'entrée',v:emp.dateEntree?new Date(emp.dateEntree).toLocaleDateString('fr-FR'):'—',icon:'📅'},
-                    {l:'Ancienneté',v:calcAnciennete(emp.dateEntree),icon:'⏱️'},
+                    {l:'Type de contrat',v:emp.statutContrat==='cdi'?'CDI':emp.statutContrat==='cdd'?'CDD':emp.statutContrat==='interim'?'Intérim':emp.statutContrat||'CDI',icon:'✎'},
+                    {l:'Date d\'entrée',v:emp.dateEntree?new Date(emp.dateEntree).toLocaleDateString('fr-FR'):'—',icon:'◫'},
+                    {l:'Ancienneté',v:calcAnciennete(emp.dateEntree),icon:'◷'},
                     {l:'Convention collective',v:'BTP — Bâtiment et Travaux Publics',icon:'📖'},
-                    {l:'Période d\'essai',v:emp.periodeEssai||((emp.statutContrat||'cdi')==='cdi'?'2 mois (renouvelable)':'1 mois'),icon:'🔄'},
+                    {l:'Période d\'essai',v:emp.periodeEssai||((emp.statutContrat||'cdi')==='cdi'?'2 mois (renouvelable)':'1 mois'),icon:'↻'},
                     {l:'Qualification',v:emp.qualification||emp.niveau,icon:'🏆'},
-                    {l:'Classification',v:emp.classification||'—',icon:'📊'},
-                    {l:'Temps de travail',v:emp.tempsPartiel?`Temps partiel (${emp.tempsPartiel}h/sem)`:'Temps plein (35h/sem)',icon:'🕐'},
+                    {l:'Classification',v:emp.classification||'—',icon:'▦'},
+                    {l:'Temps de travail',v:emp.tempsPartiel?`Temps partiel (${emp.tempsPartiel}h/sem)`:'Temps plein (35h/sem)',icon:'◷'},
                   ].map((f,i)=>(
                     <div key={i} style={{padding:'10px 14px', background:$bgSub, borderRadius:crmRd, border:`1px solid ${$borderLight}`}}>
                       <div style={{display:'flex', alignItems:'center', gap:6}}>
@@ -538,22 +538,22 @@ export default function TabCollaborateurs(__props) {
                   ))}
                 </div>
                 {emp.dateFin&&<div style={{padding:'10px 14px', background:$danger+'08', borderRadius:crmRd, border:`1px solid ${$danger}20`, marginBottom:12}}>
-                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$danger}}>📌 Date de fin de contrat : {new Date(emp.dateFin).toLocaleDateString('fr-FR')}</div>
+                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$danger}}>▪ Date de fin de contrat : {new Date(emp.dateFin).toLocaleDateString('fr-FR')}</div>
                 </div>}
                 {/* Alertes contrat */}
                 {emp.statutContrat==='cdd'&&<div style={{padding:'10px 14px', background:$warn+'08', borderRadius:crmRd, border:`1px solid ${$warn}20`}}>
-                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$warn}}>⚠️ CDD — Penser au renouvellement ou à la conversion en CDI</div>
+                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$warn}}>▲ CDD — Penser au renouvellement ou à la conversion en CDI</div>
                 </div>}
               </>)}
               {/* DOCUMENTS TAB */}
               {collabDetailTab==='documents'&&(<>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
-                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, textTransform:'uppercase', letterSpacing:'0.04em'}}>📁 Documents du collaborateur</div>
+                  <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, textTransform:'uppercase', letterSpacing:'0.04em'}}>▸ Documents du collaborateur</div>
                   <button onClick={()=>{setCollabDocAdding(true);setCollabDocType('contrat');setCollabDocNom('');setCollabDocUrl('');}} style={{padding:'4px 12px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, fontSize:'0.7rem', fontWeight:600, color:$accent, cursor:'pointer', fontFamily:'inherit'}}>+ Ajouter</button>
                 </div>
                 {collabDocAdding&&<div style={{padding:'10px 14px', background:$bgCard, borderRadius:crmRd, border:`1px solid ${$accent}30`, marginBottom:12}}>
                   <div style={{display:'flex', gap:4, marginBottom:8, flexWrap:'wrap'}}>
-                    {[{v:'contrat',l:'📝 Contrat'},{v:'avenant',l:'📋 Avenant'},{v:'cni',l:'🆔 CNI/Passeport'},{v:'rib',l:'💳 RIB'},{v:'permis',l:'🚗 Permis'},{v:'ss',l:'🏥 Carte vitale'},{v:'diplome',l:'🎓 Diplôme'},{v:'habilitation',l:'⚡ Habilitation'},{v:'visite_medicale',l:'🩺 Visite médicale'},{v:'attestation',l:'📄 Attestation'},{v:'autre',l:'📎 Autre'}].map(t=>(
+                    {[{v:'contrat',l:'✎ Contrat'},{v:'avenant',l:'☰ Avenant'},{v:'cni',l:'🆔 CNI/Passeport'},{v:'rib',l:'💳 RIB'},{v:'permis',l:'🚗 Permis'},{v:'ss',l:'🏥 Carte vitale'},{v:'diplome',l:'🎓 Diplôme'},{v:'habilitation',l:'⚡ Habilitation'},{v:'visite_medicale',l:'🩺 Visite médicale'},{v:'attestation',l:'▫ Attestation'},{v:'autre',l:'§ Autre'}].map(t=>(
                       <button key={t.v} onClick={()=>setCollabDocType(t.v)} style={{padding:'3px 8px', borderRadius:crmRd, border:`1px solid ${collabDocType===t.v?$accent:$border}`, background:collabDocType===t.v?$accent+'15':'transparent', color:collabDocType===t.v?$accent:$textSec, fontSize:'0.62rem', fontWeight:collabDocType===t.v?600:400, cursor:'pointer', fontFamily:'inherit'}}>{t.l}</button>
                     ))}
                   </div>
@@ -576,13 +576,13 @@ export default function TabCollaborateurs(__props) {
                     {type:'diplome',nom:'Diplôme',statut:'optionnel'},
                     {type:'habilitation',nom:'Habilitation électrique',statut:'optionnel'},
                   ].map((doc,i)=>{
-                    const typeIcons={contrat:'📝',avenant:'📋',cni:'🆔',rib:'💳',permis:'🚗',ss:'🏥',diplome:'🎓',habilitation:'⚡',visite_medicale:'🩺',attestation:'📄',autre:'📎'};
+                    const typeIcons={contrat:'✎',avenant:'☰',cni:'🆔',rib:'💳',permis:'🚗',ss:'🏥',diplome:'🎓',habilitation:'⚡',visite_medicale:'🩺',attestation:'▫',autre:'§'};
                     const hasDoc = (emp.documents||[]).some(d=>d.type===doc.type);
                     return (<div key={i} style={{padding:'10px 14px', borderRadius:crmRd, border:`1px solid ${hasDoc?$success+'30':doc.statut==='requis'?$danger+'20':$borderLight}`, background:hasDoc?$success+'05':doc.statut==='requis'?$danger+'03':$bgSub, display:'flex', alignItems:'center', gap:10}}>
-                      <span style={{fontSize:'1rem'}}>{typeIcons[doc.type]||'📎'}</span>
+                      <span style={{fontSize:'1rem'}}>{typeIcons[doc.type]||'§'}</span>
                       <div style={{flex:1}}>
                         <div style={{fontSize:'0.75rem', fontWeight:600, color:$text}}>{doc.nom}</div>
-                        <div style={{fontSize:'0.62rem', color:hasDoc?$success:doc.statut==='requis'?$danger:$textMut, fontWeight:500}}>{hasDoc?'✅ Présent':doc.statut==='requis'?'❌ Manquant':'—'}</div>
+                        <div style={{fontSize:'0.62rem', color:hasDoc?$success:doc.statut==='requis'?$danger:$textMut, fontWeight:500}}>{hasDoc?'✓ Présent':doc.statut==='requis'?'✕ Manquant':'—'}</div>
                       </div>
                     </div>);
                   })}
@@ -590,12 +590,12 @@ export default function TabCollaborateurs(__props) {
               </>)}
               {/* HISTORIQUE TAB */}
               {collabDetailTab==='historique'&&(<>
-                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>📈 Parcours & Évolution</div>
+                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>↗ Parcours & Évolution</div>
                 <div style={{position:'relative', marginBottom:20}}>
                   <div style={{position:'absolute', left:12, top:0, bottom:0, width:2, background:$borderLight}}></div>
                   {(emp.historique||[]).sort((a,b) => new Date(b.date) - new Date(a.date)).map((evt, idx) => {
                     const tc = evt.type === 'Entrée' ? '#059669' : evt.type === 'Promotion' ? '#d97706' : evt.type === 'Changement' ? '#2563eb' : '#b0a08a';
-                    const typeIcon = evt.type === 'Entrée' ? '🚀' : evt.type === 'Promotion' ? '⬆️' : evt.type === 'Changement' ? '🔄' : '📌';
+                    const typeIcon = evt.type === 'Entrée' ? '🚀' : evt.type === 'Promotion' ? '⬆️' : evt.type === 'Changement' ? '↻' : '▪';
                     return (<div key={idx} style={{position:'relative', paddingLeft:36, paddingBottom:14}}>
                       <div style={{position:'absolute', left:7, top:6, width:12, height:12, borderRadius:crmRd, background:tc, border:'2px solid white'}}></div>
                       <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}>
@@ -614,7 +614,7 @@ export default function TabCollaborateurs(__props) {
               </>)}
               {/* CHANTIERS TAB */}
               {collabDetailTab==='chantiers'&&(<>
-                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>🏗️ Chantiers Assignés ({mesChantiers.length})</div>
+                <div style={{fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:12, textTransform:'uppercase', letterSpacing:'0.04em'}}>◆ Chantiers Assignés ({mesChantiers.length})</div>
                 {mesChantiers.length === 0 ? (<p style={{color:$textMut, fontStyle:'italic', fontSize:'0.92rem'}}>Aucun chantier assigné</p>) : (<>
                   <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:12, marginBottom:14}}>
                     <div style={{background:$success+'12', borderRadius:crmRd, padding:12, border:`1px solid ${$success}30`}}><div style={{fontSize:'0.78rem', color:$textMut}}>CA total</div><div style={{fontWeight:800, color:$success}}>{(totalChCA/1000000).toFixed(2)}M€</div></div>

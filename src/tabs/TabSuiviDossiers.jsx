@@ -82,11 +82,11 @@ export default function TabSuiviDossiers(__props) {
           const getPrio = p => PRIO_CFG[p] || { color:'#9ca3af', bg:'#f3f4f6', dot:'#d1d5db' };
 
           const TYPE_MARCHE_CFG = {
-            'Marché public':      { color:'#0055cc', bg:'#e0f0ff', dot:'#0055cc', emoji:'🏛️' },
-            'Marché privé':       { color:'#166534', bg:'#dcfce7', dot:'#16a34a', emoji:'🏢' },
+            'Marché public':      { color:'#0055cc', bg:'#e0f0ff', dot:'#0055cc', emoji:'◆' },
+            'Marché privé':       { color:'#166534', bg:'#dcfce7', dot:'#16a34a', emoji:'▪' },
             'Marché particulier': { color:'#7c3aed', bg:'#f3e8ff', dot:'#9333ea', emoji:'🏠' },
           };
-          const getTM = tm => TYPE_MARCHE_CFG[tm] || { color:'#6b7280', bg:'#f3f4f6', dot:'#9ca3af', emoji:'📋' };
+          const getTM = tm => TYPE_MARCHE_CFG[tm] || { color:'#6b7280', bg:'#f3f4f6', dot:'#9ca3af', emoji:'☰' };
 
           const today = new Date(); today.setHours(0,0,0,0);
           const daysLeft = dl => { if(!dl) return null; const d = new Date(dl); d.setHours(0,0,0,0); return Math.ceil((d - today) / 86400000); };
@@ -182,7 +182,7 @@ export default function TabSuiviDossiers(__props) {
                             {ao.p && <span style={{padding:'3px 9px', borderRadius:10, background:prio.bg, color:prio.color, fontSize:'0.71rem', fontWeight:700}}>{ao.p}</span>}
                             {ao.tp && <span style={{padding:'3px 9px', borderRadius:10, background:$bgSub, color:$textSec, fontSize:'0.71rem', fontWeight:600, border:"1px solid "+$border}}>{ao.tp}</span>}
                             {dl !== null && dl >= 0 && dl <= 7 && <span style={{padding:'3px 9px', borderRadius:10, background:'#fee2e2', color:'#dc2626', fontSize:'0.71rem', fontWeight:700}}>⏰ J-{dl}</span>}
-                            {dl !== null && dl < 0 && <span style={{padding:'3px 9px', borderRadius:10, background:'#fef3c7', color:'#92400e', fontSize:'0.71rem', fontWeight:700}}>⚠️ Dépassée</span>}
+                            {dl !== null && dl < 0 && <span style={{padding:'3px 9px', borderRadius:10, background:'#fef3c7', color:'#92400e', fontSize:'0.71rem', fontWeight:700}}>▲ Dépassée</span>}
                           </div>
                         </div>
                         <div style={{display:'flex', flexDirection:'column', gap:6, alignItems:'flex-end', flexShrink:0, marginLeft:14}}>
@@ -193,7 +193,7 @@ export default function TabSuiviDossiers(__props) {
 
                       {/* Tabs */}
                       <div style={{display:'flex', gap:2, marginBottom:14, background:$bgSub, borderRadius:crmRd, padding:3, width:'fit-content', flexWrap:'wrap'}}>
-                        {[{id:'general',label:'📋 Général'},{id:'equipe',label:'👥 Équipe'},{id:'dates',label:'📅 Dates'},{id:'taches',label:'✅ Tâches'},{id:'financier',label:'💰 Financier'},{id:'suivi',label:'📌 Suivi'},{id:'ia',label:'🤖 Analyse IA'}].map(t => (
+                        {[{id:'general',label:'☰ Général'},{id:'equipe',label:'◉ Équipe'},{id:'dates',label:'◫ Dates'},{id:'taches',label:'✓ Tâches'},{id:'financier',label:'€ Financier'},{id:'suivi',label:'▪ Suivi'},{id:'ia',label:'🤖 Analyse IA'}].map(t => (
                           <button key={t.id} onClick={()=>{ window.__aoDetailTab=t.id; setAoSelected(null); setTimeout(()=>setAoSelected(ao.id),0); }} style={{padding:'5px 13px', borderRadius:crmRd, fontSize:'0.74rem', fontWeight: aoDetailTab===t.id ? 700 : 500, background: aoDetailTab===t.id ? $bgCard : 'transparent', color: aoDetailTab===t.id ? $text : $textMut, border: aoDetailTab===t.id ? "1px solid "+$border : '1px solid transparent', cursor:'pointer'}}>{t.label}</button>
                         ))}
                       </div>
@@ -223,15 +223,15 @@ export default function TabSuiviDossiers(__props) {
                               <FIELD label="Jours restants" val={dl !== null ? (dl < 0 ? "Dépassée +"+Math.abs(dl)+"j" : dl === 0 ? "Aujourd'hui" : dl+" jours") : '—'} color={dlColor(dl)}/>
                               {ext.vo && ext.vo !== '—' && (<div style={{padding:'9px 12px',borderRadius:crmRd,background:ext.vo==='Oui'?'#dc262608':ext.vo==='Conseillée'?'#f59e0b08':$bgSub,border:'1px solid '+(ext.vo==='Oui'?'#dc262622':ext.vo==='Conseillée'?'#f59e0b22':'transparent')}}>
                                 <div style={{fontSize:'0.62rem',color:$textMut,textTransform:'uppercase',letterSpacing:'0.07em',fontWeight:700,marginBottom:3}}>Visite obligatoire</div>
-                                <div style={{fontSize:'0.83rem',fontWeight:700,color:ext.vo==='Oui'?'#dc2626':ext.vo==='Conseillée'?'#d97706':'#059669'}}>{ext.vo==='Oui'?'⚠️ Oui — obligatoire':ext.vo==='Conseillée'?'💡 Conseillée':'✅ Non requise'}</div>
+                                <div style={{fontSize:'0.83rem',fontWeight:700,color:ext.vo==='Oui'?'#dc2626':ext.vo==='Conseillée'?'#d97706':'#059669'}}>{ext.vo==='Oui'?'▲ Oui — obligatoire':ext.vo==='Conseillée'?'✧ Conseillée':'✓ Non requise'}</div>
                               </div>)}
                               <FIELD label="Dernière mise à jour" val={fmtDate(ao.u)}/>
                             </div>
                             {/* Drive + Monday */}
                             <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
-                              {ext.drive && (<a href={ext.drive} target="_blank" rel="noreferrer" style={{padding:'6px 13px',borderRadius:crmRd,background:'#1a73e815',color:'#1a73e8',border:'1px solid #1a73e833',fontSize:'0.75rem',fontWeight:700,textDecoration:'none',display:'flex',alignItems:'center',gap:5}}><span>📁</span> Dossier Google Drive</a>)}
+                              {ext.drive && (<a href={ext.drive} target="_blank" rel="noreferrer" style={{padding:'6px 13px',borderRadius:crmRd,background:'#1a73e815',color:'#1a73e8',border:'1px solid #1a73e833',fontSize:'0.75rem',fontWeight:700,textDecoration:'none',display:'flex',alignItems:'center',gap:5}}><span>▸</span> Dossier Google Drive</a>)}
                               <a href={"https://ezel-batiment.monday.com/boards/6470581185/views/159052052/item/"+ao.id} target="_blank" rel="noreferrer" style={{padding:'6px 13px',borderRadius:crmRd,background:'#0073ea15',color:'#0073ea',border:'1px solid #0073ea33',fontSize:'0.75rem',fontWeight:700,textDecoration:'none',display:'flex',alignItems:'center',gap:5}}><span>↗</span> Fiche Monday.com</a>
-                              <button onClick={()=>navigator.clipboard&&navigator.clipboard.writeText(ao.n)} style={{padding:'6px 13px',borderRadius:crmRd,background:$bgSub,color:$textSec,border:"1px solid "+$border,fontSize:'0.75rem',cursor:'pointer',display:'flex',alignItems:'center',gap:5}}><span>📋</span> Copier le nom</button>
+                              <button onClick={()=>navigator.clipboard&&navigator.clipboard.writeText(ao.n)} style={{padding:'6px 13px',borderRadius:crmRd,background:$bgSub,color:$textSec,border:"1px solid "+$border,fontSize:'0.75rem',cursor:'pointer',display:'flex',alignItems:'center',gap:5}}><span>☰</span> Copier le nom</button>
                             </div>
                           </div>
                         );
@@ -334,7 +334,7 @@ export default function TabSuiviDossiers(__props) {
                               <div style={{fontSize:'1.1rem',fontWeight:800,color:color}}>{date?date.split(' ')[0].split('-').reverse().join('/') :'—'}</div>
                               {d !== null && !done && (
                                 <div style={{fontSize:'0.7rem',color:color,marginTop:3,fontWeight:600}}>
-                                  {d<0 ? 'Passée ('+Math.abs(d)+' j)' : d===0 ? "Aujourd'hui ⚠️" : 'J-'+d}
+                                  {d<0 ? 'Passée ('+Math.abs(d)+' j)' : d===0 ? "Aujourd'hui ▲" : 'J-'+d}
                                 </div>
                               )}
                               {note && <div style={{fontSize:'0.65rem',color:$textMut,marginTop:3}}>{note}</div>}
@@ -345,9 +345,9 @@ export default function TabSuiviDossiers(__props) {
                           <div style={{display:'flex',flexDirection:'column',gap:12}}>
                             <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:9}}>
                               <DateCard label="Date limite de réponse" date={ao.d} icon="🔴" note="Deadline officielle MOA"/>
-                              <DateCard label="Date de dépôt effective" date={ext.dd||ao.d} icon="📤" note={ext.dd?'Dépôt effectué':'Prévue = deadline'}/>
-                              <DateCard label="Date de visite" date={ext.dv} icon="🏗️" note={ext.vo==='Oui'?'Visite obligatoire':ext.vo==='Conseillée'?'Visite conseillée':'Visite non requise'}/>
-                              <DateCard label="Dernière mise à jour" date={ao.u} icon="🔄" note="Dernière activité Monday"/>
+                              <DateCard label="Date de dépôt effective" date={ext.dd||ao.d} icon="↥" note={ext.dd?'Dépôt effectué':'Prévue = deadline'}/>
+                              <DateCard label="Date de visite" date={ext.dv} icon="◆" note={ext.vo==='Oui'?'Visite obligatoire':ext.vo==='Conseillée'?'Visite conseillée':'Visite non requise'}/>
+                              <DateCard label="Dernière mise à jour" date={ao.u} icon="↻" note="Dernière activité Monday"/>
                             </div>
                             {ext.dtx && (
                               <div style={{padding:'12px 14px',borderRadius:crmRd,background:'#059669'+10,border:'1px solid #05966930'}}>
@@ -360,10 +360,10 @@ export default function TabSuiviDossiers(__props) {
                               <div style={{fontSize:'0.68rem',fontWeight:700,color:$textMut,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:10}}>Chronologie du dossier</div>
                               <div style={{display:'flex',flexDirection:'column',gap:6}}>
                                 {[
-                                  {label:'AO identifié',date:ao.n.match(/^(\d{4}\.\d{2}\.\d{2})/)?.[1]?.replace(/\./g,'-'),icon:'🔍',done:true},
-                                  {label:'Visite terrain',date:ext.dv,icon:'🏗️',done:!!ext.dv&&diffJ(ext.dv)<0},
+                                  {label:'AO identifié',date:ao.n.match(/^(\d{4}\.\d{2}\.\d{2})/)?.[1]?.replace(/\./g,'-'),icon:'⌕',done:true},
+                                  {label:'Visite terrain',date:ext.dv,icon:'◆',done:!!ext.dv&&diffJ(ext.dv)<0},
                                   {label:'Date limite réponse',date:ao.d,icon:'⏰',done:!!ao.d&&dlDeadline<0},
-                                  {label:'Dépôt',date:ext.dd||ao.d,icon:'📤',done:['En attente de Réponse','En cours de négociation','Accepté 🍾','Projet en Cours de Réalisation','Projet Terminé'].includes(ao.s)},
+                                  {label:'Dépôt',date:ext.dd||ao.d,icon:'↥',done:['En attente de Réponse','En cours de négociation','Accepté 🍾','Projet en Cours de Réalisation','Projet Terminé'].includes(ao.s)},
                                   {label:'Résultat attendu',date:null,icon:'🏆',done:['Accepté 🍾','Projet en Cours de Réalisation','Projet Terminé'].includes(ao.s)},
                                 ].map((step,i)=>{
                                   const d = step.date?diffJ(step.date):null;
@@ -458,14 +458,14 @@ export default function TabSuiviDossiers(__props) {
                                     </>)}
                                   </div>
                                   <div style={{padding:'9px 6px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    {t.doc&&<a href={t.doc} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.8rem',textDecoration:'none',opacity:0.7}} title="Ouvrir document">📎</a>}
+                                    {t.doc&&<a href={t.doc} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.8rem',textDecoration:'none',opacity:0.7}} title="Ouvrir document">§</a>}
                                   </div>
                                 </div>
                               );})}
                             </div>
 
                             {!isReal&&<div style={{padding:'7px 12px',borderRadius:crmRd,background:$bgSub,fontSize:'0.67rem',color:$textMut,textAlign:'center'}}>
-                              💡 Tâches auto-calculées — sous-éléments Monday.com (board 6476016642) non encore synchronisés pour ce dossier.
+                              ✧ Tâches auto-calculées — sous-éléments Monday.com (board 6476016642) non encore synchronisés pour ce dossier.
                             </div>}
                           </div>
                         );
@@ -531,7 +531,7 @@ export default function TabSuiviDossiers(__props) {
                         <div style={{display:'flex', flexDirection:'column', gap:12}}>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:9}}>
                             <FIELD label="Statut courant" val={ao.s} color={cfg.color} accent/>
-                            <FIELD label="Groupe pipeline" val={getScfg(ao.s).group === 'actif' ? "🔥 Actif" : getScfg(ao.s).group === 'gagne' ? "🍾 Gagné" : "📁 Perdu"}/>
+                            <FIELD label="Groupe pipeline" val={getScfg(ao.s).group === 'actif' ? "🔥 Actif" : getScfg(ao.s).group === 'gagne' ? "🍾 Gagné" : "▸ Perdu"}/>
                             <FIELD label="Date limite" val={fmtDate(ao.d)} color={dl !== null && dl <= 7 ? '#dc2626' : $text}/>
                             <FIELD label="Urgence" val={dl !== null ? (dl < 0 ? "Dépassée" : dl === 0 ? "Aujourd'hui" : dl <= 3 ? "Critique" : dl <= 7 ? "Urgent" : dl <= 14 ? "À surveiller" : "Normal") : '—'} color={dl !== null ? (dl < 0 ? '#9ca3af' : dl <= 3 ? '#dc2626' : dl <= 7 ? '#f97316' : dl <= 14 ? '#d97706' : '#059669') : $textMut}/>
                           </div>
@@ -566,12 +566,12 @@ export default function TabSuiviDossiers(__props) {
                               <div style={{fontSize:'0.62rem', color:$textMut, textTransform:'uppercase', letterSpacing:'0.07em', fontWeight:700, marginBottom:6}}>Actions disponibles</div>
                               <div style={{display:'flex', gap:6, flexWrap:'wrap'}}>
                                 <a href={mondayLink} target="_blank" rel="noreferrer" style={{padding:'5px 11px', borderRadius:crmRd, background:'#0073ea15', color:'#0073ea', border:'1px solid #0073ea33', fontSize:'0.73rem', fontWeight:700, textDecoration:'none'}}>↗ Ouvrir dans Monday</a>
-                                <button onClick={()=>{ navigator.clipboard&&navigator.clipboard.writeText(ao.n); }} style={{padding:'5px 11px', borderRadius:crmRd, background:$bgSub, color:$textSec, border:"1px solid "+$border, fontSize:'0.73rem', cursor:'pointer'}}>📋 Copier le nom</button>
+                                <button onClick={()=>{ navigator.clipboard&&navigator.clipboard.writeText(ao.n); }} style={{padding:'5px 11px', borderRadius:crmRd, background:$bgSub, color:$textSec, border:"1px solid "+$border, fontSize:'0.73rem', cursor:'pointer'}}>☰ Copier le nom</button>
                                 {getScfg(ao.s).group === 'actif' && (
-                                  <button onClick={()=>setOngletActif('suivi_dossiers')} style={{padding:'5px 11px', borderRadius:crmRd, background:'#007ab515', color:'#007ab5', border:'1px solid #007ab533', fontSize:'0.73rem', fontWeight:700, cursor:'pointer'}}>📋 Voir dans Suivi Dossiers →</button>
+                                  <button onClick={()=>setOngletActif('suivi_dossiers')} style={{padding:'5px 11px', borderRadius:crmRd, background:'#007ab515', color:'#007ab5', border:'1px solid #007ab533', fontSize:'0.73rem', fontWeight:700, cursor:'pointer'}}>☰ Voir dans Suivi Dossiers →</button>
                                 )}
                                 {getExt(ao.id).drive && (
-                                  <a href={getExt(ao.id).drive} target="_blank" rel="noreferrer" style={{padding:'5px 11px', borderRadius:crmRd, background:'#1a73e815', color:'#1a73e8', border:'1px solid #1a73e833', fontSize:'0.73rem', fontWeight:700, textDecoration:'none'}}>📁 Dossier Drive</a>
+                                  <a href={getExt(ao.id).drive} target="_blank" rel="noreferrer" style={{padding:'5px 11px', borderRadius:crmRd, background:'#1a73e815', color:'#1a73e8', border:'1px solid #1a73e833', fontSize:'0.73rem', fontWeight:700, textDecoration:'none'}}>▸ Dossier Drive</a>
                                 )}
                               </div>
                             </div>
@@ -611,7 +611,7 @@ export default function TabSuiviDossiers(__props) {
                         const cctpText = iaCctpText[ao.id] || '';
                         const mode = iaMode[ao.id] || 'paste';
 
-                        const FILE_ICONS = {pdf:'📄',docx:'📝',doc:'📝',xlsx:'📊',xls:'📊',pptx:'📑',txt:'📃',default:'📎'};
+                        const FILE_ICONS = {pdf:'▫',docx:'✎',doc:'✎',xlsx:'▦',xls:'▦',pptx:'📑',txt:'📃',default:'§'};
                         const getIcon = name => FILE_ICONS[(name||'').split('.').pop().toLowerCase()] || FILE_ICONS.default;
                         const fmtSize = b => b>1048576?(b/1048576).toFixed(1)+'MB':b>1024?(b/1024).toFixed(0)+'KB':b+'B';
 
@@ -761,7 +761,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                 <div style={{display:'flex',gap:4}}>
                                   {['paste','file','gcs'].map(m=>(
                                     <button key={m} onClick={()=>setIaMode(p=>({...p,[ao.id]:m}))} style={{padding:'3px 9px',borderRadius:crmRd,border:'1px solid '+(mode===m?ACC:$border),background:mode===m?ACC+'15':'transparent',color:mode===m?ACC:$textMut,fontSize:'0.68rem',fontWeight:mode===m?700:400,cursor:'pointer'}}>
-                                      {m==='paste'?'✎ Coller texte':m==='file'?'📎 Fichiers':'☁ GCS'}
+                                      {m==='paste'?'✎ Coller texte':m==='file'?'§ Fichiers':'☁ GCS'}
                                     </button>
                                   ))}
                                 </div>
@@ -782,7 +782,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                   <div>
                                     <div style={{fontSize:'0.72rem',color:$textMut,marginBottom:8}}>Fichiers acceptés : PDF, DOCX, XLSX, TXT, CSV (max 10MB/fichier)</div>
                                     <label style={{display:'flex',alignItems:'center',gap:8,padding:'10px 14px',borderRadius:crmRd,border:'2px dashed '+ACC+'40',background:ACC+'05',cursor:'pointer',marginBottom:docs.length?8:0}}>
-                                      <span style={{fontSize:'1.2rem'}}>📎</span>
+                                      <span style={{fontSize:'1.2rem'}}>§</span>
                                       <div>
                                         <div style={{fontSize:'0.78rem',fontWeight:700,color:ACC}}>Cliquer pour ajouter des fichiers</div>
                                         <div style={{fontSize:'0.66rem',color:$textMut}}>PDF → analyse native · DOCX/XLSX → extraction texte</div>
@@ -818,7 +818,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                             </div>
 
                             {/* ── ERROR ── */}
-                            {iaError&&<div style={{padding:'10px 14px',borderRadius:crmRd,background:'#dc262610',border:'1px solid #dc262630',fontSize:'0.76rem',color:'#dc2626'}}>⚠ Erreur : {iaError}</div>}
+                            {iaError&&<div style={{padding:'10px 14px',borderRadius:crmRd,background:'#dc262610',border:'1px solid #dc262630',fontSize:'0.76rem',color:'#dc2626'}}>▲ Erreur : {iaError}</div>}
 
                             {/* ── LOADING ── */}
                             {iaLoading&&!iaResult&&(
@@ -952,7 +952,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                 <div style={{background:'linear-gradient(90deg,#007ab508,#007ab510)',border:'2px solid #007ab540',borderRadius:crmRd,padding:'14px 18px',marginBottom:14,display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:10,flex:1,minWidth:0}}>
                     <div style={{width:34,height:34,borderRadius:8,background:'#007ab5',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-                      <span style={{fontSize:'1rem',color:'#fff'}}>📋</span>
+                      <span style={{fontSize:'1rem',color:'#fff'}}>☰</span>
                     </div>
                     <div style={{minWidth:0}}>
                       <div style={{fontWeight:700,fontSize:'0.82rem',color:'#007ab5',marginBottom:2}}>Import depuis Veille AO</div>
@@ -983,11 +983,11 @@ Analyse cet AO et donne des recommandations stratégiques :
               <div style={{display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:10, marginBottom:14}}>
                 {[
                   { label:'Dossiers actifs', value:actifs.length, sub:'dont '+urgents.length+' urgents ≤14j', icon:'🔥', color:'#dc2626', bg:'#fff1f2', border:'#fecdd3' },
-                  { label:'Offres déposées', value:DATA_NO_DOUBLON.filter(a=>a.o>0).length, sub:fmtM(gagnes.reduce((s,a)=>s+a.o,0))+' CA gagné', icon:'📤', color:'#0369a1', bg:'#e0f2fe', border:'#bae6fd' },
-                  { label:'Taux de succès', value:tauxSucces+'%', sub:gagnes.length+' acceptés', icon:'✅', color:'#059669', bg:'#dcfce7', border:'#bbf7d0' },
-                  { label:'Visites à planifier', value:visitesEnAttente.length, sub:visitesEnAttente.length ? visitesEnAttente.slice(0,1).map(a=>a.m).join('')+' ...' : 'Aucune en attente', icon:'🏗️', color:visitesEnAttente.length>0?'#d97706':'#059669', bg:visitesEnAttente.length>0?'#fef3c7':'#dcfce7', border:visitesEnAttente.length>0?'#fde68a':'#bbf7d0' },
+                  { label:'Offres déposées', value:DATA_NO_DOUBLON.filter(a=>a.o>0).length, sub:fmtM(gagnes.reduce((s,a)=>s+a.o,0))+' CA gagné', icon:'↥', color:'#0369a1', bg:'#e0f2fe', border:'#bae6fd' },
+                  { label:'Taux de succès', value:tauxSucces+'%', sub:gagnes.length+' acceptés', icon:'✓', color:'#059669', bg:'#dcfce7', border:'#bbf7d0' },
+                  { label:'Visites à planifier', value:visitesEnAttente.length, sub:visitesEnAttente.length ? visitesEnAttente.slice(0,1).map(a=>a.m).join('')+' ...' : 'Aucune en attente', icon:'◆', color:visitesEnAttente.length>0?'#d97706':'#059669', bg:visitesEnAttente.length>0?'#fef3c7':'#dcfce7', border:visitesEnAttente.length>0?'#fde68a':'#bbf7d0' },
                   { label:'Urgents ≤14j', value:urgents.length, sub:urgents.length ? urgents[0].m||urgents[0].n.slice(0,20) : 'Aucun urgent', icon:'⏰', color: urgents.length > 0 ? '#dc2626' : '#059669', bg: urgents.length > 0 ? '#fee2e2' : '#dcfce7', border: urgents.length > 0 ? '#fca5a5' : '#bbf7d0' },
-                  { label:'Pipeline actif', value:fmtM(actifs.reduce((s,a)=>s+a.o,0)), sub:'Montant total offres', icon:'💰', color:'#b45309', bg:'#fef3c7', border:'#fde68a' },
+                  { label:'Pipeline actif', value:fmtM(actifs.reduce((s,a)=>s+a.o,0)), sub:'Montant total offres', icon:'€', color:'#b45309', bg:'#fef3c7', border:'#fde68a' },
                 ].map((s,i) => (
                   <div key={i} style={{background:s.bg, borderRadius:crmRd, border:`1px solid ${s.border}`, padding:'12px 14px'}}>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:4}}>
@@ -1008,7 +1008,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                     {[
                       { id:'actifs', label:'🔥 Actifs', count: DATA_NO_DOUBLON.filter(a=>getScfg(a.s).group==='actif').length },
                       { id:'gagnes', label:'🍾 Gagnés', count: gagnes.length },
-                      { id:'perdus', label:'📁 Perdus', count: perdus.length },
+                      { id:'perdus', label:'▸ Perdus', count: perdus.length },
                       { id:'tous',   label:'Tous',      count: DATA_NO_DOUBLON.length },
                     ].map(t => (
                       <button key={t.id} onClick={()=>setAoStatut(t.id)} style={{display:'flex', alignItems:'center', gap:5, padding:'5px 11px', borderRadius:crmRd, fontSize:'0.78rem', fontWeight:aoStatut===t.id?700:500, background:aoStatut===t.id?$bgCard:'transparent', color:aoStatut===t.id?$text:$textMut, border:aoStatut===t.id?`1px solid ${$border}`:'1px solid transparent', cursor:'pointer', boxShadow:aoStatut===t.id?'0 1px 3px rgba(0,0,0,0.06)':'none'}}>
@@ -1021,7 +1021,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                     <span style={{fontSize:'0.76rem', color:$textMut, fontWeight:500}}>{sorted.length} résultat{sorted.length>1?'s':''}</span>
                     {/* View toggle */}
                     <div style={{display:'flex', alignItems:'center', background:$bgSub, borderRadius:crmRd, padding:3, gap:2}}>
-                      {[{id:'tableau',label:'☰ Tableau'},{id:'kanban',label:'⬛ Kanban'},{id:'analytics',label:'📊 Analytics'}].map(v => (
+                      {[{id:'tableau',label:'☰ Tableau'},{id:'kanban',label:'⬛ Kanban'},{id:'analytics',label:'▦ Analytics'}].map(v => (
                         <button key={v.id} onClick={()=>setAoView(v.id)} style={{padding:'4px 10px', borderRadius:crmRd, fontSize:'0.75rem', fontWeight:aoView===v.id?700:500, background:aoView===v.id?$bgCard:'transparent', color:aoView===v.id?$text:$textMut, border:aoView===v.id?`1px solid ${$border}`:'1px solid transparent', cursor:'pointer', boxShadow:aoView===v.id?'0 1px 3px rgba(0,0,0,0.06)':'none'}}>{v.label}</button>
                       ))}
                     </div>
@@ -1031,7 +1031,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                 <div style={{display:'flex', alignItems:'center', gap:8, padding:'7px 14px', flexWrap:'wrap'}}>
                   {/* Search */}
                   <div style={{position:'relative', flex:'1', minWidth:200}}>
-                    <span style={{position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:$textMut, fontSize:'0.85rem'}}>🔍</span>
+                    <span style={{position:'absolute', left:9, top:'50%', transform:'translateY(-50%)', color:$textMut, fontSize:'0.85rem'}}>⌕</span>
                     <input value={aoSearch} onChange={e=>setAoSearch(e.target.value)} placeholder="Rechercher MOA, intitulé..." style={{width:'100%', padding:'6px 10px 6px 30px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgSub, fontSize:'0.79rem', color:$text, fontFamily:'inherit', boxSizing:'border-box'}}/>
                   </div>
                   {/* Sort */}
@@ -1104,7 +1104,7 @@ Analyse cet AO et donne des recommandations stratégiques :
               <div style={{background:$bgCard, border:`1px solid ${$border}`, borderRadius:crmRd, overflow:'hidden', boxShadow:$shadow}}>
                 {/* ── 1. Summary bar ── */}
                 <div style={{padding:'8px 16px', borderBottom:`1px solid ${$border}`, background:$bgSub, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                  <span style={{fontSize:'0.78rem', fontWeight:700, color:$text}}>📋 {sorted.length} dossier{sorted.length>1?'s':''}</span>
+                  <span style={{fontSize:'0.78rem', fontWeight:700, color:$text}}>☰ {sorted.length} dossier{sorted.length>1?'s':''}</span>
                 </div>
                 {/* ── 2. Active group header (CRM style, JS-updated) ── */}
                 {dosActiveGrp && (
@@ -1194,7 +1194,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                             return (<div key={key} onClick={()=>{ AO_RAW.find(a=>a.id===ao.id)&&(AO_RAW.find(a=>a.id===ao.id).s=sc.badge); setAoStatCellOpen(null); setAoSelected(null); setTimeout(()=>setAoSelected(ao.id),10); }} style={{display:'flex', alignItems:'center', gap:8, padding:'6px 12px', cursor:'pointer', background:cfg.badge===sc.badge?ACC+'12':'transparent', opacity:tmOk?1:0.4, transition:'background 0.1s'}} onMouseEnter={e=>{if(tmOk)e.currentTarget.style.background=ACC+'12'}} onMouseLeave={e=>e.currentTarget.style.background=cfg.badge===sc.badge?ACC+'12':'transparent'}>
                                               <span style={{width:8,height:8,borderRadius:'50%',background:sc.color,flexShrink:0}}/>
                                               <span style={{fontSize:'0.78rem', color:cfg.badge===sc.badge?ACC:$text, fontWeight:cfg.badge===sc.badge?600:400, flex:1}}>{sc.badge}</span>
-                                              {!tmOk && <span style={{fontSize:'0.58rem',color:'#9ca3af',fontStyle:'italic'}}>{sc.types?.includes('public')?'🏛️ Public':sc.types?.includes('prive')?'🏢 Privé':''}</span>}
+                                              {!tmOk && <span style={{fontSize:'0.58rem',color:'#9ca3af',fontStyle:'italic'}}>{sc.types?.includes('public')?'◆ Public':sc.types?.includes('prive')?'▪ Privé':''}</span>}
                                               {cfg.badge===sc.badge && <span style={{fontSize:'0.65rem',color:ACC}}>✓</span>}
                                             </div>);
                                           })}
@@ -1204,7 +1204,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                     </div></> );
                                   })()}
                                 </div>
-                                <div style={{fontSize:'0.73rem', color:$textSec}}>{ao.tm ? (ao.tm.includes('public')?'🏛️':ao.tm.includes('priv')?'🏢':'🏠') : '—'}</div>
+                                <div style={{fontSize:'0.73rem', color:$textSec}}>{ao.tm ? (ao.tm.includes('public')?'◆':ao.tm.includes('priv')?'▪':'🏠') : '—'}</div>
                                 <div style={{fontSize:'0.78rem', fontWeight:ao.o?600:400, color:ao.o?'#059669':$textMut}}>{fmtM(ao.o)}</div>
                                 <div style={{fontSize:'0.75rem', color:dlColor(dl), fontWeight:dl!==null&&dl<=7?700:400, whiteSpace:'nowrap'}}>{fmtDate(ao.d)}</div>
                                 <div>{dl !== null ? <span style={{padding:'2px 6px', borderRadius:6, background:dlColor(dl)+'22', color:dlColor(dl), fontSize:'0.69rem', fontWeight:700}}>{dl<0?'J+'+Math.abs(dl):dl===0?'Auj.':'J-'+dl}</span> : <span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>
@@ -1220,7 +1220,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                 })()}
                                 {(() => {
                                   const ext = getExt(ao.id);
-                                  return (<div>{ext.vo==='Oui'?<span style={{padding:'2px 5px',borderRadius:4,background:'#dc262615',color:'#dc2626',fontSize:'0.6rem',fontWeight:700}}>OBL</span>:ext.vo==='Conseillée'?<span style={{padding:'2px 5px',borderRadius:4,background:'#f59e0b15',color:'#d97706',fontSize:'0.6rem',fontWeight:700}}>CSL</span>:ext.drive?<span style={{fontSize:'0.65rem',color:'#1a73e8'}}>📁</span>:<span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>);
+                                  return (<div>{ext.vo==='Oui'?<span style={{padding:'2px 5px',borderRadius:4,background:'#dc262615',color:'#dc2626',fontSize:'0.6rem',fontWeight:700}}>OBL</span>:ext.vo==='Conseillée'?<span style={{padding:'2px 5px',borderRadius:4,background:'#f59e0b15',color:'#d97706',fontSize:'0.6rem',fontWeight:700}}>CSL</span>:ext.drive?<span style={{fontSize:'0.65rem',color:'#1a73e8'}}>▸</span>:<span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>);
                                 })()}
                               </div></React.Fragment>
                             );
@@ -1342,7 +1342,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                             return (<div key={key} onClick={()=>{ AO_RAW.find(a=>a.id===ao.id)&&(AO_RAW.find(a=>a.id===ao.id).s=sc.badge); setAoStatCellOpen(null); setAoSelected(null); setTimeout(()=>setAoSelected(ao.id),10); }} style={{display:'flex', alignItems:'center', gap:8, padding:'6px 12px', cursor:'pointer', background:cfg.badge===sc.badge?ACC+'12':'transparent', opacity:tmOk?1:0.4, transition:'background 0.1s'}} onMouseEnter={e=>{if(tmOk)e.currentTarget.style.background=ACC+'12'}} onMouseLeave={e=>e.currentTarget.style.background=cfg.badge===sc.badge?ACC+'12':'transparent'}>
                                               <span style={{width:8,height:8,borderRadius:'50%',background:sc.color,flexShrink:0}}/>
                                               <span style={{fontSize:'0.78rem', color:cfg.badge===sc.badge?ACC:$text, fontWeight:cfg.badge===sc.badge?600:400, flex:1}}>{sc.badge}</span>
-                                              {!tmOk && <span style={{fontSize:'0.58rem',color:'#9ca3af',fontStyle:'italic'}}>{sc.types?.includes('public')?'🏛️ Public':sc.types?.includes('prive')?'🏢 Privé':''}</span>}
+                                              {!tmOk && <span style={{fontSize:'0.58rem',color:'#9ca3af',fontStyle:'italic'}}>{sc.types?.includes('public')?'◆ Public':sc.types?.includes('prive')?'▪ Privé':''}</span>}
                                               {cfg.badge===sc.badge && <span style={{fontSize:'0.65rem',color:ACC}}>✓</span>}
                                             </div>);
                                           })}
@@ -1352,7 +1352,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                     </div></> );
                                   })()}
                                 </div>
-                                <div style={{fontSize:'0.73rem', color:$textSec}}>{ao.tm ? (ao.tm.includes('public')?'🏛️':ao.tm.includes('priv')?'🏢':'🏠') : '—'}</div>
+                                <div style={{fontSize:'0.73rem', color:$textSec}}>{ao.tm ? (ao.tm.includes('public')?'◆':ao.tm.includes('priv')?'▪':'🏠') : '—'}</div>
                                 <div style={{fontSize:'0.78rem', fontWeight:ao.o?600:400, color:ao.o?'#059669':$textMut}}>{fmtM(ao.o)}</div>
                                 <div style={{fontSize:'0.75rem', color:dlColor(dl), fontWeight:dl!==null&&dl<=7?700:400, whiteSpace:'nowrap'}}>{fmtDate(ao.d)}</div>
                                 <div>{dl !== null ? <span style={{padding:'2px 6px', borderRadius:6, background:dlColor(dl)+'22', color:dlColor(dl), fontSize:'0.69rem', fontWeight:700}}>{dl<0?'J+'+Math.abs(dl):dl===0?'Auj.':'J-'+dl}</span> : <span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>
@@ -1368,7 +1368,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                                 })()}
                                 {(() => {
                                   const ext = getExt(ao.id);
-                                  return (<div>{ext.vo==='Oui'?<span style={{padding:'2px 5px',borderRadius:4,background:'#dc262615',color:'#dc2626',fontSize:'0.6rem',fontWeight:700}}>OBL</span>:ext.vo==='Conseillée'?<span style={{padding:'2px 5px',borderRadius:4,background:'#f59e0b15',color:'#d97706',fontSize:'0.6rem',fontWeight:700}}>CSL</span>:ext.drive?<span style={{fontSize:'0.65rem',color:'#1a73e8'}}>📁</span>:<span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>);
+                                  return (<div>{ext.vo==='Oui'?<span style={{padding:'2px 5px',borderRadius:4,background:'#dc262615',color:'#dc2626',fontSize:'0.6rem',fontWeight:700}}>OBL</span>:ext.vo==='Conseillée'?<span style={{padding:'2px 5px',borderRadius:4,background:'#f59e0b15',color:'#d97706',fontSize:'0.6rem',fontWeight:700}}>CSL</span>:ext.drive?<span style={{fontSize:'0.65rem',color:'#1a73e8'}}>▸</span>:<span style={{color:$textMut,fontSize:'0.73rem'}}>—</span>}</div>);
                                 })()}
                               </div></React.Fragment>
                             );
@@ -1518,7 +1518,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                 const sumO = (arr) => arr.reduce((s,a)=>s+(a.o||0),0);
                 const taux = (arr) => { const g=gagneC(arr); const f=g+perduC(arr); return f>0?Math.round(g/f*100):0; };
                 const PUB=ALL.filter(a=>a.tm==='Marché public'), PRI=ALL.filter(a=>a.tm==='Marché privé'), PAR=ALL.filter(a=>a.tm==='Marché particulier');
-                const segments=[{label:'Public',emoji:'🏛️',color:'#0055cc',bg:'#0055cc0d',data:PUB},{label:'Privé',emoji:'🏢',color:'#166534',bg:'#1665340d',data:PRI},{label:'Particulier',emoji:'🏠',color:'#7c3aed',bg:'#7c3aed0d',data:PAR}];
+                const segments=[{label:'Public',emoji:'◆',color:'#0055cc',bg:'#0055cc0d',data:PUB},{label:'Privé',emoji:'▪',color:'#166534',bg:'#1665340d',data:PRI},{label:'Particulier',emoji:'🏠',color:'#7c3aed',bg:'#7c3aed0d',data:PAR}];
                 const tpMap={};
                 ALL.forEach(a=>{const k=a.tp||'Non classé';if(!tpMap[k])tpMap[k]={n:0,b:0,g:0,f:0};tpMap[k].n++;tpMap[k].b+=a.b||0;if(getScfg(a.s).group==='gagne')tpMap[k].g++;if(['gagne','perdu'].includes(getScfg(a.s).group))tpMap[k].f++;});
                 const tpArr=Object.entries(tpMap).sort((a,b)=>b[1].n-a[1].n).slice(0,8);

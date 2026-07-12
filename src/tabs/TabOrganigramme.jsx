@@ -6,13 +6,13 @@ import { Legend, Line } from 'recharts';
 export default function TabOrganigramme(__props) {
   const { $accent, $bgCard, $bgSub, $border, $borderAlt, $success, $text, $textMut, $textSec, ajouterEmploye, ca, collaborateurs, crmRd, employes, filiales, filialesDynamiques, handleMouseDown, modalAjoutOuvert, niveau, nouvelEmploye, orgArbreDrag, orgArbrePos, orgArbreRef, orgSocieteDrag, orgSocietePan, orgSocietePanning, orgSocietePos, orgSocieteRef, orgSocieteZoom, orgView, setModalAjoutOuvert, setNouvelEmploye, setOrgArbreDrag, setOrgArbrePos, setOrgSocieteDrag, setOrgSocietePan, setOrgSocietePanning, setOrgSocietePos, setOrgSocieteZoom, setOrgView, supprimerEmploye } = __props;
           const ORG_VIEWS = [
-            { id: 'liste', label: 'Liste', icon: '📋' },
+            { id: 'liste', label: 'Liste', icon: '☰' },
             { id: 'galaxy', label: 'Galaxy', icon: '🌌' },
             { id: 'bubble', label: 'Bubble', icon: '🫧' },
-            { id: 'radial', label: 'Radial', icon: '🎯' },
+            { id: 'radial', label: 'Radial', icon: '◎' },
             { id: 'pappers', label: 'Arbre', icon: '🌳' },
-            { id: 'arbre', label: 'Pappers', icon: '📄' },
-            { id: 'societe', label: 'Societe.com', icon: '🏛️' },
+            { id: 'arbre', label: 'Pappers', icon: '▫' },
+            { id: 'societe', label: 'Societe.com', icon: '◆' },
           ];
 
           const FILIALE_COLORS = { ezel: '#007ab5', roulotte: '#C49A2A', echafaudage: '#6C3483', etancheite: '#0e6655', yilmaz: '#2d2d2d', groupoy: '#8B6F47' };
@@ -34,7 +34,7 @@ export default function TabOrganigramme(__props) {
               {/* Header */}
               <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20}}>
                 <div>
-                  <h2 style={{margin:0, fontSize:'1.25rem', fontWeight:700, color:'#7F6C41', display:'flex', alignItems:'center', gap:8}}>🐝 Organigramme — L'Architecture de la Ruche</h2>
+                  <h2 style={{margin:0, fontSize:'1.25rem', fontWeight:700, color:'#7F6C41', display:'flex', alignItems:'center', gap:8}}>◆ Organigramme — L'Architecture de la Ruche</h2>
                   <div style={{fontSize:'0.75rem', color:$textMut, marginTop:2}}>{employes.length} collaborateurs · {Object.keys(FILIALE_COLORS).length} entités</div>
                 </div>
                 <div style={{display:'flex', gap:8, alignItems:'center'}}>
@@ -65,7 +65,7 @@ export default function TabOrganigramme(__props) {
                       <div><label style={{display:'block', fontSize:'0.92rem', fontWeight:600, color:$textSec, marginBottom:4}}>Poste externe</label><input type="text" value={nouvelEmploye.posteExterne} onChange={e => setNouvelEmploye({...nouvelEmploye, posteExterne: e.target.value})} style={{width:'100%', border:`1px solid ${$borderAlt}`, borderRadius:crmRd, padding:'8px 14px', outline:'none', fontSize:'0.98rem', background:$bgSub, color:$text}} placeholder="Chef de Chantier" /></div>
                     </div>
                     <div style={{display:'flex', gap:12, marginTop:24}}>
-                      <button onClick={ajouterEmploye} disabled={!nouvelEmploye.nom||!nouvelEmploye.prenom} style={{flex:1, background:$success, color:'#fff', padding:'12px 24px', borderRadius:crmRd, fontWeight:600, border:'none', cursor:'pointer', fontFamily:'inherit'}}>✅ Ajouter à l'Essaim</button>
+                      <button onClick={ajouterEmploye} disabled={!nouvelEmploye.nom||!nouvelEmploye.prenom} style={{flex:1, background:$success, color:'#fff', padding:'12px 24px', borderRadius:crmRd, fontWeight:600, border:'none', cursor:'pointer', fontFamily:'inherit'}}>✓ Ajouter à l'Essaim</button>
                       <button onClick={() => setModalAjoutOuvert(false)} style={{padding:'12px 24px', border:`2px solid ${$border}`, borderRadius:crmRd, fontWeight:600, cursor:'pointer', fontFamily:'inherit', background:'transparent', color:$textSec}}>Annuler</button>
                     </div>
                   </div>
@@ -81,8 +81,8 @@ export default function TabOrganigramme(__props) {
                 };
                 const groupeConf = [
                   { id: '0', label: 'Direction (Groupe 0)', color: '#F8DC00', bg: '#F8DC0010', icon: '👑' },
-                  { id: '1', label: 'Opérationnel (Groupe 1)', color: '#22c55e', bg: '#22c55e10', icon: '🐝' },
-                  { id: '2', label: 'Support Yilmaz (Groupe 2)', color: '#f97316', bg: '#f9731610', icon: '🔄' },
+                  { id: '1', label: 'Opérationnel (Groupe 1)', color: '#22c55e', bg: '#22c55e10', icon: '◆' },
+                  { id: '2', label: 'Support Yilmaz (Groupe 2)', color: '#f97316', bg: '#f9731610', icon: '↻' },
                 ];
                 return (
                   <div style={{display:'flex', flexDirection:'column', gap:20}}>
@@ -149,7 +149,7 @@ export default function TabOrganigramme(__props) {
                       <div style={{width:110, height:110, borderRadius:'50%', background:$accent+'10', border:`3px solid ${$accent}`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', boxShadow:`0 0 0 12px ${$accent}06, 0 0 0 26px ${$accent}03`, transition:'all 0.25s', cursor:'default'}}
                         onMouseEnter={e=>{e.currentTarget.style.transform='scale(1.08)'; e.currentTarget.style.boxShadow=`0 0 0 16px ${$accent}0a, 0 0 0 34px ${$accent}05`;}}
                         onMouseLeave={e=>{e.currentTarget.style.transform='scale(1)'; e.currentTarget.style.boxShadow=`0 0 0 12px ${$accent}06, 0 0 0 26px ${$accent}03`;}}>
-                        <span style={{fontSize:'2rem'}}>🐝</span>
+                        <span style={{fontSize:'2rem'}}>◆</span>
                         <div style={{fontWeight:800, fontSize:'0.65rem', color:$accent, textAlign:'center', lineHeight:1.2}}>GROUP OY</div>
                         <div style={{fontSize:'0.5rem', color:$textMut, marginTop:2}}>{totalActifs} collaborateurs</div>
                       </div>
@@ -284,7 +284,7 @@ export default function TabOrganigramme(__props) {
               {/* ===== VUE RADIAL ===== */}
               {orgView === 'radial' && (() => {
                 const filialeGroups = Object.entries(CRM_FIL_NAMES).map(([k,nom]) => ({
-                  key: k, nom, color: FILIALE_COLORS[k]||$accent, icon: CRM_FIL_ICONS[k]||'🏢',
+                  key: k, nom, color: FILIALE_COLORS[k]||$accent, icon: CRM_FIL_ICONS[k]||'▪',
                   emps: employes.filter(e => filialeOf(e) === k)
                 })).filter(g=>g.emps.length>0);
                 const cx=380, cy=360, innerR=60, outerR=280;
@@ -293,7 +293,7 @@ export default function TabOrganigramme(__props) {
                 return (
                   <div style={{background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, overflow:'hidden'}}>
                     <div style={{padding:'14px 20px', borderBottom:`1px solid ${$border}`, display:'flex', alignItems:'center', gap:8}}>
-                      <span>🎯</span><span style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>Vue Radiale — Sunburst par Filiale</span>
+                      <span>◎</span><span style={{fontWeight:700, color:$text, fontSize:'0.9rem'}}>Vue Radiale — Sunburst par Filiale</span>
                     </div>
                     <div style={{display:'flex', gap:20, padding:20, flexWrap:'wrap', alignItems:'flex-start'}}>
                       <svg width={760} height={720} style={{flex:'0 0 auto'}}>
@@ -322,7 +322,7 @@ export default function TabOrganigramme(__props) {
                           );
                         })}
                         <circle cx={cx} cy={cy} r={innerR-2} fill={$bgCard} />
-                        <text textAnchor="middle" x={cx} y={cy-6} fontSize={11} fontWeight={700} fill={$text}>🐝</text>
+                        <text textAnchor="middle" x={cx} y={cy-6} fontSize={11} fontWeight={700} fill={$text}>◆</text>
                         <text textAnchor="middle" x={cx} y={cy+8} fontSize={9} fill={$textMut}>{total} pers.</text>
                       </svg>
                       <div style={{flex:1, minWidth:180}}>
@@ -364,15 +364,15 @@ export default function TabOrganigramme(__props) {
                       <div style={{position:'absolute', top:'-20%', right:'-10%', width:500, height:500, borderRadius:'50%', background:`radial-gradient(circle, ${$accent}08 0%, transparent 70%)`}}/>
                       <div style={{position:'absolute', bottom:'-15%', left:'-8%', width:400, height:400, borderRadius:'50%', background:`radial-gradient(circle, ${$accent}05 0%, transparent 70%)`}}/>
                       <div style={{position:'relative', zIndex:2, padding:'56px 48px', textAlign:'center'}}>
-                        <div style={{fontSize:'3.8rem', marginBottom:12, filter:'drop-shadow(0 3px 16px rgba(139,111,71,0.15))'}}>🐝</div>
+                        <div style={{fontSize:'3.8rem', marginBottom:12, filter:'drop-shadow(0 3px 16px rgba(139,111,71,0.15))'}}>◆</div>
                         <div style={{fontSize:'2.8rem', fontWeight:800, color:$text, letterSpacing:'-0.05em', lineHeight:1.05, marginBottom:8}}>
                           L'Essaim <span style={{color:$accent}}>Group OY</span>
                         </div>
                         <div style={{fontSize:'0.85rem', color:$textMut, fontWeight:500, letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:24}}>Organigramme des collaborateurs actifs</div>
                         <div style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap', marginBottom:28}}>
                           {[
-                            { n: actifs.length, l: 'Collaborateurs', icon: '👥' },
-                            { n: filialeGroups.length, l: 'Entités', icon: '🏢' },
+                            { n: actifs.length, l: 'Collaborateurs', icon: '◉' },
+                            { n: filialeGroups.length, l: 'Entités', icon: '▪' },
                             { n: actifs.filter(e=>['XXXL','XXL','XL'].includes(e.niveau)).length, l: 'Management', icon: '🎖️' },
                             { n: actifs.filter(e=>e.groupe==='0').length, l: 'Direction', icon: '👑' },
                           ].map((s,i) => (
@@ -420,7 +420,7 @@ export default function TabOrganigramme(__props) {
                               <div style={{display:'flex', gap:8}}>
                                 {direction.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['XXXL']+'20', color:NIVEAU_COLORS['XXXL'], fontSize:'0.68rem', fontWeight:700}}>👑 {direction.length} dir.</span>}
                                 {management.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['L']+'20', color:NIVEAU_COLORS['L'], fontSize:'0.68rem', fontWeight:700}}>🎖️ {management.length} mgmt</span>}
-                                {equipe.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['S']+'20', color:NIVEAU_COLORS['S'], fontSize:'0.68rem', fontWeight:700}}>🐝 {equipe.length} équipe</span>}
+                                {equipe.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['S']+'20', color:NIVEAU_COLORS['S'], fontSize:'0.68rem', fontWeight:700}}>◆ {equipe.length} équipe</span>}
                               </div>
                             </div>
 
@@ -675,17 +675,17 @@ export default function TabOrganigramme(__props) {
 
                 const holdingNodes = [
                   { id:'invest_exe', label:'INVEST EXE', sub:'Exécution',  color:'#8b5cf6', icon:'⚡', type:'holding' },
-                  { id:'invest_loc', label:'INVEST LOC', sub:'Location',   color:'#0ea5e9', icon:'📦', type:'holding' },
+                  { id:'invest_loc', label:'INVEST LOC', sub:'Location',   color:'#0ea5e9', icon:'▣', type:'holding' },
                 ];
                 const sideNodes = [
-                  { id:'yilmaz',   label:'YILMAZ SAS', sub:'Services',   color:$text, icon:'🔧', type:'support', effectif: getEmps('yilmaz').length },
+                  { id:'yilmaz',   label:'YILMAZ SAS', sub:'Services',   color:$text, icon:'✱', type:'support', effectif: getEmps('yilmaz').length },
                   { id:'sci_elia', label:'SCI Elia',   sub:'Immobilier', color:'#d97706', icon:'🏠', type:'sci' },
                 ];
                 const filialeNodes = [
-                  ...exeF.map(f => ({ id:String(f.id), label:(f.nom||''), sub:(f.activite||'').slice(0,20), color:f.couleur||'#666', icon:f.icon||'🏗️', type:'filiale', parent:'invest_exe', effectif: getEmps(f.id).length, ca: f.ca })),
+                  ...exeF.map(f => ({ id:String(f.id), label:(f.nom||''), sub:(f.activite||'').slice(0,20), color:f.couleur||'#666', icon:f.icon||'◆', type:'filiale', parent:'invest_exe', effectif: getEmps(f.id).length, ca: f.ca })),
                   ...locF.map(f => ({ id:String(f.id), label:(f.nom||''), sub:(f.activite||'').slice(0,20), color:f.couleur||'#666', icon:f.icon||'🏭', type:'filiale', parent:'invest_loc', effectif: getEmps(f.id).length, ca: f.ca })),
                 ];
-                const groupOyNode = { id:'groupoy', label:'GROUP OY', sub:'Holding mère', color:'#8B6F47', icon:'🐝', type:'group', effectif: employes.filter(e=>(e.statut||'actif')==='actif').length };
+                const groupOyNode = { id:'groupoy', label:'GROUP OY', sub:'Holding mère', color:'#8B6F47', icon:'◆', type:'group', effectif: employes.filter(e=>(e.statut||'actif')==='actif').length };
 
                 const initPositions = () => {
                   const p = {};

@@ -46,8 +46,8 @@ export default function TabEzelTableau(__props) {
           const fmtM = (v) => v >= 1000000 ? (v/1000000).toFixed(1)+'M€' : v >= 1000 ? Math.round(v/1000)+'K€' : v+'€';
           const PHASES = [
             { id:'lancement', label:'Lancement', icon:'🚀', color:'#34d399' },
-            { id:'execution', label:'Exécution', icon:'🏗️', color:'#ea580c' },
-            { id:'reception', label:'Réception & Clôture', icon:'📋', color:'#9d50dd' },
+            { id:'execution', label:'Exécution', icon:'◆', color:'#ea580c' },
+            { id:'reception', label:'Réception & Clôture', icon:'☰', color:'#9d50dd' },
             { id:'cloture', label:'GPA / RG', icon:'💳', color:'#007ab5' },
             { id:'archive', label:'Archivé / Clôturé', icon:'🗂️', color:'#757575' },
           ];
@@ -57,7 +57,7 @@ export default function TabEzelTableau(__props) {
               <div style={{maxWidth:1300, margin:'0 auto'}}>
                 <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:28}}>
                   <div>
-                    <div style={{fontSize:'1.5rem', fontWeight:800, color:$text, letterSpacing:'-0.03em'}}>🏗️ Tableau de Bord — Ezel Bâtiment</div>
+                    <div style={{fontSize:'1.5rem', fontWeight:800, color:$text, letterSpacing:'-0.03em'}}>◆ Tableau de Bord — Ezel Bâtiment</div>
                     <div style={{fontSize:'0.8rem', color:$textMut, marginTop:3}}>Données Monday.com en temps réel · Board Affaire-Chantier (4113177037) · Études AO (6470581185)</div>
                   </div>
                   <div style={{fontSize:'0.72rem', color:ACC, fontWeight:600, background:ACC+'12', padding:'4px 12px', borderRadius:crmRd, border:'1px solid '+ACC+'30'}}>MAJ : 12 mars 2026</div>
@@ -66,10 +66,10 @@ export default function TabEzelTableau(__props) {
                 {/* KPI Row */}
                 <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:24}}>
                   {[
-                    { label:'Chantiers actifs', value: activeAffaires, sub:'affaires en cours + lancement', icon:'🏗️', color:ACC },
-                    { label:'CA actif', value: fmtM(caActif), sub:'Montant marché HT en cours', icon:'💰', color:'#10b981' },
-                    { label:'CA board total', value: fmtM(caTotal), sub:'81 affaires cumulées', icon:'📊', color:'#8b5cf6' },
-                    { label:'AO actifs (études)', value: aoActifs, sub:`sur ${totalAO} AO suivis · Taux succès ${tauxSucces}%`, icon:'📐', color:'#f59e0b' },
+                    { label:'Chantiers actifs', value: activeAffaires, sub:'affaires en cours + lancement', icon:'◆', color:ACC },
+                    { label:'CA actif', value: fmtM(caActif), sub:'Montant marché HT en cours', icon:'€', color:'#10b981' },
+                    { label:'CA board total', value: fmtM(caTotal), sub:'81 affaires cumulées', icon:'▦', color:'#8b5cf6' },
+                    { label:'AO actifs (études)', value: aoActifs, sub:`sur ${totalAO} AO suivis · Taux succès ${tauxSucces}%`, icon:'◺', color:'#f59e0b' },
                   ].map(kpi => (
                     <div key={kpi.label} style={{background:$bgCard, border:'1px solid '+$border, borderRadius:crmRd, padding:'18px 20px', position:'relative', overflow:'hidden'}}>
                       <div style={{position:'absolute', top:0, left:0, bottom:0, width:4, background:kpi.color, borderRadius:crmRd+' 0 0 '+crmRd}}></div>
@@ -86,7 +86,7 @@ export default function TabEzelTableau(__props) {
                   {/* Affaire pipeline */}
                   <div style={{background:$bgCard, border:'1px solid '+$border, borderRadius:crmRd, padding:'20px 22px'}}>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16}}>
-                      <div style={{fontSize:'0.88rem', fontWeight:700, color:$text}}>📋 Pipeline Affaires · {totalAffaires} dossiers</div>
+                      <div style={{fontSize:'0.88rem', fontWeight:700, color:$text}}>☰ Pipeline Affaires · {totalAffaires} dossiers</div>
                       <div style={{fontSize:'0.68rem', color:$textMut}}>{fmtM(caTotal)} CA total</div>
                     </div>
                     {/* Phase groups */}
@@ -123,7 +123,7 @@ export default function TabEzelTableau(__props) {
                   {/* Études AO funnel */}
                   <div style={{background:$bgCard, border:'1px solid '+$border, borderRadius:crmRd, padding:'20px 22px'}}>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16}}>
-                      <div style={{fontSize:'0.88rem', fontWeight:700, color:$text}}>📐 Études AO · {totalAO} suivis</div>
+                      <div style={{fontSize:'0.88rem', fontWeight:700, color:$text}}>◺ Études AO · {totalAO} suivis</div>
                       <div style={{fontSize:'0.68rem', color:'#f59e0b', fontWeight:700, background:'#f59e0b18', padding:'2px 8px', borderRadius:20}}>Taux succès {tauxSucces}%</div>
                     </div>
 
@@ -168,7 +168,7 @@ export default function TabEzelTableau(__props) {
 
                 {/* Bottom: Phase résumé bar */}
                 <div style={{background:$bgCard, border:'1px solid '+$border, borderRadius:crmRd, padding:'18px 22px'}}>
-                  <div style={{fontSize:'0.88rem', fontWeight:700, color:$text, marginBottom:14}}>📊 Répartition des 81 affaires par phase</div>
+                  <div style={{fontSize:'0.88rem', fontWeight:700, color:$text, marginBottom:14}}>▦ Répartition des 81 affaires par phase</div>
                   <div style={{display:'flex', gap:4, height:32, borderRadius:crmRd, overflow:'hidden', marginBottom:12}}>
                     {PHASES.map(phase => {
                       const pCount = AFFAIRE_DATA.filter(d => d.phase === phase.id).reduce((s, d) => s + d.count, 0);

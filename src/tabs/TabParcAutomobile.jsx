@@ -135,7 +135,7 @@ export default function TabParcAutomobile(__props) {
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Parc Automobile</h2>
-                        {ctUrg>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#ea580c15',color:'#ea580c',fontWeight:700,border:'1px solid #ea580c30'}}>⚠ {ctUrg} CT urgent</span>}
+                        {ctUrg>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#ea580c15',color:'#ea580c',fontWeight:700,border:'1px solid #ea580c30'}}>▲ {ctUrg} CT urgent</span>}
                         {contravAD>0&&<span style={{fontSize:'0.68rem',padding:'2px 7px',borderRadius:8,background:'#dc262615',color:'#dc2626',fontWeight:700,border:'1px solid #dc262630'}}>{contravAD} PV à dénoncer</span>}
                       </div>
                       <p style={{margin:0,fontSize:'0.8rem',color:$textMut}}>{actifs.length} véhicules actifs · TCO · Sinistres · Contraventions</p>
@@ -166,7 +166,7 @@ export default function TabParcAutomobile(__props) {
               </div>
               <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap'}}>
                 <button onClick={()=>setAutoFilterOpen(p=>!p)} style={{padding:'6px 14px',border:`1px solid ${autoFilterOpen?$accent:$border}`,borderRadius:crmRd,fontSize:'0.78rem',fontFamily:'inherit',background:autoFilterOpen?$accentSub:'transparent',color:autoFilterOpen?$accent:$textSec,cursor:'pointer',display:'flex',alignItems:'center',gap:5,fontWeight:600,transition:'all 0.15s'}}>
-                  ⚙ Filtres & Colonnes {(autoFilialeFilter.length>0||autoStatutFilter.length!==2)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
+                  ✱ Filtres & Colonnes {(autoFilialeFilter.length>0||autoStatutFilter.length!==2)&&<span style={{width:6,height:6,borderRadius:'50%',background:$warn}}/>}
                 </button>
                 {autoFilialeFilter.length>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$accent+'18',color:$accent,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setAutoFilialeFilter([])}>✕ {autoFilialeFilter.length} filiale{autoFilialeFilter.length>1?'s':''}</span>}
                 {autoStatutFilter.length!==2&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,fontSize:'0.72rem',fontWeight:600,background:$warn+'18',color:$warn,display:'inline-flex',alignItems:'center',gap:4,cursor:'pointer'}} onClick={()=>setAutoStatutFilter(['actif','a_commander'])}>✕ Filtre statut</span>}
@@ -191,7 +191,7 @@ export default function TabParcAutomobile(__props) {
                     <span style={{fontSize:'0.7rem',fontWeight:700,color:$textMut}}>{count}</span>
                   </div>);
                   return(<div style={{display:'flex',flexDirection:'column',gap:2}}>
-                    <Chk id='yilmaz' label='🏢 Yilmaz' count={countF('yilmaz')} color='#2d2d2d'/>
+                    <Chk id='yilmaz' label='▪ Yilmaz' count={countF('yilmaz')} color='#2d2d2d'/>
                     <div style={{padding:'6px 8px 2px',fontSize:'0.65rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em'}}>Invest Loc</div>
                     {invLoc.map(f=><Chk key={f.id} id={f.id} label={f.icon+' '+f.nom} count={countF(f.id)} color={f.couleur} indent/>)}
                     <div style={{padding:'6px 8px 2px',fontSize:'0.65rem',fontWeight:600,color:$textMut,textTransform:'uppercase',letterSpacing:'0.04em'}}>Invest Exe</div>

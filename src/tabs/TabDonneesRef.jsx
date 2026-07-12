@@ -3,7 +3,7 @@
 
 export default function TabDonneesRef(__props) {
   const { $accent, $bgCard, $border, $danger, $shadow, $shadowLg, $text, $textMut, $textSec, autoData, ca, chantiers, collaborateurs, crmRd, drTab, employes, filiales, filialesDynamiques, niveau, setCollabDetailTab, setCollabOngletId, setDrTab, setEmployeForm, setModalEmploye, setOngletActif } = __props;
-        const drTabs = [{id:'filiales',label:'Filiales',icon:'🏢'},{id:'collaborateurs',label:'Collaborateurs',icon:'👥'},{id:'vehicules',label:'Véhicules',icon:'🚗'},{id:'materiel',label:'Matériel',icon:'🔧'},{id:'chantiers',label:'Chantiers / Affaires',icon:'🏗️'},{id:'clients',label:'Clients',icon:'🤝'},{id:'prestataires',label:'Prestataires',icon:'📦'}];
+        const drTabs = [{id:'filiales',label:'Filiales',icon:'▪'},{id:'collaborateurs',label:'Collaborateurs',icon:'◉'},{id:'vehicules',label:'Véhicules',icon:'🚗'},{id:'materiel',label:'Matériel',icon:'✱'},{id:'chantiers',label:'Chantiers / Affaires',icon:'◆'},{id:'clients',label:'Clients',icon:'🤝'},{id:'prestataires',label:'Prestataires',icon:'▣'}];
         const Tag = ({label,color}) => <span style={{display:'inline-block',padding:'2px 8px',background:(color||'#64748b')+'12',color:color||'#64748b',fontWeight:700,fontSize:'0.75rem',borderLeft:`2px solid ${color||'#64748b'}`}}>{label}</span>;
         const allChantiers = chantiers || [];
         const allClients = [...new Set(allChantiers.map(c=>c.client).filter(Boolean))].sort();
@@ -80,7 +80,7 @@ export default function TabDonneesRef(__props) {
                   </tr></thead>
                   <tbody>{employes.sort((a,b)=>{const n=['XXXL','XXL','XL','L','M','S','XS','XXS'];return n.indexOf(a.niveau)-n.indexOf(b.niveau);}).map((e,idx)=>{
                     const fil = filialesDynamiques.find(f=>f.id===e.filialeId);
-                    const filName = fil ? `${fil.icon} ${fil.nom}` : e.filialeId==='yilmaz' ? '🏛️ Yilmaz' : '—';
+                    const filName = fil ? `${fil.icon} ${fil.nom}` : e.filialeId==='yilmaz' ? '◆ Yilmaz' : '—';
                     const total = (e.salaireFix||0)+(e.primeFix||0)+(e.variable||0);
                     return <tr key={e.id} onClick={()=> {setCollabOngletId(e.id);setCollabDetailTab('profil');}} style={{borderBottom:'1px solid #f1f5f9',background:idx%2===0?'#fff':'#fafbfc',cursor:'pointer'}} onMouseOver={ev=>ev.currentTarget.style.background='#f0f9ff'} onMouseOut={ev=>ev.currentTarget.style.background=idx%2===0?'#fff':'#fafbfc'}>
                       <td style={{padding:'6px 10px',fontFamily:'monospace',fontWeight:700,color:'#6366f1',fontSize:'0.75rem',borderRight:'1px solid #f1f5f9'}}>{e.id}</td>
