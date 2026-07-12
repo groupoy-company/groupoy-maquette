@@ -9,7 +9,7 @@ export default function TabOnboarding(__props) {
           {id:'chef_chantier', label:'Chef de chantier', icon:'🪖', color:'#ef4444'},
           {id:'charge_affaires', label:"Chargé d'affaires", icon:'☰', color:'#3b82f6'},
           {id:'conducteur_travaux', label:'Conducteur de travaux', icon:'◆', color:'#8b5cf6'},
-          {id:'assistante_admin', label:'Assistante administrative', icon:'🗂', color:'#10b981'},
+          {id:'assistante_admin', label:'Assistante administrative', icon:'▸', color:'#10b981'},
           {id:'direction', label:'Direction / Cadre', icon:'👔', color:'#1e40af'}
         ];
         const OB_CHECKLISTS = {
@@ -50,19 +50,19 @@ export default function TabOnboarding(__props) {
               {t:'Règlement intérieur signé', obligatoire:true, delai:'S1'},
               {t:'Charte utilisation véhicules signée', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace (@ezel.fr / @laroulotte.fr)', obligatoire:false, delai:'Avant J1'},
               {t:'Photo identité pour profil (email, badge)', obligatoire:false, delai:'S1'},
               {t:'Ajout aux listes de diffusion (équipe chantier)', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'🚗 Véhicule & Déplacements', items:[
+            {cat:'▸ Véhicule & Déplacements', items:[
               {t:'Attribution véhicule de service (Kangoo / utilitaire)', obligatoire:false, delai:'J1'},
               {t:'Remise clés + carte carburant + télépéage', obligatoire:false, delai:'J1'},
               {t:'État des lieux véhicule signé', obligatoire:false, delai:'J1'},
               {t:'Vérification permis de conduire', obligatoire:false, delai:'Avant J1'},
               {t:'Charte utilisation véhicule signée', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'👷 EPI & Vêtements de travail', items:[
+            {cat:'◉ EPI & Vêtements de travail', items:[
               {t:'Tailles recueillies (veste, pantalon, chaussures)', obligatoire:true, delai:'Avant J1'},
               {t:'Casque de chantier (personnalisé si besoin)', obligatoire:true, delai:'J1'},
               {t:'Chaussures de sécurité', obligatoire:true, delai:'J1'},
@@ -78,7 +78,7 @@ export default function TabOnboarding(__props) {
               {t:'Partage dossier procédures sécurité', obligatoire:true, delai:'J1'},
               {t:'Accès dossier modèles (bons, rapports)', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📚 Formations', items:[
+            {cat:'▤ Formations', items:[
               {t:'Formation accueil sécurité (obligatoire)', obligatoire:true, delai:'J1'},
               {t:'Formation outillage spécifique', obligatoire:false, delai:'S1'},
               {t:'Planning formation CACES (si besoin)', obligatoire:false, delai:'M1'},
@@ -122,21 +122,21 @@ export default function TabOnboarding(__props) {
               {t:'Livret d\'accueil + règlement intérieur', obligatoire:true, delai:'J1'},
               {t:'Visite chantiers en cours', obligatoire:true, delai:'S1'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace', obligatoire:true, delai:'Avant J1'},
               {t:'Configuration signature email (template Group OY)', obligatoire:true, delai:'J1'},
               {t:'Photo professionnelle pour profil', obligatoire:false, delai:'S1'},
               {t:'Ajout aux listes de diffusion (direction chantier, RH)', obligatoire:true, delai:'J1'},
               {t:'Configuration email sur téléphone professionnel', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'💻 Accès Logiciels', items:[
+            {cat:'▢ Accès Logiciels', items:[
               {t:'Compte Monday.com créé (workspace Yilmaz)', obligatoire:true, delai:'J1'},
               {t:'Formation Monday.com — gestion chantier', obligatoire:true, delai:'S1'},
               {t:'Accès Pennylane (consultation budgets)', obligatoire:false, delai:'S1'},
               {t:'Accès CRM Group OY', obligatoire:true, delai:'S1'},
               {t:'Compte Google Workspace (Drive, Agenda, Meet)', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'🚗 Véhicule & Déplacements', items:[
+            {cat:'▸ Véhicule & Déplacements', items:[
               {t:'Attribution véhicule de service / fonction', obligatoire:true, delai:'J1'},
               {t:'Remise clés + carte carburant + badge télépéage', obligatoire:true, delai:'J1'},
               {t:'État des lieux véhicule signé', obligatoire:true, delai:'J1'},
@@ -150,7 +150,7 @@ export default function TabOnboarding(__props) {
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
               {t:'Badge accès dépôt / bureaux', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'👷 EPI & Vêtements', items:[
+            {cat:'◉ EPI & Vêtements', items:[
               {t:'Tailles recueillies (veste, pantalon, chaussures)', obligatoire:true, delai:'Avant J1'},
               {t:'Kit EPI complet (casque, chaussures, gilet, gants, lunettes)', obligatoire:true, delai:'J1'},
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
@@ -162,7 +162,7 @@ export default function TabOnboarding(__props) {
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
               {t:'Accès dossier sous-traitants', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📚 Formations Logiciels', items:[
+            {cat:'▤ Formations Logiciels', items:[
               {t:'Formation Monday.com (suivi chantier, planning)', obligatoire:true, delai:'S1'},
               {t:'Formation Google Workspace (Drive, Agenda)', obligatoire:true, delai:'S1'},
               {t:'Formation CRM Group OY (saisie heures, BC)', obligatoire:false, delai:'M1'},
@@ -202,21 +202,21 @@ export default function TabOnboarding(__props) {
               {t:'Tour des chantiers en cours', obligatoire:true, delai:'S1'},
               {t:'Transmission portefeuille affaires', obligatoire:true, delai:'S1-S2'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace', obligatoire:true, delai:'Avant J1'},
               {t:'Configuration signature email (template Group OY)', obligatoire:true, delai:'J1'},
               {t:'Photo professionnelle pour profil', obligatoire:false, delai:'S1'},
               {t:'Ajout aux listes de diffusion (direction chantier, RH)', obligatoire:true, delai:'J1'},
               {t:'Configuration email sur téléphone professionnel', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'💻 Accès Logiciels', items:[
+            {cat:'▢ Accès Logiciels', items:[
               {t:'Compte Monday.com créé (workspace Yilmaz)', obligatoire:true, delai:'J1'},
               {t:'Formation Monday.com — suivi affaires', obligatoire:true, delai:'S1'},
               {t:'Accès Pennylane (consultation budgets)', obligatoire:false, delai:'S1'},
               {t:'Accès CRM Group OY', obligatoire:true, delai:'S1'},
               {t:'Compte Google Workspace (Drive, Agenda, Meet)', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'🚗 Véhicule & Déplacements', items:[
+            {cat:'▸ Véhicule & Déplacements', items:[
               {t:'Attribution véhicule de service / fonction', obligatoire:true, delai:'J1'},
               {t:'Remise clés + carte carburant + badge télépéage', obligatoire:true, delai:'J1'},
               {t:'État des lieux véhicule signé', obligatoire:true, delai:'J1'},
@@ -230,7 +230,7 @@ export default function TabOnboarding(__props) {
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
               {t:'Badge accès dépôt / bureaux', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'👷 EPI & Vêtements', items:[
+            {cat:'◉ EPI & Vêtements', items:[
               {t:'Tailles recueillies (veste, pantalon, chaussures)', obligatoire:true, delai:'Avant J1'},
               {t:'Kit EPI complet (casque, chaussures, gilet, gants, lunettes)', obligatoire:true, delai:'J1'},
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
@@ -242,7 +242,7 @@ export default function TabOnboarding(__props) {
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
               {t:'Accès dossier sous-traitants', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📚 Formations Logiciels', items:[
+            {cat:'▤ Formations Logiciels', items:[
               {t:'Formation Monday.com (suivi chantier, planning)', obligatoire:true, delai:'S1'},
               {t:'Formation Google Workspace (Drive, Agenda)', obligatoire:true, delai:'S1'},
               {t:'Formation CRM Group OY (saisie heures, BC)', obligatoire:false, delai:'M1'},
@@ -284,21 +284,21 @@ export default function TabOnboarding(__props) {
               {t:'Livret d\'accueil', obligatoire:true, delai:'J1'},
               {t:'Tour des chantiers', obligatoire:true, delai:'S1'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace', obligatoire:true, delai:'Avant J1'},
               {t:'Configuration signature email (template Group OY)', obligatoire:true, delai:'J1'},
               {t:'Photo professionnelle pour profil', obligatoire:false, delai:'S1'},
               {t:'Ajout aux listes de diffusion (direction chantier, RH)', obligatoire:true, delai:'J1'},
               {t:'Configuration email sur téléphone professionnel', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'💻 Accès Logiciels', items:[
+            {cat:'▢ Accès Logiciels', items:[
               {t:'Compte Monday.com créé (workspace Yilmaz)', obligatoire:true, delai:'J1'},
               {t:'Formation Monday.com — pilotage travaux', obligatoire:true, delai:'S1'},
               {t:'Accès Pennylane (consultation budgets)', obligatoire:false, delai:'S1'},
               {t:'Accès CRM Group OY', obligatoire:true, delai:'S1'},
               {t:'Compte Google Workspace (Drive, Agenda, Meet)', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'🚗 Véhicule & Déplacements', items:[
+            {cat:'▸ Véhicule & Déplacements', items:[
               {t:'Attribution véhicule de service / fonction', obligatoire:true, delai:'J1'},
               {t:'Remise clés + carte carburant + badge télépéage', obligatoire:true, delai:'J1'},
               {t:'État des lieux véhicule signé', obligatoire:true, delai:'J1'},
@@ -312,7 +312,7 @@ export default function TabOnboarding(__props) {
               {t:'Outillage métré / laser', obligatoire:false, delai:'J1'},
               {t:'Badge accès dépôt / bureaux', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'👷 EPI & Vêtements', items:[
+            {cat:'◉ EPI & Vêtements', items:[
               {t:'Tailles recueillies (veste, pantalon, chaussures)', obligatoire:true, delai:'Avant J1'},
               {t:'Kit EPI complet (casque, chaussures, gilet, gants, lunettes)', obligatoire:true, delai:'J1'},
               {t:'Vêtements de travail floqués (logo entreprise)', obligatoire:false, delai:'S1'},
@@ -324,7 +324,7 @@ export default function TabOnboarding(__props) {
               {t:'Accès dossier procédures qualité', obligatoire:true, delai:'S1'},
               {t:'Accès dossier sous-traitants', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📚 Formations Logiciels', items:[
+            {cat:'▤ Formations Logiciels', items:[
               {t:'Formation Monday.com (suivi chantier, planning)', obligatoire:true, delai:'S1'},
               {t:'Formation Google Workspace (Drive, Agenda)', obligatoire:true, delai:'S1'},
               {t:'Formation CRM Group OY (saisie heures, BC)', obligatoire:false, delai:'M1'},
@@ -361,14 +361,14 @@ export default function TabOnboarding(__props) {
               {t:'Visite locaux', obligatoire:true, delai:'J1'},
               {t:'Transmission dossiers en cours', obligatoire:true, delai:'S1'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace', obligatoire:true, delai:'Avant J1'},
               {t:'Configuration signature email (template Group OY)', obligatoire:true, delai:'J1'},
               {t:'Photo professionnelle pour profil', obligatoire:false, delai:'S1'},
               {t:'Ajout aux listes de diffusion (admin, compta, RH)', obligatoire:true, delai:'J1'},
               {t:'Configuration email sur ordinateur + téléphone', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'💻 Accès Logiciels', items:[
+            {cat:'▢ Accès Logiciels', items:[
               {t:'Compte Monday.com créé (tous les boards)', obligatoire:true, delai:'J1'},
               {t:'Formation Monday.com complète', obligatoire:true, delai:'S1'},
               {t:'Accès Pennylane (saisie + consultation)', obligatoire:true, delai:'J1'},
@@ -392,7 +392,7 @@ export default function TabOnboarding(__props) {
               {t:'Accès dossier comptabilité', obligatoire:true, delai:'J1'},
               {t:'Accès dossier fournisseurs', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'📚 Formations Logiciels', items:[
+            {cat:'▤ Formations Logiciels', items:[
               {t:'Formation Monday.com (gestion boards, automations)', obligatoire:true, delai:'S1'},
               {t:'Formation Google Workspace (Drive, Sheets, Agenda)', obligatoire:true, delai:'S1'},
               {t:'Formation Pennylane (comptabilité)', obligatoire:true, delai:'S1'},
@@ -429,7 +429,7 @@ export default function TabOnboarding(__props) {
               {t:'Planning rendez-vous partenaires clés', obligatoire:false, delai:'M1'},
               {t:'Livret d\'accueil + charte', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'📧 Email & Communication', items:[
+            {cat:'✉ Email & Communication', items:[
               {t:'Création compte email Google Workspace', obligatoire:true, delai:'Avant J1'},
               {t:'Configuration signature email (template Direction)', obligatoire:true, delai:'J1'},
               {t:'Photo professionnelle', obligatoire:true, delai:'S1'},
@@ -437,7 +437,7 @@ export default function TabOnboarding(__props) {
               {t:'Configuration email sur tous les appareils', obligatoire:true, delai:'J1'},
               {t:'Carte de visite commandée', obligatoire:false, delai:'S1'}
             ]},
-            {cat:'💻 Accès Logiciels', items:[
+            {cat:'▢ Accès Logiciels', items:[
               {t:'Compte Monday.com (admin)', obligatoire:true, delai:'J1'},
               {t:'Accès Pennylane (full admin)', obligatoire:true, delai:'J1'},
               {t:'Accès CRM Group OY (admin)', obligatoire:true, delai:'J1'},
@@ -445,7 +445,7 @@ export default function TabOnboarding(__props) {
               {t:'Accès plateforme bancaire', obligatoire:false, delai:'S1'},
               {t:'Accès Yousign', obligatoire:true, delai:'J1'}
             ]},
-            {cat:'🚗 Véhicule', items:[
+            {cat:'▸ Véhicule', items:[
               {t:'Attribution véhicule de fonction', obligatoire:true, delai:'J1'},
               {t:'Contrat véhicule de fonction signé', obligatoire:true, delai:'J1'},
               {t:'Carte carburant + badge télépéage', obligatoire:true, delai:'J1'},
@@ -484,7 +484,7 @@ export default function TabOnboarding(__props) {
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    <div style={{width:40,height:40,borderRadius:10,background:'#7c3aed',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>🚀</div>
+                    <div style={{width:40,height:40,borderRadius:10,background:'#7c3aed',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>➤</div>
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Onboarding BTP</h2>
@@ -653,7 +653,7 @@ export default function TabOnboarding(__props) {
             return null;
           })()}
           {obEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setObEdit(null)}><div style={{background:$bgCard,width:'94%',maxWidth:600,maxHeight:'88vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(d=>d.id===obEdit.id)?'✎ Modifier':'➕ Nouvel'} onboarding</span><button onClick={()=>setObEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+              <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(d=>d.id===obEdit.id)?'✎ Modifier':'+ Nouvel'} onboarding</span><button onClick={()=>setObEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
               <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
                 <div style={{gridColumn:'span 2'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>Collaborateur</label><input value={obEdit.collaborateur||''} onChange={e=>setObEdit({...obEdit,collaborateur:e.target.value})} style={{width:'100%',padding:'7px 10px',border:`1px solid ${$border}`,borderRadius:crmRd,fontSize:'0.82rem',fontFamily:'inherit',background:$bgCard,color:$text,outline:'none',boxSizing:'border-box'}}/></div>
                 <div><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>Poste</label><input value={obEdit.poste||''} onChange={e=>setObEdit({...obEdit,poste:e.target.value})} style={{width:'100%',padding:'7px 10px',border:`1px solid ${$border}`,borderRadius:crmRd,fontSize:'0.82rem',fontFamily:'inherit',background:$bgCard,color:$text,outline:'none',boxSizing:'border-box'}}/></div>

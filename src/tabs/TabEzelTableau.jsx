@@ -45,11 +45,11 @@ export default function TabEzelTableau(__props) {
           const tauxSucces = Math.round(aoAcceptes / (aoAcceptes + aoRejetes) * 100);
           const fmtM = (v) => v >= 1000000 ? (v/1000000).toFixed(1)+'M€' : v >= 1000 ? Math.round(v/1000)+'K€' : v+'€';
           const PHASES = [
-            { id:'lancement', label:'Lancement', icon:'🚀', color:'#34d399' },
+            { id:'lancement', label:'Lancement', icon:'➤', color:'#34d399' },
             { id:'execution', label:'Exécution', icon:'◆', color:'#ea580c' },
             { id:'reception', label:'Réception & Clôture', icon:'☰', color:'#9d50dd' },
-            { id:'cloture', label:'GPA / RG', icon:'💳', color:'#007ab5' },
-            { id:'archive', label:'Archivé / Clôturé', icon:'🗂️', color:'#757575' },
+            { id:'cloture', label:'GPA / RG', icon:'▬', color:'#007ab5' },
+            { id:'archive', label:'Archivé / Clôturé', icon:'▸', color:'#757575' },
           ];
           const maxCount = Math.max(...AFFAIRE_DATA.map(d => d.count));
           return (
@@ -157,7 +157,7 @@ export default function TabEzelTableau(__props) {
 
                     {/* Budget AO à préparer */}
                     <div style={{marginTop:14, padding:'10px 14px', background:'#f59e0b10', border:'1px solid #f59e0b30', borderRadius:crmRd, display:'flex', alignItems:'center', gap:10}}>
-                      <div style={{fontSize:'1.1rem'}}>⚡</div>
+                      <div style={{fontSize:'1.1rem'}}>↯</div>
                       <div>
                         <div style={{fontSize:'0.68rem', color:'#f59e0b', fontWeight:700}}>4 AO à préparer</div>
                         <div style={{fontSize:'0.72rem', color:$textSec}}>Budget estimé : <strong>21.4M€</strong></div>

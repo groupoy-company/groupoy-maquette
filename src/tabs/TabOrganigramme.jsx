@@ -38,7 +38,7 @@ export default function TabOrganigramme(__props) {
                   <div style={{fontSize:'0.75rem', color:$textMut, marginTop:2}}>{employes.length} collaborateurs · {Object.keys(FILIALE_COLORS).length} entités</div>
                 </div>
                 <div style={{display:'flex', gap:8, alignItems:'center'}}>
-                  <button onClick={() => setModalAjoutOuvert(true)} style={{background:$success, color:'#fff', padding:'7px 16px', borderRadius:crmRd, fontWeight:600, border:'none', cursor:'pointer', fontFamily:'inherit', display:'flex', alignItems:'center', gap:6, fontSize:'0.82rem'}}>➕ Ajouter à l'Essaim</button>
+                  <button onClick={() => setModalAjoutOuvert(true)} style={{background:$success, color:'#fff', padding:'7px 16px', borderRadius:crmRd, fontWeight:600, border:'none', cursor:'pointer', fontFamily:'inherit', display:'flex', alignItems:'center', gap:6, fontSize:'0.82rem'}}>+ Ajouter à l'Essaim</button>
                 </div>
               </div>
 
@@ -55,7 +55,7 @@ export default function TabOrganigramme(__props) {
               {modalAjoutOuvert && (
                 <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.5)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:50}} onClick={() => setModalAjoutOuvert(false)}>
                   <div style={{background:$bgCard, borderRadius:crmRd, padding:24, maxWidth:672, width:'100%', margin:'0 16px', maxHeight:'90vh', overflowY:'auto'}} onClick={e => e.stopPropagation()}>
-                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}><h3 style={{fontSize:'1.3rem', fontWeight:700, color:'#7F6C41'}}>➕ Ajouter à l'Essaim</h3><button onClick={() => setModalAjoutOuvert(false)} style={{color:$textMut, cursor:'pointer', fontSize:'1.5rem', background:'none', border:'none'}}>✕</button></div>
+                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24}}><h3 style={{fontSize:'1.3rem', fontWeight:700, color:'#7F6C41'}}>+ Ajouter à l'Essaim</h3><button onClick={() => setModalAjoutOuvert(false)} style={{color:$textMut, cursor:'pointer', fontSize:'1.5rem', background:'none', border:'none'}}>✕</button></div>
                     <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16}}>
                       <div><label style={{display:'block', fontSize:'0.92rem', fontWeight:600, color:$textSec, marginBottom:4}}>Nom *</label><input type="text" value={nouvelEmploye.nom} onChange={e => setNouvelEmploye({...nouvelEmploye, nom: e.target.value})} style={{width:'100%', border:`1px solid ${$borderAlt}`, borderRadius:crmRd, padding:'8px 14px', outline:'none', fontSize:'0.98rem', background:$bgSub, color:$text}} placeholder="YILMAZ" /></div>
                       <div><label style={{display:'block', fontSize:'0.92rem', fontWeight:600, color:$textSec, marginBottom:4}}>Prénom *</label><input type="text" value={nouvelEmploye.prenom} onChange={e => setNouvelEmploye({...nouvelEmploye, prenom: e.target.value})} style={{width:'100%', border:`1px solid ${$borderAlt}`, borderRadius:crmRd, padding:'8px 14px', outline:'none', fontSize:'0.98rem', background:$bgSub, color:$text}} placeholder="Özdoğan" /></div>
@@ -80,7 +80,7 @@ export default function TabOrganigramme(__props) {
                   '1': employes.filter(e => e.groupe === '1'),
                 };
                 const groupeConf = [
-                  { id: '0', label: 'Direction (Groupe 0)', color: '#F8DC00', bg: '#F8DC0010', icon: '👑' },
+                  { id: '0', label: 'Direction (Groupe 0)', color: '#F8DC00', bg: '#F8DC0010', icon: '✦' },
                   { id: '1', label: 'Opérationnel (Groupe 1)', color: '#22c55e', bg: '#22c55e10', icon: '◆' },
                   { id: '2', label: 'Support Yilmaz (Groupe 2)', color: '#f97316', bg: '#f9731610', icon: '↻' },
                 ];
@@ -99,7 +99,7 @@ export default function TabOrganigramme(__props) {
                             const nc = NIVEAU_COLORS[emp.niveau] || $textMut;
                             return (
                               <div key={emp.id} style={{background:$bgSub, borderRadius:Math.max(crmRd-2,0), border:`1px solid ${$border}`, padding:'12px 14px', borderLeft:`3px solid ${fc}`, position:'relative'}}>
-                                <button onClick={() => supprimerEmploye(emp.id)} style={{position:'absolute', top:6, right:6, background:'transparent', border:'none', cursor:'pointer', color:$textMut, fontSize:'0.7rem', opacity:0.5}} onMouseEnter={e=>e.currentTarget.style.opacity='1'} onMouseLeave={e=>e.currentTarget.style.opacity='0.5'}>🗑️</button>
+                                <button onClick={() => supprimerEmploye(emp.id)} style={{position:'absolute', top:6, right:6, background:'transparent', border:'none', cursor:'pointer', color:$textMut, fontSize:'0.7rem', opacity:0.5}} onMouseEnter={e=>e.currentTarget.style.opacity='1'} onMouseLeave={e=>e.currentTarget.style.opacity='0.5'}>⊘</button>
                                 <div style={{fontWeight:700, color:$text, fontSize:'0.88rem', marginBottom:2}}>{emp.prenom} {emp.nom}</div>
                                 <div style={{fontSize:'0.75rem', color:$textSec, marginBottom:6}}>{emp.posteExterne || emp.posteInterne}</div>
                                 <div style={{display:'flex', gap:6, flexWrap:'wrap'}}>
@@ -374,7 +374,7 @@ export default function TabOrganigramme(__props) {
                             { n: actifs.length, l: 'Collaborateurs', icon: '◉' },
                             { n: filialeGroups.length, l: 'Entités', icon: '▪' },
                             { n: actifs.filter(e=>['XXXL','XXL','XL'].includes(e.niveau)).length, l: 'Management', icon: '🎖️' },
-                            { n: actifs.filter(e=>e.groupe==='0').length, l: 'Direction', icon: '👑' },
+                            { n: actifs.filter(e=>e.groupe==='0').length, l: 'Direction', icon: '✦' },
                           ].map((s,i) => (
                             <div key={i} style={{textAlign:'center', minWidth:90, background:$bgSub, borderRadius:crmRd, padding:'12px 16px', border:`1px solid ${$border}`}}>
                               <div style={{fontSize:'0.9rem', marginBottom:4}}>{s.icon}</div>
@@ -418,7 +418,7 @@ export default function TabOrganigramme(__props) {
                                 </div>
                               </div>
                               <div style={{display:'flex', gap:8}}>
-                                {direction.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['XXXL']+'20', color:NIVEAU_COLORS['XXXL'], fontSize:'0.68rem', fontWeight:700}}>👑 {direction.length} dir.</span>}
+                                {direction.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['XXXL']+'20', color:NIVEAU_COLORS['XXXL'], fontSize:'0.68rem', fontWeight:700}}>✦ {direction.length} dir.</span>}
                                 {management.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['L']+'20', color:NIVEAU_COLORS['L'], fontSize:'0.68rem', fontWeight:700}}>🎖️ {management.length} mgmt</span>}
                                 {equipe.length>0 && <span style={{padding:'3px 10px', borderRadius:crmRd>0?99:2, background:NIVEAU_COLORS['S']+'20', color:NIVEAU_COLORS['S'], fontSize:'0.68rem', fontWeight:700}}>◆ {equipe.length} équipe</span>}
                               </div>
@@ -674,12 +674,12 @@ export default function TabOrganigramme(__props) {
                 // Row 3: filiales under their holding (center zone)
 
                 const holdingNodes = [
-                  { id:'invest_exe', label:'INVEST EXE', sub:'Exécution',  color:'#8b5cf6', icon:'⚡', type:'holding' },
+                  { id:'invest_exe', label:'INVEST EXE', sub:'Exécution',  color:'#8b5cf6', icon:'↯', type:'holding' },
                   { id:'invest_loc', label:'INVEST LOC', sub:'Location',   color:'#0ea5e9', icon:'▣', type:'holding' },
                 ];
                 const sideNodes = [
                   { id:'yilmaz',   label:'YILMAZ SAS', sub:'Services',   color:$text, icon:'✱', type:'support', effectif: getEmps('yilmaz').length },
-                  { id:'sci_elia', label:'SCI Elia',   sub:'Immobilier', color:'#d97706', icon:'🏠', type:'sci' },
+                  { id:'sci_elia', label:'SCI Elia',   sub:'Immobilier', color:'#d97706', icon:'⌂', type:'sci' },
                 ];
                 const filialeNodes = [
                   ...exeF.map(f => ({ id:String(f.id), label:(f.nom||''), sub:(f.activite||'').slice(0,20), color:f.couleur||'#666', icon:f.icon||'◆', type:'filiale', parent:'invest_exe', effectif: getEmps(f.id).length, ca: f.ca })),

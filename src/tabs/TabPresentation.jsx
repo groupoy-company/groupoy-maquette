@@ -6,15 +6,15 @@ export default function TabPresentation(__props) {
   return (
           <div style={{position:"relative",userSelect:"none"}}>
             <div style={{display:"flex",justifyContent:"flex-end",marginBottom:16}}>
-              <button onClick={() => setShowPrintModal(true)} style={{background:`linear-gradient(135deg, ${$accent}, ${$accent}cc)`, color:'white', padding:'10px 20px', borderRadius:crmRd, fontWeight:600, fontSize:'0.95rem', boxShadow:'0 4px 12px rgba(139,111,71,0.2)', transition:'all 0.3s', display:'flex', alignItems:'center', gap:8, border:'none', cursor:'pointer'}}>🖨️ Imprimer la Présentation</button>
+              <button onClick={() => setShowPrintModal(true)} style={{background:`linear-gradient(135deg, ${$accent}, ${$accent}cc)`, color:'white', padding:'10px 20px', borderRadius:crmRd, fontWeight:600, fontSize:'0.95rem', boxShadow:'0 4px 12px rgba(139,111,71,0.2)', transition:'all 0.3s', display:'flex', alignItems:'center', gap:8, border:'none', cursor:'pointer'}}>⎙ Imprimer la Présentation</button>
             </div>
             {showPrintModal && (
               <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:50}} onClick={() => setShowPrintModal(false)}>
                 <div style={{background:$bgCard,borderRadius:crmRd,boxShadow:$shadowLg,padding:24,width:"100%",maxWidth:448,margin:"0 16px"}} onClick={e => e.stopPropagation()}>
-                  <h3 style={{fontSize:"1.2rem",fontWeight:700,marginBottom:4,color:$accent}} style={{color:$accent}}>🖨️ Imprimer la Présentation</h3>
+                  <h3 style={{fontSize:"1.2rem",fontWeight:700,marginBottom:4,color:$accent}} style={{color:$accent}}>⎙ Imprimer la Présentation</h3>
                   <p style={{fontSize:"0.85rem",color:$textMut,marginBottom:20}}>Sélectionnez les sections à inclure dans l'impression :</p>
                   <div style={{display:'flex', flexDirection:'column', gap:12, marginBottom:24}}>{Object.entries(configBlocsPresentation).map(([key, cfg]) => (<label key={key} style={{display:"flex",alignItems:"center",gap:12,padding:12,borderRadius:crmRd,border:`2px solid ${printSelection[key]?$accent:$border}`,cursor:"pointer",transition:"all 0.2s",background:printSelection[key]?$accent+"08":$bgSub}}><input type="checkbox" checked={printSelection[key]} onChange={e => setPrintSelection({...printSelection, [key]: e.target.checked})} style={{width:20,height:20,accentColor:$accent}} /><span style={{fontSize:'1.2rem'}}>{cfg.icon}</span><span style={{fontWeight:600,fontSize:"0.85rem",color:printSelection[key]?$accent:$textMut}}>{cfg.label}</span></label>))}</div>
-                  <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}><div style={{fontSize:"0.75rem",color:$textMut}}>{Object.values(printSelection).filter(Boolean).length} section(s) sélectionnée(s)</div><div style={{display:'flex', gap:8}}><button onClick={() => setShowPrintModal(false)} style={{padding:"8px 16px",borderRadius:crmRd,fontSize:"0.85rem",fontWeight:600,color:$textSec,background:$bgSub,border:"none",cursor:"pointer",fontFamily:"inherit"}}>Annuler</button><button onClick={handlePrint} disabled={Object.values(printSelection).every(v => !v)} style={{padding:"8px 20px",borderRadius:crmRd,fontSize:"0.85rem",fontWeight:600,color:"white",background:$accent,border:"none",cursor:"pointer",boxShadow:$shadow,display:"flex",alignItems:"center",gap:8,fontFamily:"inherit"}}>🖨️ Imprimer</button></div></div>
+                  <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}><div style={{fontSize:"0.75rem",color:$textMut}}>{Object.values(printSelection).filter(Boolean).length} section(s) sélectionnée(s)</div><div style={{display:'flex', gap:8}}><button onClick={() => setShowPrintModal(false)} style={{padding:"8px 16px",borderRadius:crmRd,fontSize:"0.85rem",fontWeight:600,color:$textSec,background:$bgSub,border:"none",cursor:"pointer",fontFamily:"inherit"}}>Annuler</button><button onClick={handlePrint} disabled={Object.values(printSelection).every(v => !v)} style={{padding:"8px 20px",borderRadius:crmRd,fontSize:"0.85rem",fontWeight:600,color:"white",background:$accent,border:"none",cursor:"pointer",boxShadow:$shadow,display:"flex",alignItems:"center",gap:8,fontFamily:"inherit"}}>⎙ Imprimer</button></div></div>
                   <div style={{display:"flex",gap:8,marginTop:12}}><button onClick={() => setPrintSelection(Object.fromEntries(Object.keys(configBlocsPresentation).map(k => [k, true])))} style={{fontSize:"0.75rem",color:$accent,cursor:"pointer"}}>Tout sélectionner</button><span style={{fontSize:"0.75rem",color:$borderLight}}>|</span><button onClick={() => setPrintSelection(Object.fromEntries(Object.keys(configBlocsPresentation).map(k => [k, false])))} style={{fontSize:"0.75rem",color:$textMut,cursor:"pointer"}}>Tout désélectionner</button></div>
                 </div>
               </div>
@@ -34,7 +34,7 @@ export default function TabPresentation(__props) {
               <div style={{overflowX:'auto',borderRadius:crmRd,border:`1px solid ${$border}`,overflow:'hidden'}}><table style={{width:'100%',borderCollapse:'separate',borderSpacing:0}}><thead><tr style={{background:$bgSub,borderBottom:`2px solid ${$border}`}}><th style={{position:'relative',padding:'12px 14px',textAlign:'left',fontWeight:700,color:$accent,fontSize:'0.78rem',textTransform:'uppercase',letterSpacing:'0.03em'}}>Écart vs Cible<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th><th style={{position:'relative',padding:'12px 16px',textAlign:'center',fontWeight:700,color:$accent,fontSize:'0.78rem',textTransform:'uppercase',letterSpacing:'0.03em'}}>Emoji<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th><th style={{position:'relative',padding:'12px 16px',textAlign:'center',fontWeight:700,color:$accent,fontSize:'0.78rem',textTransform:'uppercase',letterSpacing:'0.03em'}}>Coefficient<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th><th style={{position:'relative',padding:'12px 14px',textAlign:'left',fontWeight:700,color:$accent,fontSize:'0.78rem',textTransform:'uppercase',letterSpacing:'0.03em'}}>Niveau de Performance<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th></tr></thead>
               <tbody>{baremeRelatif.map((palier, index) => (<tr key={index} style={{borderBottom:`1px solid ${$borderLight}`,background:index%2===0?"transparent":$bgSub+"40",transition:"background 0.1s"}}><td style={{padding:12,fontWeight:500,color:$textSec}}>{palier.label}</td><td style={{padding:12,textAlign:"center",fontSize:"1.8rem"}}>{palier.emoji}</td><td style={{padding:'12px 16px', textAlign:'center', fontSize:'0.92rem', fontWeight:600}}><span style={{fontWeight:700, color:$accent, fontSize:'1.1rem'}}>×{palier.coeff.toFixed(2)}</span></td><td style={{padding:12,color:$textSec}}>{palier.commentaire}</td></tr>))}</tbody></table></div>
               <div style={{marginTop:16,display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
-                <div style={{background:$bgSub, borderRadius:crmRd, padding:18, border:`1px solid ${$border}`}}><h4 style={{fontWeight:600,color:$info,marginBottom:8}}>✧ Exemple pour votre niveau actuel :</h4><p style={{fontSize:'0.92rem', color:$textSec}}>EBE Cible : <strong>{formatPercent(niveau.ebeCible)}</strong><br/>Pour atteindre coefficient 1,0 (⭐ Excellent) : <strong>{formatPercent(niveau.ebeCible + 0.08)}</strong><br/>Pour atteindre coefficient 1,3 (🚀 Hors Norme) : <strong>{formatPercent(niveau.ebeCible + 0.15)}</strong></p></div>
+                <div style={{background:$bgSub, borderRadius:crmRd, padding:18, border:`1px solid ${$border}`}}><h4 style={{fontWeight:600,color:$info,marginBottom:8}}>✧ Exemple pour votre niveau actuel :</h4><p style={{fontSize:'0.92rem', color:$textSec}}>EBE Cible : <strong>{formatPercent(niveau.ebeCible)}</strong><br/>Pour atteindre coefficient 1,0 (⭐ Excellent) : <strong>{formatPercent(niveau.ebeCible + 0.08)}</strong><br/>Pour atteindre coefficient 1,3 (➤ Hors Norme) : <strong>{formatPercent(niveau.ebeCible + 0.15)}</strong></p></div>
                 <div style={{background:$bgSub, borderRadius:crmRd, padding:18, border:`1px solid ${$border}`}}><h4 style={{fontWeight:600,color:$success,marginBottom:8}}>◎ Votre performance actuelle :</h4><p style={{fontSize:'0.92rem', color:$textSec}}>EBE Réalisé : <strong>{formatPercent(ebePercent)}</strong><br/>Écart : <strong>{ecartEBE >= 0 ? '+' : ''}{(ecartEBE * 100).toFixed(1)} points</strong><br/>{coeffResult.emoji} <strong>{coeffResult.commentaire}</strong> (×{coefficient.toFixed(2)})</p></div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function TabPresentation(__props) {
               {/* L'HISTOIRE */}
               <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,padding:'48px',boxShadow:'0 2px 16px rgba(0,0,0,0.03)'}}>
                 <div style={{maxWidth:760,margin:'0 auto'}}>
-                  <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:8}}><span style={{fontSize:'1.5rem'}}>📖</span><div style={{fontSize:'1.6rem',fontWeight:800,color:$text,letterSpacing:'-0.03em'}}>L'Histoire de la Ruche</div></div>
+                  <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:8}}><span style={{fontSize:'1.5rem'}}>▤</span><div style={{fontSize:'1.6rem',fontWeight:800,color:$text,letterSpacing:'-0.03em'}}>L'Histoire de la Ruche</div></div>
                   <div style={{width:50,height:3,background:$accent,borderRadius:2,marginBottom:32}}/>
                   <div style={{fontSize:'1rem',color:$textSec,lineHeight:1.9,marginBottom:28}}>Il était une fois, dans la plaine d'Alsace, un groupe de bâtisseurs passionnés qui rêvaient de construire différemment. Pas seulement des murs et des toits — mais un <span style={{fontWeight:700,color:$accent}}>écosystème vivant</span> où chaque talent trouve sa place, grandit et s'épanouit. Un modèle où la performance individuelle nourrit la réussite collective, et où chaque effort est reconnu à sa juste valeur.</div>
                   <div style={{fontSize:'1rem',color:$textSec,lineHeight:1.9,marginBottom:28}}>Inspirés par la ruche — ce chef-d'œuvre de la nature où chaque abeille a un rôle précis, où l'effort collectif crée quelque chose de plus grand que la somme des individus — ils ont inventé le <span style={{fontWeight:700,color:$accent}}>Modèle Ruches</span>. Un système où la rémunération n'est pas arbitraire, mais directement liée à une réalité mesurable : l'EBE de chaque unité. Chaque collaborateur peut voir, comprendre et influencer sa rémunération.</div>
@@ -73,10 +73,10 @@ export default function TabPresentation(__props) {
                   </div>
                   <div style={{fontSize:'1.2rem',fontWeight:700,color:$text,marginBottom:16}}>Les 4 Niveaux de la Ruche</div>
                   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:32}}>{[
-                    {icon:'🌱',title:'ALVÉOLE',sub:'XXS → XS',desc:'Le terrain. L\'apprentissage et les fondations. CA : 0 à 1M€.',color:'#78350f',bg:'#fef3c7'},
-                    {icon:'🍯',title:'RAYON',sub:'S → M',desc:'L\'encadrement. Pilotage autonome de chantiers. CA : 1 à 3M€.',color:$accent,bg:$accent+'08'},
-                    {icon:'🏰',title:'RUCHE',sub:'L → XL',desc:'Le management. Direction d\'équipe et portefeuille. CA : 3 à 7,5M€.',color:'#9a3412',bg:'#fff7ed'},
-                    {icon:'👑',title:'RUCHER',sub:'XXL → XXXL',desc:'La direction. Pilotage d\'une filiale entière. CA : 7,5 à 15M€.',color:'#b91c1c',bg:'#fef2f2'},
+                    {icon:'↑',title:'ALVÉOLE',sub:'XXS → XS',desc:'Le terrain. L\'apprentissage et les fondations. CA : 0 à 1M€.',color:'#78350f',bg:'#fef3c7'},
+                    {icon:'⬡',title:'RAYON',sub:'S → M',desc:'L\'encadrement. Pilotage autonome de chantiers. CA : 1 à 3M€.',color:$accent,bg:$accent+'08'},
+                    {icon:'◆',title:'RUCHE',sub:'L → XL',desc:'Le management. Direction d\'équipe et portefeuille. CA : 3 à 7,5M€.',color:'#9a3412',bg:'#fff7ed'},
+                    {icon:'✦',title:'RUCHER',sub:'XXL → XXXL',desc:'La direction. Pilotage d\'une filiale entière. CA : 7,5 à 15M€.',color:'#b91c1c',bg:'#fef2f2'},
                   ].map((b,i)=>(<div key={i} style={{background:b.bg,borderRadius:crmRd,padding:'18px 20px',border:`1px solid ${b.color}20`,transition:'all 0.2s'}} onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseLeave={e=>e.currentTarget.style.transform='translateY(0)'}>
                     <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}><div style={{width:38,height:38,borderRadius:crmRd,background:b.color+'12',display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{fontSize:'1.2rem'}}>{b.icon}</span></div><div><div style={{fontWeight:800,fontSize:'0.92rem',color:b.color,letterSpacing:'0.04em'}}>{b.title}</div><div style={{fontSize:'0.68rem',color:$textMut}}>{b.sub}</div></div></div>
                     <div style={{fontSize:'0.88rem',color:$textSec,lineHeight:1.6}}>{b.desc}</div>
@@ -88,7 +88,7 @@ export default function TabPresentation(__props) {
                     <span style={{width:10,height:10,borderRadius:'50%',background:f.couleur,flexShrink:0}}/>
                   </div>))}</div>
                   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}>
-                    <div style={{background:$success+'06',borderRadius:crmRd,padding:'20px 24px',border:`1px solid ${$success}15`}}><div style={{fontSize:'0.95rem',color:$success,fontWeight:700,marginBottom:8}}>🚀 L'Ambition 2026–2034</div><div style={{fontSize:'0.95rem',color:$textSec,lineHeight:1.7}}>De <strong>10M€</strong> à <strong>30M€</strong> — par croissance organique et acquisitions. Chaque nouvelle filiale enrichit l'essaim.</div></div>
+                    <div style={{background:$success+'06',borderRadius:crmRd,padding:'20px 24px',border:`1px solid ${$success}15`}}><div style={{fontSize:'0.95rem',color:$success,fontWeight:700,marginBottom:8}}>➤ L'Ambition 2026–2034</div><div style={{fontSize:'0.95rem',color:$textSec,lineHeight:1.7}}>De <strong>10M€</strong> à <strong>30M€</strong> — par croissance organique et acquisitions. Chaque nouvelle filiale enrichit l'essaim.</div></div>
                     <div style={{background:$info+'06',borderRadius:crmRd,padding:'20px 24px',border:`1px solid ${$info}15`}}><div style={{fontSize:'0.95rem',color:$info,fontWeight:700,marginBottom:8}}>◆ Services Partagés YILMAZ</div><div style={{fontSize:'0.95rem',color:$textSec,lineHeight:1.7}}>Finance, RH, IT, Marketing. Chaque filiale verse <strong>5% du CA</strong> pour bénéficier de ces services mutualisés.</div></div>
                   </div>
                 </div>
@@ -120,58 +120,58 @@ export default function TabPresentation(__props) {
               {(()=>{
                 const ARCHI_DATA = {
                   ezel: {color:'#007ab5', blocs:[
-                    {title:'ALVÉOLE (Terrain)',icon:'🌱',bg:'#007ab506',border:'#007ab5',items:[
+                    {title:'ALVÉOLE (Terrain)',icon:'↑',bg:'#007ab506',border:'#007ab5',items:[
                       {niv:'XXS',nom:'Alvéole Apprenti',ca:'0–0,5M€',int:'Butineur',ext:'Assistant Conducteur de Travaux'},
                       {niv:'XS',nom:'Alvéole',ca:'0,5–1M€',int:'Collecteur',ext:'Conducteur de Travaux / Chef de Chantier'}]},
-                    {title:'RAYON (Encadrement)',icon:'🍯',bg:$accent+'06',border:$accent,items:[
+                    {title:'RAYON (Encadrement)',icon:'⬡',bg:$accent+'06',border:$accent,items:[
                       {niv:'S',nom:'Rayon Junior',ca:'1–1,5M€',int:'Bâtisseur',ext:"Conducteur de Travaux Confirmé / Chargé d'Affaires"},
                       {niv:'M',nom:'Rayon Senior',ca:'1,5–3M€',int:'Maître-Bâtisseur',ext:"Chargé d'Affaires Confirmé / Chef de Groupe"}]},
-                    {title:'RUCHE (Management)',icon:'🏰',bg:'#9a341206',border:'#9a3412',items:[
+                    {title:'RUCHE (Management)',icon:'◆',bg:'#9a341206',border:'#9a3412',items:[
                       {niv:'L',nom:'Ruche Junior',ca:'3–5M€',int:'Gardien de Ruche',ext:'Directeur de Travaux / Chef de Groupe Senior'},
                       {niv:'XL',nom:'Ruche Senior',ca:'5–7,5M€',int:'Régisseur de Ruche',ext:"Responsable d'Agence / Chef d'Agence"}]},
-                    {title:'RUCHER (Direction)',icon:'👑',bg:'#dc262606',border:'#dc2626',items:[
+                    {title:'RUCHER (Direction)',icon:'✦',bg:'#dc262606',border:'#dc2626',items:[
                       {niv:'XXL',nom:'Rucher Junior',ca:'7,5–12M€',int:'Maître-Apiculteur',ext:"Directeur d'Agence / Directeur d'Exploitation Junior"},
                       {niv:'XXXL',nom:'Rucher Senior',ca:'12–15M€',int:'Roi / Reine de la Ruche',ext:"Directeur d'Exploitation / Directeur Multi-Sites"}]}
                   ]},
                   echafaudage: {color:'#6C3483', blocs:[
-                    {title:'ALVÉOLE (Terrain)',icon:'🌱',bg:'#6C348306',border:'#6C3483',items:[
+                    {title:'ALVÉOLE (Terrain)',icon:'↑',bg:'#6C348306',border:'#6C3483',items:[
                       {niv:'XXS',nom:'Alvéole Apprenti',ca:'0–0,5M€',int:'Butineur',ext:'Monteur Échafaudeur / Aide'},
                       {niv:'XS',nom:'Alvéole',ca:'0,5–1M€',int:'Collecteur',ext:'Chef Monteur / Échafaudeur Qualifié'}]},
-                    {title:'RAYON (Encadrement)',icon:'🍯',bg:'#6C348306',border:'#8E44AD',items:[
+                    {title:'RAYON (Encadrement)',icon:'⬡',bg:'#6C348306',border:'#8E44AD',items:[
                       {niv:'S',nom:'Rayon Junior',ca:'1–1,5M€',int:'Bâtisseur',ext:'Chef d\'Équipe Échafaudage'},
                       {niv:'M',nom:'Rayon Senior',ca:'1,5–3M€',int:'Maître-Bâtisseur',ext:'Conducteur de Travaux Échafaudage'}]},
-                    {title:'RUCHE (Management)',icon:'🏰',bg:'#6C348306',border:'#6C3483',items:[
+                    {title:'RUCHE (Management)',icon:'◆',bg:'#6C348306',border:'#6C3483',items:[
                       {niv:'L',nom:'Ruche Junior',ca:'3–5M€',int:'Gardien de Ruche',ext:'Directeur de Travaux Échafaudage'},
                       {niv:'XL',nom:'Ruche Senior',ca:'5–7,5M€',int:'Régisseur de Ruche',ext:'Responsable d\'Agence Échafaudage'}]},
-                    {title:'RUCHER (Direction)',icon:'👑',bg:'#dc262606',border:'#dc2626',items:[
+                    {title:'RUCHER (Direction)',icon:'✦',bg:'#dc262606',border:'#dc2626',items:[
                       {niv:'XXL',nom:'Rucher Junior',ca:'7,5–12M€',int:'Maître-Apiculteur',ext:'Directeur d\'Agence Échafaudage'},
                       {niv:'XXXL',nom:'Rucher Senior',ca:'12–15M€',int:'Roi / Reine de la Ruche',ext:'Directeur d\'Exploitation Multi-Sites'}]}
                   ]},
                   etancheite: {color:'#0e6655', blocs:[
-                    {title:'ALVÉOLE (Terrain)',icon:'🌱',bg:'#0e665506',border:'#0e6655',items:[
+                    {title:'ALVÉOLE (Terrain)',icon:'↑',bg:'#0e665506',border:'#0e6655',items:[
                       {niv:'XXS',nom:'Alvéole Apprenti',ca:'0–0,3M€',int:'Butineur',ext:'Aide-Étancheur / Apprenti'},
                       {niv:'XS',nom:'Alvéole',ca:'0,3–0,7M€',int:'Collecteur',ext:'Étancheur Qualifié'}]},
-                    {title:'RAYON (Encadrement)',icon:'🍯',bg:'#0e665506',border:'#148f77',items:[
+                    {title:'RAYON (Encadrement)',icon:'⬡',bg:'#0e665506',border:'#148f77',items:[
                       {niv:'S',nom:'Rayon Junior',ca:'0,7–1,2M€',int:'Bâtisseur',ext:'Chef d\'Équipe Étanchéité'},
                       {niv:'M',nom:'Rayon Senior',ca:'1,2–2,5M€',int:'Maître-Bâtisseur',ext:'Conducteur de Travaux Étanchéité'}]},
-                    {title:'RUCHE (Management)',icon:'🏰',bg:'#0e665506',border:'#0e6655',items:[
+                    {title:'RUCHE (Management)',icon:'◆',bg:'#0e665506',border:'#0e6655',items:[
                       {niv:'L',nom:'Ruche Junior',ca:'2,5–4M€',int:'Gardien de Ruche',ext:'Chargé d\'Affaires Étanchéité'},
                       {niv:'XL',nom:'Ruche Senior',ca:'4–6M€',int:'Régisseur de Ruche',ext:'Responsable d\'Agence Étanchéité'}]},
-                    {title:'RUCHER (Direction)',icon:'👑',bg:'#dc262606',border:'#dc2626',items:[
+                    {title:'RUCHER (Direction)',icon:'✦',bg:'#dc262606',border:'#dc2626',items:[
                       {niv:'XXL',nom:'Rucher Junior',ca:'6–10M€',int:'Maître-Apiculteur',ext:'Directeur d\'Agence Étanchéité'},
                       {niv:'XXXL',nom:'Rucher Senior',ca:'10–15M€',int:'Roi / Reine de la Ruche',ext:'Directeur Multi-Sites Étanchéité'}]}
                   ]},
                   roulotte: {color:'#C49A2A', blocs:[
-                    {title:'ALVÉOLE (Terrain commercial)',icon:'🌱',bg:'#C49A2A06',border:'#C49A2A',items:[
+                    {title:'ALVÉOLE (Terrain commercial)',icon:'↑',bg:'#C49A2A06',border:'#C49A2A',items:[
                       {niv:'XXS',nom:'Alvéole Apprenti',ca:'0–0,3M€',int:'Butineur',ext:'Assistant Commercial Location'},
                       {niv:'XS',nom:'Alvéole',ca:'0,3–0,6M€',int:'Collecteur',ext:'Commercial Location / Magasinier'}]},
-                    {title:'RAYON (Encadrement commercial)',icon:'🍯',bg:'#C49A2A06',border:'#D4AC2B',items:[
+                    {title:'RAYON (Encadrement commercial)',icon:'⬡',bg:'#C49A2A06',border:'#D4AC2B',items:[
                       {niv:'S',nom:'Rayon Junior',ca:'0,6–1M€',int:'Bâtisseur',ext:'Commercial Location Confirmé'},
                       {niv:'M',nom:'Rayon Senior',ca:'1–2M€',int:'Maître-Bâtisseur',ext:'Responsable Commercial / Chef de Parc'}]},
-                    {title:'RUCHE (Management)',icon:'🏰',bg:'#C49A2A06',border:'#C49A2A',items:[
+                    {title:'RUCHE (Management)',icon:'◆',bg:'#C49A2A06',border:'#C49A2A',items:[
                       {niv:'L',nom:'Ruche Junior',ca:'2–3,5M€',int:'Gardien de Ruche',ext:'Responsable d\'Agence Location'},
                       {niv:'XL',nom:'Ruche Senior',ca:'3,5–5M€',int:'Régisseur de Ruche',ext:'Directeur d\'Agence Location'}]},
-                    {title:'RUCHER (Direction)',icon:'👑',bg:'#dc262606',border:'#dc2626',items:[
+                    {title:'RUCHER (Direction)',icon:'✦',bg:'#dc262606',border:'#dc2626',items:[
                       {niv:'XXL',nom:'Rucher Junior',ca:'5–8M€',int:'Maître-Apiculteur',ext:'Directeur d\'Agence Location / Zone'},
                       {niv:'XXXL',nom:'Rucher Senior',ca:'8–12M€',int:'Roi / Reine de la Ruche',ext:'Directeur Multi-Sites Location'}]}
                   ]}

@@ -131,7 +131,7 @@ export default function TabParcAutomobile(__props) {
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    <div style={{width:40,height:40,borderRadius:10,background:'#334155',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>🚗</div>
+                    <div style={{width:40,height:40,borderRadius:10,background:'#334155',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',flexShrink:0}}>▸</div>
                     <div>
                       <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:2}}>
                         <h2 style={{margin:0,fontSize:'1.05rem',fontWeight:800,color:$text,letterSpacing:'-0.01em'}}>Parc Automobile</h2>

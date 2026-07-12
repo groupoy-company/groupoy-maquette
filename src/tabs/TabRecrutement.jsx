@@ -9,12 +9,12 @@ export default function TabRecrutement(__props) {
           {id:'a_analyser',label:'À analyser',color:'#a855f7',icon:'☰',desc:'CV en attente de review'},
           {id:'preselection',label:'Présélection',color:'#f59e0b',icon:'⌕',desc:'Analyse CV & profil'},
           {id:'entretien_1',label:'1er Entretien',color:'#f97316',icon:'🗣️',desc:'Entretien téléphonique ou visio'},
-          {id:'entretien_2',label:'2ème Entretien',color:'#ef4444',icon:'🤝',desc:'Entretien physique'},
+          {id:'entretien_2',label:'2ème Entretien',color:'#ef4444',icon:'◈',desc:'Entretien physique'},
           {id:'test',label:'Test / Référence',color:'#ec4899',icon:'✎',desc:'Test technique ou prise de références'},
           {id:'proposition',label:'Proposition',color:'#10b981',icon:'▫',desc:'Promesse d\'embauche'},
           {id:'embauche',label:'Embauché',color:'#059669',icon:'✓',desc:'Intégration en cours'},
           {id:'refuse',label:'Refusé',color:$textSec,icon:'✕',desc:'Candidature refusée'},
-          {id:'reserve',label:'Vivier',color:'#0ea5e9',icon:'💎',desc:'Candidat en réserve pour plus tard'}
+          {id:'reserve',label:'Vivier',color:'#0ea5e9',icon:'◇',desc:'Candidat en réserve pour plus tard'}
         ];
         const SOURCES = ['Indeed','LinkedIn','Pôle Emploi','APEC','Spontanée','Cooptation','Cabinet','Site carrière','Facebook','Autre'];
         const SCORE_CRITERES = [
@@ -252,7 +252,7 @@ export default function TabRecrutement(__props) {
                       </div>
                       {c.disponibilite && <div style={{fontSize:'0.6rem',color:$success,marginTop:3,fontWeight:500}}>Dispo: {c.disponibilite}</div>}
                       {needsRelance(c) && <div style={{fontSize:'0.58rem',color:'#d97706',marginTop:3,fontWeight:700,display:'flex',alignItems:'center',gap:3}}>▲ {daysSinceActivity(c)}j sans activité</div>}
-                      {c.etape==='embauche'&&<div style={{fontSize:'0.58rem',color:$success,marginTop:2,fontWeight:600,display:'flex',alignItems:'center',gap:3}}>🚀 Onboarding</div>}
+                      {c.etape==='embauche'&&<div style={{fontSize:'0.58rem',color:$success,marginTop:2,fontWeight:600,display:'flex',alignItems:'center',gap:3}}>➤ Onboarding</div>}
                       {c.fichiers?.length > 0 && <div style={{display:'flex',gap:3,marginTop:2}}>{c.fichiers.some(f=>f.type==='cv')&&<span style={{fontSize:'0.55rem',background:$accent+'12',color:$accent,padding:'1px 4px',borderRadius:3,fontWeight:600}}>CV</span>}{c.fichiers.length>1&&<span style={{fontSize:'0.55rem',background:$bgSub,color:$textMut,padding:'1px 4px',borderRadius:3}}>+{c.fichiers.length-1}</span>}</div>}
                     </div>);
                   })}
@@ -267,7 +267,7 @@ export default function TabRecrutement(__props) {
             {recruBulkSel.length>0&&(<div style={{display:'flex',alignItems:'center',gap:10,padding:'10px 16px',background:$accent+'10',border:`1px solid ${$accent}30`,borderRadius:crmRd,marginBottom:10}}>
               <span style={{fontWeight:700,color:$accent,fontSize:'0.82rem'}}>{recruBulkSel.length} sélectionné{recruBulkSel.length>1?'s':''}</span>
               <button onClick={()=>{const newEtape=prompt('Nouvelle étape (nouveau/a_analyser/preselection/entretien_1/entretien_2/test/proposition/embauche/refuse/reserve):');if(!newEtape||!RECRU_ETAPES.find(e=>e.id===newEtape))return;saveCands(activeCandidats.map(c=>recruBulkSel.includes(c.id)?{...c,etape:newEtape,timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:`[Bulk] Déplacé vers ${RECRU_ETAPES.find(e=>e.id===newEtape)?.label}`}]}:c));setRecruBulkSel([]);}} style={{padding:'4px 12px',borderRadius:crmRd,border:`1px solid ${$accent}`,background:'transparent',color:$accent,fontWeight:600,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit'}}>🔀 Changer étape</button>
-              <button onClick={()=>{const etId='reserve';saveCands(activeCandidats.map(c=>recruBulkSel.includes(c.id)?{...c,etape:etId,timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:'[Bulk] Mis en vivier'}]}:c));setRecruBulkSel([]);}} style={{padding:'4px 12px',borderRadius:crmRd,border:`1px solid ${$info}`,background:'transparent',color:$info,fontWeight:600,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit'}}>💎 Vivier</button>
+              <button onClick={()=>{const etId='reserve';saveCands(activeCandidats.map(c=>recruBulkSel.includes(c.id)?{...c,etape:etId,timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:'[Bulk] Mis en vivier'}]}:c));setRecruBulkSel([]);}} style={{padding:'4px 12px',borderRadius:crmRd,border:`1px solid ${$info}`,background:'transparent',color:$info,fontWeight:600,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit'}}>◇ Vivier</button>
               <button onClick={()=>{if(!window.confirm(`Refuser ${recruBulkSel.length} candidat(s) ?`))return;saveCands(activeCandidats.map(c=>recruBulkSel.includes(c.id)?{...c,etape:'refuse',timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:'[Bulk] Candidature refusée'}]}:c));setRecruBulkSel([]);}} style={{padding:'4px 12px',borderRadius:crmRd,border:`1px solid ${$danger}`,background:'transparent',color:$danger,fontWeight:600,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit'}}>✕ Refuser</button>
               <button onClick={()=>setRecruBulkSel([])} style={{marginLeft:'auto',padding:'4px 10px',borderRadius:crmRd,border:`1px solid ${$border}`,background:'transparent',color:$textMut,fontSize:'0.72rem',cursor:'pointer',fontFamily:'inherit'}}>Désélectionner</button>
             </div>)}
@@ -359,7 +359,7 @@ export default function TabRecrutement(__props) {
                   {label:'Taux de conversion',v:txConversion+'%',color:txConversion>20?$success:txConversion>10?$warn:$danger,icon:'↗'},
                   {label:'Score moyen',v:avgScore>0?avgScore+'%':'—',color:scoreColor(avgScore),icon:'⭐'},
                   {label:'À relancer (7j+)',v:relancesCount,color:relancesCount>0?'#d97706':$success,icon:'▲'},
-                  {label:'En vivier',v:activeCandidats.filter(c=>c.etape==='reserve').length,color:$info,icon:'💎'},
+                  {label:'En vivier',v:activeCandidats.filter(c=>c.etape==='reserve').length,color:$info,icon:'◇'},
                   {label:'Avec CV',v:activeCandidats.filter(c=>c.fichiers?.some(f=>f.type==='cv')).length,color:$textSec,icon:'▫'},
                 ].map((kpi,i)=>(
                   <div key={i} style={{background:$bgCard,borderRadius:crmRd,padding:'16px 20px',border:`1px solid ${$border}`,display:'flex',alignItems:'center',gap:14}}>
@@ -426,7 +426,7 @@ export default function TabRecrutement(__props) {
           {recruNewMode&&(<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>{setRecruNewMode(null);setRecruCvPaste('');setRecruCvParsing(false);setRecruFichierUrl('');}}>
             <div style={{background:$bgCard,borderRadius:crmRd,width:'94%',maxWidth:700,maxHeight:'90vh',overflow:'auto',boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
               <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',alignItems:'center',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}>
-                <div style={{fontWeight:700,color:$text}}>{recruNewMode==='choose'?'Nouveau candidat':recruNewMode==='cv'?'🤖 Créer depuis un CV':recruNewMode==='linkedin'?'🔗 Depuis LinkedIn / Capture':'Saisie manuelle'}</div>
+                <div style={{fontWeight:700,color:$text}}>{recruNewMode==='choose'?'Nouveau candidat':recruNewMode==='cv'?'✦ Créer depuis un CV':recruNewMode==='linkedin'?'⧉ Depuis LinkedIn / Capture':'Saisie manuelle'}</div>
                 <button onClick={()=>{setRecruNewMode(null);setRecruCvPaste('');setRecruCvParsing(false);setRecruFichierUrl('');}} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer',color:$textSec}}>✕</button>
               </div>
 
@@ -445,7 +445,7 @@ export default function TabRecrutement(__props) {
                   onMouseEnter={e=>{e.currentTarget.style.borderColor=$info;e.currentTarget.style.background=$info+'12';}}
                   onMouseLeave={e=>{e.currentTarget.style.borderColor=$info+'40';e.currentTarget.style.background=$info+'05';}}
                 >
-                  <div style={{width:48,height:48,borderRadius:crmRd,background:$info+'15',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5rem',flexShrink:0}}>🤖</div>
+                  <div style={{width:48,height:48,borderRadius:crmRd,background:$info+'15',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5rem',flexShrink:0}}>✦</div>
                   <div><div style={{fontSize:'0.92rem',fontWeight:700,color:$text}}>Depuis un CV <span style={{fontSize:'0.65rem',fontWeight:600,color:$info,background:$info+'15',padding:'2px 8px',borderRadius:crmRd>0?10:2,marginLeft:6}}>IA</span></div><div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>Collez le texte du CV — l'IA extraira nom, email, téléphone, compétences automatiquement</div></div>
                 </button>
 
@@ -453,7 +453,7 @@ export default function TabRecrutement(__props) {
                   onMouseEnter={e=>{e.currentTarget.style.borderColor=$success;e.currentTarget.style.background=$success+'12';}}
                   onMouseLeave={e=>{e.currentTarget.style.borderColor=$success+'40';e.currentTarget.style.background=$success+'05';}}
                 >
-                  <div style={{width:48,height:48,borderRadius:crmRd,background:$success+'15',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5rem',flexShrink:0}}>🔗</div>
+                  <div style={{width:48,height:48,borderRadius:crmRd,background:$success+'15',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5rem',flexShrink:0}}>⧉</div>
                   <div><div style={{fontSize:'0.92rem',fontWeight:700,color:$text}}>Depuis LinkedIn / Capture <span style={{fontSize:'0.65rem',fontWeight:600,color:$success,background:$success+'15',padding:'2px 8px',borderRadius:crmRd>0?10:2,marginLeft:6}}>IA</span></div><div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>Collez un lien LinkedIn, une capture d'écran texte ou un profil — l'IA crée le candidat</div></div>
                 </button>
               </div>)}
@@ -487,7 +487,7 @@ export default function TabRecrutement(__props) {
                   >
                     <span style={{fontSize:'1.3rem'}}>▫</span>
                     <div style={{textAlign:'center'}}><div style={{fontSize:'0.82rem',fontWeight:700,color:$text}}>{recruCvParsing?'⏳ Analyse du CV en cours...':'Importer un CV depuis l\'ordinateur'}</div><div style={{fontSize:'0.68rem',color:$textMut,marginTop:2}}>{recruCvParsing?'L\'IA lit le PDF et extrait toutes les informations...':'PDF → l\'IA analyse et crée le candidat automatiquement'}</div></div>
-                    <input type="file" accept=".pdf,.doc,.docx,.txt,.rtf" style={{display:'none'}} onChange={async(e)=>{const file=e.target.files?.[0];if(!file)return;setRecruNewFichier(file.name);if(file.type==='text/plain'||file.name.endsWith('.txt')){const reader=new FileReader();reader.onload=(ev)=>{setRecruCvPaste(ev.target.result);};reader.readAsText(file);}else if(file.type==='application/pdf'){setRecruCvPaste('▫ PDF détecté : '+file.name+' — Analyse automatique en cours...');setRecruCvParsing(true);try{const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=()=>rej(new Error('Lecture impossible'));r.readAsDataURL(file);});const dataUrl=await new Promise((r2,j2)=>{const rd=new FileReader();rd.onload=()=>r2(rd.result);rd.onerror=()=>j2('err');rd.readAsDataURL(file);});const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},{type:'text',text:'Tu es un expert RH. Extrais les informations de ce CV et retourne UNIQUEMENT un objet JSON valide (sans markdown, sans backticks) :\n\n{\"prenom\":\"\",\"nomFamille\":\"\",\"email\":\"\",\"tel\":\"\",\"adresse\":\"Adresse complète (numéro, rue, code postal, ville)\",\"villeCandidat\":\"Juste la ville\",\"poste\":\"Poste actuel ou recherché\",\"linkedin\":\"\",\"pretentionSalariale\":0,\"disponibilite\":\"\",\"notes\":\"Résumé compétences et expériences clés (4-5 lignes)\",\"source\":\"CV\",\"hasPhoto\":false,\"photoDescription\":\"Si photo présente, décris brièvement (homme/femme, cheveux, tenue)\",\"dateNaissance\":\"\",\"nationalite\":\"\",\"permis\":\"\",\"formations\":\"Diplômes et certifications\",\"langues\":\"\"}\n\nSi une info est absente, laisse \"\". Pour hasPhoto, indique true si tu vois une photo du candidat.'}]}]})});const data=await resp.json();const text=data.content?.[0]?.text||'{}';const clean=text.replace(/```json|```/g,'').trim();const parsed=JSON.parse(clean);const newId='C'+String(activeCandidats.length+1).padStart(3,'0');const newCandidat={id:newId,nom:(parsed.prenom+' '+parsed.nomFamille).trim()||'Nouveau candidat',prenom:parsed.prenom||'',nomFamille:parsed.nomFamille||'',poste:parsed.poste||'',posteId:null,posteAProposer:undefined,filiale:'Ezel Bâtiment',etape:'nouveau',priorite:'Moyenne',dateCandidat:new Date().toISOString().slice(0,10),email:parsed.email||'',tel:parsed.tel||'',source:'CV',notes:parsed.notes||'',evaluation:0,pretentionSalariale:parsed.pretentionSalariale||0,disponibilite:parsed.disponibilite||'',villeCandidat:parsed.villeCandidat||'',adresse:parsed.adresse||'',dateNaissance:parsed.dateNaissance||'',nationalite:parsed.nationalite||'',permis:parsed.permis||'',formations:parsed.formations||'',langues:parsed.langues||'',linkedin:parsed.linkedin||'',motifRefus:'',photoUrl:'',fichiers:[{id:'F'+Date.now(),type:'cv',nom:file.name,url:recruFichierUrl||'',dataUrl:'',date:new Date().toISOString().slice(0,10)}],scorecard:[],entretiens:[],timeline:[{date:new Date().toISOString().slice(0,10),action:'Candidat créé depuis CV PDF (IA)'+(parsed.hasPhoto?' — 📷 Photo détectée'+(parsed.photoDescription?' ('+parsed.photoDescription+')':''):'')}]};saveCands([...activeCandidats,newCandidat]);setRecruNewMode(null);setRecruCvPaste('');setRecruCvParsing(false);setRecruFichierUrl('');setRecruDetail(newId);setRecruDetailTab('fichiers');}catch(err){setRecruCvParsing(false);setRecruCvPaste('Erreur lors de l\'analyse du PDF: '+err.message+'\n\nVeuillez copier-coller le texte du CV ci-dessous.');}}else{setRecruCvPaste('');setTimeout(()=>{const el=document.getElementById('cvPasteArea');if(el)el.focus();},100);}}}/>
+                    <input type="file" accept=".pdf,.doc,.docx,.txt,.rtf" style={{display:'none'}} onChange={async(e)=>{const file=e.target.files?.[0];if(!file)return;setRecruNewFichier(file.name);if(file.type==='text/plain'||file.name.endsWith('.txt')){const reader=new FileReader();reader.onload=(ev)=>{setRecruCvPaste(ev.target.result);};reader.readAsText(file);}else if(file.type==='application/pdf'){setRecruCvPaste('▫ PDF détecté : '+file.name+' — Analyse automatique en cours...');setRecruCvParsing(true);try{const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=()=>rej(new Error('Lecture impossible'));r.readAsDataURL(file);});const dataUrl=await new Promise((r2,j2)=>{const rd=new FileReader();rd.onload=()=>r2(rd.result);rd.onerror=()=>j2('err');rd.readAsDataURL(file);});const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},{type:'text',text:'Tu es un expert RH. Extrais les informations de ce CV et retourne UNIQUEMENT un objet JSON valide (sans markdown, sans backticks) :\n\n{\"prenom\":\"\",\"nomFamille\":\"\",\"email\":\"\",\"tel\":\"\",\"adresse\":\"Adresse complète (numéro, rue, code postal, ville)\",\"villeCandidat\":\"Juste la ville\",\"poste\":\"Poste actuel ou recherché\",\"linkedin\":\"\",\"pretentionSalariale\":0,\"disponibilite\":\"\",\"notes\":\"Résumé compétences et expériences clés (4-5 lignes)\",\"source\":\"CV\",\"hasPhoto\":false,\"photoDescription\":\"Si photo présente, décris brièvement (homme/femme, cheveux, tenue)\",\"dateNaissance\":\"\",\"nationalite\":\"\",\"permis\":\"\",\"formations\":\"Diplômes et certifications\",\"langues\":\"\"}\n\nSi une info est absente, laisse \"\". Pour hasPhoto, indique true si tu vois une photo du candidat.'}]}]})});const data=await resp.json();const text=data.content?.[0]?.text||'{}';const clean=text.replace(/```json|```/g,'').trim();const parsed=JSON.parse(clean);const newId='C'+String(activeCandidats.length+1).padStart(3,'0');const newCandidat={id:newId,nom:(parsed.prenom+' '+parsed.nomFamille).trim()||'Nouveau candidat',prenom:parsed.prenom||'',nomFamille:parsed.nomFamille||'',poste:parsed.poste||'',posteId:null,posteAProposer:undefined,filiale:'Ezel Bâtiment',etape:'nouveau',priorite:'Moyenne',dateCandidat:new Date().toISOString().slice(0,10),email:parsed.email||'',tel:parsed.tel||'',source:'CV',notes:parsed.notes||'',evaluation:0,pretentionSalariale:parsed.pretentionSalariale||0,disponibilite:parsed.disponibilite||'',villeCandidat:parsed.villeCandidat||'',adresse:parsed.adresse||'',dateNaissance:parsed.dateNaissance||'',nationalite:parsed.nationalite||'',permis:parsed.permis||'',formations:parsed.formations||'',langues:parsed.langues||'',linkedin:parsed.linkedin||'',motifRefus:'',photoUrl:'',fichiers:[{id:'F'+Date.now(),type:'cv',nom:file.name,url:recruFichierUrl||'',dataUrl:'',date:new Date().toISOString().slice(0,10)}],scorecard:[],entretiens:[],timeline:[{date:new Date().toISOString().slice(0,10),action:'Candidat créé depuis CV PDF (IA)'+(parsed.hasPhoto?' — ▣ Photo détectée'+(parsed.photoDescription?' ('+parsed.photoDescription+')':''):'')}]};saveCands([...activeCandidats,newCandidat]);setRecruNewMode(null);setRecruCvPaste('');setRecruCvParsing(false);setRecruFichierUrl('');setRecruDetail(newId);setRecruDetailTab('fichiers');}catch(err){setRecruCvParsing(false);setRecruCvPaste('Erreur lors de l\'analyse du PDF: '+err.message+'\n\nVeuillez copier-coller le texte du CV ci-dessous.');}}else{setRecruCvPaste('');setTimeout(()=>{const el=document.getElementById('cvPasteArea');if(el)el.focus();},100);}}}/>
                   </label>
                 </div>
                 <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
@@ -533,7 +533,7 @@ export default function TabRecrutement(__props) {
                       setRecruDetail(newId);setRecruDetailTab('profil');
                     }catch(err){setRecruCvParsing(false);}
                   }} style={{padding:'8px 20px',borderRadius:crmRd,border:'none',background:recruCvParsing?$textMut:$info,color:'white',fontWeight:700,fontSize:'0.78rem',cursor:recruCvParsing?'wait':'pointer',fontFamily:'inherit',opacity:(!recruCvPaste||recruCvPaste.trim().length<10)?0.4:1,display:'flex',alignItems:'center',gap:6}}>
-                    {recruCvParsing?<>⏳ Analyse en cours...</>:<>🤖 Analyser & Créer</>}
+                    {recruCvParsing?<>⏳ Analyse en cours...</>:<>✦ Analyser & Créer</>}
                   </button>
                 </div>
               </div>)}
@@ -606,7 +606,7 @@ export default function TabRecrutement(__props) {
                       setRecruDetail(newId);setRecruDetailTab('profil');
                     }catch(err){setRecruCvParsing(false);}
                   }} style={{padding:'8px 20px',borderRadius:crmRd,border:'none',background:recruCvParsing?$textMut:$success,color:'white',fontWeight:700,fontSize:'0.78rem',cursor:recruCvParsing?'wait':'pointer',fontFamily:'inherit',opacity:(!recruCvPaste||recruCvPaste.trim().length<10)?0.4:1,display:'flex',alignItems:'center',gap:6}}>
-                    {recruCvParsing?<>⏳ Analyse en cours...</>:<>🔗 Analyser & Créer</>}
+                    {recruCvParsing?<>⏳ Analyse en cours...</>:<>⧉ Analyser & Créer</>}
                   </button>
                 </div>
               </div>)}
@@ -618,7 +618,7 @@ export default function TabRecrutement(__props) {
           {recruFileViewer&&(<div style={{position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.7)',zIndex:10000,display:'flex',flexDirection:'column'}} onClick={()=>setRecruFileViewer(null)}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 20px',background:'#1a1a1a',color:'white',flexShrink:0}} onClick={e=>e.stopPropagation()}>
               <div style={{display:'flex',alignItems:'center',gap:10}}>
-                <span style={{fontSize:'1.1rem'}}>{recruFileViewer.type==='cv'?'▫':recruFileViewer.type==='photo'?'📷':'§'}</span>
+                <span style={{fontSize:'1.1rem'}}>{recruFileViewer.type==='cv'?'▫':recruFileViewer.type==='photo'?'▣':'§'}</span>
                 <span style={{fontWeight:700,fontSize:'0.9rem'}}>{recruFileViewer.nom}</span>
               </div>
               <div style={{display:'flex',gap:8,alignItems:'center'}}>
@@ -694,7 +694,7 @@ export default function TabRecrutement(__props) {
                 {(() => {const et=RECRU_ETAPES.find(e=>e.id===sel.etape); return <span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:et.color+'18',color:et.color,fontWeight:700,fontSize:'0.72rem'}}>{et.icon} {et.label}</span>;})()}
                 <span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:prioC(sel.priorite)+'15',color:prioC(sel.priorite),fontWeight:700,fontSize:'0.72rem'}}>Priorité {sel.priorite}</span>
                 {calcScore(sel.scorecard)>0&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:scoreColor(calcScore(sel.scorecard))+'15',color:scoreColor(calcScore(sel.scorecard)),fontWeight:700,fontSize:'0.72rem'}}>Score {calcScore(sel.scorecard)}%</span>}
-                {sel.etape==='embauche'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:$success+'15',color:$success,fontWeight:700,fontSize:'0.72rem',cursor:'pointer'}} onClick={()=>launchOnboarding(sel)}>🚀 Lancer Onboarding</span>}
+                {sel.etape==='embauche'&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:$success+'15',color:$success,fontWeight:700,fontSize:'0.72rem',cursor:'pointer'}} onClick={()=>launchOnboarding(sel)}>➤ Lancer Onboarding</span>}
                 {(sel.etape==='proposition')&&<span style={{padding:'3px 10px',borderRadius:crmRd>0?20:2,background:$warn+'15',color:$warn,fontWeight:700,fontSize:'0.72rem'}}>▫ Proposition en cours</span>}
               </div>
             </div>
@@ -708,7 +708,7 @@ export default function TabRecrutement(__props) {
             <div style={{padding:'16px 20px'}}>
               {/* PROFIL */}
               {recruDetailTab==='profil'&&(<div style={{display:'flex',flexDirection:'column',gap:12}}>
-                {[{l:'Email',v:sel.email,icon:'📧'},{l:'Téléphone',v:sel.tel,icon:'📱'},{l:'Ville',v:sel.villeCandidat,icon:'📍'},{l:'LinkedIn',v:sel.linkedin,icon:'🔗'},{l:'Poste visé',v:sel.poste,icon:'▪',link:sel.posteId?()=>{setOngletActif('postes');setPosteSelectionne(sel.posteId);}:null},{l:'Poste à proposer',v:sel.posteAProposer||null,icon:'↻'},{l:'Source',v:sel.source,icon:'📡'},{l:'Adresse',v:sel.adresse||null,icon:'🏠'},{l:'Date de naissance',v:sel.dateNaissance||null,icon:'🎂'},{l:'Nationalité',v:sel.nationalite||null,icon:'🌍'},{l:'Permis',v:sel.permis||null,icon:'🚗'},{l:'Formations',v:sel.formations||null,icon:'🎓'},{l:'Langues',v:sel.langues||null,icon:'🗣️'},{l:'Disponibilité',v:sel.disponibilite,icon:'◫'},{l:'Prétention salariale',v:sel.pretentionSalariale?`${sel.pretentionSalariale.toLocaleString('fr-FR')}€ brut/an`:'—',icon:'€'},{l:'Date candidature',v:sel.dateCandidat,icon:'☰'}].filter(f=>f.v!==null&&f.v!==undefined&&f.v!=='').map((f,i)=>(
+                {[{l:'Email',v:sel.email,icon:'✉'},{l:'Téléphone',v:sel.tel,icon:'▢'},{l:'Ville',v:sel.villeCandidat,icon:'⌖'},{l:'LinkedIn',v:sel.linkedin,icon:'⧉'},{l:'Poste visé',v:sel.poste,icon:'▪',link:sel.posteId?()=>{setOngletActif('postes');setPosteSelectionne(sel.posteId);}:null},{l:'Poste à proposer',v:sel.posteAProposer||null,icon:'↻'},{l:'Source',v:sel.source,icon:'📡'},{l:'Adresse',v:sel.adresse||null,icon:'⌂'},{l:'Date de naissance',v:sel.dateNaissance||null,icon:'🎂'},{l:'Nationalité',v:sel.nationalite||null,icon:'◎'},{l:'Permis',v:sel.permis||null,icon:'▸'},{l:'Formations',v:sel.formations||null,icon:'❖'},{l:'Langues',v:sel.langues||null,icon:'🗣️'},{l:'Disponibilité',v:sel.disponibilite,icon:'◫'},{l:'Prétention salariale',v:sel.pretentionSalariale?`${sel.pretentionSalariale.toLocaleString('fr-FR')}€ brut/an`:'—',icon:'€'},{l:'Date candidature',v:sel.dateCandidat,icon:'☰'}].filter(f=>f.v!==null&&f.v!==undefined&&f.v!=='').map((f,i)=>(
                   <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
                     <span style={{fontSize:'0.85rem',width:24,textAlign:'center'}}>{f.icon}</span>
                     <div><div style={{fontSize:'0.65rem',color:$textMut,fontWeight:600,textTransform:'uppercase',letterSpacing:'0.04em'}}>{f.l}</div><div style={{fontSize:'0.82rem',color:$text,fontWeight:500}}>{f.v||'—'}</div></div>
@@ -757,7 +757,7 @@ export default function TabRecrutement(__props) {
                   const statColor=ent.statut==='fait'?$success:ent.statut==='planifie'?$info:$textMut;
                   return (<div key={ent.id} style={{padding:'12px 14px',borderRadius:crmRd,border:`1px solid ${$borderLight}`,background:$bgSub}}>
                     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
-                      <span style={{fontWeight:700,fontSize:'0.8rem',color:$text}}>{ent.type==='tel'?'✆ Téléphone':ent.type==='visio'?'💻 Visio':'🤝 Physique'}</span>
+                      <span style={{fontWeight:700,fontSize:'0.8rem',color:$text}}>{ent.type==='tel'?'✆ Téléphone':ent.type==='visio'?'▢ Visio':'◈ Physique'}</span>
                       <span style={{padding:'2px 8px',borderRadius:crmRd>0?12:2,background:statColor+'15',color:statColor,fontWeight:600,fontSize:'0.68rem'}}>{ent.statut==='fait'?'Réalisé':'Planifié'}</span>
                     </div>
                     <div style={{fontSize:'0.75rem',color:$textSec}}>{ent.date} à {ent.heure} — {ent.intervieweur?empNom(ent.intervieweur):'—'}</div>
@@ -778,12 +778,12 @@ export default function TabRecrutement(__props) {
                     <div style={{fontSize:'0.68rem',color:$textMut,fontWeight:600,textTransform:'uppercase',letterSpacing:'0.04em'}}>Photo candidat</div>
                   </div>
                   {!sel.photoUrl&&sel.timeline?.some(t=>t.action?.includes('Photo détectée'))&&<div style={{padding:'8px 12px',background:$warn+'10',border:`1px solid ${$warn}30`,borderRadius:crmRd,marginBottom:8}}>
-                    <div style={{fontSize:'0.72rem',fontWeight:600,color:$warn,marginBottom:4}}>📷 Photo détectée dans le CV !</div>
+                    <div style={{fontSize:'0.72rem',fontWeight:600,color:$warn,marginBottom:4}}>▣ Photo détectée dans le CV !</div>
                     <div style={{fontSize:'0.65rem',color:$text,lineHeight:1.4}}>L'IA a repéré une photo dans le CV mais ne peut pas l'extraire automatiquement. Pour l'ajouter :</div>
                     <div style={{fontSize:'0.62rem',color:$textSec,marginTop:4,lineHeight:1.5}}>1. Ouvrez le CV ci-dessous ("Ouvrir ↗")<br/>2. Faites une capture d'écran de la photo<br/>3. Cliquez "▸ Importer photo" ci-dessous</div>
                   </div>}
                   <div style={{display:'flex',alignItems:'center',gap:12}}>
-                    {sel.photoUrl?<img src={sel.photoUrl} style={{width:64,height:64,borderRadius:'50%',objectFit:'cover',border:`2px solid ${$border}`}}/>:<div style={{width:64,height:64,borderRadius:'50%',background:$bgCard,border:`2px dashed ${$border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',color:$textMut}}>📷</div>}
+                    {sel.photoUrl?<img src={sel.photoUrl} style={{width:64,height:64,borderRadius:'50%',objectFit:'cover',border:`2px solid ${$border}`}}/>:<div style={{width:64,height:64,borderRadius:'50%',background:$bgCard,border:`2px dashed ${$border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',color:$textMut}}>▣</div>}
                     <div style={{flex:1}}>
                       <div style={{fontSize:'0.58rem',color:$textMut,marginBottom:4,lineHeight:1.4}}>
                         ✧ <strong>LinkedIn</strong> : Ouvrez le profil → clic droit sur la photo → "Copier l'adresse de l'image" → collez ci-dessous<br/>
@@ -809,7 +809,7 @@ export default function TabRecrutement(__props) {
                   {recruAddingFichier&&<div style={{padding:'10px 12px',background:$bgCard,borderRadius:crmRd,border:`1px solid ${$accent}30`,marginBottom:8}}>
                     <div style={{fontSize:'0.65rem',color:$textMut,marginBottom:6}}>Type de document :</div>
                     <div style={{display:'flex',gap:4,marginBottom:8,flexWrap:'wrap'}}>
-                      {[{v:'cv',l:'▫ CV'},{v:'lettre',l:'✉️ Lettre motiv.'},{v:'photo',l:'📷 Photo'},{v:'capture',l:'📸 Capture LinkedIn'},{v:'promesse',l:'☰ Promesse embauche'},{v:'test',l:'✎ Test technique'},{v:'autre',l:'§ Autre'}].map(t=>(
+                      {[{v:'cv',l:'▫ CV'},{v:'lettre',l:'✉️ Lettre motiv.'},{v:'photo',l:'▣ Photo'},{v:'capture',l:'📸 Capture LinkedIn'},{v:'promesse',l:'☰ Promesse embauche'},{v:'test',l:'✎ Test technique'},{v:'autre',l:'§ Autre'}].map(t=>(
                         <button key={t.v} onClick={()=>{setRecruFichierType(t.v);if(!recruNewFichier){const nameMap={cv:`CV_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,lettre:`LM_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,photo:`Photo_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,capture:`LinkedIn_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,promesse:`Promesse_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,test:`Test_${(sel.nomFamille||sel.nom||'').replace(/\s/g,'_')}`,autre:''};setRecruNewFichier(nameMap[t.v]||'');}}} style={{padding:'4px 10px',borderRadius:crmRd,border:`1px solid ${recruFichierType===t.v?$accent:$border}`,background:recruFichierType===t.v?$accent+'15':'transparent',color:recruFichierType===t.v?$accent:$textSec,fontSize:'0.65rem',fontWeight:recruFichierType===t.v?600:400,cursor:'pointer',fontFamily:'inherit',transition:'all 0.1s'}}>{t.l}</button>
                       ))}
                     </div>
@@ -833,7 +833,7 @@ export default function TabRecrutement(__props) {
                   </div>}
                   {sel.fichiers&&sel.fichiers.length>0?(<div style={{display:'flex',flexDirection:'column',gap:4}}>
                     {sel.fichiers.map((f,i)=>{
-                      const typeIcons={cv:'▫',photo:'📷',capture:'📸',lettre:'✉️',autre:'§',promesse:'☰',test:'✎'};
+                      const typeIcons={cv:'▫',photo:'▣',capture:'📸',lettre:'✉️',autre:'§',promesse:'☰',test:'✎'};
                       const typeColors={cv:$accent,photo:'#8b5cf6',capture:'#0ea5e9',lettre:$warn,autre:$textMut,promesse:$success,test:'#ec4899'};
                       return (<div key={f.id||i} onClick={()=>{if(f.dataUrl&&f.dataUrl.length>10)setRecruFileViewer({nom:f.nom,dataUrl:f.dataUrl,type:f.type});else if(f.url)window.open(f.url.startsWith('http')?f.url:'https://'+f.url,'_blank');}} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 12px',borderRadius:crmRd,background:$bgCard,border:`1px solid ${$borderLight}`,cursor:f.dataUrl||f.url?'pointer':'default',transition:'all 0.15s'}}
                         onMouseEnter={e=>{if(f.dataUrl||f.url)e.currentTarget.style.borderColor=$accent;}}
@@ -841,7 +841,7 @@ export default function TabRecrutement(__props) {
                         <span style={{fontSize:'1rem'}}>{typeIcons[f.type]||'§'}</span>
                         <div style={{flex:1}}>
                           <div style={{fontSize:'0.75rem',fontWeight:600,color:$text}}>{f.url?<a href={f.url} target="_blank" rel="noopener" style={{color:$accent,textDecoration:'none'}} onMouseEnter={e=>e.currentTarget.style.textDecoration='underline'} onMouseLeave={e=>e.currentTarget.style.textDecoration='none'}>{f.nom} ↗</a>:f.nom}</div>
-                          <div style={{fontSize:'0.62rem',color:$textMut}}>{f.type?.toUpperCase()} — {f.date}{f.dataUrl&&f.dataUrl.length>10?' — ↧ Téléchargé':f.url?' — 🔗 Lien disponible':' — § Ajouté'}{f.size?` — ${(f.size/1024).toFixed(0)} Ko`:''}</div>
+                          <div style={{fontSize:'0.62rem',color:$textMut}}>{f.type?.toUpperCase()} — {f.date}{f.dataUrl&&f.dataUrl.length>10?' — ↧ Téléchargé':f.url?' — ⧉ Lien disponible':' — § Ajouté'}{f.size?` — ${(f.size/1024).toFixed(0)} Ko`:''}</div>
                         </div>
                         <div style={{display:'flex',gap:3}}>{(f.url||f.dataUrl)&&<button onClick={e2=>{e2.stopPropagation();if(f.dataUrl&&f.dataUrl.length>10)setRecruFileViewer({nom:f.nom,dataUrl:f.dataUrl,type:f.type});else if(f.url)window.open(f.url.startsWith('http')?f.url:'https://'+f.url,'_blank');}} style={{padding:'2px 6px',borderRadius:crmRd,border:`1px solid ${$accent}30`,background:$accent+'08',fontSize:'0.6rem',fontWeight:600,color:$accent,cursor:'pointer',fontFamily:'inherit'}}>{f.dataUrl&&f.dataUrl.length>10?'Ouvrir ↗':'Lien ↗'}</button>}{f.dataUrl&&<button onClick={e2=>{e2.stopPropagation();const a=document.createElement('a');a.href=f.dataUrl;a.download=f.nom;document.body.appendChild(a);a.click();document.body.removeChild(a);}} style={{padding:'2px 6px',borderRadius:crmRd,border:`1px solid ${$success}30`,background:$success+'08',fontSize:'0.6rem',fontWeight:600,color:$success,cursor:'pointer',fontFamily:'inherit'}}>Télécharger ↓</button>}<button onClick={e2=>{e2.stopPropagation();saveCands(activeCandidats.map(c=>c.id===sel.id?{...c,fichiers:c.fichiers.filter((_,j)=>j!==i)}:c));}} style={{background:'none',border:'none',fontSize:'0.7rem',color:$danger,cursor:'pointer',fontFamily:'inherit'}}>✕</button></div>
                       </div>);
@@ -852,7 +852,7 @@ export default function TabRecrutement(__props) {
                 {/* IA — Résumé CV */}
                 <div style={{padding:'12px 14px',background:`linear-gradient(135deg, ${$info}08, ${$accent}05)`,borderRadius:crmRd,border:`1px solid ${$info}30`}}>
                   <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:10}}>
-                    <span style={{fontSize:'0.9rem'}}>🤖</span>
+                    <span style={{fontSize:'0.9rem'}}>✦</span>
                     <div style={{fontSize:'0.68rem',color:$info,fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em'}}>IA Co-pilot</div>
                   </div>
                   <div style={{display:'flex',flexDirection:'column',gap:6}}>
@@ -876,7 +876,7 @@ export default function TabRecrutement(__props) {
                       onMouseEnter={e=>{if(!recruIaLoading)e.currentTarget.style.borderColor=$success;}}
                       onMouseLeave={e=>e.currentTarget.style.borderColor=$success+'40'}
                     >
-                      <span style={{fontSize:'1.1rem'}}>{recruIaLoading?'⏳':'🎉'}</span>
+                      <span style={{fontSize:'1.1rem'}}>{recruIaLoading?'⏳':'✧'}</span>
                       <div><div style={{fontSize:'0.78rem',fontWeight:600,color:$success}}>{recruIaLoading?'Rédaction en cours...':'Générer Promesse d\'Embauche IA'}</div><div style={{fontSize:'0.62rem',color:$textMut}}>Document conforme au droit du travail français</div></div>
                     </button>
                   </div>
@@ -908,12 +908,12 @@ export default function TabRecrutement(__props) {
 
                 {/* Lancer Onboarding */}
                 {(sel.etape==='proposition'||sel.etape==='embauche')&&<div style={{padding:'12px 14px',background:`linear-gradient(135deg, ${$success}08, ${$success}04)`,borderRadius:crmRd,border:`1px solid ${$success}30`}}>
-                  <div style={{fontSize:'0.68rem',color:$success,fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:10}}>🎉 Intégration</div>
+                  <div style={{fontSize:'0.68rem',color:$success,fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',marginBottom:10}}>✧ Intégration</div>
                   <button onClick={()=>launchOnboarding(sel)} style={{display:'flex',alignItems:'center',gap:10,padding:'12px 16px',borderRadius:crmRd,border:`1px solid ${$success}`,background:$success+'10',cursor:'pointer',fontFamily:'inherit',transition:'all 0.2s',textAlign:'left',width:'100%'}}
                     onMouseEnter={e=>{e.currentTarget.style.background=$success+'20';e.currentTarget.style.transform='translateY(-1px)';}}
                     onMouseLeave={e=>{e.currentTarget.style.background=$success+'10';e.currentTarget.style.transform='none';}}
                   >
-                    <div style={{width:40,height:40,borderRadius:crmRd,background:$success+'20',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.3rem',flexShrink:0}}>🚀</div>
+                    <div style={{width:40,height:40,borderRadius:crmRd,background:$success+'20',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.3rem',flexShrink:0}}>➤</div>
                     <div>
                       <div style={{fontSize:'0.85rem',fontWeight:700,color:$success}}>Lancer l'Onboarding</div>
                       <div style={{fontSize:'0.65rem',color:$textMut,marginTop:2}}>Créer le parcours d'intégration avec checklist BTP pour {sel.nom}</div>
@@ -930,7 +930,7 @@ export default function TabRecrutement(__props) {
                       onMouseEnter={e=>e.currentTarget.style.borderColor=$accent}
                       onMouseLeave={e=>e.currentTarget.style.borderColor=$border}
                     >
-                      <span style={{fontSize:'1.1rem'}}>📧</span>
+                      <span style={{fontSize:'1.1rem'}}>✉</span>
                       <div><div style={{fontSize:'0.78rem',fontWeight:600,color:$text}}>Envoyer un email</div><div style={{fontSize:'0.65rem',color:$textMut}}>{sel.email||'Pas d\'email renseigné'}</div></div>
                     </button>
 
@@ -946,7 +946,7 @@ export default function TabRecrutement(__props) {
                       onMouseEnter={e=>e.currentTarget.style.borderColor='#0077b5'}
                       onMouseLeave={e=>e.currentTarget.style.borderColor=$border}
                     >
-                      <span style={{fontSize:'1.1rem'}}>🔗</span>
+                      <span style={{fontSize:'1.1rem'}}>⧉</span>
                       <div><div style={{fontSize:'0.78rem',fontWeight:600,color:$text}}>Voir profil LinkedIn</div><div style={{fontSize:'0.65rem',color:'#0077b5'}}>{sel.linkedin}</div></div>
                     </button>}
                   </div>
@@ -972,7 +972,7 @@ export default function TabRecrutement(__props) {
                       {label:'Accusé de réception',desc:'Confirmer la réception de la candidature',icon:'📨',subject:'Confirmation de réception — {poste}',body:'Bonjour {nom},\n\nNous accusons bonne réception de votre candidature pour le poste de {poste} au sein de {filiale}.\n\nVotre dossier sera étudié avec attention et nous reviendrons vers vous dans les meilleurs délais.\n\nCordialement,\nService RH — Group OY'},
                       {label:'Convocation entretien',desc:'Inviter à un entretien',icon:'🗣️',subject:'Invitation entretien — {poste}',body:'Bonjour {nom},\n\nNous avons le plaisir de vous informer que votre candidature pour le poste de {poste} a retenu notre attention.\n\nNous souhaitons vous rencontrer lors d\'un entretien. Merci de choisir un créneau :\nhttps://calendly.com/rh-groupoy/entretien\n\nCordialement,\nService RH — Group OY'},
                       {label:'Refus candidature',desc:'Informer du refus avec motif',icon:'✉️',subject:'Suite à votre candidature — {poste}',body:'Bonjour {nom},\n\nNous vous remercions pour l\'intérêt que vous portez à notre entreprise et pour votre candidature au poste de {poste}.\n\nAprès examen attentif de votre dossier, nous avons le regret de vous informer que nous ne pourrons pas donner suite à votre candidature.\n\nNous vous souhaitons bonne continuation dans vos recherches.\n\nCordialement,\nService RH — Group OY'},
-                      {label:'Promesse d\'embauche',desc:'Envoyer une proposition d\'embauche',icon:'🎉',subject:'Proposition d\'embauche — {poste} — Group OY',body:'Bonjour {nom},\n\nNous avons le plaisir de vous confirmer que votre candidature pour le poste de {poste} au sein de {filiale} a été retenue.\n\nVous trouverez ci-joint votre promesse d\'embauche. Merci de nous la retourner signée.\n\nDate de prise de poste prévue : À confirmer\nRémunération brute annuelle : {salaire}€\n\nBienvenue dans l\'équipe !\n\nCordialement,\nÖzdoğan YILMAZ\nPDG — Group OY'}
+                      {label:'Promesse d\'embauche',desc:'Envoyer une proposition d\'embauche',icon:'✧',subject:'Proposition d\'embauche — {poste} — Group OY',body:'Bonjour {nom},\n\nNous avons le plaisir de vous confirmer que votre candidature pour le poste de {poste} au sein de {filiale} a été retenue.\n\nVous trouverez ci-joint votre promesse d\'embauche. Merci de nous la retourner signée.\n\nDate de prise de poste prévue : À confirmer\nRémunération brute annuelle : {salaire}€\n\nBienvenue dans l\'équipe !\n\nCordialement,\nÖzdoğan YILMAZ\nPDG — Group OY'}
                     ].map((tpl,i)=>(
                       <button key={i} onClick={()=>{const subj=tpl.subject.replace('{poste}',sel.poste);const body=tpl.body.replace(/\{nom\}/g,sel.nom).replace(/\{poste\}/g,sel.poste).replace(/\{filiale\}/g,sel.filiale).replace(/\{salaire\}/g,String(sel.pretentionSalariale||''));const mailto=`mailto:${sel.email}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;window.open(mailto);saveCands(activeCandidats.map(c=>c.id===sel.id?{...c,timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:`${tpl.label} envoyé(e) à ${sel.email}`}]}:c));}} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 12px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s',textAlign:'left'}}
                         onMouseEnter={e=>e.currentTarget.style.borderColor=$accent}
@@ -1011,7 +1011,7 @@ export default function TabRecrutement(__props) {
                 {/* Quick actions */}
                 <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
                   {sel.etape!=='refuse'&&<button onClick={()=>{const motif=prompt('Motif du refus :');if(motif!==null){saveCands(activeCandidats.map(c=>c.id===sel.id?{...c,etape:'refuse',motifRefus:motif,timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:`Candidature refusée${motif?' — '+motif:''}`}]}:c));}}} style={{flex:1,padding:'10px 14px',borderRadius:crmRd,border:`1px solid ${$danger}40`,background:$danger+'08',color:$danger,fontWeight:600,fontSize:'0.75rem',cursor:'pointer',fontFamily:'inherit'}}>✕ Refuser</button>}
-                  {sel.etape!=='reserve'&&<button onClick={()=>{saveCands(activeCandidats.map(c=>c.id===sel.id?{...c,etape:'reserve',timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:'Mis en vivier pour plus tard'}]}:c));}} style={{flex:1,padding:'10px 14px',borderRadius:crmRd,border:`1px solid ${$info}40`,background:$info+'08',color:$info,fontWeight:600,fontSize:'0.75rem',cursor:'pointer',fontFamily:'inherit'}}>💎 Vivier</button>}
+                  {sel.etape!=='reserve'&&<button onClick={()=>{saveCands(activeCandidats.map(c=>c.id===sel.id?{...c,etape:'reserve',timeline:[...(c.timeline||[]),{date:new Date().toISOString().slice(0,10),action:'Mis en vivier pour plus tard'}]}:c));}} style={{flex:1,padding:'10px 14px',borderRadius:crmRd,border:`1px solid ${$info}40`,background:$info+'08',color:$info,fontWeight:600,fontSize:'0.75rem',cursor:'pointer',fontFamily:'inherit'}}>◇ Vivier</button>}
                 </div>
               </div>)}
                             {recruDetailTab==='timeline'&&(<div style={{position:'relative',paddingLeft:20}}>

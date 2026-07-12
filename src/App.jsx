@@ -84,9 +84,9 @@ const baremeRelatif = [
   { ecartMin: 0.04, ecartMax: 0.059, coeff: 0.75, label: "Cible +4pts", emoji: "✓", commentaire: "Bonne performance" },
   { ecartMin: 0.06, ecartMax: 0.079, coeff: 0.9, label: "Cible +6pts", emoji: "🌟", commentaire: "Très bonne performance" },
   { ecartMin: 0.08, ecartMax: 0.099, coeff: 1.0, label: "Cible +8pts", emoji: "⭐", commentaire: "Excellente performance (100%)" },
-  { ecartMin: 0.10, ecartMax: 0.119, coeff: 1.1, label: "Cible +10pts", emoji: "🏆", commentaire: "Performance remarquable" },
-  { ecartMin: 0.12, ecartMax: 0.149, coeff: 1.2, label: "Cible +12pts", emoji: "💎", commentaire: "Performance exceptionnelle" },
-  { ecartMin: 0.15, ecartMax: 999, coeff: 1.3, label: "Cible +15pts", emoji: "🚀", commentaire: "PERFORMANCE HORS NORME" }
+  { ecartMin: 0.10, ecartMax: 0.119, coeff: 1.1, label: "Cible +10pts", emoji: "★", commentaire: "Performance remarquable" },
+  { ecartMin: 0.12, ecartMax: 0.149, coeff: 1.2, label: "Cible +12pts", emoji: "◇", commentaire: "Performance exceptionnelle" },
+  { ecartMin: 0.15, ecartMax: 999, coeff: 1.3, label: "Cible +15pts", emoji: "➤", commentaire: "PERFORMANCE HORS NORME" }
 ];
 
 // Définition des filiales avec leurs grilles respectives
@@ -291,14 +291,14 @@ const SimulateurRuches = () => {
       nom: 'Yilmaz', icon: '▪', desc: 'Services partagés : Finance,\nRH, IT et Marketing',
       services: [
         { id: 'direction', label: 'Direction Générale', icon: '◆', modules: ['dashboard', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
-        { id: 'crm', label: 'CRM Groupe', icon: '🤝', modules: ['crm_commercial'], desc: 'Vue consolidée des affaires, contacts et pipeline de toutes les filiales' },
-        { id: 'finance', label: 'Finance & Gestion', icon: '🏦', modules: ['dashboard', 'fact_interne', 'fact_externe', 'budget', 'tresorerie', 'analytique'], desc: 'Contrôle de gestion, facturation interne/externe, trésorerie, budget' },
+        { id: 'crm', label: 'CRM Groupe', icon: '◈', modules: ['crm_commercial'], desc: 'Vue consolidée des affaires, contacts et pipeline de toutes les filiales' },
+        { id: 'finance', label: 'Finance & Gestion', icon: '⬡', modules: ['dashboard', 'fact_interne', 'fact_externe', 'budget', 'tresorerie', 'analytique'], desc: 'Contrôle de gestion, facturation interne/externe, trésorerie, budget' },
         { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'organigramme', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh', 'presentation', 'simulateur', 'suivi'], desc: 'Personnel, recrutement, rémunération, formation, gestion RH complète' },
         { id: 'execution', label: 'Exécution / Chantiers', icon: '◆', modules: ['ordres_travail'], desc: 'Ordres de travail, suivi chantiers (vue consolidée groupe)' },
-        { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', modules: ['bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta'], desc: 'Bons de commande, freelances, suivi prestataires, facturation' },
-        { id: 'it', label: 'IT / Digital', icon: '💻', modules: ['admin', 'outils', 'tickets', 'parc_info', 'donnees_ref'], desc: 'Infrastructure, parc informatique, données de référence' },
-        { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'], desc: 'Parc automobile, matériel BTP, état des lieux, TCO' },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'], desc: 'Contrats, litiges, assurances, conformité BTP' },
+        { id: 'achats', label: 'Achats & Prestataires', icon: '◈', modules: ['bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta'], desc: 'Bons de commande, freelances, suivi prestataires, facturation' },
+        { id: 'it', label: 'IT / Digital', icon: '▢', modules: ['admin', 'outils', 'tickets', 'parc_info', 'donnees_ref'], desc: 'Infrastructure, parc informatique, données de référence' },
+        { id: 'logistique', label: 'Logistique & Parc', icon: '▸', modules: ['parc_automobile', 'materiel'], desc: 'Parc automobile, matériel BTP, état des lieux, TCO' },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '§', modules: ['contrats', 'litiges', 'assurances', 'conformite'], desc: 'Contrats, litiges, assurances, conformité BTP' },
         { id: 'marketing', label: 'Marketing & Communication', icon: '📣', modules: ['identite', 'supports', 'web'], desc: 'Charte graphique, supports commerciaux, présence web' }
       ]
     },
@@ -306,57 +306,57 @@ const SimulateurRuches = () => {
       nom: 'Ezel Bâtiment', icon: '◆', desc: 'Entreprise générale BTP',
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard', 'ezel_tableau'] },
-        { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
+        { id: 'crm', label: 'CRM Commercial', icon: '◈', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '◺', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '☰', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
         { id: 'execution', label: 'Exécution Chantier', icon: '◆', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
         { id: 'cloture', label: 'Réception & Clôture', icon: '✓', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
-        { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
+        { id: 'logistique', label: 'Logistique & Parc', icon: '▸', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '§', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
+        { id: 'administratif', label: 'Administratif', icon: '▤', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     },
     'roulotte': {
       nom: 'La Roulotte', icon: '▸', desc: 'Location roulottes & matériel',
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
-        { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
+        { id: 'crm', label: 'CRM Commercial', icon: '◈', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Planification', icon: '▸', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '✱', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
+        { id: 'administratif', label: 'Administratif', icon: '▤', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
     'echafaudage': {
       nom: "L'Échafaudage", icon: '✱', desc: 'Location + Montage échafaudage',
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
-        { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
+        { id: 'crm', label: 'CRM Commercial', icon: '◈', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Montage', icon: '✱', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '✱', modules: ['materiel', 'parc_automobile'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
+        { id: 'administratif', label: 'Administratif', icon: '▤', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
     'etancheite': {
       nom: "L'Étanchéité", icon: '◦', desc: "Travaux d'étanchéité\net imperméabilisation",
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '▦', modules: ['dashboard'] },
-        { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
+        { id: 'crm', label: 'CRM Commercial', icon: '◈', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '◺', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '☰', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
         { id: 'execution', label: 'Exécution Chantier', icon: '🔨', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
         { id: 'cloture', label: 'Réception & Clôture', icon: '✓', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
         { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
-        { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
+        { id: 'logistique', label: 'Logistique & Parc', icon: '▸', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '◉', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '§', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '€', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
+        { id: 'administratif', label: 'Administratif', icon: '▤', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     }
   };
@@ -722,22 +722,22 @@ const SimulateurRuches = () => {
     donutCA: '🍩 Répartition CA (Donut)',
     comparatifMarges: '▦ Comparatif Marges par Filiale',
     masseSalariale: '€ Masse Salariale / CA',
-    tresorerieBFR: '🏦 Trésorerie / BFR',
+    tresorerieBFR: '⬡ Trésorerie / BFR',
     pipelineAO: '📑 Pipeline Commercial (AO)',
     caParCollab: '◉ CA / Collaborateur',
     topChantiers: '◆ Top 5 Chantiers en cours',
-    alertes: '🚨 Alertes / Points d\'attention',
+    alertes: '▲ Alertes / Points d\'attention',
     evolutionEffectif: '◉ Évolution Effectif',
     objectifsVsRealise: '◎ Objectifs CA vs Réalisé',
     sousTraitanceChart: '✱ Taux Sous-traitance par Filiale',
-    detailFrais: '📉 Décomposition des Charges',
+    detailFrais: '↘ Décomposition des Charges',
     rentabiliteNette: '💹 Rentabilité Nette par Filiale',
     objectifsEBE: '◎ Objectifs EBE vs Réalisé',
     radarPerformance: '🕸️ Radar Performance Filiales',
     carnetCommandes: '📒 Carnet de Commandes',
     repartitionEffectif: '◉ Répartition Effectif par Filiale',
     ratiosFinanciers: '◺ Ratios Financiers BTP',
-    margeParChantier: '💶 Marge par Chantier'
+    margeParChantier: '€ Marge par Chantier'
   };
   // widgetDescriptions — structure de référence des widgets dashboard
   const widgetDescriptions = {
@@ -777,9 +777,9 @@ const SimulateurRuches = () => {
     jalons: [
       { id: 'j1', year: 2025, label: 'Fondations', icon: '◆', color: '#8B6F47', items: ['Structuration YILMAZ','Mise en place Ruches','4 filiales opérationnelles','CA ~4M€'], done: true },
       { id: 'j2', year: 2026, label: 'Consolidation', icon: '↗', color: '#059669', items: ['Rentabilité EBE positif','Recrutement +5 collaborateurs','Digitalisation complète','Lancement L\'Étanchéité'], active: true },
-      { id: 'j3', year: 2027, label: 'Croissance', icon: '🚀', color: '#2563eb', items: ['CA 6M€ objectif','Première acquisition externe','Expansion géographique','15 collaborateurs'] },
-      { id: 'j4', year: 2028, label: 'Expansion', icon: '🌍', color: '#7c3aed', items: ['CA 8M€','2ème acquisition','Nouveaux métiers BTP','20 collaborateurs'] },
-      { id: 'j5', year: 2029, label: 'Leadership', icon: '👑', color: '#dc2626', items: ['CA 10M€','Leader régional BTP','Diversification services','25 collaborateurs'] },
+      { id: 'j3', year: 2027, label: 'Croissance', icon: '➤', color: '#2563eb', items: ['CA 6M€ objectif','Première acquisition externe','Expansion géographique','15 collaborateurs'] },
+      { id: 'j4', year: 2028, label: 'Expansion', icon: '◎', color: '#7c3aed', items: ['CA 8M€','2ème acquisition','Nouveaux métiers BTP','20 collaborateurs'] },
+      { id: 'j5', year: 2029, label: 'Leadership', icon: '✦', color: '#dc2626', items: ['CA 10M€','Leader régional BTP','Diversification services','25 collaborateurs'] },
       { id: 'j6', year: 2030, label: 'Cap 10M€', icon: '◎', color: '#d97706', items: ['CA 10-12M€','5+ filiales','Innovation BTP','30 collaborateurs'] },
       { id: 'j7', year: 2032, label: 'Maturité', icon: '◆', color: '#0891b2', items: ['CA 15M€','Groupe structuré','Marque reconnue','40 collaborateurs'] },
       { id: 'j8', year: 2035, label: 'Vision 30M€', icon: '⭐', color: '#8B6F47', items: ['CA 25-30M€','Groupe multi-régional','Transmission possible','50+ collaborateurs'] }
@@ -795,15 +795,15 @@ const SimulateurRuches = () => {
       { year: 2035, ca: 30.0, ebe: 3.5, eff: 55 }
     ],
     visionCards: [
-      { id: 'v1', horizon: '1 an', year: '2027', icon: '📍', color: '#059669', objectif: 'CA 6M€', details: 'EBE positif consolidé, 18 collaborateurs, 4 filiales rentables, lancement L\'Étanchéité' },
+      { id: 'v1', horizon: '1 an', year: '2027', icon: '⌖', color: '#059669', objectif: 'CA 6M€', details: 'EBE positif consolidé, 18 collaborateurs, 4 filiales rentables, lancement L\'Étanchéité' },
       { id: 'v2', horizon: '3 ans', year: '2029', icon: '◎', color: '#2563eb', objectif: 'CA 10M€', details: 'Leader régional, 1-2 acquisitions réalisées, 25 collaborateurs, diversification métiers' },
-      { id: 'v3', horizon: '5 ans', year: '2031', icon: '🚀', color: '#7c3aed', objectif: 'CA 15M€', details: 'Groupe structuré multi-filiales, marque reconnue, 35 collaborateurs, innovation BTP' },
+      { id: 'v3', horizon: '5 ans', year: '2031', icon: '➤', color: '#7c3aed', objectif: 'CA 15M€', details: 'Groupe structuré multi-filiales, marque reconnue, 35 collaborateurs, innovation BTP' },
       { id: 'v4', horizon: '10 ans', year: '2035', icon: '⭐', color: '#d97706', objectif: 'CA 25-30M€', details: 'Groupe multi-régional, 50+ collaborateurs, possibilité transmission ou partenariat stratégique' }
     ],
     objectifs: [
-      { id: 'o1', cat: 'Croissance Organique', icon: '🌱', color: '#059669', items: ['Augmenter CA Ezel de 15%/an','Développer La Roulotte (9→20 unités)','Monter L\'Échafaudage en autonomie','Lancer L\'Étanchéité (CA cible 500K€)'] },
+      { id: 'o1', cat: 'Croissance Organique', icon: '↑', color: '#059669', items: ['Augmenter CA Ezel de 15%/an','Développer La Roulotte (9→20 unités)','Monter L\'Échafaudage en autonomie','Lancer L\'Étanchéité (CA cible 500K€)'] },
       { id: 'o2', cat: 'Croissance Externe', icon: '▪', color: '#2563eb', items: ['Identifier cibles acquisition Alsace','Budget acquisition : 200-500K€','Intégration via modèle YILMAZ','Mutualisation services post-acquisition'] },
-      { id: 'o3', cat: 'Excellence Opérationnelle', icon: '⚡', color: '#7c3aed', items: ['Marge brute >40% sur chaque filiale','EBE/CA >8% objectif groupe','Digitalisation 100% processus','Certifications Qualibat / RGE'] },
+      { id: 'o3', cat: 'Excellence Opérationnelle', icon: '↯', color: '#7c3aed', items: ['Marge brute >40% sur chaque filiale','EBE/CA >8% objectif groupe','Digitalisation 100% processus','Certifications Qualibat / RGE'] },
       { id: 'o4', cat: 'Capital Humain', icon: '◉', color: '#d97706', items: ['Fidélisation via Ruches (turnover <10%)','Plan formation continue','Recrutement pipeline permanent','Montée en compétences managers'] }
     ],
     projectionsFiliale: [
@@ -869,11 +869,11 @@ const SimulateurRuches = () => {
   const [factIntStyle, setFactIntStyle] = useState('noir');
   const servicesYilmaz = [
     { id: 'direction', label: 'Direction / Stratégie', icon: '◆', color: '#8B6F47' },
-    { id: 'finance', label: 'Finance / Comptabilité', icon: '🏦', color: '#059669' },
+    { id: 'finance', label: 'Finance / Comptabilité', icon: '⬡', color: '#059669' },
     { id: 'rh', label: 'RH / Paie', icon: '◉', color: '#2563eb' },
-    { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', color: '#7c3aed' },
-    { id: 'it', label: 'IT / Digital', icon: '💻', color: '#0891b2' },
-    { id: 'juridique', label: 'Juridique / Conformité', icon: '⚖️', color: '#d97706' },
+    { id: 'achats', label: 'Achats & Prestataires', icon: '◈', color: '#7c3aed' },
+    { id: 'it', label: 'IT / Digital', icon: '▢', color: '#0891b2' },
+    { id: 'juridique', label: 'Juridique / Conformité', icon: '§', color: '#d97706' },
     { id: 'marketing', label: 'Marketing / Communication', icon: '📣', color: '#ec4899' }
   ];
   const defaultFactIntData = {
@@ -968,19 +968,19 @@ const SimulateurRuches = () => {
   const BUDGET_CATS = [
     { id:'ca', label:'Chiffre d\'affaires', type:'revenu', icon:'↗' },
     { id:'prestations_internes', label:'Prestations YILMAZ (refacturées)', type:'revenu', icon:'↻' },
-    { id:'autres_produits', label:'Autres produits', type:'revenu', icon:'💎' },
+    { id:'autres_produits', label:'Autres produits', type:'revenu', icon:'◇' },
     { id:'achats_materiaux', label:'Achats matériaux & fournitures', type:'charge', icon:'🧱' },
     { id:'sous_traitance', label:'Sous-traitance', type:'charge', icon:'◆' },
     { id:'masse_salariale', label:'Masse salariale (brut + charges)', type:'charge', icon:'◉' },
-    { id:'prestataires_ext', label:'Prestataires externes', type:'charge', icon:'🤝' },
+    { id:'prestataires_ext', label:'Prestataires externes', type:'charge', icon:'◈' },
     { id:'loyers_locaux', label:'Loyers & charges locaux', type:'charge', icon:'▪' },
-    { id:'vehicules', label:'Véhicules & déplacements', type:'charge', icon:'🚗' },
-    { id:'assurances', label:'Assurances', type:'charge', icon:'🛡️' },
+    { id:'vehicules', label:'Véhicules & déplacements', type:'charge', icon:'▸' },
+    { id:'assurances', label:'Assurances', type:'charge', icon:'⬟' },
     { id:'frais_generaux', label:'Frais généraux & admin', type:'charge', icon:'☰' },
-    { id:'it_outils', label:'IT, logiciels & outils', type:'charge', icon:'💻' },
+    { id:'it_outils', label:'IT, logiciels & outils', type:'charge', icon:'▢' },
     { id:'marketing_comm', label:'Marketing & communication', type:'charge', icon:'📣' },
     { id:'investissements', label:'Investissements (CAPEX)', type:'invest', icon:'€' },
-    { id:'remboursements', label:'Remboursements emprunts', type:'financier', icon:'🏦' }
+    { id:'remboursements', label:'Remboursements emprunts', type:'financier', icon:'⬡' }
   ];
   const BUDGET_FILIALES = [
     { id:'all', label:'◆ Consolidé (Group OY)', color:'#2d2216' },
@@ -1145,29 +1145,29 @@ const SimulateurRuches = () => {
     forfait_mensuel: { label:'Forfait mensuel', unite:'€/mois', icon:'📆', desc:'Abonnement mensuel fixe — expert-comptable, hébergement' },
     forfait_mission: { label:'Forfait mission', unite:'€/mission', icon:'◎', desc:'Prix fixe pour un livrable défini — audit, site web' },
     forfait_annuel: { label:'Forfait annuel', unite:'€/an', icon:'☰', desc:'Contrat annuel — assurance, maintenance, certification' },
-    success_fee: { label:'Au résultat (success fee)', unite:'% ou fixe', icon:'🏆', desc:'Commission sur résultat — cabinet recrutement' },
+    success_fee: { label:'Au résultat (success fee)', unite:'% ou fixe', icon:'★', desc:'Commission sur résultat — cabinet recrutement' },
     regie: { label:'Régie (temps + matériel)', unite:'€/h + frais', icon:'✱', desc:'Temps passé + fournitures/déplacements — artisans BTP' },
-    mixte: { label:'Mixte (base + variable)', unite:'€/mois + var.', icon:'⚡', desc:'Forfait de base + complément variable — DAF, consultant' }
+    mixte: { label:'Mixte (base + variable)', unite:'€/mois + var.', icon:'↯', desc:'Forfait de base + complément variable — DAF, consultant' }
   };
 
   const TYPES_PRESTA = {
     freelance: { label:'Freelance / Indépendant', icon:'◉', color:'#7c3aed' },
-    auto_entrepreneur: { label:'Auto-entrepreneur', icon:'🏠', color:'#2563eb' },
+    auto_entrepreneur: { label:'Auto-entrepreneur', icon:'⌂', color:'#2563eb' },
     societe: { label:'Société (SARL/SAS/EURL)', icon:'▪', color:'#059669' },
-    portage: { label:'Portage salarial', icon:'🤝', color:'#d97706' },
+    portage: { label:'Portage salarial', icon:'◈', color:'#d97706' },
     cabinet: { label:'Cabinet / Agence', icon:'◆', color:'#dc2626' },
-    organisme: { label:'Organisme agréé', icon:'🎓', color:'#0891b2' },
-    interim: { label:'Agence intérim', icon:'👷', color:'#ea580c' },
+    organisme: { label:'Organisme agréé', icon:'❖', color:'#0891b2' },
+    interim: { label:'Agence intérim', icon:'◉', color:'#ea580c' },
     association: { label:'Association', icon:'💚', color:'#16a34a' }
   };
 
   const CATS_PRESTA = {
     finance: { label:'Finance & Comptabilité', icon:'€', color:'#059669' },
     rh: { label:'Ressources Humaines', icon:'◉', color:'#7c3aed' },
-    it: { label:'IT & Digital', icon:'💻', color:'#2563eb' },
-    juridique: { label:'Juridique', icon:'⚖️', color:'#dc2626' },
+    it: { label:'IT & Digital', icon:'▢', color:'#2563eb' },
+    juridique: { label:'Juridique', icon:'§', color:'#dc2626' },
     marketing: { label:'Marketing & Communication', icon:'📣', color:'#ec4899' },
-    formation: { label:'Formation', icon:'🎓', color:'#d97706' },
+    formation: { label:'Formation', icon:'❖', color:'#d97706' },
     btp_sous_traitant: { label:'Sous-traitance BTP', icon:'🔨', color:'#ea580c' },
     bureau_etude: { label:'Bureau d\'études / Contrôle', icon:'◺', color:'#0891b2' },
     transport: { label:'Transport / Logistique', icon:'▸', color:'#6b7280' },
@@ -1190,7 +1190,7 @@ const SimulateurRuches = () => {
     envoye: { label:'Envoyé', icon:'↥', bg:'#dbeafe', color:'#1e40af' },
     signe: { label:'Signé', icon:'✓', bg:'#dcfce7', color:'#166534' },
     expire: { label:'Expiré', icon:'⏰', bg:'#fecaca', color:'#991b1b' },
-    resilie: { label:'Résilié', icon:'🚫', bg:'#f3f4f6', color:'#6b7280' }
+    resilie: { label:'Résilié', icon:'∅', bg:'#f3f4f6', color:'#6b7280' }
   };
   const CONDITIONS_PAIEMENT = {
     immediat:{label:'Paiement immédiat', delai:'à réception de facture'},
@@ -1239,12 +1239,12 @@ const SimulateurRuches = () => {
   const DOC_TYPES = {
     cv: { label:'CV / Portfolio', icon:'▫', category:'recu' },
     urssaf: { label:'Attestation URSSAF', icon:'◆', category:'recu', renewable:true, delaiMois:3 },
-    rc_pro: { label:'RC Professionnelle', icon:'🛡️', category:'recu', renewable:true, delaiMois:12 },
+    rc_pro: { label:'RC Professionnelle', icon:'⬟', category:'recu', renewable:true, delaiMois:12 },
     decennale: { label:'Décennale', icon:'◆', category:'recu', renewable:true, delaiMois:12 },
-    rib: { label:'RIB', icon:'🏦', category:'recu' },
+    rib: { label:'RIB', icon:'⬡', category:'recu' },
     kbis: { label:'Kbis / SIRENE', icon:'☰', category:'recu', renewable:true, delaiMois:3 },
     certif: { label:'Certification / Habilitation', icon:'🎖️', category:'recu', renewable:true },
-    contrat_signe: { label:'Contrat signé', icon:'📜', category:'emis' },
+    contrat_signe: { label:'Contrat signé', icon:'▤', category:'emis' },
     bon_commande: { label:'Bon de commande', icon:'✎', category:'emis' },
     ordre_mission: { label:'Ordre de mission', icon:'☰', category:'emis' },
     evaluation: { label:'Évaluation annuelle', icon:'⭐', category:'emis' },
@@ -1376,7 +1376,7 @@ const SimulateurRuches = () => {
     setConfirmDelete(null);
   };
 
-  const [filialesDynamiques, setFilialesDynamiques] = usePersistedState('filiales_v4', FILIALES_INIT);
+  const [filialesDynamiques, setFilialesDynamiques] = usePersistedState('filiales_v5', FILIALES_INIT);
 
   // Migration: ajouter L'Étanchéité si absente + sync couleurs
   useEffect(() => {
@@ -1836,7 +1836,7 @@ const SimulateurRuches = () => {
 
   const AO_PHASES = [
     { id: 'Visite', label: 'Visite', color: '#f59e0b', icon: '◫' },
-    { id: 'Chiffrage', label: 'Chiffrage', color: '#3b82f6', icon: '🧮' },
+    { id: 'Chiffrage', label: 'Chiffrage', color: '#3b82f6', icon: '▦' },
     { id: 'Mémoire technique', label: 'Mémoire technique', color: '#8b5cf6', icon: '✎' },
     { id: 'Montage dossier', label: 'Montage dossier', color: '#06b6d4', icon: '▸' },
     { id: 'Relecture', label: 'Relecture', color: '#f97316', icon: '⌕' },
@@ -1850,7 +1850,7 @@ const SimulateurRuches = () => {
     'En préparation': { color: '#007ab5', bg: '#eff6ff', icon: '✎' },
     'En attente de réponse': { color: '#2563eb', bg: '#dbeafe', icon: '⏳' },
     'À présenter': { color: '#0284c7', bg: '#e0f2fe', icon: '↥' },
-    'Remporté': { color: '#059669', bg: '#ecfdf5', icon: '🏆' },
+    'Remporté': { color: '#059669', bg: '#ecfdf5', icon: '★' },
     'Non retenu': { color: '#6b7280', bg: '#f3f4f6', icon: '✕' },
     'Courrier demande de précisions': { color: '#7c3aed', bg: '#f5f3ff', icon: '✉️' },
     'Suite Refus': { color: '#94a3b8', bg: '#f8fafc', icon: '📨' },
@@ -1860,11 +1860,11 @@ const SimulateurRuches = () => {
   const [veilleStatutsOrdre, setVeilleStatutsOrdre] = useState([
     { id: 'nouveau', label: 'Nouveau', icon: '🆕', color: '#64748b', bg: '#f8fafc', groupe: 'nouveaux' },
     { id: 'a_regarder', label: 'À Regarder', icon: '🐟', color: '#d97706', bg: '#fffbeb', groupe: 'suivis' },
-    { id: 'en_attente_dce', label: 'En attente de DCE', icon: '📂', color: '#7c3aed', bg: '#f5f3ff', groupe: 'suivis' },
+    { id: 'en_attente_dce', label: 'En attente de DCE', icon: '▸', color: '#7c3aed', bg: '#f5f3ff', groupe: 'suivis' },
     { id: 'en_analyse', label: 'En Analyse', icon: '⌕', color: '#0369a1', bg: '#f0f9ff', groupe: 'suivis' },
     { id: 'go_a_traiter', label: 'GO – À Traiter', icon: '⭐', color: '#15803d', bg: '#f0fdf4', groupe: 'suivis' },
     { id: 'no_go', label: 'No Go', icon: '👎', color: '#be123c', bg: '#fff1f2', groupe: 'archives' },
-    { id: 'hors_cible', label: 'Hors cible', icon: '🚫', color: '#9ca3af', bg: '#f9fafb', groupe: 'archives' },
+    { id: 'hors_cible', label: 'Hors cible', icon: '∅', color: '#9ca3af', bg: '#f9fafb', groupe: 'archives' },
   ]);
 
   const [veilleAO, setVeilleAO] = useState([
@@ -1948,7 +1948,7 @@ const SimulateurRuches = () => {
   };
   const VEILLE_DECISIONS = [
     {id:'a_decider',label:'À décider',icon:'⏳',color:'#64748b'},
-    {id:'lancer',label:'Lancer',icon:'🚀',color:'#0369a1'},
+    {id:'lancer',label:'Lancer',icon:'➤',color:'#0369a1'},
     {id:'reporte',label:'Reporté',icon:'⏸️',color:'#d97706'},
     {id:'ne_pas_repondre',label:'Ne pas répondre',icon:'✕',color:'#dc2626'}
   ];
@@ -1982,12 +1982,12 @@ const SimulateurRuches = () => {
   // Planning Gantt
   const PLAN_PHASES = [
     { id:'visite', label:'Visite', icon:'◆', color:'#f39c12' },
-    { id:'chiffrage', label:'Chiffrage', icon:'🧮', color:'#e67e22' },
+    { id:'chiffrage', label:'Chiffrage', icon:'▦', color:'#e67e22' },
     { id:'memoire', label:'Mémoire technique', icon:'✎', color:'#9b59b6' },
     { id:'montage', label:'Montage dossier', icon:'▸', color:'#3498db' },
     { id:'relecture', label:'Relecture', icon:'⌕', color:'#0ea5e9' },
     { id:'depose', label:'Déposé', icon:'↥', color:'#e74c3c' },
-    { id:'execution', label:'Exécution', icon:'⚡', color:'#27ae60' },
+    { id:'execution', label:'Exécution', icon:'↯', color:'#27ae60' },
     { id:'termine', label:'Terminé', icon:'✓', color:'#16a34a' }
   ];
   const PLAN_STATUTS = [
@@ -2377,21 +2377,21 @@ const SimulateurRuches = () => {
     formActive.filter(f => f.dateExpiration).forEach(f => {
       const d = daysDiff(f.dateExpiration);
       if (d > 0 && d <= 90) alerts.push({type:'warning',module:'formation',icon:'☰',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} expire dans ${d}j`,entityType:'formation',entityId:f.id,employeId:f.employeId});
-      else if (d <= 0) alerts.push({type:'critical',module:'formation',icon:'🚨',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} EXPIRÉE (${Math.abs(d)}j)`,entityType:'formation',entityId:f.id,employeId:f.employeId});
+      else if (d <= 0) alerts.push({type:'critical',module:'formation',icon:'▲',text:`Formation "${f.intitule || f.formation}" de ${empNom(f.employeId)} EXPIRÉE (${Math.abs(d)}j)`,entityType:'formation',entityId:f.id,employeId:f.employeId});
     });
     // Contrats expiring
     const ctrActive = ctrData.length > 0 ? ctrData : sampleCtrDefault;
     ctrActive.filter(c => c.dateFin).forEach(c => {
       const d = daysDiff(c.dateFin);
       if (d > 0 && d <= 90) alerts.push({type:'warning',module:'contrats',icon:'▫',text:`Contrat "${c.titre}" expire dans ${d}j`,entityType:'contrat',entityId:c.id});
-      else if (d <= 0 && c.statut !== 'resilie') alerts.push({type:'critical',module:'contrats',icon:'🚨',text:`Contrat "${c.titre}" EXPIRÉ (${Math.abs(d)}j)`,entityType:'contrat',entityId:c.id});
+      else if (d <= 0 && c.statut !== 'resilie') alerts.push({type:'critical',module:'contrats',icon:'▲',text:`Contrat "${c.titre}" EXPIRÉ (${Math.abs(d)}j)`,entityType:'contrat',entityId:c.id});
     });
     // Assurances expiring
     const assActive = assData.length > 0 ? assData : sampleAssDefault;
     assActive.filter(a => a.dateFin).forEach(a => {
       const d = daysDiff(a.dateFin);
-      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'assurances',icon:'🛡️',text:`${a.type} (${a.numPolice || '—'}) expire dans ${d}j`,entityType:'assurance',entityId:a.id});
-      else if (d <= 0 && a.statut !== 'resilie') alerts.push({type:'critical',module:'assurances',icon:'🚨',text:`${a.type} EXPIRÉE! (${Math.abs(d)}j)`,entityType:'assurance',entityId:a.id});
+      if (d > 0 && d <= 90) alerts.push({type:'warning',module:'assurances',icon:'⬟',text:`${a.type} (${a.numPolice || '—'}) expire dans ${d}j`,entityType:'assurance',entityId:a.id});
+      else if (d <= 0 && a.statut !== 'resilie') alerts.push({type:'critical',module:'assurances',icon:'▲',text:`${a.type} EXPIRÉE! (${Math.abs(d)}j)`,entityType:'assurance',entityId:a.id});
     });
     // Absences en attente
     const absActive = absData.length > 0 ? absData : [];
@@ -2404,7 +2404,7 @@ const SimulateurRuches = () => {
     // Litiges
     const litActive = litData.length > 0 ? litData : [];
     const openLit = litActive.filter(l => l.statut === 'ouvert' || l.statut === 'procedure').length;
-    if (openLit > 0) alerts.push({type:'critical',module:'litiges',icon:'⚖️',text:`${openLit} litige${openLit>1?'s':''} en cours`,entityType:'litige'});
+    if (openLit > 0) alerts.push({type:'critical',module:'litiges',icon:'§',text:`${openLit} litige${openLit>1?'s':''} en cours`,entityType:'litige'});
     // Factures à valider
     const rfActive = rfData.length > 0 ? rfData : [];
     const pendingRf = rfActive.filter(r => r.statut === 'a_valider').length;
@@ -2432,7 +2432,7 @@ const SimulateurRuches = () => {
     matActive.filter(m => m.dateVGP && m.statut !== 'reforme').forEach(m => {
       const d = daysDiff(m.dateVGP);
       if (d > 0 && d <= 60) alerts.push({type:'warning',module:'materiel',icon:'✱',text:`VGP ${m.nom} dans ${d}j`,entityType:'materiel'});
-      else if (d <= 0) alerts.push({type:'critical',module:'materiel',icon:'🚨',text:`VGP ${m.nom} DÉPASSÉ (${Math.abs(d)}j)`,entityType:'materiel'});
+      else if (d <= 0) alerts.push({type:'critical',module:'materiel',icon:'▲',text:`VGP ${m.nom} DÉPASSÉ (${Math.abs(d)}j)`,entityType:'materiel'});
     });
     matActive.filter(m => m.dateCT && m.statut !== 'reforme').forEach(m => {
       const d = daysDiff(m.dateCT);
@@ -2587,7 +2587,7 @@ const SimulateurRuches = () => {
   }, [blocDrag, isBlocDragging, blocDropTargetIndex, ordreBlocsPresentation]);
 
   const configBlocsPresentation = {
-    histoire: { label: "L'Histoire de la Ruche", icon: '📖' },
+    histoire: { label: "L'Histoire de la Ruche", icon: '▤' },
     bareme: { label: 'Barème de Performance', icon: '▦' },
     architecture: { label: "L'Architecture de la Ruche", icon: '🐝' },
     grilles: { label: 'Grilles de Rémunération', icon: '€' },
@@ -3051,7 +3051,7 @@ const SimulateurRuches = () => {
           </div>
           {showChangePassword && (
             <div style={{position:'absolute', right:40, top:80, background:$bgCard, borderRadius:crmRd, padding:20, boxShadow:'0 10px 40px rgba(0,0,0,0.2)', zIndex:100, width:280}} onClick={e => e.stopPropagation()}>
-              <h4 style={{margin:'0 0 12px', color:$accent, fontSize:'0.9rem'}}>🔒 Changer le mot de passe</h4>
+              <h4 style={{margin:'0 0 12px', color:$accent, fontSize:'0.9rem'}}>▪ Changer le mot de passe</h4>
               <input type="password" placeholder="Ancien mot de passe" value={passwordForm.ancien} onChange={e => setPasswordForm({...passwordForm, ancien: e.target.value})} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
               <input type="password" placeholder="Nouveau mot de passe" value={passwordForm.nouveau} onChange={e => setPasswordForm({...passwordForm, nouveau: e.target.value})} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
               <input type="password" placeholder="Confirmer" value={passwordForm.confirmation} onChange={e => setPasswordForm({...passwordForm, confirmation: e.target.value})} onKeyDown={e => e.key==='Enter' && handleChangePassword()} style={{width:'100%', padding:'6px 10px', border:`1px solid ${$border}`, borderRadius:crmRd, marginBottom:8, fontSize:'0.9rem', boxSizing:'border-box'}} />
@@ -3253,7 +3253,7 @@ const SimulateurRuches = () => {
             return (
             <div style={{marginTop: svcCardSize==='sm'?'0.5rem':'0.75rem'}}>
               <div style={{fontSize:'0.78rem', fontWeight:700, color: col.main, marginBottom: svcCardSize==='sm'?'0.35rem':'0.5rem', display:'flex', alignItems:'center', gap:'0.3rem'}}>
-                <span style={{fontSize:'0.85rem'}}>📂</span> Services de {SERVICES_CONFIG[navEntreprise].nom}
+                <span style={{fontSize:'0.85rem'}}>▸</span> Services de {SERVICES_CONFIG[navEntreprise].nom}
                 {navEntreprise === 'yilmaz' && isSuperAdmin() && (
                   <span onClick={(e) => { e.stopPropagation(); setShowServicesPanel(p => !p); }} style={{marginLeft:'auto', cursor:'pointer', fontSize:'0.82rem', color:$textMut, display:'flex', alignItems:'center', gap:4, padding:'2px 8px', borderRadius:crmRd, background: showServicesPanel ? $bgSub : 'transparent', transition:'background 0.2s'}}>
                     ✱ <span style={{fontSize:'0.7rem', color:'#d4d0c8'}}>{SERVICES_CONFIG.yilmaz.services.filter(s => !hiddenServicesYilmaz.includes(s.id)).length}/{SERVICES_CONFIG.yilmaz.services.length}</span>
@@ -3281,7 +3281,7 @@ const SimulateurRuches = () => {
                       </div>
                       <div style={{textAlign:'right'}}>
                         {svc.hidden && hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.65rem', fontWeight:700, background:'#d97706', color:'white', padding:'1px 6px', borderRadius:crmRd}}>BIENTÔT</span>}
-                        {!svc.hidden && hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#9ca3af', fontWeight:600}}>🔒 Masqué</span>}
+                        {!svc.hidden && hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#9ca3af', fontWeight:600}}>▪ Masqué</span>}
                         {!hiddenServicesYilmaz.includes(svc.id) && <span style={{fontSize:'0.7rem', color:'#059669', fontWeight:600}}>✓ Affiché</span>}
                       </div>
                     </div>
@@ -3369,7 +3369,7 @@ const SimulateurRuches = () => {
             return (
               <div style={{display:'flex', alignItems:'center', gap:0, marginBottom:'0.75rem', borderRadius:crmRd, overflow:'hidden', border:`1px solid ${filAcc}40`, background:$bgCard, boxShadow:`0 2px 8px ${filAcc}18`}}>
                 <button onClick={() => navigateToGroupe()} style={{display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:'transparent', border:'none', cursor:'pointer', color:$textMut, fontSize:'0.8rem', fontWeight:500, fontFamily:'inherit', transition:'background 0.15s', flexShrink:0}} onMouseOver={e=>e.currentTarget.style.background=$bgSub} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
-                  🏠 <span>Accueil</span>
+                  ⌂ <span>Accueil</span>
                 </button>
                 <span style={{color:$border, flexShrink:0, fontSize:'1rem', padding:'0 2px'}}>›</span>
                 <button onClick={() => { setNavService(null); setOngletActif('dashboard'); setProcessusOuvert(null); }} style={{display:'flex', alignItems:'center', gap:6, padding:'8px 14px', background:'transparent', border:'none', cursor:'pointer', color:$textMut, fontSize:'0.8rem', fontWeight:500, fontFamily:'inherit', transition:'background 0.15s', flexShrink:0}} onMouseOver={e=>e.currentTarget.style.background=$bgSub} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
@@ -3393,7 +3393,7 @@ const SimulateurRuches = () => {
           {/* ====== CARTES MODULES — quand service sélectionné ====== */}
           {navService && navEntreprise && (() => {
             const moduleIcons = {
-              crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
+              crm_commercial: { icon: '◈', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
               kpi_dashboard: { icon: '▦', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
               dashboard: { icon: '▦', label: 'Tableau de Bord', desc: "KPI, finances et vue d'ensemble", color: '#e67e22' },
               ezel_tableau: { icon: '◆', label: 'Monday · Affaires Live', desc: '81 affaires · Études AO · données temps réel', color: '#007ab5' },
@@ -3407,24 +3407,24 @@ const SimulateurRuches = () => {
               postes: { icon: '▪', label: 'Postes & Fiches', desc: 'Fiches de poste et référentiel', color: '#3498db' },
               presentation: { icon: '🐝', label: 'Modèle Ruches', desc: 'Philosophie, niveaux de rémunération, fonctionnement du système ruches', color: '#9b59b6' },
               organigramme: { icon: '▪', label: 'Organigramme', desc: 'Structure et hiérarchie', color: '#1abc9c' },
-              simulateur: { icon: '🧮', label: 'Simulateur', desc: 'Simulation de rémunération', color: '#f39c12' },
+              simulateur: { icon: '▦', label: 'Simulateur', desc: 'Simulation de rémunération', color: '#f39c12' },
               suivi: { icon: '↗', label: 'Suivi de l\'Essaim', desc: 'Suivi des performances', color: '#e74c3c' },
               admin: { icon: '✱', label: 'Administration', desc: 'Gestion des droits et structure', color: '#7f8c8d' },
-              presentation_groupe: { icon: '🌐', label: 'Présentation Group', desc: 'Vitrine interactive du groupe', color: '#8B6F47' },
+              presentation_groupe: { icon: '◎', label: 'Présentation Group', desc: 'Vitrine interactive du groupe', color: '#8B6F47' },
               // Direction
-              roadmap: { icon: '🗺️', label: 'Feuille de Route', desc: 'Vision stratégique 2025-2035', color: '#6366f1' },
+              roadmap: { icon: '⌖', label: 'Feuille de Route', desc: 'Vision stratégique 2025-2035', color: '#6366f1' },
               // Finance
-              fact_interne: { icon: '🧾', label: 'Facturation Interne', desc: 'Devis & factures YILMAZ → Filiales, temps passé', color: '#059669' },
+              fact_interne: { icon: '▤', label: 'Facturation Interne', desc: 'Devis & factures YILMAZ → Filiales, temps passé', color: '#059669' },
               fact_externe: { icon: '↧', label: 'Facturation Externe', desc: 'Réception factures prestataires → Pennylane', color: '#dc2626' },
               budget: { icon: '▦', label: 'Budget Prévisionnel', desc: 'Budget annuel par filiale, suivi écarts prévu vs réel', color: '#8B6F47' },
               tresorerie: { icon: '€', label: 'Trésorerie', desc: 'Plan de trésorerie, prévisions cash-flow', color: '#d97706' },
               analytique: { icon: '▦', label: 'Analytique', desc: 'Suivi analytique par chantier, filiale, projet', color: '#7c3aed' },
               // RH
               recrutement: { icon: '☰', label: 'Recrutement', desc: 'Pipeline : Offre → Sélection → Entretien → Promesse', color: '#3b82f6' },
-              onboarding: { icon: '🚀', label: 'Onboarding', desc: 'Accueil nouveau collaborateur, checklist intégration', color: '#10b981' },
+              onboarding: { icon: '➤', label: 'Onboarding', desc: 'Accueil nouveau collaborateur, checklist intégration', color: '#10b981' },
               offboarding: { icon: '👋', label: 'Offboarding', desc: 'Départ collaborateur, checklist sortie, solde de tout compte', color: '#ef4444' },
               dossier_rh: { icon: '▸', label: 'Dossier du Personnel', desc: 'Documents administratifs, contrats, pièces justificatives', color: '#8B6F47' },
-              formation: { icon: '🎓', label: 'Formation', desc: 'Plan de formation, habilitations BTP, CACES', color: '#8b5cf6' },
+              formation: { icon: '❖', label: 'Formation', desc: 'Plan de formation, habilitations BTP, CACES', color: '#8b5cf6' },
               absences: { icon: '🏖️', label: 'Absences & Congés', desc: 'Congés, arrêts maladie, planning absences', color: '#f97316' },
               // Achats & Prestataires
               bon_commande: { icon: '✎', label: 'Bons de Commande', desc: 'Création et suivi BC vers prestataires/freelances', color: '#0891b2' },
@@ -3435,21 +3435,21 @@ const SimulateurRuches = () => {
               outils: { icon: '✱', label: 'Outils & Licences', desc: 'Inventaire logiciels, Monday, Pennylane, licences', color: '#6366f1' },
               tickets: { icon: '🎫', label: 'Tickets Support', desc: 'Demandes IT, incidents, résolution', color: '#ef4444' },
               // Juridique
-              contrats: { icon: '📜', label: 'Contrats', desc: 'Suivi contrats clients, fournisseurs, sous-traitants', color: '#1e40af' },
-              litiges: { icon: '⚡', label: 'Litiges', desc: 'Litiges en cours, provisions, suivi juridique', color: '#dc2626' },
-              assurances: { icon: '🛡️', label: 'Assurances', desc: 'Polices, échéances, sinistres, décennale', color: '#059669' },
+              contrats: { icon: '▤', label: 'Contrats', desc: 'Suivi contrats clients, fournisseurs, sous-traitants', color: '#1e40af' },
+              litiges: { icon: '↯', label: 'Litiges', desc: 'Litiges en cours, provisions, suivi juridique', color: '#dc2626' },
+              assurances: { icon: '⬟', label: 'Assurances', desc: 'Polices, échéances, sinistres, décennale', color: '#059669' },
               conformite: { icon: '✓', label: 'Conformité BTP', desc: 'DUERP, registres obligatoires, certifications', color: '#7c3aed' },
               // Exécution
               ordres_travail: { icon: '☰', label: 'Ordres de Travail', desc: 'OT chantiers, consignes sécurité, suivi heures', color: '#f97316' },
               // Logistique & Parc
-              parc_automobile: { icon: '🚗', label: 'Parc Automobile', desc: 'Véhicules, CT, assurance, km, conducteurs', color: '#0ea5e9' },
+              parc_automobile: { icon: '▸', label: 'Parc Automobile', desc: 'Véhicules, CT, assurance, km, conducteurs', color: '#0ea5e9' },
               materiel: { icon: '✱', label: 'Parc Matériel', desc: 'Engins, échafaudages, outillage, VGP', color: '#0891b2' },
               // Marketing
-              identite: { icon: '🎨', label: 'Identité Visuelle', desc: 'Charte graphique, logos, couleurs, templates', color: '#ec4899' },
+              identite: { icon: '✎', label: 'Identité Visuelle', desc: 'Charte graphique, logos, couleurs, templates', color: '#ec4899' },
               supports: { icon: '▫', label: 'Supports Commerciaux', desc: 'Plaquettes, cartes de visite, signalétique', color: '#f59e0b' },
-              web: { icon: '🌐', label: 'Présence Web', desc: 'Sites web, réseaux sociaux, e-réputation', color: '#3b82f6' },
+              web: { icon: '◎', label: 'Présence Web', desc: 'Sites web, réseaux sociaux, e-réputation', color: '#3b82f6' },
               donnees_ref: { icon: '🗄️', label: 'Données de Référence', desc: 'Filiales, collaborateurs, véhicules, matériel, chantiers', color: '#6366f1' },
-              parc_info: { icon: '💻', label: 'Parc Informatique', desc: 'Téléphones, ordinateurs, écrans, imprimantes, accessoires', color: '#7c3aed' }
+              parc_info: { icon: '▢', label: 'Parc Informatique', desc: 'Téléphones, ordinateurs, écrans, imprimantes, accessoires', color: '#7c3aed' }
             };
             const storeKey = `${navEntreprise}_${navService}`;
             const orderedMods = getOrderedModules(navEntreprise, navService);
@@ -3658,7 +3658,7 @@ const SimulateurRuches = () => {
       {modalEmploye && (
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:200}} onClick={() => setModalEmploye(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, padding:28, maxWidth:600, width:'100%', margin:'0 16px', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:`1px solid ${$border}`, maxHeight:'92vh', overflowY:'auto'}} onClick={e => e.stopPropagation()}>
-                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalEmploye === 'add' ? '➕ Nouveau Collaborateur' : '✎ Modifier Collaborateur'}</div>
+                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalEmploye === 'add' ? '+ Nouveau Collaborateur' : '✎ Modifier Collaborateur'}</div>
                   {(() => {
                     const f = employeForm; const u = (k,v) => setEmployeForm({...f, [k]:v});
                     const inS = {width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$border}`, fontSize:'0.95rem', outline:'none'};
@@ -3716,7 +3716,7 @@ const SimulateurRuches = () => {
                       </div>
                       <div style={{display:'flex', alignItems:'center', gap:10, padding:'8px 0'}}>
                         <input type="checkbox" checked={f.isResponsable} onChange={e => u('isResponsable', e.target.checked)} style={{width:18, height:18, accentColor:'#8B6F47'}} />
-                        <span style={{fontSize:'0.92rem', fontWeight:600, color:$text}}>👑 Est responsable (gère un CA)</span>
+                        <span style={{fontSize:'0.92rem', fontWeight:600, color:$text}}>✦ Est responsable (gère un CA)</span>
                       </div>
                       {f.isResponsable && (
                       <div style={{background:$success+'12', borderRadius:crmRd, padding:14}}>
@@ -3728,7 +3728,7 @@ const SimulateurRuches = () => {
                         </div>
                       </div>)}
                       <div style={{display:'flex', gap:10, marginTop:8}}>
-                        <button onClick={saveEmploye} disabled={!f.nom || !f.prenom} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.prenom) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.prenom) ? 'not-allowed' : 'pointer'}}>{modalEmploye === 'add' ? '✓ Créer' : '💾 Enregistrer'}</button>
+                        <button onClick={saveEmploye} disabled={!f.nom || !f.prenom} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.prenom) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.prenom) ? 'not-allowed' : 'pointer'}}>{modalEmploye === 'add' ? '✓ Créer' : '↓ Enregistrer'}</button>
                         <button onClick={() => setModalEmploye(null)} style={{padding:'10px 20px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>Annuler</button>
                       </div>
                     </div>);
@@ -3741,7 +3741,7 @@ const SimulateurRuches = () => {
       {modalChantier && (
               <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', display:'flex', alignItems:'center', justifyContent:'center', zIndex:200}} onClick={() => setModalChantier(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, padding:28, maxWidth:600, width:'100%', margin:'0 16px', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:`1px solid ${$border}`, maxHeight:'92vh', overflowY:'auto'}} onClick={e => e.stopPropagation()}>
-                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalChantier === 'add' ? '➕ Nouveau Chantier' : '✎ Modifier Chantier'}</div>
+                  <div style={{fontSize:'1.1rem', fontWeight:800, color:$text, marginBottom:20}}>{modalChantier === 'add' ? '+ Nouveau Chantier' : '✎ Modifier Chantier'}</div>
                   {(() => {
                     const f = chantierForm; const u = (k,v) => setChantierForm({...f, [k]:v});
                     const inS = {width:'100%', padding:'8px 12px', borderRadius:crmRd, border:`1px solid ${$border}`, fontSize:'0.95rem', outline:'none'};
@@ -3789,7 +3789,7 @@ const SimulateurRuches = () => {
                         </div>)}
                       </div>
                       <div style={{display:'flex', gap:10, marginTop:8}}>
-                        <button onClick={saveChantier} disabled={!f.nom || !f.client} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.client) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.client) ? 'not-allowed' : 'pointer'}}>{modalChantier === 'add' ? '✓ Créer' : '💾 Enregistrer'}</button>
+                        <button onClick={saveChantier} disabled={!f.nom || !f.client} style={{flex:1, padding:'10px 20px', borderRadius:crmRd, border:'none', background: (!f.nom || !f.client) ? '#f0ebe3' : 'linear-gradient(135deg, #059669, #047857)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor: (!f.nom || !f.client) ? 'not-allowed' : 'pointer'}}>{modalChantier === 'add' ? '✓ Créer' : '↓ Enregistrer'}</button>
                         <button onClick={() => setModalChantier(null)} style={{padding:'10px 20px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>Annuler</button>
                       </div>
                     </div>);
@@ -3903,7 +3903,7 @@ const SimulateurRuches = () => {
                     <br/><span style={{fontSize:'0.92rem', color:$textMut}}>Cette action est irréversible.</span>
                   </div>
                   <div style={{display:'flex', gap:10, justifyContent:'center'}}>
-                    <button onClick={() => confirmDelete.type === 'poste' ? (()=>{setPostes(prev=>prev.filter(x=>x.id!==confirmDelete.id));setPosteSelectionne(null);setPosteEditMode(false);setConfirmDelete(null);})() : confirmDelete.type === 'employe' ? deleteEmploye(confirmDelete.id) : deleteChantier(confirmDelete.id)} style={{padding:'10px 24px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #dc2626, #b91c1c)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer'}}>🗑️ Supprimer</button>
+                    <button onClick={() => confirmDelete.type === 'poste' ? (()=>{setPostes(prev=>prev.filter(x=>x.id!==confirmDelete.id));setPosteSelectionne(null);setPosteEditMode(false);setConfirmDelete(null);})() : confirmDelete.type === 'employe' ? deleteEmploye(confirmDelete.id) : deleteChantier(confirmDelete.id)} style={{padding:'10px 24px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #dc2626, #b91c1c)', color:'white', fontWeight:700, fontSize:'0.95rem', cursor:'pointer'}}>⊘ Supprimer</button>
                     <button onClick={() => setConfirmDelete(null)} style={{padding:'10px 24px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.95rem', cursor:'pointer'}}>Annuler</button>
                   </div>
                 </div>

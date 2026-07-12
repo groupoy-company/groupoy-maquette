@@ -33,7 +33,7 @@ export default function TabFormation(__props) {
             <div style={{padding:'16px 20px'}}>
               <div style={{display:'flex', alignItems:'flex-start', justifyContent:'space-between'}}>
                 <div style={{display:'flex', alignItems:'center', gap:12}}>
-                  <div style={{width:40, height:40, borderRadius:10, background:'#059669', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.2rem', flexShrink:0}}>🎓</div>
+                  <div style={{width:40, height:40, borderRadius:10, background:'#059669', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.2rem', flexShrink:0}}>❖</div>
                   <div>
                     <div style={{display:'flex', alignItems:'center', gap:7, marginBottom:2}}>
                       <h2 style={{margin:0, fontSize:'1.05rem', fontWeight:800, color:$text, letterSpacing:'-0.01em'}}>Formations & Habilitations BTP</h2>
@@ -71,7 +71,7 @@ export default function TabFormation(__props) {
             </div>
             <div style={{display:'flex', alignItems:'center', gap:8, padding:'8px 14px', flexWrap:'wrap'}}>
               <select value={formFilter} onChange={e=>setFormFilter(e.target.value)} style={{fontSize:'0.8rem', padding:'5px 9px', borderRadius:crmRd, border:`1px solid ${$border}`, background:$bgSub, color:$textSec, outline:'none', cursor:'pointer'}}>
-                <option value="tous">🏷 Tous types</option>
+                <option value="tous">⌗ Tous types</option>
                 {FORM_TYPES.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}
                 {FORM_STATUTS.map(s=><option key={s.id} value={s.id}>{s.label}</option>)}
               </select>
@@ -116,7 +116,7 @@ export default function TabFormation(__props) {
             const tauxConformite = data.length>0?Math.round(data.filter(f=>f.statut==='valide').length/data.length*100):100;
             const KPIS = [
               {l:'Habilitations valides',v:data.filter(f=>f.statut==='valide').length,sub:'conformes à jour',c:'#059669',bg:'#05966912',icon:'✓',bar:tauxConformite},
-              {l:'Expirées',v:expires.length,sub:expires.length>0?'action requise':'RAS',c:'#dc2626',bg:'#dc262612',icon:'🚨',urgent:expires.length>0},
+              {l:'Expirées',v:expires.length,sub:expires.length>0?'action requise':'RAS',c:'#dc2626',bg:'#dc262612',icon:'▲',urgent:expires.length>0},
               {l:'Expire ≤90 jours',v:expireBientot.length,sub:'recyclage à planifier',c:'#d97706',bg:'#d9770612',icon:'⏳',urgent:expireBientot.length>0},
               {l:'Planifiées',v:data.filter(f=>f.statut==='planifie').length,sub:'en cours de planif.',c:'#3b82f6',bg:'#3b82f612',icon:'◫'},
               {l:'Budget total',v:fmtCout(totalCout),sub:data.length+' habilitation'+(data.length>1?'s':''),c:'#7c3aed',bg:'#7c3aed12',icon:'€'},
@@ -158,7 +158,7 @@ export default function TabFormation(__props) {
                       onClick={()=>setFormEdit({...f})}>
                     <div style={{padding:'12px 16px',display:'flex',justifyContent:'space-between',alignItems:'center',cursor:'pointer'}}>
                       <div>
-                        <div style={{fontWeight:700,fontSize:'0.92rem',color:isExpired?'#991b1b':'#92400e'}}>{isExpired ? '🚨' : '▲'} {f.intitule}</div>
+                        <div style={{fontWeight:700,fontSize:'0.92rem',color:isExpired?'#991b1b':'#92400e'}}>{isExpired ? '▲' : '▲'} {f.intitule}</div>
                         <div style={{fontSize:'0.78rem',color:$textSec,marginTop:2}}><EmpLink id={f.employeId}/> — <FilLink id={f.filialeId}/></div>
                         <div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>Type: {tp.label} — Validité: {DUREES_VALIDITE[f.type]} — Organisme: {f.organisme}</div>
                       </div>
@@ -197,7 +197,7 @@ export default function TabFormation(__props) {
           </>)}
           {/* Modal formation */}
           {formEdit && (<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={()=>setFormEdit(null)}><div style={{background:$bgCard,width:'92%',maxWidth:580,maxHeight:'85vh',overflow:'auto',borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e=>e.stopPropagation()}>
-            <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(f=>f.id===formEdit.id)?'✎ Modifier':'➕ Nouvelle'} formation</span><button onClick={()=>setFormEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
+            <div style={{padding:'14px 20px',background:$bgSub,borderBottom:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',borderRadius:`${crmRd}px ${crmRd}px 0 0`}}><span style={{fontWeight:700,color:$text}}>{data.find(f=>f.id===formEdit.id)?'✎ Modifier':'+ Nouvelle'} formation</span><button onClick={()=>setFormEdit(null)} style={{background:'none',border:'none',fontSize:'1.1rem',cursor:'pointer'}}>✕</button></div>
             <div style={{padding:'14px 20px',display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
               {[{k:'collaborateur',l:'Collaborateur',span:2},{k:'filiale',l:'Filiale',type:'select',opts:['YILMAZ SAS','Ezel Bâtiment',"L'Échafaudage",'La Roulotte',"L'Étanchéité"]},{k:'type',l:'Type',type:'select',opts:FORM_TYPES.map(t=>t.id),labels:FORM_TYPES.map(t=>t.label)},{k:'intitule',l:'Intitulé formation',span:2},{k:'organisme',l:'Organisme'},{k:'cout',l:'Coût (€)',type:'number'},{k:'dateObtention',l:'Date obtention',type:'date'},{k:'dateExpiration',l:'Date expiration',type:'date'},{k:'statut',l:'Statut',type:'select',opts:FORM_STATUTS.map(s=>s.id),labels:FORM_STATUTS.map(s=>s.label)},{k:'notes',l:'Notes',span:2,type:'textarea'}].map(f => (
                 <div key={f.k} style={{gridColumn:f.span?'span 2':'span 1'}}><label style={{display:'block',fontSize:'0.7rem',fontWeight:600,color:$textMut,marginBottom:4,letterSpacing:'0.02em',textTransform:'uppercase'}}>{f.l}</label>

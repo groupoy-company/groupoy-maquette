@@ -10,24 +10,24 @@ export const ROLES = {
 
 // Catégories de rôles
 export const NIVEAUX_HIERARCHIQUES = [
-  { id: 'PDG', label: 'PDG', icon: '👑' },
-  { id: 'DG', label: 'Directeur Général', icon: '🏛️' },
-  { id: 'DAF', label: 'Directeur Administratif & Financier', icon: '💰' },
-  { id: 'DIRECTEUR', label: 'Directeur / Responsable', icon: '📋' },
-  { id: 'CHEF_SERVICE', label: 'Chef de Service', icon: '🔧' },
-  { id: 'CHARGE', label: 'Chargé(e) / Référent(e)', icon: '📌' },
-  { id: 'EMPLOYE', label: 'Employé(e)', icon: '👤' }
+  { id: 'PDG', label: 'PDG', icon: '✦' },
+  { id: 'DG', label: 'Directeur Général', icon: '◆' },
+  { id: 'DAF', label: 'Directeur Administratif & Financier', icon: '€' },
+  { id: 'DIRECTEUR', label: 'Directeur / Responsable', icon: '☰' },
+  { id: 'CHEF_SERVICE', label: 'Chef de Service', icon: '✱' },
+  { id: 'CHARGE', label: 'Chargé(e) / Référent(e)', icon: '▪' },
+  { id: 'EMPLOYE', label: 'Employé(e)', icon: '◉' }
 ];
 
 export const SERVICES = [
-  { id: 'DIRECTION', label: 'Direction Générale', icon: '🏛️' },
-  { id: 'FINANCE', label: 'Finance / Comptabilité', icon: '💰' },
+  { id: 'DIRECTION', label: 'Direction Générale', icon: '◆' },
+  { id: 'FINANCE', label: 'Finance / Comptabilité', icon: '€' },
   { id: 'RH', label: 'Ressources Humaines', icon: '👥' },
-  { id: 'OPERATIONS', label: 'Opérations / Production', icon: '🏗️' },
-  { id: 'COMMERCIAL', label: 'Commercial / Relation Client', icon: '🤝' },
-  { id: 'IT', label: 'IT / Digital', icon: '💻' },
-  { id: 'MARKETING', label: 'Marketing / Communication', icon: '📢' },
-  { id: 'QUALITE', label: 'Qualité / Sécurité', icon: '🛡️' }
+  { id: 'OPERATIONS', label: 'Opérations / Production', icon: '◆' },
+  { id: 'COMMERCIAL', label: 'Commercial / Relation Client', icon: '◈' },
+  { id: 'IT', label: 'IT / Digital', icon: '▢' },
+  { id: 'MARKETING', label: 'Marketing / Communication', icon: '✦' },
+  { id: 'QUALITE', label: 'Qualité / Sécurité', icon: '⬟' }
 ];
 
 export const NIVEAUX_ACCES = [

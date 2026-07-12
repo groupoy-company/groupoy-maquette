@@ -2,7 +2,7 @@
 // Extrait de App.jsx lors de la modularisation (étape 5).
 
 export const FILIALES_INIT = [
-    { id: 1, nom: 'La Roulotte', siren: '928276518', holding: 'INVEST LOC', activite: 'Location Roulottes, WC & Barrières', icon: '🚛', ca: 131092, effectif: 2, sousTraitancePct: 26, fraisInternesPct: 18, margeBrutePct: 74, couleur: '#C49A2A',
+    { id: 1, nom: 'La Roulotte', siren: '928276518', holding: 'INVEST LOC', activite: 'Location Roulottes, WC & Barrières', icon: '▸', ca: 131092, effectif: 2, sousTraitancePct: 26, fraisInternesPct: 18, margeBrutePct: 74, couleur: '#C49A2A',
       historique: [
         { annee: '2023', ca: 0.08, ebe: 0.01 },
         { annee: '2024', ca: 0.10, ebe: 0.015 },
@@ -10,7 +10,7 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 0.131, ebe: 0.024 }
       ]
     },
-    { id: 2, nom: "L'Échafaudage", siren: '942781774', holding: 'INVEST LOC', activite: 'Location + Montage/Démontage Échafaudages', icon: '⚙️', ca: 272545, effectif: 4, sousTraitancePct: 73, fraisInternesPct: 25, margeBrutePct: 27, couleur: '#6C3483',
+    { id: 2, nom: "L'Échafaudage", siren: '942781774', holding: 'INVEST LOC', activite: 'Location + Montage/Démontage Échafaudages', icon: '✱', ca: 272545, effectif: 4, sousTraitancePct: 73, fraisInternesPct: 25, margeBrutePct: 27, couleur: '#6C3483',
       historique: [
         { annee: '2023', ca: 0.15, ebe: -0.02 },
         { annee: '2024', ca: 0.22, ebe: -0.05 },
@@ -18,7 +18,7 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 0.273, ebe: -0.112 }
       ]
     },
-    { id: 3, nom: 'Ezel Bâtiment', siren: '753592872', holding: 'INVEST EXE', activite: 'Entreprise Générale de Bâtiment', icon: '🏗️', ca: 3878253, effectif: 8, sousTraitancePct: 36, fraisInternesPct: 20, margeBrutePct: 42, couleur: '#007ab5',
+    { id: 3, nom: 'Ezel Bâtiment', siren: '753592872', holding: 'INVEST EXE', activite: 'Entreprise Générale de Bâtiment', icon: '◆', ca: 3878253, effectif: 8, sousTraitancePct: 36, fraisInternesPct: 20, margeBrutePct: 42, couleur: '#007ab5',
       historique: [
         { annee: '2023', ca: 1.8, ebe: 0.08 },
         { annee: '2024', ca: 2.9, ebe: 0.15 },
@@ -26,7 +26,7 @@ export const FILIALES_INIT = [
         { annee: '2026', ca: 3.878, ebe: 0.054 }
       ]
     },
-    { id: 6, nom: "L'Étanchéité", siren: '104085147', holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '💧', ca: 0, effectif: 0, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
+    { id: 6, nom: "L'Étanchéité", siren: '104085147', holding: 'INVEST EXE', activite: "Travaux d'étanchéité et imperméabilisation", icon: '◦', ca: 0, effectif: 0, sousTraitancePct: 40, fraisInternesPct: 22, margeBrutePct: 60, couleur: '#0e6655',
       historique: [
         { annee: '2025', ca: 0, ebe: 0 },
         { annee: '2026', ca: 0, ebe: 0 }
@@ -197,5 +197,5 @@ export const POSTES_INIT = [
     { id:'P020', titre:'Commercial Location', titreRuche:'Butineur', niveau:'S', filialeId:1, service:'Commercial', statut:'a_creer', titulaire:null, besoinType:'creation', sousMotif:null, urgence:'1_3_mois', typeContrat:'cdi', dateBesoin:'2026-05-01', justification:'Développement commercial La Roulotte — besoin prospection', budgetCharge:52000, onboardingType:'charge_affaires', salaireMin:30000, salaireMax:36000, primeMin:2000, primeMax:4000, variableMin:5000, variableMax:12000, fichePoste:'', missions:'', competences:'', ficheAnnonce:'', historique:[{date:'2026-03-05',action:'Poste à créer — fiche en cours de rédaction',par:'Diane'}] },
     { id:'P021', titre:'Maçon Qualifié', titreRuche:'Ouvrière-Bâtisseuse', niveau:'XXS', filialeId:3, service:'Production', statut:'ouvert', titulaire:null, besoinType:'remplacement', sousMotif:'fin_cdd', urgence:'immediate', typeContrat:'cdi', dateBesoin:'2026-03-15', justification:'Fin CDD chantier Lycée — conversion CDI si bon profil', budgetCharge:42000, onboardingType:'ouvrier_btp', salaireMin:24000, salaireMax:28000, primeMin:1500, primeMax:2500, variableMin:2000, variableMax:4000, fichePoste:'', missions:'', competences:'', ficheAnnonce:'', historique:[{date:'2026-03-01',action:'Fin CDD — poste ouvert pour CDI',par:'Pierre'}] },
     { id:'P024', titre:'Conducteur de Travaux', titreRuche:'Gardien de Ruche', niveau:'L', filialeId:3, service:'Direction', statut:'ouvert', titulaire:null, besoinType:'remplacement', sousMotif:null, urgence:'1_mois', typeContrat:'cdi', dateBesoin:'2026-04-01', justification:'Poste à recruter — Direction Ezel', budgetCharge:70000, onboardingType:'conducteur_travaux', salaireMin:38000, salaireMax:45000, primeMin:5000, primeMax:8000, variableMin:8000, variableMax:15000, fichePoste:'', missions:'', competences:'', ficheAnnonce:'', historique:[] },
-    { id:'P025', titre:'Chargé d\'Affaires TCE', titreRuche:'Gardien de Ruche', niveau:'L', filialeId:3, service:'Production', statut:'ouvert', titulaire:null, besoinType:'creation', sousMotif:null, urgence:'1_3_mois', typeContrat:'cdi', dateBesoin:'2026-05-01', justification:'Développement activité TCE — besoin renfort commercial et technique', budgetCharge:65000, onboardingType:'charge_affaires', salaireMin:36000, salaireMax:44000, primeMin:4000, primeMax:7000, variableMin:10000, variableMax:18000, fichePoste:'Pilotage commercial et technique des affaires TCE (tous corps d\'état). Responsable du chiffrage, de la relation client et du suivi des chantiers.', missions:'• Chiffrage et réponse aux appels d\'offres TCE\n• Relation client et développement commercial\n• Suivi technique et financier des chantiers\n• Coordination des sous-traitants', competences:'• Expérience 3-5 ans en BTP / TCE\n• Maîtrise chiffrage et lecture de plans\n• Permis B obligatoire\n• CACES apprécié', ficheAnnonce:'🏗️ EZEL BÂTIMENT recrute un(e) Chargé(e) d\'Affaires TCE\n\nBasé(e) à Strasbourg, vous intégrez une entreprise en pleine croissance spécialisée en gros œuvre et TCE.\n\nVos missions :\n- Chiffrage et réponse aux AO\n- Suivi technique et financier\n- Relation client\n\nProfil : 3-5 ans BTP, autonome, rigoureux\nPackage : 36-44k€ fixe + prime + variable\n\nPostulez : rh@ezel.fr', historique:[{date:'2026-03-08',action:'Poste créé — développement activité TCE',par:'Özdoğan'}] }
+    { id:'P025', titre:'Chargé d\'Affaires TCE', titreRuche:'Gardien de Ruche', niveau:'L', filialeId:3, service:'Production', statut:'ouvert', titulaire:null, besoinType:'creation', sousMotif:null, urgence:'1_3_mois', typeContrat:'cdi', dateBesoin:'2026-05-01', justification:'Développement activité TCE — besoin renfort commercial et technique', budgetCharge:65000, onboardingType:'charge_affaires', salaireMin:36000, salaireMax:44000, primeMin:4000, primeMax:7000, variableMin:10000, variableMax:18000, fichePoste:'Pilotage commercial et technique des affaires TCE (tous corps d\'état). Responsable du chiffrage, de la relation client et du suivi des chantiers.', missions:'• Chiffrage et réponse aux appels d\'offres TCE\n• Relation client et développement commercial\n• Suivi technique et financier des chantiers\n• Coordination des sous-traitants', competences:'• Expérience 3-5 ans en BTP / TCE\n• Maîtrise chiffrage et lecture de plans\n• Permis B obligatoire\n• CACES apprécié', ficheAnnonce:'◆ EZEL BÂTIMENT recrute un(e) Chargé(e) d\'Affaires TCE\n\nBasé(e) à Strasbourg, vous intégrez une entreprise en pleine croissance spécialisée en gros œuvre et TCE.\n\nVos missions :\n- Chiffrage et réponse aux AO\n- Suivi technique et financier\n- Relation client\n\nProfil : 3-5 ans BTP, autonome, rigoureux\nPackage : 36-44k€ fixe + prime + variable\n\nPostulez : rh@ezel.fr', historique:[{date:'2026-03-08',action:'Poste créé — développement activité TCE',par:'Özdoğan'}] }
 ];

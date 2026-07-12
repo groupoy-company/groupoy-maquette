@@ -66,7 +66,7 @@ export default function TabVeilleAo(__props) {
           const tabGroupes = [
             { id: 'tous', label: '☰ Tous', count: veilleAO.length },
             { id: 'nouveaux', label: '🆕 Nouveaux', count: veilleAO.filter(a => a.statut === 'nouveau').length },
-            { id: 'suivis', label: '👁️ Suivis', count: veilleAO.filter(a => !['nouveau','hors_cible','no_go','archive'].includes(a.statut)).length },
+            { id: 'suivis', label: '◎ Suivis', count: veilleAO.filter(a => !['nouveau','hors_cible','no_go','archive'].includes(a.statut)).length },
             { id: 'archives', label: '🗄️ Archives', count: veilleAO.filter(a => ['hors_cible','no_go','archive'].includes(a.statut)).length }
           ];
 
@@ -100,7 +100,7 @@ export default function TabVeilleAo(__props) {
                           <div style={{display:'flex', gap:5, flexWrap:'wrap'}}>
                             <span style={{padding:'2px 8px', borderRadius:8, background:vs.bg||'#f1f5f9', color:vs.color||'#64748b', fontSize:'0.7rem', fontWeight:700, border:`1px solid ${vs.color||'#64748b'}33`}}>{vs.icon} {vs.label}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:pInfo.bg, color:pInfo.color, fontSize:'0.7rem', fontWeight:700}}>{ao.priorite}</span>
-                            <span style={{padding:'2px 8px', borderRadius:8, background:typeColor+'15', color:typeColor, fontSize:'0.7rem', fontWeight:700, border:`1px solid ${typeColor}30`}}>{ao.type === 'Public' ? '◆' : ao.type === 'Privé' ? '▪' : '🏠'} {ao.type}</span>
+                            <span style={{padding:'2px 8px', borderRadius:8, background:typeColor+'15', color:typeColor, fontSize:'0.7rem', fontWeight:700, border:`1px solid ${typeColor}30`}}>{ao.type === 'Public' ? '◆' : ao.type === 'Privé' ? '▪' : '⌂'} {ao.type}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:srcColor+'15', color:srcColor, fontSize:'0.7rem', fontWeight:700}}>{ao.source}</span>
                             {dlDays !== null && dlDays >= 0 && dlDays <= 7 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fee2e2', color:'#dc2626', fontSize:'0.7rem', fontWeight:700}}>⏰ J-{dlDays}</span>}
                             {dlDays !== null && dlDays < 0 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fef3c7', color:'#92400e', fontSize:'0.7rem', fontWeight:700}}>▲ Expirée</span>}
@@ -188,7 +188,7 @@ export default function TabVeilleAo(__props) {
                             {/* Header bar */}
                             <div style={{padding:'10px 14px',background:'linear-gradient(135deg,#007ab508,#007ab503)',display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
                               <div style={{display:'flex',alignItems:'center',gap:7}}>
-                                <span style={{fontSize:'1rem'}}>🤖</span>
+                                <span style={{fontSize:'1rem'}}>✦</span>
                                 <span style={{fontSize:'0.75rem',fontWeight:700,color:'#007ab5'}}>Analyse IA — GO / NO-GO</span>
                                 {viaDoc&&<span style={{fontSize:'0.62rem',padding:'1px 6px',borderRadius:4,background:'#05966912',color:'#059669',fontWeight:700}}>▫ {viaDoc.name.slice(0,20)}{viaDoc.name.length>20?'...':''}</span>}
                                 {viaRes&&!viaLoad&&<span style={{fontSize:'0.6rem',color:$textMut}}>mis en cache</span>}
@@ -208,7 +208,7 @@ export default function TabVeilleAo(__props) {
                                     <button
                                       title={"BOAMP : récupère automatiquement les pièces du DCE via l'API BOAMP (data.gouv.fr) — disponible Phase 1 Next.js"}
                                       onClick={()=>{
-                                        // 🚧 PHASE 1 — implémentation backend requise
+                                        // ▲ PHASE 1 — implémentation backend requise
                                         // API: https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?where=annonce_id=26-XXXXXX
                                         // → récupère lien_telecharger_dce
                                         // → proxy GCS/Next.js fetch + base64 → Claude
@@ -225,7 +225,7 @@ export default function TabVeilleAo(__props) {
                                   <button
                                       title={"SPIGAO : pas d'API publique — ouvrir SPIGAO, télécharger le RC, puis l'uploader via '§ Upload'"}
                                       onClick={()=>{
-                                        // 🚧 Pas d'API publique SPIGAO
+                                        // ▲ Pas d'API publique SPIGAO
                                         // Workflow manuel: SPIGAO → télécharger → upload ici
                                         // Alternative future: connexion OAuth SPIGAO si disponible
                                         alert('SPIGAO — Pas d API publique. Workflow : 1. Ouvrir SPIGAO 2. Telecharger RC/CCTP 3. Uploader via Upload ci-dessus. Alternative future : integration API si disponible.');
@@ -240,7 +240,7 @@ export default function TabVeilleAo(__props) {
                                   <button
                                     title={"Google Cloud Storage — déposer le DCE dans gs://group-oy-dce/{dos_id}/ pour lecture automatique (Phase 1)"}
                                     onClick={()=>{
-                                      // 🚧 PHASE 1 — GCS native integration
+                                      // ▲ PHASE 1 — GCS native integration
                                       // SDK: @google-cloud/storage
                                       // Bucket: group-oy-dce / folder: DOS-2026-XXXX/
                                       // → lister fichiers → Gemini 1.5 Pro (multi-fichiers natif) ou Claude
@@ -269,7 +269,7 @@ export default function TabVeilleAo(__props) {
                               </div>
                               <button
                                 onClick={()=>{
-                                  // 🚧 PHASE 1 — Télécharger tout le dossier DCE
+                                  // ▲ PHASE 1 — Télécharger tout le dossier DCE
                                   // Sources par priorité :
                                   //   1. BOAMP API → boamp-datadila.opendatasoft.com/api → lien_telecharger_dce
                                   //      GET /records?where=annonce_id="{ao.ref}" → champ "url_document"
@@ -431,7 +431,7 @@ export default function TabVeilleAo(__props) {
               {[
                 { label:'Marchés détectés', value: veilleAO.length, icon:'☰', color:'#007ab5', bg:'#007ab50d', border:'#007ab525', sub: `dont ${veilleAO.filter(a=>a.statut==='nouveau').length} nouveaux`, subColor:'#007ab5' },
                 { label:'En analyse', value: veilleAO.filter(a=>['a_regarder','en_analyse'].includes(a.statut)).length, icon:'🔬', color:'#f59e0b', bg:'#f59e0b0d', border:'#f59e0b25', sub:'À qualifier rapidement', subColor:'#d97706' },
-                { label:'GO validés', value: veilleAO.filter(a=>a.statut==='go_a_traiter').length, icon:'🚀', color:'#059669', bg:'#0596690d', border:'#05966925', sub:'À transmettre études', subColor:'#059669' },
+                { label:'GO validés', value: veilleAO.filter(a=>a.statut==='go_a_traiter').length, icon:'➤', color:'#059669', bg:'#0596690d', border:'#05966925', sub:'À transmettre études', subColor:'#059669' },
                 { label:'Pipeline actif', value: formatMontant(pipelineTotal), icon:'€', color:'#7c3aed', bg:'#7c3aed0d', border:'#7c3aed25', sub:`${veilleAO.filter(a=>!['hors_cible','no_go','archive'].includes(a.statut)).length} marchés actifs`, subColor:'#7c3aed' },
               ].map((s,i) => (
                 <div key={i} style={{background:s.bg, borderRadius:crmRd, border:`1px solid ${s.border}`, padding:'0', overflow:'hidden', position:'relative'}}>
@@ -589,7 +589,7 @@ export default function TabVeilleAo(__props) {
               {(() => {
                 const toggleGrp = (sid) => setVeilleGroupesFermes(prev => prev.includes(sid) ? prev.filter(x => x !== sid) : [...prev, sid]);
                 const prioStyle = { 'Critique ▲': { color:'#333', bg:'#f3f3f3' }, Haute: { color: '#401694', bg: '#ede9fe' }, Moyenne: { color: '#d97706', bg: '#fef3c7' }, Basse: { color: '#2563eb', bg: '#dbeafe' } };
-                const typeColors = { Public: { color:'#0055cc', bg:'#e0f0ff', emoji:'◆' }, 'Privé': { color:'#166534', bg:'#dcfce7', emoji:'▪' }, Particulier: { color:'#7c3aed', bg:'#f3e8ff', emoji:'🏠' } };
+                const typeColors = { Public: { color:'#0055cc', bg:'#e0f0ff', emoji:'◆' }, 'Privé': { color:'#166534', bg:'#dcfce7', emoji:'▪' }, Particulier: { color:'#7c3aed', bg:'#f3e8ff', emoji:'⌂' } };
                 const sourceStyle = { SPIGAO: { color: '#e65100', bg: '#fff3e0' }, BOAMP: { color: '#000091', bg: '#e3f2fd' }, Autre: { color: '#546e7a', bg: '#eceff1' } };
                 const personColors = { pierre: '#e65100', david: '#1565c0', ozdogan: '#6a1b9a' };
                 const personInitials = { pierre: 'PS', david: 'DL', ozdogan: 'OY' };
@@ -640,7 +640,7 @@ export default function TabVeilleAo(__props) {
                 const buildGroups = () => {
                   if (veilleGroupePar === 'none') return [{ key: 'all', label: 'Tous les marchés', color: '#64748b', items: filtered }];
                   if (veilleGroupePar === 'statut') return VEILLE_STATUTS.filter(vs => filtered.some(a => a.statut === vs.id)).map(vs => ({ key: vs.id, label: vs.label, color: vs.color, icon: vs.icon, items: filtered.filter(a => a.statut === vs.id) }));
-                  if (veilleGroupePar === 'type') return ['Public','Privé','Particulier'].filter(t => filtered.some(a => a.type === t)).map(t => ({ key: t, label: t, color: typeColors[t], icon: t === 'Public' ? '◆' : t === 'Privé' ? '▪' : '🏠', items: filtered.filter(a => a.type === t) }));
+                  if (veilleGroupePar === 'type') return ['Public','Privé','Particulier'].filter(t => filtered.some(a => a.type === t)).map(t => ({ key: t, label: t, color: typeColors[t], icon: t === 'Public' ? '◆' : t === 'Privé' ? '▪' : '⌂', items: filtered.filter(a => a.type === t) }));
                   if (veilleGroupePar === 'priorite') return ['Haute','Moyenne','Basse'].filter(p => filtered.some(a => a.priorite === p)).map(p => ({ key: p, label: p, color: prioStyle[p].color, icon: p === 'Haute' ? '▲' : p === 'Moyenne' ? '●' : '▽', items: filtered.filter(a => a.priorite === p) }));
                   if (veilleGroupePar === 'source') return ['SPIGAO','BOAMP','Autre'].filter(s => filtered.some(a => a.source === s)).map(s => ({ key: s, label: s, color: sourceStyle[s]?.color || '#666', icon: s === 'SPIGAO' ? '◆' : s === 'BOAMP' ? '◇' : '○', items: filtered.filter(a => a.source === s) }));
                   if (veilleGroupePar === 'acheteur') return [...new Set(filtered.map(a => a.acheteur))].sort().map(ac => ({ key: ac, label: ac, color: '#0369a1', icon: '▪', items: filtered.filter(a => a.acheteur === ac) }));
