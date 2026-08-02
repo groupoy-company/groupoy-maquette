@@ -22,3 +22,31 @@ export async function kvSet(key, value) {
   const { error } = await supabase.from('app_kv').upsert({ key, value, updated_at: new Date().toISOString() });
   if (error) console.warn('[supabase kvSet]', key, error.message);
 }
+
+// ── Authentification par code e-mail (OTP) ──
+// Envoie un code à 6 chiffres à l'adresse indiquée
+export async function otpSignIn(email) {
+  if (!supabase) return { error: 'Supabase non configuré' };
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: { shouldCreateUser: true }
+  });
+  return { error: error ? error.message : null };
+}
+
+// Vérifie le code reçu → ouvre la session
+export async function otpVerify(email, token) {
+  if (!supabase) return { error: 'Supabase non configuré' };
+  const { data, error } = await supabase.auth.verifyOtp({ email, token, type: 'email' });
+  return { error: error ? error.message : null, user: data?.user || null };
+}
+
+export async function authSignOut() {
+  if (supabase) await supabase.auth.signOut();
+}
+
+export async function getAuthUser() {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getUser();
+  return data?.user || null;
+}

@@ -169,6 +169,12 @@ const SimulateurRuches = () => {
   });
   const [users, setUsers] = usePersistedState('users', INITIAL_USERS);
   const [loginForm, setLoginForm] = useState({ login: '', password: '' });
+  const [authMode, setAuthMode] = useState('otp'); // 'otp' (e-mail + code) | 'password' (classique)
+  const [otpEmail, setOtpEmail] = useState('');
+  const [otpCode, setOtpCode] = useState('');
+  const [otpStep, setOtpStep] = useState('email'); // 'email' | 'code'
+  const [otpBusy, setOtpBusy] = useState(false);
+  const [otpMsg, setOtpMsg] = useState('');
   const [loginError, setLoginError] = useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [passwordForm, setPasswordForm] = useState({ ancien: '', nouveau: '', confirmation: '' });
@@ -223,7 +229,40 @@ const SimulateurRuches = () => {
     }
   };
 
-  const handleLogout = () => { setIsLoggedIn(false); setCurrentUser(null); setShowChangePassword(false); setShowLoginModal(false); setOngletActif('presentation_groupe'); };
+  // ── Connexion par code e-mail (OTP Supabase) ──
+  const EMAIL_TO_LOGIN = { 'admin@yilmaz.fr':'ozdogan', 'oyilmaz@ezel.fr':'ozdogan', 'contact@ezel.fr':'ozlem.yilmaz' };
+  const loginAsEmail = (email) => {
+    const target = EMAIL_TO_LOGIN[(email||'').toLowerCase().trim()];
+    let user = target && users.find(u => u.login === target && u.actif);
+    if (!user) user = users.find(u => u.role === 'SUPER_ADMIN' && u.actif) || users[0];
+    if (user) {
+      setCurrentUser(user); setIsLoggedIn(true); setShowLoginModal(false);
+      setUsers(prev => prev.map(u => u.id === user.id ? {...u, derniereConnexion: new Date().toISOString()} : u));
+      const g = computeGreeting(user.prenom || user.login); setGreetingLine1(g.line1); setGreetingLine2(g.line2);
+    }
+  };
+  const handleOtpSend = async () => {
+    const email = otpEmail.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setOtpMsg('Adresse e-mail invalide'); return; }
+    setOtpBusy(true); setOtpMsg('');
+    const { otpSignIn } = await import('./lib/supabase.js');
+    const { error } = await otpSignIn(email);
+    setOtpBusy(false);
+    if (error) { setOtpMsg('Erreur : ' + error); return; }
+    setOtpStep('code'); setOtpMsg('Code envoyé à ' + email);
+  };
+  const handleOtpVerify = async () => {
+    const code = otpCode.trim();
+    if (code.length < 6) { setOtpMsg('Entrez le code à 6 chiffres'); return; }
+    setOtpBusy(true); setOtpMsg('');
+    const { otpVerify } = await import('./lib/supabase.js');
+    const { error } = await otpVerify(otpEmail.trim(), code);
+    setOtpBusy(false);
+    if (error) { setOtpMsg('Code incorrect ou expiré'); return; }
+    loginAsEmail(otpEmail.trim());
+    setOtpStep('email'); setOtpCode(''); setOtpMsg('');
+  };
+  const handleLogout = async () => { try { const { authSignOut } = await import('./lib/supabase.js'); await authSignOut(); } catch(e){} setIsLoggedIn(false); setCurrentUser(null); setShowChangePassword(false); setShowLoginModal(false); setOtpStep('email'); setOtpCode(''); setOtpEmail(''); setOngletActif('presentation_groupe'); };
 
   const handleChangePassword = () => {
     if (!currentUser) return;
@@ -2863,17 +2902,41 @@ const SimulateurRuches = () => {
             <h1 style={{fontSize:'1.45rem', fontWeight:600, color:'#f4efe6', margin:0, letterSpacing:'0.02em'}}>Espace de Gestion</h1>
             <p style={{color:'#c9b892', fontSize:'0.88rem', margin:'6px 0 0', opacity:0.85}}>Le Grand Rucher — accès privé</p>
           </div>
-          <div style={{marginBottom:16}}>
-            <label style={{display:'block', fontSize:'0.85rem', color:'#666', marginBottom:4, fontWeight:600}}>Identifiant</label>
-            <input value={loginForm.login} onChange={e => setLoginForm({...loginForm, login: e.target.value})} onKeyDown={e => e.key === 'Enter' && handleLogin()} placeholder="ex: ozdogan" style={{width:'100%', padding:'12px 14px', border:'2px solid #f0ebe3', borderRadius:crmRd, fontSize:'0.95rem', outline:'none', boxSizing:'border-box'}} />
-          </div>
-          <div style={{marginBottom:20}}>
-            <label style={{display:'block', fontSize:'0.85rem', color:'#666', marginBottom:4, fontWeight:600}}>Mot de passe</label>
-            <input type="password" value={loginForm.password} onChange={e => setLoginForm({...loginForm, password: e.target.value})} onKeyDown={e => e.key === 'Enter' && handleLogin()} placeholder="••••••••" style={{width:'100%', padding:'12px 14px', border:'2px solid #f0ebe3', borderRadius:crmRd, fontSize:'0.95rem', outline:'none', boxSizing:'border-box'}} />
-          </div>
-          {loginError && <div style={{background:$danger+'12', border:'1px solid #fecaca', color:'#dc2626', padding:'8px 12px', borderRadius:crmRd, fontSize:'0.9rem', marginBottom:16, fontWeight:600}}>{loginError}</div>}
-          <button onClick={handleLogin} style={{width:'100%', padding:'14px', background:`linear-gradient(135deg, ${$accent}, ${$accent}cc)`, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:'pointer'}}>Se connecter</button>
-          
+          {authMode === 'otp' ? (
+            <>
+              {otpStep === 'email' ? (
+                <div style={{marginBottom:16}}>
+                  <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:6, fontWeight:600}}>Adresse e-mail</label>
+                  <input value={otpEmail} onChange={e => setOtpEmail(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleOtpSend()} placeholder="vous@yilmaz.fr" autoComplete="email" style={{width:'100%', padding:'12px 14px', border:`1px solid ${$border}`, borderRadius:crmRd, fontSize:'0.95rem', outline:'none', boxSizing:'border-box', background:$bgCard, color:$text}} />
+                </div>
+              ) : (
+                <div style={{marginBottom:16}}>
+                  <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:6, fontWeight:600}}>Code reçu par e-mail</label>
+                  <input value={otpCode} onChange={e => setOtpCode(e.target.value.replace(/\D/g,''))} onKeyDown={e => e.key === 'Enter' && handleOtpVerify()} placeholder="000000" inputMode="numeric" maxLength={6} style={{width:'100%', padding:'12px 14px', border:`1px solid ${$border}`, borderRadius:crmRd, fontSize:'1.4rem', letterSpacing:'0.4em', textAlign:'center', outline:'none', boxSizing:'border-box', background:$bgCard, color:$text}} />
+                </div>
+              )}
+              {otpMsg && <div style={{color: otpMsg.startsWith('Code envoyé')?$textSec:'#dc2626', fontSize:'0.82rem', marginBottom:12}}>{otpMsg}</div>}
+              {otpStep === 'email'
+                ? <button onClick={handleOtpSend} disabled={otpBusy} style={{width:'100%', padding:'14px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:otpBusy?'wait':'pointer', opacity:otpBusy?0.6:1}}>{otpBusy?'Envoi…':'Recevoir un code'}</button>
+                : <button onClick={handleOtpVerify} disabled={otpBusy} style={{width:'100%', padding:'14px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:otpBusy?'wait':'pointer', opacity:otpBusy?0.6:1}}>{otpBusy?'Vérification…':'Se connecter'}</button>}
+              {otpStep === 'code' && <div onClick={()=>{setOtpStep('email');setOtpCode('');setOtpMsg('');}} style={{textAlign:'center', marginTop:12, fontSize:'0.8rem', color:$textMut, cursor:'pointer'}}>← Changer d'adresse</div>}
+              <div onClick={()=>{setAuthMode('password');setOtpMsg('');}} style={{textAlign:'center', marginTop:16, fontSize:'0.78rem', color:$textMut, cursor:'pointer', opacity:0.7}}>Connexion classique (identifiant)</div>
+            </>
+          ) : (
+            <>
+              <div style={{marginBottom:16}}>
+                <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:4, fontWeight:600}}>Identifiant</label>
+                <input value={loginForm.login} onChange={e => setLoginForm({...loginForm, login: e.target.value})} onKeyDown={e => e.key === 'Enter' && handleLogin()} placeholder="ex: ozdogan" style={{width:'100%', padding:'12px 14px', border:`1px solid ${$border}`, borderRadius:crmRd, fontSize:'0.95rem', outline:'none', boxSizing:'border-box', background:$bgCard, color:$text}} />
+              </div>
+              <div style={{marginBottom:20}}>
+                <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:4, fontWeight:600}}>Mot de passe</label>
+                <input type="password" value={loginForm.password} onChange={e => setLoginForm({...loginForm, password: e.target.value})} onKeyDown={e => e.key === 'Enter' && handleLogin()} placeholder="••••••••" style={{width:'100%', padding:'12px 14px', border:`1px solid ${$border}`, borderRadius:crmRd, fontSize:'0.95rem', outline:'none', boxSizing:'border-box', background:$bgCard, color:$text}} />
+              </div>
+              {loginError && <div style={{background:$danger+'12', border:'1px solid #fecaca', color:'#dc2626', padding:'8px 12px', borderRadius:crmRd, fontSize:'0.9rem', marginBottom:16, fontWeight:600}}>{loginError}</div>}
+              <button onClick={handleLogin} style={{width:'100%', padding:'14px', background:`linear-gradient(135deg, ${$accent}, ${$accent}cc)`, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:'pointer'}}>Se connecter</button>
+              <div onClick={()=>setAuthMode('otp')} style={{textAlign:'center', marginTop:16, fontSize:'0.78rem', color:$textMut, cursor:'pointer', opacity:0.7}}>Connexion par code e-mail</div>
+            </>
+          )}
         </div>
       </div>
     )}
