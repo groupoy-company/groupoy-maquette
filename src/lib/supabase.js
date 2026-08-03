@@ -11,6 +11,11 @@ export const supabase = supabaseEnabled ? createClient(url, anon, {
     persistSession: true,       // la session survit à la fermeture de l'onglet
     autoRefreshToken: true,     // prolongée automatiquement
     detectSessionInUrl: true,   // récupère la session au retour du lien e-mail
+    // « implicit » : le jeton arrive directement dans l'adresse de retour.
+    // Indispensable ici — c'est le format qu'envoie Supabase par e-mail — et cela
+    // permet d'ouvrir le lien sur un AUTRE appareil que celui de la demande
+    // (demander l'accès sur l'ordinateur, cliquer le lien depuis le téléphone).
+    flowType: 'implicit',
   },
 }) : null;
 
