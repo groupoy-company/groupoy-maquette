@@ -16,9 +16,15 @@
 - [x] Persistance corrigée (window.storage → localStorage + Supabase)
 - [x] Supabase branché (projet dédié, table `app_kv`, client `src/lib/supabase.js`)
 - [x] Auth OTP e-mail — UI + flux construits
-- [ ] **Auth OTP — livraison e-mail** : template Supabase en mode CODE (`{{ .Token }}`) + SMTP Resend (fiabilité). → à caler avec Benjamin.
-- [ ] **Sécurité** : RLS strict sur toutes les tables (accès = authentifié + rôle), retirer les mots de passe en clair (INITIAL_USERS), `isLoggedIn` défaut = false en prod, aucun secret côté client.
-- [ ] **Stockage documents** : un seul module `storage-helper` (l'app ne sait pas où sont les fichiers, nous décidons derrière). **Départ = Supabase Storage** pour les docs liés aux enregistrements (devis, photos de chantier…). **Volume Drive > 1 To** → bascule archive vers **Google Cloud Storage** prévue (compte GCloud déjà en place, nettement moins cher au To). On garde la porte GCS ouverte dès le module pour migrer sans réécrire l'app.
+- [x] **Connexion par e-mail opérationnelle** (03/08) — cause de la panne trouvée : le modèle d'e-mail Supabase envoyait un **lien** alors que l'écran attendait un **code**, et `site_url` pointait sur un mauvais port. Corrigé : `site_url`/`uri_allow_list` justes, code à 6 chiffres, et l'application récupère désormais la session au retour du lien (formats `#access_token` et `?code`). Testé de bout en bout : e-mail reçu → connexion automatique.
+- [ ] **SMTP Resend** (reste à faire — demande un compte) : l'e-mail intégré Supabase est limité à **2 envois/heure**, tombe en indésirables, et **ne permet pas de personnaliser le modèle en offre gratuite** (donc lien only, pas de code). De plus, les scanners de sécurité des messageries peuvent **consommer le lien à usage unique avant l'utilisateur** (constaté). → Resend = code à 6 chiffres, 3 000 e-mails/mois, expéditeur `@groupoy.fr`.
+- [x] **Sécurité — verrouillage complet** (03/08) :
+  - RLS `app_kv` : accès anonyme **supprimé** (avant : lecture ET écriture ouvertes à tous — données salariés, finances, chantiers exposées). Réservé aux utilisateurs authentifiés. Vérifié : anonyme = `[]` en lecture, refus en écriture.
+  - **Inscriptions publiques fermées** (`disable_signup`) + `shouldCreateUser: false` : plus personne ne peut se créer un compte. Comptes autorisés provisionnés (admin@yilmaz.fr, oyilmaz@ezel.fr, contact@ezel.fr).
+  - **Connexion obligatoire** : `isLoggedIn` par défaut = false.
+  - **Mots de passe en clair supprimés** (code, navigateur et cloud) → empreintes SHA-256 salées par identifiant. Les mots de passe existants continuent de fonctionner.
+  - Reste (Faz C) : droits fins par utilisateur (qui voit/modifie quoi).
+- [x] **Stockage documents** (03/08) : module unique `src/lib/storage.js` — l'application ne sait pas où sont les fichiers. Bucket Supabase **privé** `documents`, réservé aux authentifiés, ouverture par **liens temporaires** (jamais d'URL publique). Composant réutilisable `PanneauDocuments` (glisser-déposer, liste, ouverture, suppression) + onglet **Documents** (rangement par entité › dossier). Adaptateur **GCS préparé** dans le même fichier : la bascule archive (Drive > 1 To) se fera sans toucher aux écrans.
 - [ ] **Hébergement + domaine** : déploiement (Cloud Run ou Vercel) + sous-domaine **app.groupoy.fr** (DNS chez le registrar, sans toucher au site vitrine).
 
 ## FAZ B — Fonctionnalités (backlog, par ROI)

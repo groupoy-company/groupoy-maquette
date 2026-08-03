@@ -7,7 +7,8 @@
 Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui rassemble RH, Finance, Commercial/AO, Chantiers, Parc & IT, et le pilotage de direction. 49 modules (onglets), deux entités : **Group OY** et **Invest Exe**.
 
 ## Comment ça marche (côté utilisateur)
-- Connexion par **code e-mail** (OTP).
+- **Connexion obligatoire.** On saisit son adresse e-mail, on reçoit un message, on clique sur le lien : l'application s'ouvre. Seules les adresses autorisées par un administrateur peuvent entrer — personne ne peut se créer un compte.
+- Les données (salariés, finances, chantiers…) ne sont accessibles qu'une fois connecté.
 - Menu latéral → un **onglet = un module**.
 - Les données saisies sont **sauvegardées automatiquement** (navigateur + cloud Supabase).
 - Thème visuel « Obsidienne & Or » (sombre, luxe sobre).
@@ -42,6 +43,9 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 
 ### Parc informatique & outils
 - **ParcInfo**, **Outils**, **Tickets**, **Supports**, **Web** — matériel IT, outils, support.
+
+### Documents
+- **Documents** — coffre-fort documentaire, rangé par entité puis par dossier (chantiers, appels d'offres, contrats, assurances, RH, parc, comptabilité, juridique). Glisser-déposer pour ajouter. Les fichiers sont privés : ils s'ouvrent par un lien temporaire, jamais par une adresse publique. Le même panneau peut être branché sur n'importe quelle fiche (un chantier, un contrat, un salarié).
 
 ### Outils internes de l'app
 - **Guide** — aide intégrée.
