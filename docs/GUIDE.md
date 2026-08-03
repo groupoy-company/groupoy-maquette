@@ -10,6 +10,7 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 - **Connexion obligatoire.** On saisit son adresse e-mail, on reçoit un message, on clique sur le lien : l'application s'ouvre. Seules les adresses autorisées par un administrateur peuvent entrer — personne ne peut se créer un compte.
 - Les données (salariés, finances, chantiers…) ne sont accessibles qu'une fois connecté.
 - Menu latéral → un **onglet = un module**.
+- **Raccourci ⌘K** (ou `Ctrl+K` sur Windows) : ouvre une recherche instantanée de tous les écrans depuis n'importe où. On tape « échéances », « véhicules », « documents »… et on y va directement, sans passer par entité → service → module. Les accents ne sont pas nécessaires.
 - Les données saisies sont **sauvegardées automatiquement** (navigateur + cloud Supabase).
 - Thème visuel « Obsidienne & Or » (sombre, luxe sobre).
 

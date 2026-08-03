@@ -30,7 +30,7 @@
 
 ## FAZ B — Fonctionnalités (backlog, par ROI)
 1. [x] **Centre d'échéances** (fait 03/08) — agrège assurances, contrats, contrôles techniques, fins de leasing, conformité (DUERP/certifs/VGP) et appels d'offres ; KPI (expiré / 30j / 90j), filtres par source + horizon, recherche, respect du contexte filiale. Onglet `centre_echeances` dans Direction (Group OY) et Juridique de chaque entité. Données via `src/data/echeances.js` (repli échantillon quand l'état live est vide).
-2. Palette de commandes ⌘K + recherche globale
+2. [x] **Palette de commandes ⌘K** (fait 03/08) — `Cmd+K` (Mac) ou `Ctrl+K` ouvre une recherche instantanée de tous les écrans, depuis n'importe où. Recherche insensible aux accents (« echeance » trouve « Centre d'échéances »), affiche le chemin (entité › service), navigation au clavier (↑ ↓ ↵), accès rapides quand le champ est vide. Supprime le parcours à trois niveaux. Référentiel partagé : `src/data/modules.js`.
 3. Carte des chantiers + météo 5 jours
 4. Module SCI ELIA (biens, loyers, emprunts) — appli dédiée, hors vitrine page de garde
 5. Exports PDF élégants (organigramme, dashboard, présentation)
@@ -48,6 +48,7 @@
 ---
 
 ## Bugs connus (à corriger)
+- [x] **Le lien de connexion par e-mail n'ouvrait jamais la session** (corrigé 03/08) — le client Supabase était en mode `pkce` par défaut : il rejetait le jeton envoyé dans l'adresse de retour (`#access_token`, format réellement utilisé par les e-mails Supabase) tout en effaçant l'adresse. Résultat : e-mail reçu, lien cliqué, retour sur l'écran de connexion. Corrigé par `flowType: 'implicit'` — ce qui permet aussi d'**ouvrir le lien sur un autre appareil** que celui qui l'a demandé (demander sur l'ordinateur, cliquer depuis le téléphone). Vérifié : connexion automatique au retour du lien.
 - [x] **Dashboard Group OY plantait** (corrigé 03/08) — cause : `getKpiFiliale` (App.jsx) renvoyait `margeBrutePct = undefined` pour les holdings à CA=0 dépourvus du champ (ELIA, L'Ezel), puis `kpi.margeBrutePct.toFixed(0)` (widget « Filiales ») → écran blanc. Fix : défauts `?? 0` dans `getKpiFiliale` + moyennes holding protégées. **+ Error boundary** ajoutée autour de toute la zone d'onglets (`WidgetErrorBoundary`, `key={ongletActif}`) → si un module plante, on affiche un message au lieu d'un écran blanc, et les autres onglets restent utilisables.
 
 ## Décisions actées
