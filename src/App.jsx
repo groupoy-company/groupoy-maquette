@@ -12,6 +12,7 @@ import TabReceptionFactures from './tabs/TabReceptionFactures.jsx';
 import TabOutils from './tabs/TabOutils.jsx';
 import TabConformite from './tabs/TabConformite.jsx';
 import TabCentreEcheances from './tabs/TabCentreEcheances.jsx';
+import TabDocuments from './tabs/TabDocuments.jsx';
 import TabSuiviPresta from './tabs/TabSuiviPresta.jsx';
 import TabContrats from './tabs/TabContrats.jsx';
 import TabBonCommande from './tabs/TabBonCommande.jsx';
@@ -287,8 +288,11 @@ const SimulateurRuches = () => {
     let stop = () => {};
     (async () => {
       try {
-        const { getSession, onAuthChange } = await import('./lib/supabase.js');
-        const session = await getSession();
+        const { getSession, onAuthChange, recupererSessionDepuisURL } = await import('./lib/supabase.js');
+        // Retour depuis le lien reçu par e-mail (jeton dans l'adresse) …
+        const depuisLien = await recupererSessionDepuisURL();
+        // … sinon session déjà enregistrée dans le navigateur
+        const session = depuisLien || await getSession();
         if (session?.user?.email) loginAsEmail(session.user.email);
         stop = onAuthChange(s => { if (s?.user?.email) loginAsEmail(s.user.email); });
       } catch (e) { /* Supabase non configuré → connexion locale uniquement */ }
@@ -333,7 +337,7 @@ const SimulateurRuches = () => {
       'recrutement', 'onboarding', 'offboarding', 'formation', 'absences', 'dossier_rh',
       'bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta',
       'outils', 'tickets',
-      'contrats', 'litiges', 'assurances', 'conformite', 'centre_echeances',
+      'contrats', 'litiges', 'assurances', 'conformite', 'centre_echeances', 'documents',
       'ordres_travail', 'materiel', 'parc_automobile', 'donnees_ref', 'parc_info',
       'identite', 'supports', 'web'
     ].includes(ongletId)) return true;
@@ -369,7 +373,7 @@ const SimulateurRuches = () => {
     'groupoy': {
       nom: 'Group OY', icon: '🐝', desc: 'Vue consolidée du groupe\net pilotage stratégique',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'presentation_groupe', 'presentation', 'admin'] },
+        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'documents', 'presentation_groupe', 'presentation', 'admin'] },
         { id: 'finance', label: 'Finance Group', icon: '💰', modules: ['dashboard', 'simulateur', 'suivi'] },
         { id: 'rh', label: 'RH Group', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme'] }
       ]
@@ -377,7 +381,7 @@ const SimulateurRuches = () => {
     'yilmaz': {
       nom: 'Yilmaz', icon: '🏢', desc: 'Services partagés : Finance,\nRH, IT et Marketing',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
+        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'documents', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
         { id: 'crm', label: 'CRM Groupe', icon: '🤝', modules: ['crm_commercial'], desc: 'Vue consolidée des affaires, contacts et pipeline de toutes les filiales' },
         { id: 'finance', label: 'Finance & Gestion', icon: '🏦', modules: ['dashboard', 'fact_interne', 'fact_externe', 'budget', 'tresorerie', 'analytique'], desc: 'Contrôle de gestion, facturation interne/externe, trésorerie, budget' },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh', 'presentation', 'simulateur', 'suivi'], desc: 'Personnel, recrutement, rémunération, formation, gestion RH complète' },
@@ -392,7 +396,7 @@ const SimulateurRuches = () => {
     'ezel': {
       nom: 'Ezel Bâtiment', icon: '🏗️', desc: 'Entreprise générale BTP',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'ezel_tableau'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'documents', 'ezel_tableau'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
@@ -408,7 +412,7 @@ const SimulateurRuches = () => {
     'roulotte': {
       nom: 'La Roulotte', icon: '🚛', desc: 'Location roulottes & matériel',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Planification', icon: '🚛', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['parc_automobile', 'materiel'] },
@@ -420,7 +424,7 @@ const SimulateurRuches = () => {
     'echafaudage': {
       nom: "L'Échafaudage", icon: '⚙️', desc: 'Location + Montage échafaudage',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Montage', icon: '⚙️', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['materiel', 'parc_automobile'] },
@@ -432,7 +436,7 @@ const SimulateurRuches = () => {
     'etancheite': {
       nom: "L'Étanchéité", icon: '💧', desc: "Travaux d'étanchéité\net imperméabilisation",
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
@@ -3510,6 +3514,7 @@ const SimulateurRuches = () => {
           {/* ====== CARTES MODULES — quand service sélectionné ====== */}
           {navService && navEntreprise && (() => {
             const moduleIcons = {
+              documents: { icon: '📁', label: 'Documents', desc: 'Coffre-fort documentaire — plans, contrats, factures, photos', color: '#0891b2' },
               centre_echeances: { icon: '⏰', label: "Centre d'échéances", desc: 'Assurances, CT, leasings, contrats, conformité, AO — toutes les dates clés', color: '#d4a030' },
               crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
               kpi_dashboard: { icon: '📊', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
@@ -3656,7 +3661,7 @@ const SimulateurRuches = () => {
           const currentSvc = services.find(s=>s.id===navService);
           const moduleList = currentSvc ? currentSvc.modules : [];
           const filialeMap = {'groupoy':null,'yilmaz':'yilmaz','ezel':3,'roulotte':1,'echafaudage':2,'etancheite':6};
-          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',svc_kpi:'Indicateurs',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Groupe',suivi_presta:'Suivi presta',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Suivi Dossiers AO',centre_echeances:'Échéances'};
+          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',svc_kpi:'Indicateurs',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Groupe',suivi_presta:'Suivi presta',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Suivi Dossiers AO',centre_echeances:'Échéances',documents:'Documents'};
 
           return (
             <div style={{position:'fixed',left:0,top:46,bottom:0,width:SIDEBAR_W,background:$bgSub,borderRight:`1px solid ${$border}`,zIndex:9000,display:'flex',flexDirection:'column',overflow:'hidden'}}>
@@ -3987,6 +3992,7 @@ const SimulateurRuches = () => {
 
       {/* ══════ MODULE: CONFORMITÉ BTP ══════ */}
       {ongletActif === 'conformite' && <TabConformite {...{ $bgCard, $border, $text, $textMut, $textSec, chantiers, crmRd, empNom, filNom, filiales, filterByFiliale }} />}
+      {ongletActif === 'documents' && <TabDocuments {...{ $accent, $bgCard, $bgSub, $border, $shadow, $shadowLg, $text, $textMut, $textSec, $danger, crmRd, navEntreprise }} />}
       {ongletActif === 'centre_echeances' && <TabCentreEcheances {...{ $accent, $bgCard, $bgSub, $border, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, $danger, $warn, $success, $info, crmRd, filNom, filterByFiliale, assData, ctrData, autoData, veilleAO }} />}
 
       {/* ══════ MODULE: IDENTITÉ VISUELLE ══════ */}

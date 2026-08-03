@@ -6,7 +6,40 @@ const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Actif seulement si les variables sont présentes (sinon l'app tourne en localStorage seul).
 export const supabaseEnabled = Boolean(url && anon);
-export const supabase = supabaseEnabled ? createClient(url, anon) : null;
+export const supabase = supabaseEnabled ? createClient(url, anon, {
+  auth: {
+    persistSession: true,       // la session survit à la fermeture de l'onglet
+    autoRefreshToken: true,     // prolongée automatiquement
+    detectSessionInUrl: true,   // récupère la session au retour du lien e-mail
+  },
+}) : null;
+
+// Récupère la session quand l'utilisateur revient depuis le lien reçu par e-mail.
+// Deux formats possibles selon le mode d'envoi : « #access_token=… » ou « ?code=… ».
+// On traite les deux, puis on nettoie l'adresse pour ne pas laisser de jeton visible.
+export async function recupererSessionDepuisURL() {
+  if (!supabase) return null;
+  try {
+    const hash = window.location.hash || '';
+    const params = new URLSearchParams(window.location.search);
+
+    if (hash.includes('access_token=')) {
+      const h = new URLSearchParams(hash.replace(/^#/, ''));
+      const access_token = h.get('access_token');
+      const refresh_token = h.get('refresh_token');
+      if (access_token && refresh_token) {
+        const { data, error } = await supabase.auth.setSession({ access_token, refresh_token });
+        window.history.replaceState({}, '', window.location.pathname);
+        if (!error) return data?.session || null;
+      }
+    } else if (params.get('code')) {
+      const { data, error } = await supabase.auth.exchangeCodeForSession(params.get('code'));
+      window.history.replaceState({}, '', window.location.pathname);
+      if (!error) return data?.session || null;
+    }
+  } catch (e) { /* lien invalide ou expiré → on reste sur l'écran de connexion */ }
+  return null;
+}
 
 // Lecture d'une valeur du store clé-valeur cloud
 export async function kvGet(key) {
