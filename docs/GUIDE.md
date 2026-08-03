@@ -10,9 +10,18 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 - **Connexion obligatoire.** On saisit son adresse e-mail, on reçoit un message, on clique sur le lien : l'application s'ouvre. Seules les adresses autorisées par un administrateur peuvent entrer — personne ne peut se créer un compte.
 - Les données (salariés, finances, chantiers…) ne sont accessibles qu'une fois connecté.
 - Menu latéral → un **onglet = un module**.
-- **Raccourci ⌘K** (ou `Ctrl+K` sur Windows) : ouvre une recherche instantanée de tous les écrans depuis n'importe où. On tape « échéances », « véhicules », « documents »… et on y va directement, sans passer par entité → service → module. Les accents ne sont pas nécessaires.
 - Les données saisies sont **sauvegardées automatiquement** (navigateur + cloud Supabase).
 - Thème visuel « Obsidienne & Or » (sombre, luxe sobre).
+
+## Raccourcis clavier
+> Cette liste est tenue à jour à chaque nouveau raccourci ajouté.
+
+| Raccourci | Ce que ça fait |
+|---|---|
+| **⌘ K** (Mac) · **Ctrl K** (Windows) | Ouvre la recherche d'écrans, depuis n'importe où. On tape « échéances », « véhicules », « documents »… et on y va directement, sans passer par entité → service → module. **Les accents ne sont pas nécessaires** (« echeance » suffit). Le même raccourci referme la recherche. |
+| **↑ ↓** | Se déplacer dans les résultats de la recherche |
+| **↵ Entrée** | Ouvrir le résultat sélectionné |
+| **Échap** | Fermer la recherche |
 
 ## Carte des modules (49)
 

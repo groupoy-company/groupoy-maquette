@@ -10,6 +10,26 @@
 
 ---
 
+## Journal — ce qui a été fait, en clair
+> À lire pour savoir où on en est sans entrer dans la technique. Du plus récent au plus ancien.
+
+### 3 août 2026 — sécurité, documents, navigation
+1. **Centre d'échéances** — un écran qui rassemble toutes les dates limites du groupe (assurances, contrats, contrôles techniques, fins de leasing, conformité, appels d'offres). Avant, ces dates étaient éparpillées dans six écrans différents. Filtres par source et par horizon, compteurs « expiré / 30 jours / 90 jours ».
+2. **Écran blanc corrigé** — le tableau de bord de Group OY plantait (page blanche). Cause : deux sociétés (ELIA, L'Ezel) n'avaient pas de taux de marge renseigné. Réparé. **Et une protection générale a été ajoutée** : si un écran plante à l'avenir, seul cet écran affiche un message — le reste de l'application continue de fonctionner.
+3. **Cartographie de l'application** — une page qui montre les 6 entités, les 49 modules regroupés par métier, et ce qui est relié à quoi.
+4. **Sécurité — la base de données était ouverte à tous.** N'importe qui connaissant l'adresse pouvait lire ET modifier les données (salariés, finances, chantiers). Fermée : seules les personnes connectées y accèdent. **Les inscriptions publiques ont été coupées** (avant, un inconnu pouvait se créer un compte). **La connexion est devenue obligatoire.** **Les mots de passe en clair** (9 salariés, visibles dans le code) ont été remplacés par des empreintes chiffrées — les mots de passe eux-mêmes ne changent pas.
+5. **Connexion par e-mail réparée** — elle n'avait jamais fonctionné depuis le début. Deux causes trouvées et corrigées : le message envoyait un lien alors que l'écran attendait un code, puis le lien n'ouvrait pas la session au retour. Bonus : le lien peut maintenant être ouvert **depuis un autre appareil** (demander sur l'ordinateur, cliquer depuis le téléphone).
+6. **Coffre-fort documentaire** — les fichiers (plans, contrats, photos, attestations) vivent désormais dans l'application, rangés par entité et par dossier. Ils sont privés : ils s'ouvrent par un lien temporaire, jamais par une adresse publique. Le même panneau pourra être posé sur n'importe quelle fiche (un chantier, un contrat, un salarié). Conçu pour basculer vers Google Cloud plus tard **sans toucher aux écrans**.
+7. **Raccourci ⌘K** — depuis n'importe où, une recherche instantanée de tous les écrans. Plus besoin de passer par entité → service → module.
+
+### Avant (juin – juillet 2026)
+- **Découpage du fichier géant** : 27 000 lignes en un seul bloc → 49 écrans séparés, plus faciles à faire évoluer sans rien casser.
+- **Identité visuelle** « Obsidienne & Or ».
+- **Sauvegarde dans le cloud** : les données ne vivent plus seulement dans le navigateur.
+- **Mise sur GitHub** : historique complet, rien ne se perd, récupérable depuis n'importe quel ordinateur.
+
+---
+
 ## FAZ A — Fondations (avant mise en ligne)
 - [x] Modularisation (App.jsx 27 000 → ~4 000 lignes, 49 composants)
 - [x] Identité visuelle V2 (thème « Obsidienne & Or », en-tête, monogrammes)
