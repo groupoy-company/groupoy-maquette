@@ -67,9 +67,13 @@ class WidgetErrorBoundary extends React.Component {
   componentDidCatch(error, info) { console.error('Widget crash:', this.props.name, error, info); }
   render() {
     if (this.state.hasError) {
-      return <div style={{padding:16, background:$danger+'12', borderRadius:12, border:'1px solid #fca5a5', color:'#dc2626', fontSize:'0.92rem', width:'100%'}}>
-        <span style={{fontWeight:700}}>⚠️ Erreur widget: {this.props.name}</span>
-        <button onClick={() => this.setState({hasError: false, error: null})} style={{marginLeft:12, padding:'4px 12px', borderRadius:6, border:'1px solid #fca5a5', background:'white', cursor:'pointer', fontSize:'0.85rem'}}>Réessayer</button>
+      const err = this.state.error;
+      const msg = err && (err.message || String(err)) || 'Erreur inconnue';
+      return <div style={{padding:'20px 24px', margin:'16px 0', background:'rgba(239,68,68,0.08)', borderRadius:12, border:'1px solid rgba(239,68,68,0.35)', color:'#ef4444', fontSize:'0.92rem', width:'100%', boxSizing:'border-box'}}>
+        <div style={{fontWeight:700, fontSize:'1rem', marginBottom:8}}>⚠️ Ce module a rencontré une erreur{this.props.name ? ' : ' + this.props.name : ''}</div>
+        <div style={{fontFamily:'ui-monospace, monospace', fontSize:'0.8rem', color:'#dc2626', background:'rgba(0,0,0,0.06)', padding:'8px 10px', borderRadius:8, marginBottom:10, whiteSpace:'pre-wrap', wordBreak:'break-word'}}>{msg}</div>
+        <div style={{fontSize:'0.82rem', opacity:0.85, marginBottom:12}}>Les autres modules fonctionnent normalement — vous pouvez réessayer ou changer d'onglet.</div>
+        <button onClick={() => this.setState({hasError: false, error: null})} style={{padding:'6px 14px', borderRadius:8, border:'1px solid rgba(239,68,68,0.4)', background:'#fff', color:'#dc2626', cursor:'pointer', fontSize:'0.85rem', fontWeight:600}}>Réessayer</button>
       </div>;
     }
     return this.props.children;
@@ -301,7 +305,7 @@ const SimulateurRuches = () => {
   const isSuperAdmin = () => currentUser && currentUser.role === 'SUPER_ADMIN';
 
   const [ongletActif, setOngletActif] = useState('presentation_groupe');
-  
+
   // Navigation Entreprise > Service > Module
   const [navEntreprise, setNavEntreprise] = useState(null);
   const [navService, setNavService] = useState(null);
@@ -330,7 +334,7 @@ const SimulateurRuches = () => {
     'yilmaz': {
       nom: 'Yilmaz', icon: '🏢', desc: 'Services partagés : Finance,\nRH, IT et Marketing',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
+        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'presentation_groupe', 'presentation', 'roadmap'], desc: 'Pilotage stratégique, vision groupe, feuille de route' },
         { id: 'crm', label: 'CRM Groupe', icon: '🤝', modules: ['crm_commercial'], desc: 'Vue consolidée des affaires, contacts et pipeline de toutes les filiales' },
         { id: 'finance', label: 'Finance & Gestion', icon: '🏦', modules: ['dashboard', 'fact_interne', 'fact_externe', 'budget', 'tresorerie', 'analytique'], desc: 'Contrôle de gestion, facturation interne/externe, trésorerie, budget' },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh', 'presentation', 'simulateur', 'suivi'], desc: 'Personnel, recrutement, rémunération, formation, gestion RH complète' },
@@ -338,14 +342,14 @@ const SimulateurRuches = () => {
         { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', modules: ['bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta'], desc: 'Bons de commande, freelances, suivi prestataires, facturation' },
         { id: 'it', label: 'IT / Digital', icon: '💻', modules: ['admin', 'outils', 'tickets', 'parc_info', 'donnees_ref'], desc: 'Infrastructure, parc informatique, données de référence' },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'], desc: 'Parc automobile, matériel BTP, état des lieux, TCO' },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'], desc: 'Échéances, contrats, litiges, assurances, conformité BTP' },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'], desc: 'Contrats, litiges, assurances, conformité BTP' },
         { id: 'marketing', label: 'Marketing & Communication', icon: '📣', modules: ['identite', 'supports', 'web'], desc: 'Charte graphique, supports commerciaux, présence web' }
       ]
     },
     'ezel': {
       nom: 'Ezel Bâtiment', icon: '🏗️', desc: 'Entreprise générale BTP',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'ezel_tableau'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances', 'ezel_tableau'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
@@ -353,7 +357,7 @@ const SimulateurRuches = () => {
         { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
@@ -361,7 +365,7 @@ const SimulateurRuches = () => {
     'roulotte': {
       nom: 'La Roulotte', icon: '🚛', desc: 'Location roulottes & matériel',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Planification', icon: '🚛', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['parc_automobile', 'materiel'] },
@@ -373,7 +377,7 @@ const SimulateurRuches = () => {
     'echafaudage': {
       nom: "L'Échafaudage", icon: '⚙️', desc: 'Location + Montage échafaudage',
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'exploitation', label: 'Exploitation & Montage', icon: '⚙️', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['materiel', 'parc_automobile'] },
@@ -385,7 +389,7 @@ const SimulateurRuches = () => {
     'etancheite': {
       nom: "L'Étanchéité", icon: '💧', desc: "Travaux d'étanchéité\net imperméabilisation",
       services: [
-        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard'] },
+        { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['dashboard', 'centre_echeances'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
         { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
         { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
@@ -394,7 +398,7 @@ const SimulateurRuches = () => {
         { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
@@ -1456,7 +1460,7 @@ const SimulateurRuches = () => {
     const m = donneesFinancieres?.[f.id]?.[donneesAnneeActive] || donneesFinancieres?.[String(f.id)]?.[donneesAnneeActive] || {};
     const ca = m.ca ?? f.ca;
     const sousTraitance = m.sousTraitance ?? (ca * f.sousTraitancePct / 100);
-    const margeBrute = m.margeBrute ?? (ca * f.margeBrutePct / 100);
+    const margeBrute = m.margeBrute ?? (ca * (f.margeBrutePct ?? 0) / 100);
     const fraisInternes = m.fraisInternes ?? (ca * f.fraisInternesPct / 100);
     const fraisStructure = m.fraisStructure ?? (ca * 0.06);
     const ebe = m.ebe ?? (margeBrute - fraisInternes - fraisStructure);
@@ -1466,8 +1470,8 @@ const SimulateurRuches = () => {
     const impots = Math.max(0, resultatExploitation * 0.25);
     const resultatNet = m.rn ?? (resultatExploitation - impots);
     const resultatNetPct = ca > 0 ? (resultatNet / ca * 100) : 0;
-    const margeBrutePct = ca > 0 ? (margeBrute / ca * 100) : f.margeBrutePct;
-    const sousTraitancePct = ca > 0 ? (sousTraitance / ca * 100) : f.sousTraitancePct;
+    const margeBrutePct = ca > 0 ? (margeBrute / ca * 100) : (f.margeBrutePct ?? 0);
+    const sousTraitancePct = ca > 0 ? (sousTraitance / ca * 100) : (f.sousTraitancePct ?? 0);
     const effectif = m.effectif ?? f.effectif;
     const caParCollab = effectif > 0 ? ca / effectif : 0;
     const tresorerie = m.tresorerie ?? null;
@@ -1487,9 +1491,9 @@ const SimulateurRuches = () => {
       if (children.length > 0) {
         const totalCA = children.reduce((s, c) => s + c.ca, 0);
         const totalEffectif = children.reduce((s, c) => s + c.effectif, 0);
-        const avgMarge = children.reduce((s, c) => s + c.margeBrutePct, 0) / children.length;
-        const avgSousTraitance = children.reduce((s, c) => s + c.sousTraitancePct, 0) / children.length;
-        const avgFraisInternes = children.reduce((s, c) => s + c.fraisInternesPct, 0) / children.length;
+        const avgMarge = children.reduce((s, c) => s + (c.margeBrutePct ?? 0), 0) / children.length;
+        const avgSousTraitance = children.reduce((s, c) => s + (c.sousTraitancePct ?? 0), 0) / children.length;
+        const avgFraisInternes = children.reduce((s, c) => s + (c.fraisInternesPct ?? 0), 0) / children.length;
         const historique = children[0].historique ? children[0].historique.map((_, i) => ({
           annee: children[0].historique[i]?.annee,
           ca: children.reduce((s, c) => s + (c.historique?.[i]?.ca || 0), 0),
@@ -3664,6 +3668,10 @@ const SimulateurRuches = () => {
         {/* FILIALE FILTER BAR — YILMAZ context only */}
         <FilialeFilterBar />
 
+        {/* Toute la zone d'onglets est protégée : si un module plante, on affiche
+            un message au lieu d'un écran blanc. key={ongletActif} → réinitialise en changeant d'onglet. */}
+        <WidgetErrorBoundary name={ongletActif} key={ongletActif}>
+
         {/* TABLEAU DE BORD */}
         {ongletActif === 'dashboard' && <TabDashboard {...{ $accent, $bg, $bgCard, $bgCardHover, $bgSub, $border, $borderLight, $danger, $info, $selBg, $selText, $shadow, $success, $text, $textMut, $textSec, $warn, SERVICES_CONFIG, WidgetErrorBoundary, ajouterFiliale, amortissements, appelsOffres, ca, calculsFiliales, chantiers, collaborateurs, crmRd, dashGroupeVue, dashSettingsOpen, dashWidgetOrder, dashWidgetSizes, dashWidgets, dashboardChantierId, dashboardCollabId, dashboardFiliale, dashboardVue, dataEvolutionCA, defaultAnnees, defaultWidgetOrder, donneesAnneeActive, donneesAnneesSupp, donneesDragOverIdx, donneesFilialeOrder, donneesFinancieres, dragOverWidget, dragWidget, employes, emptyChantier, emptyEmploye, filNom, filiales, filialesDynamiques, filialesEnrichies, fraisInternes, getAlerts, getChantiersCollab, getDonnee, getEmployesFiliale, getKpiFiliale, handleDonneesDrop, handleSettingsDrop, handleWidgetDrop, hiddenServicesYilmaz, impots, isDragging, margeBrute, modalFilialeOuvert, navEntreprise, nbFiliales, niveau, nouvelleFiliale, pennylaneApiKey, pennylaneError, pennylaneStatus, resultatExploitation, resultatNet, setChantierForm, setCollabDetailTab, setCollabFiltreFiliale, setCollabOngletId, setConfirmDelete, setDashGroupeVue, setDashSettingsOpen, setDashWidgetOrder, setDashWidgets, setDashboardChantierId, setDashboardCollabId, setDashboardFiliale, setDashboardVue, setDonnee, setDonneesAnneeActive, setDonneesAnneesSupp, setDonneesDragIdx, setDonneesDragOverIdx, setDragOverWidget, setDragWidget, setEmployeForm, setModalChantier, setModalEmploye, setModalFilialeOuvert, setNavService, setNouvelleFiliale, setOngletActif, setPennylaneApiKey, setPennylaneError, setPennylaneStatus, setSettingsDragIdx, setSettingsDragOverIdx, setYilmazVue, settingsDragIdx, settingsDragOverIdx, showBorderAccent, sousTraitance, toggleWidget, toggleWidgetSize, totalEffectif, widgetDescriptions, widgetLabels, yilmazVue }} />}
 
@@ -3954,6 +3962,8 @@ const SimulateurRuches = () => {
       {ongletActif === 'parc_automobile' && <TabParcAutomobile {...{ $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderAlt, $borderLight, $danger, $info, $selBg, $selText, $shadow, $shadowLg, $success, $text, $textMut, $textSec, $warn, FILIALE_FILTER_OPTIONS, autoColWidths, autoData, autoDetail, autoEdit, autoEtatLieux, autoFilialeFilter, autoFilter, autoFilterOpen, autoStatutFilter, autoTab, autoTabsRef, autoViewMode, autoVisibleCols, crmRd, ctStatut, empNom, employes, filialeFilter, filialesDynamiques, navEntreprise, setAutoColWidths, setAutoData, setAutoDetail, setAutoEdit, setAutoEtatLieux, setAutoFilialeFilter, setAutoFilter, setAutoFilterOpen, setAutoStatutFilter, setAutoTab, setAutoViewMode, setAutoVisibleCols, showBorderAccent }} />}
       {/* ══════ MODULE: PARC MATÉRIEL (hors véhicules) ══════ */}
       {ongletActif === 'materiel' && <TabMateriel {...{ $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderAlt, $borderLight, $danger, $info, $selBg, $selText, $shadow, $shadowLg, $success, $text, $textMut, $textSec, $warn, FILIALE_FILTER_OPTIONS, chantiers, collaborateurs, crmRd, empNom, employes, filialeFilter, matAttest, matData, matDetail, matEdit, matFilialeFilter, matFilter, matFilterOpen, matTab, matVisibleCols, navEntreprise, setMatAttest, setMatData, setMatDetail, setMatEdit, setMatFilialeFilter, setMatFilter, setMatFilterOpen, setMatTab, setMatVisibleCols, showBorderAccent }} />}
+
+        </WidgetErrorBoundary>
 
       </div>
     </div>

@@ -15,6 +15,7 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 ## Carte des modules (49)
 
 ### Direction & pilotage
+- **Centre d'échéances** — vue transversale de toutes les dates clés (assurances, contrats, contrôles techniques, leasings, conformité, appels d'offres). Ne « possède » rien : c'est une loupe qui lit les dates des autres modules et les liste ensemble (KPI expiré/30j/90j, filtres par source + horizon, recherche). Accessible au niveau **Tableau de Bord / Direction** de chaque entité.
 - **Dashboard**, **KpiDashboard** — vues de synthèse et indicateurs.
 - **Organigramme**, **Presentation**, **PresentationGroupe** — structure et présentation du groupe.
 - **Identite** — identité / paramètres de l'entité.

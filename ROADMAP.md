@@ -41,7 +41,7 @@
 ---
 
 ## Bugs connus (à corriger)
-- **Dashboard Group OY plante** : en entrant sur l'entité « Group OY », l'onglet `dashboard` (holding) lève une erreur (`TabDashboard.jsx` ~ligne 20-26, bloc `isHolding`) → écran blanc (pas d'error boundary sur les onglets). Pré-existant, sans lien avec le Centre d'échéances. À diagnostiquer (probable donnée manquante sur une filiale holding) + ajouter une error boundary par onglet pour éviter l'écran blanc.
+- [x] **Dashboard Group OY plantait** (corrigé 03/08) — cause : `getKpiFiliale` (App.jsx) renvoyait `margeBrutePct = undefined` pour les holdings à CA=0 dépourvus du champ (ELIA, L'Ezel), puis `kpi.margeBrutePct.toFixed(0)` (widget « Filiales ») → écran blanc. Fix : défauts `?? 0` dans `getKpiFiliale` + moyennes holding protégées. **+ Error boundary** ajoutée autour de toute la zone d'onglets (`WidgetErrorBoundary`, `key={ongletActif}`) → si un module plante, on affiche un message au lieu d'un écran blanc, et les autres onglets restent utilisables.
 
 ## Décisions actées
 - **Projets Supabase séparés** : maquette = `groupoy-maquette` ; ne pas mélanger avec `groupoy-app` de Benjamin.
