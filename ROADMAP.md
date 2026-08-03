@@ -22,7 +22,7 @@
 - [ ] **Hébergement + domaine** : déploiement (Cloud Run ou Vercel) + sous-domaine **app.groupoy.fr** (DNS chez le registrar, sans toucher au site vitrine).
 
 ## FAZ B — Fonctionnalités (backlog, par ROI)
-1. Centre d'échéances (deadlines unifiés : AO, assurances, contrôles véhicules, CACES/habilitations, contrats)
+1. [x] **Centre d'échéances** (fait 03/08) — agrège assurances, contrats, contrôles techniques, fins de leasing, conformité (DUERP/certifs/VGP) et appels d'offres ; KPI (expiré / 30j / 90j), filtres par source + horizon, recherche, respect du contexte filiale. Onglet `centre_echeances` dans Direction (Group OY) et Juridique de chaque entité. Données via `src/data/echeances.js` (repli échantillon quand l'état live est vide).
 2. Palette de commandes ⌘K + recherche globale
 3. Carte des chantiers + météo 5 jours
 4. Module SCI ELIA (biens, loyers, emprunts) — appli dédiée, hors vitrine page de garde
@@ -39,6 +39,9 @@
 - Migration complète Drive → GCS
 
 ---
+
+## Bugs connus (à corriger)
+- **Dashboard Group OY plante** : en entrant sur l'entité « Group OY », l'onglet `dashboard` (holding) lève une erreur (`TabDashboard.jsx` ~ligne 20-26, bloc `isHolding`) → écran blanc (pas d'error boundary sur les onglets). Pré-existant, sans lien avec le Centre d'échéances. À diagnostiquer (probable donnée manquante sur une filiale holding) + ajouter une error boundary par onglet pour éviter l'écran blanc.
 
 ## Décisions actées
 - **Projets Supabase séparés** : maquette = `groupoy-maquette` ; ne pas mélanger avec `groupoy-app` de Benjamin.
