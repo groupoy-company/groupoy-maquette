@@ -11,6 +11,7 @@ import TabSupports from './tabs/TabSupports.jsx';
 import TabReceptionFactures from './tabs/TabReceptionFactures.jsx';
 import TabOutils from './tabs/TabOutils.jsx';
 import TabConformite from './tabs/TabConformite.jsx';
+import TabCentreEcheances from './tabs/TabCentreEcheances.jsx';
 import TabSuiviPresta from './tabs/TabSuiviPresta.jsx';
 import TabContrats from './tabs/TabContrats.jsx';
 import TabBonCommande from './tabs/TabBonCommande.jsx';
@@ -285,7 +286,7 @@ const SimulateurRuches = () => {
       'recrutement', 'onboarding', 'offboarding', 'formation', 'absences', 'dossier_rh',
       'bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta',
       'outils', 'tickets',
-      'contrats', 'litiges', 'assurances', 'conformite',
+      'contrats', 'litiges', 'assurances', 'conformite', 'centre_echeances',
       'ordres_travail', 'materiel', 'parc_automobile', 'donnees_ref', 'parc_info',
       'identite', 'supports', 'web'
     ].includes(ongletId)) return true;
@@ -321,7 +322,7 @@ const SimulateurRuches = () => {
     'groupoy': {
       nom: 'Group OY', icon: '🐝', desc: 'Vue consolidée du groupe\net pilotage stratégique',
       services: [
-        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'presentation_groupe', 'presentation', 'admin'] },
+        { id: 'direction', label: 'Direction Générale', icon: '🏛️', modules: ['dashboard', 'centre_echeances', 'presentation_groupe', 'presentation', 'admin'] },
         { id: 'finance', label: 'Finance Group', icon: '💰', modules: ['dashboard', 'simulateur', 'suivi'] },
         { id: 'rh', label: 'RH Group', icon: '👥', modules: ['collaborateurs', 'postes', 'organigramme'] }
       ]
@@ -337,7 +338,7 @@ const SimulateurRuches = () => {
         { id: 'achats', label: 'Achats & Prestataires', icon: '🤝', modules: ['bon_commande', 'suivi_presta', 'reception_factures', 'catalogue_presta'], desc: 'Bons de commande, freelances, suivi prestataires, facturation' },
         { id: 'it', label: 'IT / Digital', icon: '💻', modules: ['admin', 'outils', 'tickets', 'parc_info', 'donnees_ref'], desc: 'Infrastructure, parc informatique, données de référence' },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'], desc: 'Parc automobile, matériel BTP, état des lieux, TCO' },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'], desc: 'Contrats, litiges, assurances, conformité BTP' },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'], desc: 'Échéances, contrats, litiges, assurances, conformité BTP' },
         { id: 'marketing', label: 'Marketing & Communication', icon: '📣', modules: ['identite', 'supports', 'web'], desc: 'Charte graphique, supports commerciaux, présence web' }
       ]
     },
@@ -352,7 +353,7 @@ const SimulateurRuches = () => {
         { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
@@ -393,7 +394,7 @@ const SimulateurRuches = () => {
         { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
+        { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['centre_echeances', 'contrats', 'litiges', 'assurances', 'conformite'] },
         { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
@@ -3456,6 +3457,7 @@ const SimulateurRuches = () => {
           {/* ====== CARTES MODULES — quand service sélectionné ====== */}
           {navService && navEntreprise && (() => {
             const moduleIcons = {
+              centre_echeances: { icon: '⏰', label: "Centre d'échéances", desc: 'Assurances, CT, leasings, contrats, conformité, AO — toutes les dates clés', color: '#d4a030' },
               crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
               kpi_dashboard: { icon: '📊', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
               dashboard: { icon: '📊', label: 'Tableau de Bord', desc: "KPI, finances et vue d'ensemble", color: '#e67e22' },
@@ -3601,7 +3603,7 @@ const SimulateurRuches = () => {
           const currentSvc = services.find(s=>s.id===navService);
           const moduleList = currentSvc ? currentSvc.modules : [];
           const filialeMap = {'groupoy':null,'yilmaz':'yilmaz','ezel':3,'roulotte':1,'echafaudage':2,'etancheite':6};
-          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',svc_kpi:'Indicateurs',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Groupe',suivi_presta:'Suivi presta',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Suivi Dossiers AO'};
+          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',svc_kpi:'Indicateurs',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Groupe',suivi_presta:'Suivi presta',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Suivi Dossiers AO',centre_echeances:'Échéances'};
 
           return (
             <div style={{position:'fixed',left:0,top:46,bottom:0,width:SIDEBAR_W,background:$bgSub,borderRight:`1px solid ${$border}`,zIndex:9000,display:'flex',flexDirection:'column',overflow:'hidden'}}>
@@ -3928,6 +3930,7 @@ const SimulateurRuches = () => {
 
       {/* ══════ MODULE: CONFORMITÉ BTP ══════ */}
       {ongletActif === 'conformite' && <TabConformite {...{ $bgCard, $border, $text, $textMut, $textSec, chantiers, crmRd, empNom, filNom, filiales, filterByFiliale }} />}
+      {ongletActif === 'centre_echeances' && <TabCentreEcheances {...{ $accent, $bgCard, $bgSub, $border, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, $danger, $warn, $success, $info, crmRd, filNom, filterByFiliale, assData, ctrData, autoData, veilleAO }} />}
 
       {/* ══════ MODULE: IDENTITÉ VISUELLE ══════ */}
       {ongletActif === 'identite' && <TabIdentite {...{ $accent, $bgCard, $bgSub, $border, $borderAlt, $text, $textMut, $textSec, crmRd }} />}
