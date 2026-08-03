@@ -166,7 +166,8 @@ const filiales = {
 
 const SimulateurRuches = () => {
   // === AUTH STATES ===
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // Connexion obligatoire : l'application ne s'ouvre jamais sans authentification.
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(() => {
     const u = INITIAL_USERS.find(u => u.id === 'USR001');
@@ -214,9 +215,19 @@ const SimulateurRuches = () => {
     return { line1: `${salut} ${prenom} !`, line2: 'Bienvenue au Grand Rucher.' };
   };
 
+  // Empreinte du mot de passe (SHA-256 salé par identifiant utilisateur).
+  // Aucun mot de passe n'est stocké en clair, ni dans le code, ni dans le navigateur.
+  const hashPassword = async (userId, motDePasse) => {
+    const data = new TextEncoder().encode(userId + ':' + motDePasse);
+    const buf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  };
+
   // Login
-  const handleLogin = () => {
-    const user = users.find(u => u.login === loginForm.login && u.password === loginForm.password && u.actif);
+  const handleLogin = async () => {
+    const candidat = users.find(u => u.login === loginForm.login && u.actif);
+    const empreinte = candidat ? await hashPassword(candidat.id, loginForm.password) : null;
+    const user = (candidat && empreinte === candidat.passwordHash) ? candidat : null;
     if (user) {
       const updated = {...user, derniereConnexion: new Date().toISOString()};
       setUsers(prev => prev.map(u => u.id === user.id ? updated : u));
@@ -254,8 +265,38 @@ const SimulateurRuches = () => {
     const { error } = await otpSignIn(email);
     setOtpBusy(false);
     if (error) { setOtpMsg('Erreur : ' + error); return; }
-    setOtpStep('code'); setOtpMsg('Code envoyé à ' + email);
+    setOtpStep('code');
+    setOtpMsg('E-mail envoyé à ' + email);
   };
+  // Nettoyage de sécurité : supprime tout mot de passe en clair hérité d'une
+  // ancienne version encore présent dans le navigateur (ou remonté du cloud).
+  React.useEffect(() => {
+    if (!Array.isArray(users) || users.length === 0) return;
+    if (!users.some(u => u && u.password !== undefined)) return;
+    setUsers(prev => prev.map(u => {
+      if (!u || u.password === undefined) return u;
+      const { password, ...reste } = u;
+      const ref = INITIAL_USERS.find(i => i.id === u.id);
+      return { ...reste, passwordHash: u.passwordHash || (ref && ref.passwordHash) || null };
+    }));
+  }, [users, setUsers]);
+
+  // Connexion automatique quand une session Supabase existe déjà
+  // (retour depuis le lien reçu par e-mail, ou session encore valide).
+  React.useEffect(() => {
+    let stop = () => {};
+    (async () => {
+      try {
+        const { getSession, onAuthChange } = await import('./lib/supabase.js');
+        const session = await getSession();
+        if (session?.user?.email) loginAsEmail(session.user.email);
+        stop = onAuthChange(s => { if (s?.user?.email) loginAsEmail(s.user.email); });
+      } catch (e) { /* Supabase non configuré → connexion locale uniquement */ }
+    })();
+    return () => stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleOtpVerify = async () => {
     const code = otpCode.trim();
     if (code.length < 6) { setOtpMsg('Entrez le code à 6 chiffres'); return; }
@@ -269,12 +310,14 @@ const SimulateurRuches = () => {
   };
   const handleLogout = async () => { try { const { authSignOut } = await import('./lib/supabase.js'); await authSignOut(); } catch(e){} setIsLoggedIn(false); setCurrentUser(null); setShowChangePassword(false); setShowLoginModal(false); setOtpStep('email'); setOtpCode(''); setOtpEmail(''); setOngletActif('presentation_groupe'); };
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
     if (!currentUser) return;
-    if (passwordForm.ancien !== currentUser.password) { setPasswordMsg('❌ Ancien mot de passe incorrect'); return; }
-    if (passwordForm.nouveau.length < 4) { setPasswordMsg('❌ Le nouveau mot de passe doit faire au moins 4 caractères'); return; }
+    const empreinteAncien = await hashPassword(currentUser.id, passwordForm.ancien);
+    if (empreinteAncien !== currentUser.passwordHash) { setPasswordMsg('❌ Ancien mot de passe incorrect'); return; }
+    if (passwordForm.nouveau.length < 8) { setPasswordMsg('❌ Le nouveau mot de passe doit faire au moins 8 caractères'); return; }
     if (passwordForm.nouveau !== passwordForm.confirmation) { setPasswordMsg('❌ La confirmation ne correspond pas'); return; }
-    const updated = {...currentUser, password: passwordForm.nouveau};
+    const updated = {...currentUser, passwordHash: await hashPassword(currentUser.id, passwordForm.nouveau)};
+    delete updated.password;
     setUsers(prev => prev.map(u => u.id === currentUser.id ? updated : u));
     setCurrentUser(updated);
     setPasswordMsg('✅ Mot de passe modifié avec succès !');
@@ -2916,13 +2959,19 @@ const SimulateurRuches = () => {
                 </div>
               ) : (
                 <div style={{marginBottom:16}}>
-                  <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:6, fontWeight:600}}>Code reçu par e-mail</label>
+                  <div style={{background:$bgSub, border:`1px solid ${$border}`, borderRadius:crmRd, padding:'14px 16px', marginBottom:14}}>
+                    <div style={{fontSize:'0.88rem', fontWeight:700, color:$text, marginBottom:5}}>📬 Ouvrez votre boîte e-mail</div>
+                    <div style={{fontSize:'0.82rem', color:$textSec, lineHeight:1.55}}>
+                      Cliquez sur le <strong>lien de connexion</strong> que nous venons de vous envoyer : vous serez connecté automatiquement.
+                    </div>
+                  </div>
+                  <label style={{display:'block', fontSize:'0.85rem', color:$textMut, marginBottom:6, fontWeight:600}}>…ou saisissez le code, si l'e-mail en contient un</label>
                   <input value={otpCode} onChange={e => setOtpCode(e.target.value.replace(/\D/g,''))} onKeyDown={e => e.key === 'Enter' && handleOtpVerify()} placeholder="000000" inputMode="numeric" maxLength={6} style={{width:'100%', padding:'12px 14px', border:`1px solid ${$border}`, borderRadius:crmRd, fontSize:'1.4rem', letterSpacing:'0.4em', textAlign:'center', outline:'none', boxSizing:'border-box', background:$bgCard, color:$text}} />
                 </div>
               )}
-              {otpMsg && <div style={{color: otpMsg.startsWith('Code envoyé')?$textSec:'#dc2626', fontSize:'0.82rem', marginBottom:12}}>{otpMsg}</div>}
+              {otpMsg && <div style={{color: otpMsg.startsWith('E-mail envoyé')?$textSec:'#dc2626', fontSize:'0.82rem', marginBottom:12}}>{otpMsg}</div>}
               {otpStep === 'email'
-                ? <button onClick={handleOtpSend} disabled={otpBusy} style={{width:'100%', padding:'14px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:otpBusy?'wait':'pointer', opacity:otpBusy?0.6:1}}>{otpBusy?'Envoi…':'Recevoir un code'}</button>
+                ? <button onClick={handleOtpSend} disabled={otpBusy} style={{width:'100%', padding:'14px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:otpBusy?'wait':'pointer', opacity:otpBusy?0.6:1}}>{otpBusy?'Envoi…':'Recevoir mon accès par e-mail'}</button>
                 : <button onClick={handleOtpVerify} disabled={otpBusy} style={{width:'100%', padding:'14px', background:$accent, color:'white', border:'none', borderRadius:crmRd, fontSize:'1rem', fontWeight:700, cursor:otpBusy?'wait':'pointer', opacity:otpBusy?0.6:1}}>{otpBusy?'Vérification…':'Se connecter'}</button>}
               {otpStep === 'code' && <div onClick={()=>{setOtpStep('email');setOtpCode('');setOtpMsg('');}} style={{textAlign:'center', marginTop:12, fontSize:'0.8rem', color:$textMut, cursor:'pointer'}}>← Changer d'adresse</div>}
               <div onClick={()=>{setAuthMode('password');setOtpMsg('');}} style={{textAlign:'center', marginTop:16, fontSize:'0.78rem', color:$textMut, cursor:'pointer', opacity:0.7}}>Connexion classique (identifiant)</div>

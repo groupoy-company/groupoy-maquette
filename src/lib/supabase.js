@@ -23,15 +23,28 @@ export async function kvSet(key, value) {
   if (error) console.warn('[supabase kvSet]', key, error.message);
 }
 
-// ── Authentification par code e-mail (OTP) ──
-// Envoie un code à 6 chiffres à l'adresse indiquée
+// ── Authentification par e-mail (lien de connexion ou code) ──
+// Envoie un e-mail de connexion. IMPORTANT : `shouldCreateUser: false` →
+// seules les adresses déjà autorisées (créées par un administrateur) peuvent entrer.
+// Aucun inconnu ne peut se créer un compte.
 export async function otpSignIn(email) {
   if (!supabase) return { error: 'Supabase non configuré' };
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { shouldCreateUser: true }
+    options: {
+      shouldCreateUser: false,
+      emailRedirectTo: window.location.origin,
+    }
   });
-  return { error: error ? error.message : null };
+  if (error) {
+    // Message clair pour une adresse non autorisée
+    const m = (error.message || '').toLowerCase();
+    if (m.includes('signups not allowed') || m.includes('not found') || m.includes('disabled')) {
+      return { error: "Cette adresse n'est pas autorisée. Contactez l'administrateur." };
+    }
+    return { error: error.message };
+  }
+  return { error: null };
 }
 
 // Vérifie le code reçu → ouvre la session
@@ -49,4 +62,19 @@ export async function getAuthUser() {
   if (!supabase) return null;
   const { data } = await supabase.auth.getUser();
   return data?.user || null;
+}
+
+// Session courante (utilisée au démarrage : si l'utilisateur revient par le lien
+// reçu par e-mail, supabase-js a déjà posé la session → on ouvre l'application).
+export async function getSession() {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getSession();
+  return data?.session || null;
+}
+
+// Notifie l'application quand la session change (connexion par lien, déconnexion…)
+export function onAuthChange(callback) {
+  if (!supabase) return () => {};
+  const { data } = supabase.auth.onAuthStateChange((_event, session) => callback(session));
+  return () => data?.subscription?.unsubscribe?.();
 }
