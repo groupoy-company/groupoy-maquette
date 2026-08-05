@@ -601,7 +601,7 @@ export default function TabCollaborateurs(__props) {
                       <div style={{background:$bgSub, borderRadius:crmRd, padding:12, border:`1px solid ${$border}`}}>
                         <div style={{display:'flex', alignItems:'center', gap:8, marginBottom:4}}>
                           <span style={{fontSize:'0.82rem', fontWeight:700, color:$textMut}}>{new Date(evt.date).toLocaleDateString('fr-FR')}</span>
-                          <span style={{padding:'2px 8px', borderRadius:crmRd, fontSize:'0.78rem', fontWeight:700, background: evt.type==='Entrée'?'#f0fdf4':evt.type==='Promotion'?'#fffbeb':'#eff6ff', color: tc}}>{typeIcon} {evt.type}</span>
+                          <span style={{padding:'2px 8px', borderRadius:crmRd, fontSize:'0.78rem', fontWeight:700, background: evt.type==='Entrée'?'rgba(34,197,94,0.10)':evt.type==='Promotion'?'rgba(212,160,48,0.12)':'rgba(59,130,246,0.10)', color: tc}}>{typeIcon} {evt.type}</span>
                           <span style={{padding:'2px 8px', borderRadius:crmRd, fontSize:'0.78rem', fontWeight:700, background:$accent+'15', color:$accent}}>{evt.niveau}</span>
                         </div>
                         <div style={{fontWeight:600, fontSize:'0.95rem', color:$text}}>{evt.poste}</div>
@@ -630,7 +630,7 @@ export default function TabCollaborateurs(__props) {
                       </tr></thead>
                       <tbody>{mesChantiers.map((ch, idx) => {
                         const marge = ch.montantVente - ch.budgetHT;
-                        const sc = ch.statut==='Terminé'?{bg:'#f0fdf4',c:'#059669'}:ch.statut==='Planifié'?{bg:'#eff6ff',c:'#2563eb'}:{bg:'#fffbeb',c:'#d97706'};
+                        const sc = ch.statut==='Terminé'?{bg:'rgba(34,197,94,0.10)',c:'#059669'}:ch.statut==='Planifié'?{bg:'rgba(59,130,246,0.10)',c:'#2563eb'}:{bg:'rgba(212,160,48,0.12)',c:'#d97706'};
                         return (<tr key={ch.id} onClick={() => {
                           const fId = ch.filialeId;
                           const keyMap = {};

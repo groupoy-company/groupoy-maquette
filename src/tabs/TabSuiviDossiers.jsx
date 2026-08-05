@@ -74,19 +74,19 @@ export default function TabSuiviDossiers(__props) {
           };
 
           const PRIO_CFG = {
-            'Critique !': { color:'#333333', bg:'#f3f3f3', dot:'#333' },
-            'Haute':      { color:'#401694', bg:'#ede9fe', dot:'#7c3aed' },
-            'Moyenne':    { color:'#5559df', bg:'#e0e7ff', dot:'#6366f1' },
-            'Basse':      { color:'#4a90c4', bg:'#dbeafe', dot:'#3b82f6' },
+            'Critique !': { color:'#333333', bg:'rgba(243,243,243,0.14)', dot:'#333' },
+            'Haute':      { color:'#401694', bg:'rgba(139,92,246,0.14)', dot:'#7c3aed' },
+            'Moyenne':    { color:'#5559df', bg:'rgba(99,102,241,0.14)', dot:'#6366f1' },
+            'Basse':      { color:'#4a90c4', bg:'rgba(59,130,246,0.14)', dot:'#3b82f6' },
           };
-          const getPrio = p => PRIO_CFG[p] || { color:'#9ca3af', bg:'#f3f4f6', dot:'#d1d5db' };
+          const getPrio = p => PRIO_CFG[p] || { color:'#9ca3af', bg:$bgSub, dot:'#d1d5db' };
 
           const TYPE_MARCHE_CFG = {
-            'Marché public':      { color:'#0055cc', bg:'#e0f0ff', dot:'#0055cc', emoji:'🏛️' },
-            'Marché privé':       { color:'#166534', bg:'#dcfce7', dot:'#16a34a', emoji:'🏢' },
-            'Marché particulier': { color:'#7c3aed', bg:'#f3e8ff', dot:'#9333ea', emoji:'🏠' },
+            'Marché public':      { color:'#0055cc', bg:'rgba(224,240,255,0.14)', dot:'#0055cc', emoji:'🏛️' },
+            'Marché privé':       { color:'#166534', bg:'rgba(34,197,94,0.14)', dot:'#16a34a', emoji:'🏢' },
+            'Marché particulier': { color:'#7c3aed', bg:'rgba(139,92,246,0.14)', dot:'#9333ea', emoji:'🏠' },
           };
-          const getTM = tm => TYPE_MARCHE_CFG[tm] || { color:'#6b7280', bg:'#f3f4f6', dot:'#9ca3af', emoji:'📋' };
+          const getTM = tm => TYPE_MARCHE_CFG[tm] || { color:'#6b7280', bg:$bgSub, dot:'#9ca3af', emoji:'📋' };
 
           const today = new Date(); today.setHours(0,0,0,0);
           const daysLeft = dl => { if(!dl) return null; const d = new Date(dl); d.setHours(0,0,0,0); return Math.ceil((d - today) / 86400000); };
@@ -181,8 +181,8 @@ export default function TabSuiviDossiers(__props) {
                             <span style={{padding:'3px 9px', borderRadius:10, background:tmCfg.bg, color:tmCfg.color, fontSize:'0.71rem', fontWeight:700, border:"1px solid "+tmCfg.dot+"30"}}>{tmCfg.emoji} {ao.tm||'—'}</span>
                             {ao.p && <span style={{padding:'3px 9px', borderRadius:10, background:prio.bg, color:prio.color, fontSize:'0.71rem', fontWeight:700}}>{ao.p}</span>}
                             {ao.tp && <span style={{padding:'3px 9px', borderRadius:10, background:$bgSub, color:$textSec, fontSize:'0.71rem', fontWeight:600, border:"1px solid "+$border}}>{ao.tp}</span>}
-                            {dl !== null && dl >= 0 && dl <= 7 && <span style={{padding:'3px 9px', borderRadius:10, background:'#fee2e2', color:'#dc2626', fontSize:'0.71rem', fontWeight:700}}>⏰ J-{dl}</span>}
-                            {dl !== null && dl < 0 && <span style={{padding:'3px 9px', borderRadius:10, background:'#fef3c7', color:'#92400e', fontSize:'0.71rem', fontWeight:700}}>⚠️ Dépassée</span>}
+                            {dl !== null && dl >= 0 && dl <= 7 && <span style={{padding:'3px 9px', borderRadius:10, background:'rgba(239,68,68,0.14)', color:'#dc2626', fontSize:'0.71rem', fontWeight:700}}>⏰ J-{dl}</span>}
+                            {dl !== null && dl < 0 && <span style={{padding:'3px 9px', borderRadius:10, background:'rgba(212,160,48,0.18)', color:'#92400e', fontSize:'0.71rem', fontWeight:700}}>⚠️ Dépassée</span>}
                           </div>
                         </div>
                         <div style={{display:'flex', flexDirection:'column', gap:6, alignItems:'flex-end', flexShrink:0, marginLeft:14}}>
@@ -982,12 +982,12 @@ Analyse cet AO et donne des recommandations stratégiques :
               {/* ═══ KPI CARDS ═══ */}
               <div style={{display:'grid', gridTemplateColumns:'repeat(5,1fr)', gap:10, marginBottom:14}}>
                 {[
-                  { label:'Dossiers actifs', value:actifs.length, sub:'dont '+urgents.length+' urgents ≤14j', icon:'🔥', color:'#dc2626', bg:'#fff1f2', border:'#fecdd3' },
-                  { label:'Offres déposées', value:DATA_NO_DOUBLON.filter(a=>a.o>0).length, sub:fmtM(gagnes.reduce((s,a)=>s+a.o,0))+' CA gagné', icon:'📤', color:'#0369a1', bg:'#e0f2fe', border:'#bae6fd' },
-                  { label:'Taux de succès', value:tauxSucces+'%', sub:gagnes.length+' acceptés', icon:'✅', color:'#059669', bg:'#dcfce7', border:'#bbf7d0' },
-                  { label:'Visites à planifier', value:visitesEnAttente.length, sub:visitesEnAttente.length ? visitesEnAttente.slice(0,1).map(a=>a.m).join('')+' ...' : 'Aucune en attente', icon:'🏗️', color:visitesEnAttente.length>0?'#d97706':'#059669', bg:visitesEnAttente.length>0?'#fef3c7':'#dcfce7', border:visitesEnAttente.length>0?'#fde68a':'#bbf7d0' },
-                  { label:'Urgents ≤14j', value:urgents.length, sub:urgents.length ? urgents[0].m||urgents[0].n.slice(0,20) : 'Aucun urgent', icon:'⏰', color: urgents.length > 0 ? '#dc2626' : '#059669', bg: urgents.length > 0 ? '#fee2e2' : '#dcfce7', border: urgents.length > 0 ? '#fca5a5' : '#bbf7d0' },
-                  { label:'Pipeline actif', value:fmtM(actifs.reduce((s,a)=>s+a.o,0)), sub:'Montant total offres', icon:'💰', color:'#b45309', bg:'#fef3c7', border:'#fde68a' },
+                  { label:'Dossiers actifs', value:actifs.length, sub:'dont '+urgents.length+' urgents ≤14j', icon:'🔥', color:'#dc2626', bg:'rgba(255,241,242,0.14)', border:'#fecdd3' },
+                  { label:'Offres déposées', value:DATA_NO_DOUBLON.filter(a=>a.o>0).length, sub:fmtM(gagnes.reduce((s,a)=>s+a.o,0))+' CA gagné', icon:'📤', color:'#0369a1', bg:'rgba(224,242,254,0.14)', border:'#bae6fd' },
+                  { label:'Taux de succès', value:tauxSucces+'%', sub:gagnes.length+' acceptés', icon:'✅', color:'#059669', bg:'rgba(34,197,94,0.14)', border:'rgba(34,197,94,0.22)' },
+                  { label:'Visites à planifier', value:visitesEnAttente.length, sub:visitesEnAttente.length ? visitesEnAttente.slice(0,1).map(a=>a.m).join('')+' ...' : 'Aucune en attente', icon:'🏗️', color:visitesEnAttente.length>0?'#d97706':'#059669', bg:visitesEnAttente.length>0?'rgba(212,160,48,0.18)':'rgba(34,197,94,0.14)', border:visitesEnAttente.length>0?'rgba(212,160,48,0.26)':'rgba(34,197,94,0.22)' },
+                  { label:'Urgents ≤14j', value:urgents.length, sub:urgents.length ? urgents[0].m||urgents[0].n.slice(0,20) : 'Aucun urgent', icon:'⏰', color: urgents.length > 0 ? '#dc2626' : '#059669', bg: urgents.length > 0 ? 'rgba(239,68,68,0.14)' : 'rgba(34,197,94,0.14)', border: urgents.length > 0 ? 'rgba(239,68,68,0.30)' : 'rgba(34,197,94,0.22)' },
+                  { label:'Pipeline actif', value:fmtM(actifs.reduce((s,a)=>s+a.o,0)), sub:'Montant total offres', icon:'💰', color:'#b45309', bg:'rgba(212,160,48,0.18)', border:'rgba(212,160,48,0.26)' },
                 ].map((s,i) => (
                   <div key={i} style={{background:s.bg, borderRadius:crmRd, border:`1px solid ${s.border}`, padding:'12px 14px'}}>
                     <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:4}}>
@@ -1578,7 +1578,7 @@ Analyse cet AO et donne des recommandations stratégiques :
                             const isNow=mo.y===new Date().getFullYear()&&mo.m===new Date().getMonth();
                             return(<div key={i} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:2}}>
                               <div style={{fontSize:'0.57rem',color:$textMut,fontWeight:mo.count>0?700:400,minHeight:10,textAlign:'center'}}>{mo.count||''}</div>
-                              <div style={{width:'100%',height:h,borderRadius:'2px 2px 0 0',background:isNow?'#007ab5':mo.count>0?'#007ab555':'#e5e7eb'}} title={`${mo.label}: ${mo.count} AO`}/>
+                              <div style={{width:'100%',height:h,borderRadius:'2px 2px 0 0',background:isNow?'#007ab5':mo.count>0?'#007ab555':$border}} title={`${mo.label}: ${mo.count} AO`}/>
                               <div style={{fontSize:'0.52rem',color:isNow?'#007ab5':$textMut,fontWeight:isNow?700:400,textAlign:'center',lineHeight:1.1,whiteSpace:'nowrap'}}>{mo.label}</div>
                             </div>);
                           })}

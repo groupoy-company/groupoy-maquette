@@ -62,7 +62,7 @@ export default function TabCalendrierSvc(__props) {
                 </p>
               </div>
               <div style={{display:'flex',alignItems:'center',gap:8}}>
-                {isEtudesPrix && <span style={{fontSize:'0.75rem',padding:'4px 10px',borderRadius:crmRd,background:'#e0f2fe',color:'#0369a1',fontWeight:600,border:'1px solid #bae6fd'}}>🟢 Monday.com</span>}
+                {isEtudesPrix && <span style={{fontSize:'0.75rem',padding:'4px 10px',borderRadius:crmRd,background:'rgba(224,242,254,0.14)',color:'#0369a1',fontWeight:600,border:'1px solid #bae6fd'}}>🟢 Monday.com</span>}
                 <button onClick={() => { const d = new Date(calAnnee,calMois-1); setCalMois(d.getMonth()); setCalAnnee(d.getFullYear()); }} style={{padding:'6px 12px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,cursor:'pointer',fontSize:'0.85rem'}}>◀</button>
                 <span style={{fontSize:'0.95rem',fontWeight:700,color:$text,minWidth:140,textAlign:'center'}}>{moisNoms[calMois]} {calAnnee}</span>
                 <button onClick={() => { const d = new Date(calAnnee,calMois+1); setCalMois(d.getMonth()); setCalAnnee(d.getFullYear()); }} style={{padding:'6px 12px',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,cursor:'pointer',fontSize:'0.85rem'}}>▶</button>
@@ -102,7 +102,7 @@ export default function TabCalendrierSvc(__props) {
                       const d = new Date(ao.date);
                       const days = Math.ceil((d-today)/(1000*60*60*24));
                       const urgent = days <= 7;
-                      return (<div key={i} style={{padding:'10px 12px',background: urgent ? '#fee2e2' : $bgSub,borderRadius:crmRd,border:`1px solid ${urgent ? '#fca5a5' : $border}`}}>
+                      return (<div key={i} style={{padding:'10px 12px',background: urgent ? 'rgba(239,68,68,0.14)' : $bgSub,borderRadius:crmRd,border:`1px solid ${urgent ? 'rgba(239,68,68,0.30)' : $border}`}}>
                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:6}}>
                           <div style={{flex:1}}>
                             <div style={{fontSize:'0.78rem',fontWeight:600,color:$text,lineHeight:1.3}}>{ao.titre}</div>

@@ -188,7 +188,7 @@ export default function TabRecrutement(__props) {
 
           {/* Alerte relances */}
           {(() => { const relances = activeCandidats.filter(needsRelance); if(relances.length===0) return null; return (
-            <div style={{display:'flex',alignItems:'center',gap:10,padding:'10px 16px',borderRadius:crmRd,background:'#fef3c7',border:'1px solid #fcd34d',marginBottom:12,cursor:'pointer'}} onClick={()=>setRecruView('liste')}>
+            <div style={{display:'flex',alignItems:'center',gap:10,padding:'10px 16px',borderRadius:crmRd,background:'rgba(212,160,48,0.18)',border:'1px solid #fcd34d',marginBottom:12,cursor:'pointer'}} onClick={()=>setRecruView('liste')}>
               <span style={{fontSize:'1.1rem'}}>⚠️</span>
               <div style={{flex:1}}>
                 <span style={{fontWeight:700,color:'#92400e',fontSize:'0.82rem'}}>{relances.length} candidat{relances.length>1?'s':''} sans activité depuis 7+ jours</span>
@@ -283,7 +283,7 @@ export default function TabRecrutement(__props) {
                 const isBulk=recruBulkSel.includes(c.id);
                 const alerte=needsRelance(c);
                 const days=alerte?daysSinceActivity(c):0;
-                return <tr key={c.id} style={{cursor:'pointer',borderBottom:`1px solid ${$borderLight}`,background:isBulk?$accent+'10':recruDetail===c.id?$accentSub:alerte?'#fffbeb':$bgSub+'60',transition:'background 0.1s'}} onMouseEnter={e=>{if(recruDetail!==c.id&&!isBulk)e.currentTarget.style.background=$bgCardHover;}} onMouseLeave={e=>{if(recruDetail!==c.id&&!isBulk)e.currentTarget.style.background=recruDetail===c.id?$accentSub:alerte?'#fffbeb':$bgSub+'60';}}>
+                return <tr key={c.id} style={{cursor:'pointer',borderBottom:`1px solid ${$borderLight}`,background:isBulk?$accent+'10':recruDetail===c.id?$accentSub:alerte?'rgba(212,160,48,0.12)':$bgSub+'60',transition:'background 0.1s'}} onMouseEnter={e=>{if(recruDetail!==c.id&&!isBulk)e.currentTarget.style.background=$bgCardHover;}} onMouseLeave={e=>{if(recruDetail!==c.id&&!isBulk)e.currentTarget.style.background=recruDetail===c.id?$accentSub:alerte?'#fffbeb':$bgSub+'60';}}>
                   <td style={{padding:'12px 10px',textAlign:'center'}} onClick={e=>e.stopPropagation()}><input type="checkbox" checked={isBulk} onChange={e=>setRecruBulkSel(prev=>e.target.checked?[...prev,c.id]:prev.filter(x=>x!==c.id))}/></td>
                   <td style={{padding:'12px 14px'}} onClick={()=>openDetail(c)}><div style={{display:'flex',alignItems:'center',gap:8}}>{c.photoUrl?<img src={c.photoUrl} style={{width:28,height:28,borderRadius:'50%',objectFit:'cover',flexShrink:0}}/>:<div style={{width:28,height:28,borderRadius:'50%',background:$bgSub,border:`1px solid ${$border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'0.58rem',fontWeight:700,color:$textMut,flexShrink:0}}>{(c.nom||'').split(' ').map(w=>w[0]).join('').slice(0,2)}</div>}<div><div style={{fontWeight:700,color:$text}}>{c.nom}</div><div style={{fontSize:'0.68rem',color:$textMut,fontWeight:400}}>{c.email}</div></div></div></td>
                   <td style={{padding:'12px 14px',fontSize:'0.82rem'}} onClick={()=>openDetail(c)}>{c.poste}</td>
@@ -295,7 +295,7 @@ export default function TabRecrutement(__props) {
                   <td style={{padding:'12px 14px',fontSize:'0.72rem',color:$success}} onClick={()=>openDetail(c)}>{c.disponibilite||'—'}</td>
                   <td style={{padding:'12px 14px',fontSize:'0.72rem',fontWeight:600}} onClick={()=>openDetail(c)}>{c.pretentionSalariale?`${(c.pretentionSalariale/1000).toFixed(0)}k€`:'—'}</td>
                   <td style={{padding:'12px 14px',fontSize:'0.7rem',color:$textMut}} onClick={()=>openDetail(c)}>{c.dateCandidat}</td>
-                  <td style={{padding:'12px 14px',textAlign:'center'}} onClick={()=>openDetail(c)}>{alerte&&<span style={{fontSize:'0.72rem',fontWeight:700,color:'#d97706',background:'#fef3c7',padding:'2px 7px',borderRadius:crmRd>0?10:2,whiteSpace:'nowrap'}}>⚠️ {days}j</span>}</td>
+                  <td style={{padding:'12px 14px',textAlign:'center'}} onClick={()=>openDetail(c)}>{alerte&&<span style={{fontSize:'0.72rem',fontWeight:700,color:'#d97706',background:'rgba(212,160,48,0.18)',padding:'2px 7px',borderRadius:crmRd>0?10:2,whiteSpace:'nowrap'}}>⚠️ {days}j</span>}</td>
                 </tr>;
               })}</tbody>
             </table>
@@ -628,11 +628,11 @@ export default function TabRecrutement(__props) {
             </div>
             <div style={{flex:1,overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center'}} onClick={e=>e.stopPropagation()}>
               {recruFileViewer.dataUrl?.startsWith('data:application/pdf')?
-                <iframe src={recruFileViewer.dataUrl} style={{width:'100%',height:'100%',border:'none',background:'white'}}/>
+                <iframe src={recruFileViewer.dataUrl} style={{width:'100%',height:'100%',border:'none',background:$bgCard}}/>
               :recruFileViewer.dataUrl?.startsWith('data:image')?
                 <img src={recruFileViewer.dataUrl} style={{maxWidth:'90%',maxHeight:'90%',objectFit:'contain',borderRadius:8,boxShadow:'0 8px 40px rgba(0,0,0,0.5)'}}/>
               :
-                <iframe src={recruFileViewer.dataUrl} style={{width:'100%',height:'100%',border:'none',background:'white'}}/>
+                <iframe src={recruFileViewer.dataUrl} style={{width:'100%',height:'100%',border:'none',background:$bgCard}}/>
               }
             </div>
           </div>)}

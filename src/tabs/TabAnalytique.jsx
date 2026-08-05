@@ -39,11 +39,11 @@ export default function TabAnalytique(__props) {
             {/* KPI */}
             <div style={{display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:12, marginBottom:16}}>
               {[
-                {l:'Chiffre d\'affaires',v:fmt(totalCA),c:'#059669',bg:'#f0fdf4'},
-                {l:'Charges totales',v:fmt(totalCharges),c:'#8a6040',bg:'#faf6ef'},
-                {l:'Marge brute',v:fmt(margeBrute),c: margeBrute>=0?'#2d5016':'#c04030',bg: margeBrute>=0?'#f0f7f0':'#fef2f2'},
-                {l:'Taux de marge',v:margePct+'%',c:'#8B6F47',bg:'#faf8f5'},
-                {l:'Chantiers actifs',v:enCours+' / '+filteredCh.length,c:'#3b82f6',bg:'#eff6ff'}
+                {l:'Chiffre d\'affaires',v:fmt(totalCA),c:'#059669',bg:'rgba(34,197,94,0.10)'},
+                {l:'Charges totales',v:fmt(totalCharges),c:'#8a6040',bg:$bgSub},
+                {l:'Marge brute',v:fmt(margeBrute),c: margeBrute>=0?'#2d5016':'#c04030',bg: margeBrute>=0?'rgba(34,197,94,0.10)':'rgba(239,68,68,0.10)'},
+                {l:'Taux de marge',v:margePct+'%',c:'#8B6F47',bg:$bgSub},
+                {l:'Chantiers actifs',v:enCours+' / '+filteredCh.length,c:'#3b82f6',bg:'rgba(59,130,246,0.10)'}
               ].map((k,i) => (
                 <div key={i} style={{background:k.bg, borderRadius:crmRd, padding:'12px 14px', border:`1px solid ${$border}`}}>
                   <div style={{fontSize:'0.68rem', color:$textMut, fontWeight:600, textTransform:'uppercase'}}>{k.l}</div>
@@ -54,7 +54,7 @@ export default function TabAnalytique(__props) {
             {/* Tabs */}
             <div style={{display:'flex', gap:6, marginBottom:14}}>
               {[{id:'rentabilite',l:'Rentabilité chantiers'},{id:'filiales',l:'Par filiale'},{id:'budget_vs_reel',l:'Budget vs Réalisé'}].map(t => (
-                <button key={t.id} onClick={() => setAnaTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: anaTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: anaTab===t.id ? '#faf6ef' : 'white', color: anaTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.l}</button>
+                <button key={t.id} onClick={() => setAnaTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: anaTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: anaTab===t.id ? $bgSub : $bgCard, color: anaTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.l}</button>
               ))}
             </div>
             {/* Tab: Rentabilité chantiers */}
@@ -174,7 +174,7 @@ export default function TabAnalytique(__props) {
                       <td style={{padding:'8px 10px'}}>{fmt(budgetCharges)}</td>
                       <td style={{padding:'8px 10px', fontWeight:600}}>{fmt(realCharges)}</td>
                       <td style={{padding:'8px 10px', color: ecartCh<=0?'#059669':'#dc2626', fontWeight:600}}>{ecartCh>=0?'+':''}{fmt(ecartCh)}</td>
-                      <td style={{padding:'8px 10px'}}><span style={{padding:'2px 8px',borderRadius:crmRd,fontWeight:700,fontSize:'0.72rem', background: perf>=10?'#dcfce7':perf>=0?'#fef3c7':'#fef2f2', color: perf>=10?'#15803d':perf>=0?'#a16207':'#dc2626'}}>{perf}%</span></td>
+                      <td style={{padding:'8px 10px'}}><span style={{padding:'2px 8px',borderRadius:crmRd,fontWeight:700,fontSize:'0.72rem', background: perf>=10?'rgba(34,197,94,0.14)':perf>=0?'rgba(212,160,48,0.18)':'rgba(239,68,68,0.10)', color: perf>=10?'#15803d':perf>=0?'#a16207':'#dc2626'}}>{perf}%</span></td>
                     </tr>;
                   })}</tbody>
                 </table>

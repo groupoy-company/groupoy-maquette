@@ -27,7 +27,7 @@ export default function TabOutils(__props) {
               >+ Outil</button>
           </div>
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(150px, 1fr))', gap:8, marginBottom:16}}>
-            {[{l:'Coût annuel total',v:totalAnnuel.toLocaleString('fr-FR')+'€',c:'#8B6F47',bg:'#faf6ef'},{l:'Outils actifs',v:data.filter(o=>o.statut==='actif').length,c:'#10b981',bg:'#f0fdf4'},{l:'Licences totales',v:totalLicences,c:'#3b82f6',bg:'#eff6ff'},{l:'Coût/mois moyen',v:Math.round(totalAnnuel/12).toLocaleString('fr-FR')+'€',c:'#f59e0b',bg:'#fffbeb'}].map((k,i)=>(
+            {[{l:'Coût annuel total',v:totalAnnuel.toLocaleString('fr-FR')+'€',c:'#8B6F47',bg:$bgSub},{l:'Outils actifs',v:data.filter(o=>o.statut==='actif').length,c:'#10b981',bg:'rgba(34,197,94,0.10)'},{l:'Licences totales',v:totalLicences,c:'#3b82f6',bg:'rgba(59,130,246,0.10)'},{l:'Coût/mois moyen',v:Math.round(totalAnnuel/12).toLocaleString('fr-FR')+'€',c:'#f59e0b',bg:'rgba(212,160,48,0.12)'}].map((k,i)=>(
               <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=$border;e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow=$shadow;}}

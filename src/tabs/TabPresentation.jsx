@@ -73,10 +73,10 @@ export default function TabPresentation(__props) {
                   </div>
                   <div style={{fontSize:'1.2rem',fontWeight:700,color:$text,marginBottom:16}}>Les 4 Niveaux de la Ruche</div>
                   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:32}}>{[
-                    {icon:'🌱',title:'ALVÉOLE',sub:'XXS → XS',desc:'Le terrain. L\'apprentissage et les fondations. CA : 0 à 1M€.',color:'#78350f',bg:'#fef3c7'},
+                    {icon:'🌱',title:'ALVÉOLE',sub:'XXS → XS',desc:'Le terrain. L\'apprentissage et les fondations. CA : 0 à 1M€.',color:'#78350f',bg:'rgba(212,160,48,0.18)'},
                     {icon:'🍯',title:'RAYON',sub:'S → M',desc:'L\'encadrement. Pilotage autonome de chantiers. CA : 1 à 3M€.',color:$accent,bg:$accent+'08'},
-                    {icon:'🏰',title:'RUCHE',sub:'L → XL',desc:'Le management. Direction d\'équipe et portefeuille. CA : 3 à 7,5M€.',color:'#9a3412',bg:'#fff7ed'},
-                    {icon:'👑',title:'RUCHER',sub:'XXL → XXXL',desc:'La direction. Pilotage d\'une filiale entière. CA : 7,5 à 15M€.',color:'#b91c1c',bg:'#fef2f2'},
+                    {icon:'🏰',title:'RUCHE',sub:'L → XL',desc:'Le management. Direction d\'équipe et portefeuille. CA : 3 à 7,5M€.',color:'#9a3412',bg:'rgba(249,115,22,0.10)'},
+                    {icon:'👑',title:'RUCHER',sub:'XXL → XXXL',desc:'La direction. Pilotage d\'une filiale entière. CA : 7,5 à 15M€.',color:'#b91c1c',bg:'rgba(239,68,68,0.10)'},
                   ].map((b,i)=>(<div key={i} style={{background:b.bg,borderRadius:crmRd,padding:'18px 20px',border:`1px solid ${b.color}20`,transition:'all 0.2s'}} onMouseEnter={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseLeave={e=>e.currentTarget.style.transform='translateY(0)'}>
                     <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}><div style={{width:38,height:38,borderRadius:crmRd,background:b.color+'12',display:'flex',alignItems:'center',justifyContent:'center'}}><span style={{fontSize:'1.2rem'}}>{b.icon}</span></div><div><div style={{fontWeight:800,fontSize:'0.92rem',color:b.color,letterSpacing:'0.04em'}}>{b.title}</div><div style={{fontSize:'0.68rem',color:$textMut}}>{b.sub}</div></div></div>
                     <div style={{fontSize:'0.88rem',color:$textSec,lineHeight:1.6}}>{b.desc}</div>

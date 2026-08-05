@@ -74,7 +74,7 @@ export default function TabVeilleAo(__props) {
           const renderVeillePanel = (ao) => {
                 if (!ao) return null;
                 const vs = VEILLE_STATUTS.find(s => s.id === ao.statut) || {};
-                const pInfo = { Haute:{color:'#ef4444',bg:'#fee2e2'}, Moyenne:{color:'#f59e0b',bg:'#fef3c7'}, Basse:{color:'#6366f1',bg:'#ede9fe'} }[ao.priorite] || {color:'#64748b',bg:'#f1f5f9'};
+                const pInfo = { Haute:{color:'#ef4444',bg:'rgba(239,68,68,0.14)'}, Moyenne:{color:'#f59e0b',bg:'rgba(212,160,48,0.18)'}, Basse:{color:'#6366f1',bg:'rgba(139,92,246,0.14)'} }[ao.priorite] || {color:'#64748b',bg:'rgba(241,245,249,0.14)'};
                 const srcColor = { SPIGAO:'#e65100', BOAMP:'#000091', Autre:'#78909c' }[ao.source] || '#64748b';
                 const dlMs = ao.dateLimite ? new Date(ao.dateLimite).getTime() - Date.now() : null;
                 const dlDays = dlMs !== null ? Math.ceil(dlMs/86400000) : null;
@@ -102,8 +102,8 @@ export default function TabVeilleAo(__props) {
                             <span style={{padding:'2px 8px', borderRadius:8, background:pInfo.bg, color:pInfo.color, fontSize:'0.7rem', fontWeight:700}}>{ao.priorite}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:typeColor+'15', color:typeColor, fontSize:'0.7rem', fontWeight:700, border:`1px solid ${typeColor}30`}}>{ao.type === 'Public' ? '🏛️' : ao.type === 'Privé' ? '🏢' : '🏠'} {ao.type}</span>
                             <span style={{padding:'2px 8px', borderRadius:8, background:srcColor+'15', color:srcColor, fontSize:'0.7rem', fontWeight:700}}>{ao.source}</span>
-                            {dlDays !== null && dlDays >= 0 && dlDays <= 7 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fee2e2', color:'#dc2626', fontSize:'0.7rem', fontWeight:700}}>⏰ J-{dlDays}</span>}
-                            {dlDays !== null && dlDays < 0 && <span style={{padding:'2px 8px', borderRadius:8, background:'#fef3c7', color:'#92400e', fontSize:'0.7rem', fontWeight:700}}>⚠️ Expirée</span>}
+                            {dlDays !== null && dlDays >= 0 && dlDays <= 7 && <span style={{padding:'2px 8px', borderRadius:8, background:'rgba(239,68,68,0.14)', color:'#dc2626', fontSize:'0.7rem', fontWeight:700}}>⏰ J-{dlDays}</span>}
+                            {dlDays !== null && dlDays < 0 && <span style={{padding:'2px 8px', borderRadius:8, background:'rgba(212,160,48,0.18)', color:'#92400e', fontSize:'0.7rem', fontWeight:700}}>⚠️ Expirée</span>}
                           </div>
                         </div>
                         <div style={{display:'flex', gap:6, flexShrink:0, marginLeft:14}}>
@@ -383,7 +383,7 @@ export default function TabVeilleAo(__props) {
 
             {/* === FORMULAIRE SAISIE MANUELLE === */}
             {veilleFormOpen && (<div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(15,23,42,0.35)', zIndex:200, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setVeilleFormOpen(false)}>
-              <div onClick={e => e.stopPropagation()} style={{background:'#fff', borderRadius:crmRd, width:560, maxHeight:'90vh', overflowY:'auto', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:'1px solid #e2e8f0'}}>
+              <div onClick={e => e.stopPropagation()} style={{background:$bgCard, borderRadius:crmRd, width:560, maxHeight:'90vh', overflowY:'auto', boxShadow:'0 20px 60px rgba(0,0,0,0.15)', border:'1px solid #e2e8f0'}}>
                 <div style={{padding:'20px 24px 16px', borderBottom:`1px solid ${$border}`, display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                   <div>
                     <h3 style={{margin:0, fontSize:'1.05rem', fontWeight:700, color:$text}}>Nouvelle Affaire</h3>
@@ -588,9 +588,9 @@ export default function TabVeilleAo(__props) {
             {/* === TABLE CLEAN === */}
               {(() => {
                 const toggleGrp = (sid) => setVeilleGroupesFermes(prev => prev.includes(sid) ? prev.filter(x => x !== sid) : [...prev, sid]);
-                const prioStyle = { 'Critique ⚠️️': { color:'#333', bg:'#f3f3f3' }, Haute: { color: '#401694', bg: '#ede9fe' }, Moyenne: { color: '#d97706', bg: '#fef3c7' }, Basse: { color: '#2563eb', bg: '#dbeafe' } };
-                const typeColors = { Public: { color:'#0055cc', bg:'#e0f0ff', emoji:'🏛️' }, 'Privé': { color:'#166534', bg:'#dcfce7', emoji:'🏢' }, Particulier: { color:'#7c3aed', bg:'#f3e8ff', emoji:'🏠' } };
-                const sourceStyle = { SPIGAO: { color: '#e65100', bg: '#fff3e0' }, BOAMP: { color: '#000091', bg: '#e3f2fd' }, Autre: { color: '#546e7a', bg: '#eceff1' } };
+                const prioStyle = { 'Critique ⚠️️': { color:'#333', bg:'rgba(243,243,243,0.14)' }, Haute: { color: '#401694', bg: 'rgba(139,92,246,0.14)' }, Moyenne: { color: '#d97706', bg: 'rgba(212,160,48,0.18)' }, Basse: { color: '#2563eb', bg: 'rgba(59,130,246,0.14)' } };
+                const typeColors = { Public: { color:'#0055cc', bg:'rgba(224,240,255,0.14)', emoji:'🏛️' }, 'Privé': { color:'#166534', bg:'rgba(34,197,94,0.14)', emoji:'🏢' }, Particulier: { color:'#7c3aed', bg:'rgba(139,92,246,0.14)', emoji:'🏠' } };
+                const sourceStyle = { SPIGAO: { color: '#e65100', bg: 'rgba(255,243,224,0.14)' }, BOAMP: { color: '#000091', bg: 'rgba(227,242,253,0.14)' }, Autre: { color: '#546e7a', bg: 'rgba(236,239,241,0.14)' } };
                 const personColors = { pierre: '#e65100', david: '#1565c0', ozdogan: '#6a1b9a' };
                 const personInitials = { pierre: 'PS', david: 'DL', ozdogan: 'OY' };
                 const VCOL_DEFS = {
@@ -732,7 +732,7 @@ export default function TabVeilleAo(__props) {
                                           <SourceLogo name={ao.source} size={16} />{ao.source}
                                         </div>
                                         {veilleSourceDropdown === ao.id && (<div className="veille-dropdown-zone" onClick={e => e.stopPropagation()} style={{position:'absolute', top:'100%', left:8, zIndex:80, background:$bgCard, borderRadius:crmRd, border:'1px solid #e2e8f0', boxShadow:'0 4px 16px rgba(0,0,0,0.08)', padding:4, minWidth:120}}>
-                                          {['SPIGAO','BOAMP','Autre'].map(s => (<div key={s} onClick={(ev) => { ev.stopPropagation(); updateAO(ao.id, 'source', s); setVeilleSourceDropdown(null); }} style={{padding:'5px 10px', borderRadius:crmRd, cursor:'pointer', fontSize:TXT.md, fontWeight: ao.source === s ? 600 : 400, color: sourceStyle[s]?.color || '#666', background: ao.source === s ? '#faf8f5' : 'transparent', display:'flex', alignItems:'center', gap:6}} onMouseOver={ev => ev.currentTarget.style.background='#faf8f5'} onMouseOut={ev => { if(ao.source !== s) ev.currentTarget.style.background='transparent'; }}>
+                                          {['SPIGAO','BOAMP','Autre'].map(s => (<div key={s} onClick={(ev) => { ev.stopPropagation(); updateAO(ao.id, 'source', s); setVeilleSourceDropdown(null); }} style={{padding:'5px 10px', borderRadius:crmRd, cursor:'pointer', fontSize:TXT.md, fontWeight: ao.source === s ? 600 : 400, color: sourceStyle[s]?.color || '#666', background: ao.source === s ? $bgSub : 'transparent', display:'flex', alignItems:'center', gap:6}} onMouseOver={ev => ev.currentTarget.style.background='#faf8f5'} onMouseOut={ev => { if(ao.source !== s) ev.currentTarget.style.background='transparent'; }}>
                                             <SourceLogo name={s} size={14} />{s}{ao.source === s && <span style={{marginLeft:'auto', color:'#22c55e', fontSize:11}}>✓</span>}
                                           </div>))}
                                         </div>)}
@@ -741,7 +741,7 @@ export default function TabVeilleAo(__props) {
                                     case 'client': return (<td key={colId} {...frzAttr} style={{...base, cursor:'pointer'}} onClick={(e)=>{e.stopPropagation();setVeilleSelectedAO(prev=>prev===ao.id?null:ao.id);}}><span style={{fontSize:TXT.md, fontWeight:400, color:$text}}>{ao.acheteur}</span></td>);
                                     case 'objet': return (<td key={colId} {...frzAttr} onClick={(e)=>{e.stopPropagation();setVeilleSelectedAO(prev=>prev===ao.id?null:ao.id);}} style={{...base, cursor:'pointer'}}><span style={{fontSize:TXT.md, fontWeight:400, color:$text}}>{ao.titre}</span></td>);
                                     case 'type': {
-                                      const tmCfgV = typeColors[ao.type] || { color:$textSec, bg:'#f3f4f6' };
+                                      const tmCfgV = typeColors[ao.type] || { color:$textSec, bg:$bgSub };
                                       const TM_ORDER_V = ['Public','Privé','Particulier'];
                                       return (<td key={colId} {...frzAttr} style={{...base, textAlign:'center'}}>
                                         <div onClick={e => { e.stopPropagation(); const idx = TM_ORDER_V.indexOf(ao.type); updateAO(ao.id, 'type', TM_ORDER_V[(idx+1)%TM_ORDER_V.length]); }} title="Cliquer pour changer" style={{display:'inline-flex', alignItems:'center', gap:4, cursor:'pointer', userSelect:'none'}}>
@@ -775,7 +775,7 @@ export default function TabVeilleAo(__props) {
                                               <div key={vs.id}
                                                 onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); setVeilleStatGrab(idx); }}
                                                 onClick={(e) => { e.stopPropagation(); if (veilleStatGrab === null) { updateAO(ao.id, 'statut', vs.id); setVeilleStatCellOpen(null); } }}
-                                                style={{display:'flex', alignItems:'center', gap:6, padding:'5px 10px', height:VSTAT_H, boxSizing:'border-box', cursor: veilleStatGrab !== null ? 'grabbing' : 'pointer', opacity: isGrabbed ? 0.35 : 1, background: isCurrent ? '#f0ebe3' : (isOverItem ? '#eef2ff' : 'transparent'), borderTop: isOverItem ? '2px solid #818cf8' : '2px solid transparent', userSelect:'none', transition:'background 0.08s'}}>
+                                                style={{display:'flex', alignItems:'center', gap:6, padding:'5px 10px', height:VSTAT_H, boxSizing:'border-box', cursor: veilleStatGrab !== null ? 'grabbing' : 'pointer', opacity: isGrabbed ? 0.35 : 1, background: isCurrent ? $border : (isOverItem ? '#eef2ff' : 'transparent'), borderTop: isOverItem ? '2px solid #818cf8' : '2px solid transparent', userSelect:'none', transition:'background 0.08s'}}>
                                                 <svg width="6" height="10" viewBox="0 0 6 10" style={{flexShrink:0, opacity:0.25, cursor:'grab'}}><circle cx="1.5" cy="1.5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="1.5" r="1" fill="#b0a08a"/><circle cx="1.5" cy="5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="5" r="1" fill="#b0a08a"/><circle cx="1.5" cy="8.5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="8.5" r="1" fill="#b0a08a"/></svg>
                                                 <span style={{width:7, height:7, borderRadius:'50%', background:vs.color, flexShrink:0}}></span>
                                                 <span style={{fontSize:TXT.sm, color:$text, flex:1}}>{vs.icon} {vs.label}</span>
@@ -840,7 +840,7 @@ export default function TabVeilleAo(__props) {
                                         return (<td key={colId} {...frzAttr} style={{...base, textAlign:'center'}}>
                                           <div style={{display:'inline-flex', alignItems:'center', gap:4}}>
                                             <span style={{fontSize:TXT.md, fontWeight:400, color:'#059669'}}>✅ Transféré</span>
-                                            <button onClick={ev => { ev.stopPropagation(); handleDecision(ao.id, 'a_decider'); }} title="Annuler" style={{width:14, height:14, borderRadius:3, border:'1px solid #fca5a5', background:'#fee2e2', cursor:'pointer', display:'inline-flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:8, color:'#dc2626', lineHeight:1}}>✕</button>
+                                            <button onClick={ev => { ev.stopPropagation(); handleDecision(ao.id, 'a_decider'); }} title="Annuler" style={{width:14, height:14, borderRadius:3, border:'1px solid #fca5a5', background:'rgba(239,68,68,0.14)', cursor:'pointer', display:'inline-flex', alignItems:'center', justifyContent:'center', padding:0, fontSize:8, color:'#dc2626', lineHeight:1}}>✕</button>
                                           </div>
                                         </td>);
                                       }
@@ -870,7 +870,7 @@ export default function TabVeilleAo(__props) {
                                               <div key={dId}
                                                 onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); setVeilleDecGrab(idx); }}
                                                 onClick={(e) => { e.stopPropagation(); if (veilleDecGrab === null) { handleDecision(ao.id, dId); setVeilleDecCellOpen(null); } }}
-                                                style={{display:'flex', alignItems:'center', gap:6, padding:'5px 10px', height:DEC_H, boxSizing:'border-box', cursor: veilleDecGrab !== null ? 'grabbing' : 'pointer', opacity: isGrabbed ? 0.35 : 1, background: isCurrent ? '#f0ebe3' : (isOverItem ? '#eef2ff' : 'transparent'), borderTop: isOverItem ? '2px solid #818cf8' : '2px solid transparent', userSelect:'none', transition:'background 0.08s'}}>
+                                                style={{display:'flex', alignItems:'center', gap:6, padding:'5px 10px', height:DEC_H, boxSizing:'border-box', cursor: veilleDecGrab !== null ? 'grabbing' : 'pointer', opacity: isGrabbed ? 0.35 : 1, background: isCurrent ? $border : (isOverItem ? '#eef2ff' : 'transparent'), borderTop: isOverItem ? '2px solid #818cf8' : '2px solid transparent', userSelect:'none', transition:'background 0.08s'}}>
                                                 <svg width="6" height="10" viewBox="0 0 6 10" style={{flexShrink:0, opacity:0.25, cursor:'grab'}}><circle cx="1.5" cy="1.5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="1.5" r="1" fill="#b0a08a"/><circle cx="1.5" cy="5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="5" r="1" fill="#b0a08a"/><circle cx="1.5" cy="8.5" r="1" fill="#b0a08a"/><circle cx="4.5" cy="8.5" r="1" fill="#b0a08a"/></svg>
                                                 <span style={{fontSize:TXT.sm, color:dv.color||'#334155', flex:1}}>{dv.icon} {dv.label}</span>
                                                 {isCurrent && <span style={{fontSize:'0.7rem', color:'#3b82f6'}}>✓</span>}

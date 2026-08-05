@@ -5,10 +5,10 @@ export default function TabFactInterne(__props) {
   const { $accent, $bgCard, $bgSub, $border, $borderAlt, $success, $text, $textMut, $textSec, CONDITIONS_PAIEMENT, ca, crmRd, deleteFacture, factIntData, factIntPreview, factIntStyle, factIntTab, filialesEnrichies, genererFacture, getKpiFiliale, handlePrint, servicesYilmaz, setFactIntPreview, setFactIntStyle, setFactIntTab, toggleFactIntService, updateFactIntConfig, updateFacture } = __props;
         const { config, factures } = factIntData;
         const cardStyle = {background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', overflow:'hidden'};
-        const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:'#fefdfb'};
+        const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:$bgCard};
         const lbS = {display:'block', fontSize:'0.75rem', fontWeight:600, color:$textMut, marginBottom:3, textTransform:'uppercase'};
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(2)+'M€' : v >= 1000 ? (v/1000).toFixed(1)+'K€' : v.toFixed(0)+'€';
-        const statutColors = { brouillon: {bg:'#fef3c7', color:'#92400e', label:'📝 Brouillon'}, envoyee: {bg:'#dbeafe', color:'#1e40af', label:'📤 Envoyée'}, payee: {bg:'#dcfce7', color:'#166534', label:'✅ Payée'}, retard: {bg:'#fecaca', color:'#991b1b', label:'⚠️ En retard'} };
+        const statutColors = { brouillon: {bg:'rgba(212,160,48,0.18)', color:'#92400e', label:'📝 Brouillon'}, envoyee: {bg:'rgba(59,130,246,0.14)', color:'#1e40af', label:'📤 Envoyée'}, payee: {bg:'rgba(34,197,94,0.14)', color:'#166534', label:'✅ Payée'}, retard: {bg:'rgba(239,68,68,0.22)', color:'#991b1b', label:'⚠️ En retard'} };
         const totalForfaitMensuel = config.filter(c=>c.actif).reduce((s,c) => s + c.forfaitMensuel, 0);
         const totalVariableEstime = config.filter(c=>c.actif).reduce((s,c) => {
           const fil = filialesEnrichies.find(f => f.nom === c.filialeNom);
@@ -37,7 +37,7 @@ export default function TabFactInterne(__props) {
               </div>
               <div style={{display:'flex', gap:8}}>
                 {['dashboard','factures','config'].map(t => (
-                  <button key={t} onClick={() => setFactIntTab(t)} style={{padding:'8px 14px', borderRadius:crmRd, border: factIntTab === t ? '2px solid #059669' : `1px solid ${$borderAlt}`, background: factIntTab === t ? '#f0fdf4' : 'white', color: factIntTab === t ? '#059669' : '#6b5d4d', fontWeight: factIntTab === t ? 700 : 500, fontSize:'0.88rem', cursor:'pointer'}}>
+                  <button key={t} onClick={() => setFactIntTab(t)} style={{padding:'8px 14px', borderRadius:crmRd, border: factIntTab === t ? '2px solid #059669' : `1px solid ${$borderAlt}`, background: factIntTab === t ? 'rgba(34,197,94,0.10)' : $bgCard, color: factIntTab === t ? '#059669' : '#6b5d4d', fontWeight: factIntTab === t ? 700 : 500, fontSize:'0.88rem', cursor:'pointer'}}>
                     {t === 'dashboard' ? '📊 Dashboard' : t === 'factures' ? '📋 Factures' : '⚙️ Config'}
                   </button>
                 ))}
@@ -82,7 +82,7 @@ export default function TabFactInterne(__props) {
                       const ca = fil ? getKpiFiliale(fil).ca : 0;
                       const varEst = Math.round(ca * cfg.tauxVariable / 100 / 12);
                       return (
-                        <tr key={cfg.filialeNom} style={{background: i%2===0 ? 'white' : '#fefdfb'}}>
+                        <tr key={cfg.filialeNom} style={{background: i%2===0 ? $bgCard : $bgCard}}>
                           <td style={{padding:'10px 12px', fontWeight:700, color:$text, borderBottom:`1px solid ${$border}`}}>{cfg.filialeNom}</td>
                           <td style={{padding:'10px 12px', textAlign:'right', fontWeight:600, color:$accent, borderBottom:`1px solid ${$border}`}}>{fmt(cfg.forfaitMensuel)}</td>
                           <td style={{padding:'10px 12px', textAlign:'right', color:'#7c3aed', fontWeight:600, borderBottom:`1px solid ${$border}`}}>{cfg.tauxVariable}%</td>
@@ -97,7 +97,7 @@ export default function TabFactInterne(__props) {
                               })}
                             </div>
                           </td>
-                          <td style={{padding:'10px 12px', borderBottom:`1px solid ${$border}`}}><span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background:'#dcfce7', color:'#166534', fontWeight:600}}>Actif</span></td>
+                          <td style={{padding:'10px 12px', borderBottom:`1px solid ${$border}`}}><span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background:'rgba(34,197,94,0.14)', color:'#166534', fontWeight:600}}>Actif</span></td>
                         </tr>
                       );
                     })}
@@ -137,7 +137,7 @@ export default function TabFactInterne(__props) {
                       {factures.slice(0, 8).map((f, i) => {
                         const st = statutColors[f.statut] || statutColors.brouillon;
                         return (
-                          <tr key={f.id} onClick={() => setFactIntPreview(f)} style={{background: i%2===0 ? 'white' : '#fefdfb', cursor:'pointer', transition:'background 0.15s'}} onMouseOver={e => e.currentTarget.style.background='#fef3c7'} onMouseOut={e => e.currentTarget.style.background= i%2===0 ? 'white' : '#fefdfb'}>
+                          <tr key={f.id} onClick={() => setFactIntPreview(f)} style={{background: i%2===0 ? $bgCard : $bgCard, cursor:'pointer', transition:'background 0.15s'}} onMouseOver={e => e.currentTarget.style.background='#fef3c7'} onMouseOut={e => e.currentTarget.style.background= i%2===0 ? 'white' : '#fefdfb'}>
                             <td style={{padding:'8px 10px', fontWeight:600, color:$accent, borderBottom:`1px solid ${$border}`, fontSize:'0.82rem'}}>{f.id}</td>
                             <td style={{padding:'8px 10px', fontWeight:600, color:$text, borderBottom:`1px solid ${$border}`}}>{f.filiale}</td>
                             <td style={{padding:'8px 10px', color:$textSec, borderBottom:`1px solid ${$border}`}}>{f.periode}</td>
@@ -205,7 +205,7 @@ export default function TabFactInterne(__props) {
                       {factures.map((f, i) => {
                         const st = statutColors[f.statut] || statutColors.brouillon;
                         return (
-                          <tr key={f.id} style={{background: i%2===0 ? 'white' : '#fefdfb'}}>
+                          <tr key={f.id} style={{background: i%2===0 ? $bgCard : $bgCard}}>
                             <td onClick={() => setFactIntPreview(f)} style={{padding:'8px 10px', fontWeight:600, color:$accent, borderBottom:`1px solid ${$border}`, fontSize:'0.82rem', cursor:'pointer', textDecoration:'underline'}}>{f.id}</td>
                             <td style={{padding:'8px 10px', fontWeight:600, color:$text, borderBottom:`1px solid ${$border}`}}>{f.filiale}</td>
                             <td style={{padding:'8px 10px', color:$textSec, borderBottom:`1px solid ${$border}`}}>{f.periode}</td>
@@ -222,7 +222,7 @@ export default function TabFactInterne(__props) {
                                   <option value="payee">✅ Payée</option>
                                   <option value="retard">⚠️ En retard</option>
                                 </select>
-                                <button onClick={() => deleteFacture(f.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'none', background:'#fecaca', color:'#dc2626', fontSize:'0.75rem', cursor:'pointer'}}>🗑️</button>
+                                <button onClick={() => deleteFacture(f.id)} style={{padding:'3px 6px', borderRadius:crmRd, border:'none', background:'rgba(239,68,68,0.22)', color:'#dc2626', fontSize:'0.75rem', cursor:'pointer'}}>🗑️</button>
                               </div>
                             </td>
                           </tr>
@@ -252,11 +252,11 @@ export default function TabFactInterne(__props) {
                 </div>
                 <div style={{display:'flex', flexDirection:'column', gap:16}}>
                   {config.map((cfg, i) => (
-                    <div key={cfg.filialeNom} style={{border:`1px solid ${$border}`, borderRadius:crmRd, padding:16, background: cfg.actif ? 'white' : '#faf8f5'}}>
+                    <div key={cfg.filialeNom} style={{border:`1px solid ${$border}`, borderRadius:crmRd, padding:16, background: cfg.actif ? $bgCard : $bgSub}}>
                       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12}}>
                         <div style={{display:'flex', alignItems:'center', gap:10}}>
                           <span style={{fontSize:'1.1rem', fontWeight:800, color:$text}}>{cfg.filialeNom}</span>
-                          <span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background: cfg.actif ? '#dcfce7' : '#fef3c7', color: cfg.actif ? '#166534' : '#92400e', fontWeight:600}}>{cfg.actif ? '✅ Actif' : '⏸️ Inactif'}</span>
+                          <span style={{fontSize:'0.75rem', padding:'2px 8px', borderRadius:crmRd, background: cfg.actif ? 'rgba(34,197,94,0.14)' : 'rgba(212,160,48,0.18)', color: cfg.actif ? '#166534' : '#92400e', fontWeight:600}}>{cfg.actif ? '✅ Actif' : '⏸️ Inactif'}</span>
                         </div>
                         <label style={{display:'flex', alignItems:'center', gap:6, cursor:'pointer', fontSize:'0.85rem', color:$textSec}}>
                           <input type="checkbox" checked={cfg.actif} onChange={e => updateFactIntConfig(i, 'actif', e.target.checked)} style={{width:16, height:16, accentColor:'#059669'}} />
@@ -294,7 +294,7 @@ export default function TabFactInterne(__props) {
                             {servicesYilmaz.map(svc => {
                               const active = cfg.services.includes(svc.id);
                               return (
-                                <button key={svc.id} onClick={() => toggleFactIntService(i, svc.id)} style={{display:'flex', alignItems:'center', gap:5, padding:'6px 10px', borderRadius:crmRd, border: active ? `2px solid ${svc.color}` : `1px solid ${$borderAlt}`, background: active ? `${svc.color}10` : 'white', color: active ? svc.color : '#b0a08a', fontWeight: active ? 600 : 400, fontSize:'0.73rem', cursor:'pointer', transition:'all 0.15s'}}>
+                                <button key={svc.id} onClick={() => toggleFactIntService(i, svc.id)} style={{display:'flex', alignItems:'center', gap:5, padding:'6px 10px', borderRadius:crmRd, border: active ? `2px solid ${svc.color}` : `1px solid ${$borderAlt}`, background: active ? `${svc.color}10` : $bgCard, color: active ? svc.color : '#b0a08a', fontWeight: active ? 600 : 400, fontSize:'0.73rem', cursor:'pointer', transition:'all 0.15s'}}>
                                   <span>{svc.icon}</span> {svc.label}
                                 </button>
                               );
@@ -355,7 +355,7 @@ export default function TabFactInterne(__props) {
                   : { bar:'linear-gradient(90deg,#8B6F47,#c9b896,#8B6F47)', logo:'#8B6F47', logoSub:'#9b9590', sep:'linear-gradient(90deg,#f0ebe3,#d4d0c8,#f0ebe3)', refLbl:'#b0a08a', refNum:'#8B6F47', refDate:'#6b5d4d',
                       partyBg:'#faf8f5', partyBrd:'#f0ebe3', partyTitle:'#b0a08a', partyName:'#2d2216', partyAddr:'#6b5d4d',
                       objetBg:'#fef9e7', objetBrd:'#f0e6c0', objetTxt:'#92400e', objetStrong:'#92400e',
-                      svcTitle:'#b0a08a', tagBg:'linear-gradient(135deg,#f5f0e8,#ede8df)', tagBrd:'#e8e4de', tagTxt:'#6b5d4d',
+                      svcTitle:'#b0a08a', tagBg:'linear-gradient(135deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))', tagBrd:'#e8e4de', tagTxt:'#6b5d4d',
                       thBg:'#faf8f5', thBrd:'2px solid #f0ebe3', thTxt:'#b0a08a',
                       htBg:'#f0fdf4', htBrd:'none',
                       tvaTxt:'#6b5d4d',
@@ -453,8 +453,8 @@ export default function TabFactInterne(__props) {
                         <div style={{fontSize:'0.85rem', color:$textMut, display:'flex', alignItems:'center', gap:8}}>
                           {moisNoms[f.mois]} {f.annee} — {f.filiale}
                           <div style={{display:'flex', borderRadius:crmRd, overflow:'hidden', border:'1px solid #e0e0e0', marginLeft:6}}>
-                            <button onClick={() => setFactIntStyle('noir')} style={{padding:'2px 8px', fontSize:'0.72rem', fontWeight:700, border:'none', cursor:'pointer', background: factIntStyle==='noir' ? '#1a1a1a' : '#f5f5f5', color: factIntStyle==='noir' ? 'white' : '#999'}}>NOIR</button>
-                            <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'2px 8px', fontSize:'0.72rem', fontWeight:700, border:'none', cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : '#f5f5f5', color: factIntStyle==='groupoy' ? 'white' : '#999'}}>OY</button>
+                            <button onClick={() => setFactIntStyle('noir')} style={{padding:'2px 8px', fontSize:'0.72rem', fontWeight:700, border:'none', cursor:'pointer', background: factIntStyle==='noir' ? '#1a1a1a' : $bgSub, color: factIntStyle==='noir' ? 'white' : '#999'}}>NOIR</button>
+                            <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'2px 8px', fontSize:'0.72rem', fontWeight:700, border:'none', cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : $bgSub, color: factIntStyle==='groupoy' ? 'white' : '#999'}}>OY</button>
                           </div>
                         </div>
                       </div>
@@ -485,12 +485,12 @@ export default function TabFactInterne(__props) {
 
                       {/* Parties */}
                       <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:16, marginBottom:28}}>
-                        <div style={{padding:16, background: factIntStyle==='noir' ? 'white' : '#faf8f5', borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`}}>
+                        <div style={{padding:16, background: factIntStyle==='noir' ? $bgCard : $bgSub, borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`}}>
                           <div style={{fontSize:'0.7rem', textTransform:'uppercase', letterSpacing:1.5, color: factIntStyle==='noir' ? '#999' : '#b0a08a', fontWeight:700, marginBottom:6}}>Émetteur</div>
                           <div style={{fontSize:'0.9rem', fontWeight:700, color:'#1a1a1a'}}>YILMAZ SAS</div>
                           <div style={{fontSize:'0.85rem', color:'#666', lineHeight:1.6}}>Services Partagés<br/>Group OY<br/>12 rue de l'Industrie<br/>67190 Mutzig</div>
                         </div>
-                        <div style={{padding:16, background: factIntStyle==='noir' ? 'white' : '#faf8f5', borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`}}>
+                        <div style={{padding:16, background: factIntStyle==='noir' ? $bgCard : $bgSub, borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`}}>
                           <div style={{fontSize:'0.7rem', textTransform:'uppercase', letterSpacing:1.5, color: factIntStyle==='noir' ? '#999' : '#b0a08a', fontWeight:700, marginBottom:6}}>Destinataire</div>
                           <div style={{fontSize:'0.9rem', fontWeight:700, color:'#1a1a1a'}}>{f.filiale}</div>
                           <div style={{fontSize:'0.85rem', color:'#666', lineHeight:1.6}}>Filiale Group OY<br/>67190 Mutzig</div>
@@ -505,21 +505,21 @@ export default function TabFactInterne(__props) {
                             const svc = servicesYilmaz.find(s => s.id === sId);
                             if (!svc) return null;
                             return factIntStyle==='noir'
-                              ? <span key={sId} style={{padding:'4px 12px', borderRadius:crmRd, background:'#f0f0f0', border:'1px solid #e0e0e0', color:$text, fontSize:'0.8rem', fontWeight:600}}>{svc.label}</span>
+                              ? <span key={sId} style={{padding:'4px 12px', borderRadius:crmRd, background:'rgba(240,240,240,0.14)', border:'1px solid #e0e0e0', color:$text, fontSize:'0.8rem', fontWeight:600}}>{svc.label}</span>
                               : <span key={sId} style={{padding:'4px 10px', borderRadius:crmRd, background:`${svc.color}12`, color: svc.color, fontSize:'0.82rem', fontWeight:600}}>{svc.icon} {svc.label}</span>;
                           })}
                         </div>
                       </div>
 
                       {/* Objet */}
-                      <div style={{background: factIntStyle==='noir' ? '#f7f7f7' : '#fef9e7', border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`, borderRadius:crmRd, padding:'10px 16px', marginBottom:20, fontSize:'0.88rem', color: factIntStyle==='noir' ? '#444' : '#92400e'}}>
+                      <div style={{background: factIntStyle==='noir' ? $bgSub : '#fef9e7', border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`, borderRadius:crmRd, padding:'10px 16px', marginBottom:20, fontSize:'0.88rem', color: factIntStyle==='noir' ? '#444' : '#92400e'}}>
                         <strong>Objet :</strong> Prestations de services partagés YILMAZ pour la période de {moisNoms[f.mois]} {f.annee}
                       </div>
 
                       {/* Tableau montants */}
                       <table style={{width:'100%', borderCollapse:'collapse', marginBottom:24}}>
                         <thead>
-                          <tr style={{background: factIntStyle==='noir' ? 'transparent' : '#faf8f5'}}>
+                          <tr style={{background: factIntStyle==='noir' ? 'transparent' : $bgSub}}>
                             <th style={{position:'relative',padding:'12px 14px', textAlign:'left', fontSize:'0.82rem', fontWeight:600, color: factIntStyle==='noir' ? '#999' : '#b0a08a', borderBottom: factIntStyle==='noir' ? '2px solid #1a1a1a' : '2px solid #f0ebe3'}}>Désignation<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th>
                             <th style={{position:'relative',padding:'12px 14px', textAlign:'right', fontSize:'0.82rem', fontWeight:600, color: factIntStyle==='noir' ? '#999' : '#b0a08a', borderBottom: factIntStyle==='noir' ? '2px solid #1a1a1a' : '2px solid #f0ebe3'}}>Montant HT<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th>
                           </tr>
@@ -541,15 +541,15 @@ export default function TabFactInterne(__props) {
                             <td style={{padding:'12px 14px', fontSize:'0.92rem', color:$textSec, borderBottom:`1px solid ${$border}`}}>TVA (20%)</td>
                             <td style={{padding:'12px 14px', textAlign:'right', fontSize:'0.95rem', color: factIntStyle==='noir' ? '#888' : '#6b5d4d', borderBottom:'1px solid #eee'}}>{tva.toLocaleString('fr-FR')} €</td>
                           </tr>
-                          <tr style={{background:'#dcfce7'}}>
-                            <td style={{padding:'14px', fontWeight:800, fontSize:'0.95rem', color: factIntStyle==='noir' ? 'white' : '#059669', background: factIntStyle==='noir' ? '#1a1a1a' : '#dcfce7', borderRadius: factIntStyle==='noir' ? '6px 0 0 6px' : 0}}>TOTAL TTC</td>
-                            <td style={{padding:'14px', textAlign:'right', fontWeight:800, fontSize:'1.15rem', color: factIntStyle==='noir' ? 'white' : '#059669', background: factIntStyle==='noir' ? '#1a1a1a' : '#dcfce7', borderRadius: factIntStyle==='noir' ? '0 6px 6px 0' : 0}}>{ttc.toLocaleString('fr-FR')} €</td>
+                          <tr style={{background:'rgba(34,197,94,0.14)'}}>
+                            <td style={{padding:'14px', fontWeight:800, fontSize:'0.95rem', color: factIntStyle==='noir' ? 'white' : '#059669', background: factIntStyle==='noir' ? '#1a1a1a' : 'rgba(34,197,94,0.14)', borderRadius: factIntStyle==='noir' ? '6px 0 0 6px' : 0}}>TOTAL TTC</td>
+                            <td style={{padding:'14px', textAlign:'right', fontWeight:800, fontSize:'1.15rem', color: factIntStyle==='noir' ? 'white' : '#059669', background: factIntStyle==='noir' ? '#1a1a1a' : 'rgba(34,197,94,0.14)', borderRadius: factIntStyle==='noir' ? '0 6px 6px 0' : 0}}>{ttc.toLocaleString('fr-FR')} €</td>
                           </tr>
                         </tbody>
                       </table>
 
                       {/* Conditions de paiement */}
-                      <div style={{padding:'12px 16px', background: factIntStyle==='noir' ? 'white' : '#faf8f5', borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`, marginBottom:12}}>
+                      <div style={{padding:'12px 16px', background: factIntStyle==='noir' ? $bgCard : $bgSub, borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : `1px solid ${$border}`, marginBottom:12}}>
                         <div style={{fontSize:'0.72rem', textTransform:'uppercase', letterSpacing:1.5, color: factIntStyle==='noir' ? '#999' : '#b0a08a', fontWeight:700, marginBottom:6}}>Conditions de paiement</div>
                         <div style={{fontSize:'0.8rem', color: factIntStyle==='noir' ? '#666' : '#6b5d4d', lineHeight:1.8}}>
                           Règlement à 30 jours date de facture par virement bancaire.<br/>
@@ -558,7 +558,7 @@ export default function TabFactInterne(__props) {
                       </div>
 
                       {/* RIB */}
-                      <div style={{padding:'10px 16px', background: factIntStyle==='noir' ? '#f7f7f7' : '#eff6ff', borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : '1px solid #bfdbfe', marginBottom:16}}>
+                      <div style={{padding:'10px 16px', background: factIntStyle==='noir' ? $bgSub : 'rgba(59,130,246,0.10)', borderRadius:crmRd, border: factIntStyle==='noir' ? '1px solid #e5e5e5' : '1px solid #bfdbfe', marginBottom:16}}>
                         <div style={{fontSize:'0.72rem', textTransform:'uppercase', letterSpacing:1.5, color: factIntStyle==='noir' ? '#999' : '#3b82f6', fontWeight:700, marginBottom:4}}>Coordonnées bancaires</div>
                         <div style={{fontSize:'0.8rem', color: factIntStyle==='noir' ? '#1a1a1a' : '#1e40af', fontFamily:'monospace'}}>IBAN : FR76 XXXX XXXX XXXX XXXX XXXX XXX &nbsp;&nbsp; BIC : XXXXXXXX</div>
                       </div>
@@ -581,8 +581,8 @@ export default function TabFactInterne(__props) {
                           <option value="retard">⚠️ En retard</option>
                         </select>
                         <div style={{display:'flex', borderRadius:crmRd, overflow:'hidden', border:`1px solid ${$borderAlt}`}}>
-                          <button onClick={() => setFactIntStyle('noir')} style={{padding:'5px 12px', border:'none', fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='noir' ? '#1a1a1a' : 'white', color: factIntStyle==='noir' ? 'white' : '#999', transition:'all 0.2s'}}>⬛ Noir</button>
-                          <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'5px 12px', border:'none', borderLeft:`1px solid ${$borderAlt}`, fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : 'white', color: factIntStyle==='groupoy' ? 'white' : '#999', transition:'all 0.2s'}}>🐝 Group OY</button>
+                          <button onClick={() => setFactIntStyle('noir')} style={{padding:'5px 12px', border:'none', fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='noir' ? '#1a1a1a' : $bgCard, color: factIntStyle==='noir' ? 'white' : '#999', transition:'all 0.2s'}}>⬛ Noir</button>
+                          <button onClick={() => setFactIntStyle('groupoy')} style={{padding:'5px 12px', border:'none', borderLeft:`1px solid ${$borderAlt}`, fontSize:'0.8rem', fontWeight:700, cursor:'pointer', background: factIntStyle==='groupoy' ? '#8B6F47' : $bgCard, color: factIntStyle==='groupoy' ? 'white' : '#999', transition:'all 0.2s'}}>🐝 Group OY</button>
                         </div>
                       </div>
                       <div style={{display:'flex', gap:8}}>

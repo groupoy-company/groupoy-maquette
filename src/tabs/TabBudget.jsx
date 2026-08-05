@@ -58,9 +58,9 @@ export default function TabBudget(__props) {
                   setCsvExportText(rows.join('\n'));
                 }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d4c5a9', background:$bgSub, color:$accent, fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📥 Export CSV</button>
                 {budgetFiliale !== 'all' && <>
-                  <button onClick={() => { setBudgetImportModal('csv'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:'#f0f7f0', color:'#3a6a2a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📤 Import CSV</button>
-                  <button onClick={() => { setBudgetImportModal('paste'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:'#f0f2f7', color:'#3a4a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📋 Coller Excel</button>
-                  <button onClick={() => { setBudgetImportModal('copy_year'); setBudgetCopyPct(5); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'#f7f0f7', color:'#6a3a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>🔄 Copier N-1</button>
+                  <button onClick={() => { setBudgetImportModal('csv'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:'rgba(34,197,94,0.10)', color:'#3a6a2a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📤 Import CSV</button>
+                  <button onClick={() => { setBudgetImportModal('paste'); setBudgetImportText(''); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:'rgba(240,242,247,0.14)', color:'#3a4a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>📋 Coller Excel</button>
+                  <button onClick={() => { setBudgetImportModal('copy_year'); setBudgetCopyPct(5); }} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'rgba(247,240,247,0.14)', color:'#6a3a6a', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>🔄 Copier N-1</button>
                 </>}
               </div>
             </div>
@@ -68,21 +68,21 @@ export default function TabBudget(__props) {
 
                         {/* KPI Cards */}
             <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:14, marginBottom:18}}>
-              <div style={{background:'linear-gradient(145deg, #fafcfa, #f2f8f0)', borderRadius:crmRd, padding:'20px', border:'1px solid #d8e8d2', position:'relative', overflow:'hidden'}}>
-                <div style={{position:'absolute', top:-10, right:-10, width:70, height:70, borderRadius:'50%', background:'#e8f5e2', opacity:0.5}}/>
+              <div style={{background:'linear-gradient(145deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))', borderRadius:crmRd, padding:'20px', border:'1px solid #d8e8d2', position:'relative', overflow:'hidden'}}>
+                <div style={{position:'absolute', top:-10, right:-10, width:70, height:70, borderRadius:'50%', background:'rgba(232,245,226,0.14)', opacity:0.5}}/>
                 <div style={{fontSize:'0.7rem', fontWeight:700, color:'#7a9a6a', textTransform:'uppercase', letterSpacing:'0.8px', marginBottom:8}}>Revenus</div>
                 <div style={{display:'flex', alignItems:'baseline', gap:8}}><span style={{fontSize:'1.6rem', fontWeight:900, color:'#3a5a28'}}>{fmt(totalRevReel)}</span><span style={{fontSize:'0.78rem', color:'#9ab88c'}}>/ {fmt(totalRevPrevu)}</span></div>
-                <div style={{marginTop:12, height:6, background:'#e4eed8', borderRadius:3}}><div style={{width:Math.min(100, totalRevPrevu > 0 ? totalRevReel/totalRevPrevu*100 : 0)+'%', height:'100%', background:'linear-gradient(90deg, #7a9a6a, #5a8a48)', borderRadius:3, transition:'width 0.5s'}}/></div>
+                <div style={{marginTop:12, height:6, background:'rgba(228,238,216,0.14)', borderRadius:3}}><div style={{width:Math.min(100, totalRevPrevu > 0 ? totalRevReel/totalRevPrevu*100 : 0)+'%', height:'100%', background:'linear-gradient(90deg, #7a9a6a, #5a8a48)', borderRadius:3, transition:'width 0.5s'}}/></div>
                 <div style={{fontSize:'0.7rem', color:'#9ab88c', marginTop:4, textAlign:'right'}}>{totalRevPrevu > 0 ? Math.round(totalRevReel/totalRevPrevu*100) : 0}% atteint</div>
               </div>
-              <div style={{background:'linear-gradient(145deg, #fcfaf8, #f8f2ec)', borderRadius:crmRd, padding:'20px', border:'1px solid #e8d8c8', position:'relative', overflow:'hidden'}}>
-                <div style={{position:'absolute', top:-10, right:-10, width:70, height:70, borderRadius:'50%', background:'#f5ece2', opacity:0.5}}/>
+              <div style={{background:'linear-gradient(145deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))', borderRadius:crmRd, padding:'20px', border:'1px solid #e8d8c8', position:'relative', overflow:'hidden'}}>
+                <div style={{position:'absolute', top:-10, right:-10, width:70, height:70, borderRadius:'50%', background:'rgba(245,236,226,0.14)', opacity:0.5}}/>
                 <div style={{fontSize:'0.7rem', fontWeight:700, color:'#a08060', textTransform:'uppercase', letterSpacing:'0.8px', marginBottom:8}}>Charges</div>
                 <div style={{display:'flex', alignItems:'baseline', gap:8}}><span style={{fontSize:'1.6rem', fontWeight:900, color:'#6a4a28'}}>{fmt(totalChgReel)}</span><span style={{fontSize:'0.78rem', color:'#c0a888'}}>/ {fmt(totalChgPrevu)}</span></div>
-                <div style={{marginTop:12, height:6, background:'#eee4d8', borderRadius:3}}><div style={{width:Math.min(100, totalChgPrevu > 0 ? totalChgReel/totalChgPrevu*100 : 0)+'%', height:'100%', background: totalChgReel > totalChgPrevu ? 'linear-gradient(90deg, #c07040, #a04020)' : 'linear-gradient(90deg, #a08060, #8a6a48)', borderRadius:3, transition:'width 0.5s'}}/></div>
+                <div style={{marginTop:12, height:6, background:'rgba(238,228,216,0.14)', borderRadius:3}}><div style={{width:Math.min(100, totalChgPrevu > 0 ? totalChgReel/totalChgPrevu*100 : 0)+'%', height:'100%', background: totalChgReel > totalChgPrevu ? 'linear-gradient(90deg, #c07040, #a04020)' : 'linear-gradient(90deg, #a08060, #8a6a48)', borderRadius:3, transition:'width 0.5s'}}/></div>
                 <div style={{fontSize:'0.7rem', color:'#c0a888', marginTop:4, textAlign:'right'}}>{totalChgPrevu > 0 ? Math.round(totalChgReel/totalChgPrevu*100) : 0}% consommé</div>
               </div>
-              <div style={{background: resultatReel >= 0 ? 'linear-gradient(145deg, #fcfcf6, #f6f4e8)' : 'linear-gradient(145deg, #fcf6f6, #f8ece8)', borderRadius:crmRd, padding:'20px', border: resultatReel >= 0 ? '1px solid #e0dcc0' : '1px solid #e8c8c0', position:'relative', overflow:'hidden'}}>
+              <div style={{background: resultatReel >= 0 ? 'linear-gradient(145deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))' : 'linear-gradient(145deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))', borderRadius:crmRd, padding:'20px', border: resultatReel >= 0 ? '1px solid #e0dcc0' : '1px solid #e8c8c0', position:'relative', overflow:'hidden'}}>
                 <div style={{position:'absolute', top:-10, right:-10, width:70, height:70, borderRadius:'50%', background: resultatReel >= 0 ? '#f0ecd0' : '#f5dcd8', opacity:0.5}}/>
                 <div style={{fontSize:'0.7rem', fontWeight:700, color: resultatReel >= 0 ? '#8B6F47' : '#a05040', textTransform:'uppercase', letterSpacing:'0.8px', marginBottom:8}}>Résultat net</div>
                 <div style={{display:'flex', alignItems:'baseline', gap:8}}><span style={{fontSize:'1.6rem', fontWeight:900, color: resultatReel >= 0 ? '#5a4a20' : '#8a2828'}}>{fmt(resultatReel)}</span><span style={{fontSize:'0.78rem', color: resultatReel >= 0 ? '#b0a070' : '#c09080'}}>prévu {fmt(resultatPrevu)}</span></div>
@@ -129,7 +129,7 @@ export default function TabBudget(__props) {
             {/* Tab buttons */}
             <div style={{display:'flex', gap:6, marginBottom:16}}>
               {[{id:'tableau',label:'📋 Tableau détaillé'},{id:'graphiques',label:'📈 Graphiques'},{id:'alertes',label:'🚨 Alertes ('+alertes.length+')'},{id:'api',label:'🔌 API & Intégrations'}].map(t => (
-                <button key={t.id} onClick={() => setBudgetTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: budgetTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: budgetTab===t.id ? '#faf6ef' : 'white', color: budgetTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
+                <button key={t.id} onClick={() => setBudgetTab(t.id)} style={{padding:'6px 14px', borderRadius:crmRd, border: budgetTab===t.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: budgetTab===t.id ? $bgSub : $bgCard, color: budgetTab===t.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>{t.label}</button>
               ))}
             </div>
 
@@ -142,7 +142,7 @@ export default function TabBudget(__props) {
                       <tr style={{background:$bgSub}}>
                         <th style={{position:'relative',padding:'10px 12px', textAlign:'left', fontWeight:700, color:$text, position:'sticky', left:0, background:$bgSub, zIndex:2, minWidth:220, borderRight:`2px solid ${$borderAlt}`}}>Catégorie<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th>
                         {moisCourts.map((m,i) => (
-                          <th key={i} colSpan={3} style={{position:'relative',padding:'8px 4px', textAlign:'center', fontWeight:700, color: i <= moisActuel ? '#2d2216' : '#ccc4b8', borderRight:`1px solid ${$border}`, minWidth:180, background: i === moisActuel ? '#fef3c7' : '#faf8f5'}}>
+                          <th key={i} colSpan={3} style={{position:'relative',padding:'8px 4px', textAlign:'center', fontWeight:700, color: i <= moisActuel ? '#2d2216' : '#ccc4b8', borderRight:`1px solid ${$border}`, minWidth:180, background: i === moisActuel ? 'rgba(212,160,48,0.18)' : $bgSub}}>
                             {m}
                           <div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th>
                         ))}
@@ -195,7 +195,7 @@ export default function TabBudget(__props) {
                                     const isEditing = budgetEditCell && budgetEditCell.cat === cat.id && budgetEditCell.mois === i;
                                     return (
                                       <React.Fragment key={i}>
-                                        <td style={{padding:'4px 6px', textAlign:'right', color: isPast ? '#2d2216' : '#ccc4b8', cursor: budgetFiliale !== 'all' ? 'pointer' : 'default', background: isEditing ? '#fef3c7' : (i === moisActuel ? '#fffbeb' : 'white')}}
+                                        <td style={{padding:'4px 6px', textAlign:'right', color: isPast ? '#2d2216' : '#ccc4b8', cursor: budgetFiliale !== 'all' ? 'pointer' : 'default', background: isEditing ? 'rgba(212,160,48,0.18)' : (i === moisActuel ? 'rgba(212,160,48,0.12)' : $bgCard)}}
                                           onClick={() => { if(budgetFiliale !== 'all') setBudgetEditCell({cat:cat.id, mois:i, field:'prevu', val:String(p)}); }}>
                                           {isEditing && budgetEditCell.field==='prevu' ?
                                             <input autoFocus type="number" value={budgetEditCell.val} onChange={e => setBudgetEditCell(prev=>({...prev,val:e.target.value}))}
@@ -204,7 +204,7 @@ export default function TabBudget(__props) {
                                               style={{width:60, padding:'2px 4px', borderRadius:crmRd, border:'1px solid #d4c5a9', fontSize:'0.78rem', textAlign:'right'}}/>
                                             : (p > 0 ? (p>=1000 ? Math.round(p/1000)+'k' : p.toLocaleString('fr-FR')) : '—')}
                                         </td>
-                                        <td style={{padding:'4px 6px', textAlign:'right', fontWeight: isPast && r > 0 ? 700 : 400, color: isPast ? '#2d2216' : '#ccc4b8', cursor: budgetFiliale !== 'all' ? 'pointer' : 'default', background: isEditing ? '#fef3c7' : (i === moisActuel ? '#fffbeb' : 'white')}}
+                                        <td style={{padding:'4px 6px', textAlign:'right', fontWeight: isPast && r > 0 ? 700 : 400, color: isPast ? '#2d2216' : '#ccc4b8', cursor: budgetFiliale !== 'all' ? 'pointer' : 'default', background: isEditing ? 'rgba(212,160,48,0.18)' : (i === moisActuel ? 'rgba(212,160,48,0.12)' : $bgCard)}}
                                           onClick={() => { if(budgetFiliale !== 'all') setBudgetEditCell({cat:cat.id, mois:i, field:'reel', val:String(r)}); }}>
                                           {isEditing && budgetEditCell.field==='reel' ?
                                             <input autoFocus type="number" value={budgetEditCell.val} onChange={e => setBudgetEditCell(prev=>({...prev,val:e.target.value}))}
@@ -379,7 +379,7 @@ export default function TabBudget(__props) {
                 <div style={{padding:'16px'}}>
                   {alertes.length === 0 && <div style={{padding:20, textAlign:'center', color:'#059669', fontWeight:600, fontSize:'0.95rem'}}>✅ Aucun dépassement budgétaire — Tout est sous contrôle !</div>}
                   {alertes.sort((a,b) => b.ecart - a.ecart).map((a,i) => (
-                    <div key={i} style={{padding:'12px 16px', borderRadius:crmRd, background: a.ecart > 20 ? '#fef2f2' : '#fffbeb', border: a.ecart > 20 ? '1px solid #fecaca' : '1px solid #fde68a', marginBottom:8}}>
+                    <div key={i} style={{padding:'12px 16px', borderRadius:crmRd, background: a.ecart > 20 ? 'rgba(239,68,68,0.10)' : 'rgba(212,160,48,0.12)', border: a.ecart > 20 ? '1px solid #fecaca' : '1px solid #fde68a', marginBottom:8}}>
                       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                         <div>
                           <span style={{fontSize:'0.92rem', fontWeight:700}}>{a.cat.icon} {a.cat.label}</span>
@@ -388,7 +388,7 @@ export default function TabBudget(__props) {
                         <div style={{display:'flex', gap:12, alignItems:'center'}}>
                           <span style={{fontSize:'0.82rem', color:$textSec}}>Prévu: {fmt(a.prevuYTD)}</span>
                           <span style={{fontSize:'0.82rem', fontWeight:700, color:'#dc2626'}}>Réel: {fmt(a.reelYTD)}</span>
-                          <span style={{fontSize:'0.95rem', fontWeight:900, color: a.ecart > 20 ? '#dc2626' : '#d97706', padding:'3px 10px', borderRadius:crmRd, background: a.ecart > 20 ? '#fecaca' : '#fde68a'}}>+{a.ecart}%</span>
+                          <span style={{fontSize:'0.95rem', fontWeight:900, color: a.ecart > 20 ? '#dc2626' : '#d97706', padding:'3px 10px', borderRadius:crmRd, background: a.ecart > 20 ? 'rgba(239,68,68,0.22)' : 'rgba(212,160,48,0.26)'}}>+{a.ecart}%</span>
                         </div>
                       </div>
                       <div style={{marginTop:6, height:6, background:$bgSub, borderRadius:3, overflow:'hidden'}}>
@@ -420,7 +420,7 @@ export default function TabBudget(__props) {
               return (
                 <div style={{display:'flex', flexDirection:'column', gap:16}}>
                   {/* Connection Status Banner */}
-                  <div style={{padding:'14px 20px', borderRadius:crmRd, background: isConnected ? 'linear-gradient(135deg, #f0f7f0, #e8f5e2)' : 'linear-gradient(135deg, #faf8f5, #f5f0e8)', border: isConnected ? '1px solid #d5e8d5' : `1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                  <div style={{padding:'14px 20px', borderRadius:crmRd, background: isConnected ? 'linear-gradient(135deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))' : 'linear-gradient(135deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))', border: isConnected ? '1px solid #d5e8d5' : `1px solid ${$border}`, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <div style={{display:'flex', alignItems:'center', gap:12}}>
                       <div style={{width:10, height:10, borderRadius:'50%', background: isConnected ? '#5a8a48' : '#c0a060', boxShadow: isConnected ? '0 0 8px #5a8a4880' : 'none'}}/>
                       <div>
@@ -445,7 +445,7 @@ export default function TabBudget(__props) {
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
                           {apiProviders.map(p => (
                             <div key={p.id} onClick={() => saveBudgetApi({...cfg, provider: p.id, baseUrl: p.baseUrl || cfg.baseUrl})}
-                              style={{padding:'10px 12px', borderRadius:crmRd, border: cfg.provider === p.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.provider === p.id ? '#faf6ef' : 'white', cursor:'pointer', transition:'all 0.15s', display:'flex', alignItems:'center', gap:10}}>
+                              style={{padding:'10px 12px', borderRadius:crmRd, border: cfg.provider === p.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.provider === p.id ? $bgSub : $bgCard, cursor:'pointer', transition:'all 0.15s', display:'flex', alignItems:'center', gap:10}}>
                               <div style={{width:28, height:28, borderRadius:7, background:p.iconBg, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.68rem', fontWeight:800, color:'white', letterSpacing:'-0.5px', flexShrink:0}}>{p.icon}</div>
                               <div>
                                 <div style={{fontWeight:700, fontSize:'0.82rem'}}>{p.label}</div>
@@ -490,8 +490,8 @@ export default function TabBudget(__props) {
                             <div style={{flex:1}}>
                               <div style={{fontWeight:700, fontSize:'0.82rem', color: ep.enabled ? '#2d2216' : '#c0b8a8', textTransform:'capitalize'}}>{key.replace(/_/g,' ')}</div>
                               <div style={{display:'flex', gap:6, marginTop:4}}>
-                                <span style={{fontSize:'0.68rem', padding:'2px 6px', borderRadius:crmRd, background:'#f0f2f7', color:'#4a5a7a', fontWeight:600}}>{ep.method}</span>
-                                <input value={ep.path} onChange={e => updateEndpoint(key, 'path', e.target.value)} style={{flex:1, padding:'2px 6px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.72rem', fontFamily:'monospace', background: ep.enabled ? 'white' : '#faf8f5'}}/>
+                                <span style={{fontSize:'0.68rem', padding:'2px 6px', borderRadius:crmRd, background:'rgba(240,242,247,0.14)', color:'#4a5a7a', fontWeight:600}}>{ep.method}</span>
+                                <input value={ep.path} onChange={e => updateEndpoint(key, 'path', e.target.value)} style={{flex:1, padding:'2px 6px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.72rem', fontFamily:'monospace', background: ep.enabled ? $bgCard : $bgSub}}/>
                               </div>
                             </div>
                           </div>
@@ -511,7 +511,7 @@ export default function TabBudget(__props) {
                           <label style={{fontSize:'0.72rem', fontWeight:700, color:$accent, display:'block', marginBottom:4}}>Direction</label>
                           <div style={{display:'flex', gap:6}}>
                             {[{id:'import',label:'📥 Import (API → Budget)',desc:'Données réelles depuis la compta'},{id:'export',label:'📤 Export (Budget → API)',desc:'Envoyer le prévisionnel'},{id:'bidirectional',label:'🔄 Bidirectionnel',desc:'Sync dans les deux sens'}].map(d => (
-                              <div key={d.id} onClick={() => updateCfg('syncDirection', d.id)} style={{flex:1, padding:'8px 10px', borderRadius:crmRd, border: cfg.syncDirection === d.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.syncDirection === d.id ? '#faf6ef' : 'white', cursor:'pointer', textAlign:'center'}}>
+                              <div key={d.id} onClick={() => updateCfg('syncDirection', d.id)} style={{flex:1, padding:'8px 10px', borderRadius:crmRd, border: cfg.syncDirection === d.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.syncDirection === d.id ? $bgSub : $bgCard, cursor:'pointer', textAlign:'center'}}>
                                 <div style={{fontWeight:700, fontSize:'0.75rem'}}>{d.label}</div>
                                 <div style={{fontSize:'0.65rem', color:$textMut, marginTop:2}}>{d.desc}</div>
                               </div>
@@ -522,7 +522,7 @@ export default function TabBudget(__props) {
                           <label style={{fontSize:'0.72rem', fontWeight:700, color:$accent, display:'block', marginBottom:4}}>Fréquence</label>
                           <div style={{display:'flex', gap:6}}>
                             {[{id:'manual',label:'Manuel'},{id:'daily',label:'Quotidien'},{id:'weekly',label:'Hebdomadaire'},{id:'monthly',label:'Mensuel'}].map(f => (
-                              <button key={f.id} onClick={() => updateCfg('syncFrequency', f.id)} style={{flex:1, padding:'6px', borderRadius:crmRd, border: cfg.syncFrequency === f.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.syncFrequency === f.id ? '#faf6ef' : 'white', color: cfg.syncFrequency === f.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.78rem', cursor:'pointer'}}>{f.label}</button>
+                              <button key={f.id} onClick={() => updateCfg('syncFrequency', f.id)} style={{flex:1, padding:'6px', borderRadius:crmRd, border: cfg.syncFrequency === f.id ? '2px solid #8B6F47' : `1px solid ${$border}`, background: cfg.syncFrequency === f.id ? $bgSub : $bgCard, color: cfg.syncFrequency === f.id ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.78rem', cursor:'pointer'}}>{f.label}</button>
                             ))}
                           </div>
                         </div>
@@ -601,7 +601,7 @@ export default function TabBudget(__props) {
                     <div style={{padding:'16px'}}>
                       <div style={{display:'flex', gap:6, marginBottom:10}}>
                         {['curl','javascript','python'].map(lang => (
-                          <button key={lang} onClick={() => updateCfg('codeSnippetLang', lang)} style={{padding:'4px 12px', borderRadius:crmRd, border: (cfg.codeSnippetLang||'curl') === lang ? '2px solid #8B6F47' : `1px solid ${$border}`, background: (cfg.codeSnippetLang||'curl') === lang ? '#faf6ef' : 'white', color: (cfg.codeSnippetLang||'curl') === lang ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.75rem', cursor:'pointer', textTransform:'capitalize'}}>{lang}</button>
+                          <button key={lang} onClick={() => updateCfg('codeSnippetLang', lang)} style={{padding:'4px 12px', borderRadius:crmRd, border: (cfg.codeSnippetLang||'curl') === lang ? '2px solid #8B6F47' : `1px solid ${$border}`, background: (cfg.codeSnippetLang||'curl') === lang ? $bgSub : $bgCard, color: (cfg.codeSnippetLang||'curl') === lang ? '#8B6F47' : '#6b5d4d', fontWeight:700, fontSize:'0.75rem', cursor:'pointer', textTransform:'capitalize'}}>{lang}</button>
                         ))}
                       </div>
                       <pre style={{background:'#1a1a2e', color:'#e8e4de', padding:16, borderRadius:crmRd, fontSize:'0.72rem', lineHeight:1.6, overflowX:'auto', margin:0}}>
@@ -672,7 +672,7 @@ for inv in invoices:
                   </div>
                   <div style={{padding:'16px 20px', flex:1, overflow:'auto'}}>
                     <div style={{fontSize:'0.78rem', color:$textMut, marginBottom:8}}>Ctrl+A puis Ctrl+C, ou utilisez les boutons ci-dessus</div>
-                    <textarea id="csv-export-area" readOnly value={csvExportText} style={{width:'100%', minHeight:280, height:'50vh', padding:12, fontFamily:'monospace', fontSize:'0.78rem', border:`1px solid ${$borderAlt}`, borderRadius:crmRd, resize:'none', background:'#fafaf8', lineHeight:1.5, boxSizing:'border-box'}} onFocus={e => e.target.select()}/>
+                    <textarea id="csv-export-area" readOnly value={csvExportText} style={{width:'100%', minHeight:280, height:'50vh', padding:12, fontFamily:'monospace', fontSize:'0.78rem', border:`1px solid ${$borderAlt}`, borderRadius:crmRd, resize:'none', background:'rgba(250,250,248,0.14)', lineHeight:1.5, boxSizing:'border-box'}} onFocus={e => e.target.select()}/>
                   </div>
                 </div>
               </div>
@@ -682,14 +682,14 @@ for inv in invoices:
             {budgetImportModal === 'csv' && (
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:700, maxHeight:'85vh', overflow:'auto', borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
-                  <div style={{padding:'16px 20px', background:'#f0f7f0', borderBottom:'1px solid #d5e8d5', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                  <div style={{padding:'16px 20px', background:'rgba(34,197,94,0.10)', borderBottom:'1px solid #d5e8d5', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <div><div style={{fontWeight:700, color:'#2d5016', fontSize:'1rem'}}>📤 Import CSV</div><div style={{fontSize:'0.75rem', color:'#6b8a5e'}}>Importez depuis Pennylane ou fichier comptable</div></div>
                     <button onClick={() => setBudgetImportModal(null)} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5e8d5', background:$bgCard, color:$textSec, fontWeight:700, cursor:'pointer'}}>✕</button>
                   </div>
                   <div style={{padding:'20px'}}>
-                    <div style={{background:'#fafcfa', borderRadius:crmRd, border:'1px solid #e4eed8', padding:14, marginBottom:16, fontSize:'0.78rem', color:'#4a6a3a'}}>
+                    <div style={{background:'rgba(250,252,250,0.14)', borderRadius:crmRd, border:'1px solid #e4eed8', padding:14, marginBottom:16, fontSize:'0.78rem', color:'#4a6a3a'}}>
                       <div style={{fontWeight:700, marginBottom:6}}>Format CSV (séparateur ;) :</div>
-                      <code style={{display:'block', background:'#f0f5e8', padding:8, borderRadius:crmRd, fontSize:'0.72rem', lineHeight:1.6, whiteSpace:'pre'}}>categorie;Jan;Fév;Mar;Avr;Mai;Jun;Jul;Aoû;Sep;Oct;Nov;Déc{'\n'}ca_principal;320000;340000;360000;...{'\n'}masse_salariale;88000;88000;...</code>
+                      <code style={{display:'block', background:'rgba(240,245,232,0.14)', padding:8, borderRadius:crmRd, fontSize:'0.72rem', lineHeight:1.6, whiteSpace:'pre'}}>categorie;Jan;Fév;Mar;Avr;Mai;Jun;Jul;Aoû;Sep;Oct;Nov;Déc{'\n'}ca_principal;320000;340000;360000;...{'\n'}masse_salariale;88000;88000;...</code>
                       <div style={{marginTop:8, fontSize:'0.72rem', color:'#8aaa7e'}}>IDs: {BUDGET_CATS.map(c => c.id).join(', ')}</div>
                     </div>
                     <textarea value={budgetImportText} onChange={e => setBudgetImportText(e.target.value)} placeholder="Collez votre CSV ici..." style={{width:'100%', height:200, padding:12, fontFamily:'monospace', fontSize:'0.78rem', border:'1px solid #d5e8d5', borderRadius:crmRd, resize:'vertical', background:$bgCard, boxSizing:'border-box'}}/>
@@ -715,7 +715,7 @@ for inv in invoices:
                             alert(imported + ' catégorie(s) importée(s) dans ' + (target === 'reel' ? 'Réel' : 'Prévu'));
                             setBudgetImportModal(null);
                           } catch(err) { alert('Erreur: ' + err.message); }
-                        }} style={{padding:'8px 20px', borderRadius:crmRd, border: target==='reel' ? 'none' : '1px solid #d5e8d5', background: target==='reel' ? '#5a8a48' : '#f0f7f0', color: target==='reel' ? 'white' : '#3a6a2a', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>
+                        }} style={{padding:'8px 20px', borderRadius:crmRd, border: target==='reel' ? 'none' : '1px solid #d5e8d5', background: target==='reel' ? '#5a8a48' : 'rgba(34,197,94,0.10)', color: target==='reel' ? 'white' : '#3a6a2a', fontWeight:700, fontSize:'0.85rem', cursor:'pointer'}}>
                           {target === 'reel' ? '✅ Importer → Réel' : '📋 Importer → Prévu'}
                         </button>
                       ))}
@@ -729,12 +729,12 @@ for inv in invoices:
             {budgetImportModal === 'paste' && (
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:700, maxHeight:'85vh', overflow:'auto', borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
-                  <div style={{padding:'16px 20px', background:'#f0f2f7', borderBottom:'1px solid #d5d8e8', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                  <div style={{padding:'16px 20px', background:'rgba(240,242,247,0.14)', borderBottom:'1px solid #d5d8e8', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <div><div style={{fontWeight:700, color:'#2a3a5a', fontSize:'1rem'}}>📋 Coller depuis Excel</div><div style={{fontSize:'0.75rem', color:'#6a7a9a'}}>Sélectionnez dans Excel → Ctrl+C → Collez ici Ctrl+V</div></div>
                     <button onClick={() => setBudgetImportModal(null)} style={{padding:'6px 12px', borderRadius:crmRd, border:'1px solid #d5d8e8', background:$bgCard, color:$textSec, fontWeight:700, cursor:'pointer'}}>✕</button>
                   </div>
                   <div style={{padding:'20px'}}>
-                    <div style={{background:'#f5f6fa', borderRadius:crmRd, border:'1px solid #e0e2ea', padding:14, marginBottom:16, fontSize:'0.78rem', color:'#4a4a6a'}}>
+                    <div style={{background:'rgba(245,246,250,0.14)', borderRadius:crmRd, border:'1px solid #e0e2ea', padding:14, marginBottom:16, fontSize:'0.78rem', color:'#4a4a6a'}}>
                       <div style={{fontWeight:700, marginBottom:4}}>Format tab-separated (copié depuis Excel) :</div>
                       <div style={{fontSize:'0.72rem'}}>Col A = ID catégorie ou nom, Cols B-M = Jan-Déc. Les tabs sont détectés automatiquement.</div>
                     </div>
@@ -777,7 +777,7 @@ for inv in invoices:
             {budgetImportModal === 'copy_year' && (
               <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.5)', zIndex:500, display:'flex', alignItems:'center', justifyContent:'center'}} onClick={() => setBudgetImportModal(null)}>
                 <div style={{background:$bgCard, borderRadius:crmRd, width:'90%', maxWidth:520, borderRadius:crmRd,boxShadow:$shadowLg}} onClick={e => e.stopPropagation()}>
-                  <div style={{padding:'16px 20px', background:'#f7f0f7', borderBottom:'1px solid #e8d5e8'}}>
+                  <div style={{padding:'16px 20px', background:'rgba(247,240,247,0.14)', borderBottom:'1px solid #e8d5e8'}}>
                     <div style={{fontWeight:700, color:'#5a2a5a', fontSize:'1rem'}}>🔄 Copier depuis {budgetAnnee - 1}</div>
                     <div style={{fontSize:'0.75rem', color:'#9a6a9a'}}>Recopier N-1 avec ajustement %</div>
                   </div>
@@ -792,7 +792,7 @@ for inv in invoices:
                           <input type="range" min={-20} max={30} value={budgetCopyPct} onChange={e => setBudgetCopyPct(Number(e.target.value))} style={{flex:1, accentColor:'#6a3a6a'}}/>
                           <span style={{fontWeight:800, color: budgetCopyPct >= 0 ? '#5a8a48' : '#a04020', fontSize:'1.1rem', minWidth:55, textAlign:'right'}}>{budgetCopyPct > 0 ? '+' : ''}{budgetCopyPct}%</span>
                         </div>
-                        <div style={{background:'#faf5fa', borderRadius:crmRd, padding:14, marginBottom:16, fontSize:'0.78rem'}}>
+                        <div style={{background:'rgba(250,245,250,0.14)', borderRadius:crmRd, padding:14, marginBottom:16, fontSize:'0.78rem'}}>
                           <div style={{fontWeight:700, marginBottom:8, color:'#5a2a5a'}}>Aperçu :</div>
                           {BUDGET_CATS.filter(c => prevBd[c.id]?.prevu?.some(v => v > 0) || prevBd[c.id]?.reel?.some(v => v > 0)).slice(0,6).map(c => {
                             const prevT = (prevBd[c.id]?.prevu||[]).reduce((a,v)=>a+v,0);
@@ -823,7 +823,7 @@ for inv in invoices:
                               nd[budgetFiliale][budgetAnnee][cId].prevu = (prevBd[cId]?.reel||Array(12).fill(0)).map(v => Math.round(v * m));
                             });
                             saveBudget(nd); setBudgetImportModal(null);
-                          }} style={{padding:'8px 18px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'#f7f0f7', color:'#6a3a6a', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>Réel N-1 → Prévu {budgetAnnee}</button>
+                          }} style={{padding:'8px 18px', borderRadius:crmRd, border:'1px solid #e8d5e8', background:'rgba(247,240,247,0.14)', color:'#6a3a6a', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>Réel N-1 → Prévu {budgetAnnee}</button>
                         </div>
                       </>);
                     })()}
@@ -846,7 +846,7 @@ for inv in invoices:
                     <div style={{padding:'20px'}}>
                       <div style={{display:'flex', gap:6, marginBottom:14}}>
                         {['prevu','reel'].map(f => (
-                          <button key={f} onClick={() => setBudgetRowEdit(prev => ({...prev, field:f}))} style={{padding:'5px 14px', borderRadius:crmRd, fontWeight:700, fontSize:'0.82rem', cursor:'pointer', border: budgetRowEdit.field === f ? '2px solid '+(f==='prevu'?'#8B6F47':'#5a8a48') : `1px solid ${$border}`, background: budgetRowEdit.field === f ? (f==='prevu'?'#faf6ef':'#f0f7f0') : 'white', color: budgetRowEdit.field === f ? (f==='prevu'?'#8B6F47':'#5a8a48') : '#6b5d4d'}}>{f === 'prevu' ? 'Prévu' : 'Réel'}</button>
+                          <button key={f} onClick={() => setBudgetRowEdit(prev => ({...prev, field:f}))} style={{padding:'5px 14px', borderRadius:crmRd, fontWeight:700, fontSize:'0.82rem', cursor:'pointer', border: budgetRowEdit.field === f ? '2px solid '+(f==='prevu'?'#8B6F47':'#5a8a48') : `1px solid ${$border}`, background: budgetRowEdit.field === f ? (f==='prevu'?$bgSub:'rgba(34,197,94,0.10)') : $bgCard, color: budgetRowEdit.field === f ? (f==='prevu'?'#8B6F47':'#5a8a48') : '#6b5d4d'}}>{f === 'prevu' ? 'Prévu' : 'Réel'}</button>
                         ))}
                       </div>
                       <div style={{display:'grid', gridTemplateColumns:'repeat(6, 1fr)', gap:8}}>

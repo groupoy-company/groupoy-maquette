@@ -2,7 +2,7 @@
 
 
 export default function TabParcInfo(__props) {
-  const { $bgCard, $border, $shadow, $shadowLg, $text, $textMut, $textSec, FILIALE_FILTER_OPTIONS, crmRd, empNom, employes, parcInfoData, parcInfoDetail, parcInfoEdit, parcInfoFilter, setParcInfoData, setParcInfoDetail, setParcInfoEdit, setParcInfoFilter } = __props;
+  const { $bgSub, $bgCard, $border, $shadow, $shadowLg, $text, $textMut, $textSec, FILIALE_FILTER_OPTIONS, crmRd, empNom, employes, parcInfoData, parcInfoDetail, parcInfoEdit, parcInfoFilter, setParcInfoData, setParcInfoDetail, setParcInfoEdit, setParcInfoFilter } = __props;
         const savePI = d => { setParcInfoData(d); localStorage.setItem('ruches_parc_info', JSON.stringify(d)); };
         const PI_CATS = [{id:'telephone',label:'Téléphone',color:'#16a34a',icon:'📱'},{id:'portable',label:'PC Portable',color:'#2563eb',icon:'💻'},{id:'fixe',label:'PC Fixe',color:'#0891b2',icon:'🖥️'},{id:'ecran',label:'Écran',color:'#7c3aed',icon:'🖥️'},{id:'imprimante',label:'Imprimante',color:'#ea580c',icon:'🖨️'},{id:'tablette',label:'Tablette',color:'#db2777',icon:'📱'},{id:'accessoire',label:'Accessoire',color:$textSec,icon:'⌨️'},{id:'reseau',label:'Réseau / Box',color:'#0f766e',icon:'🌐'}];
         const PI_STATUTS = [{id:'actif',label:'Actif',color:'#16a34a'},{id:'stock',label:'En stock',color:'#ca8a04'},{id:'panne',label:'En panne',color:'#dc2626'},{id:'reforme',label:'Réformé',color:$textSec},{id:'perdu',label:'Perdu / Volé',color:'#be123c'}];
@@ -50,7 +50,7 @@ export default function TabParcInfo(__props) {
               <div style={{fontSize:'0.85rem',color:$textSec,marginTop:2}}>{data.length} équipements · Valeur totale: {(totalCout/1000).toFixed(1)}k€</div>
             </div>
 
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))',gap:1,marginBottom:16,background:'#e2e8f0'}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))',gap:1,marginBottom:16,background:'rgba(226,232,240,0.14)'}}>
               {[
                 {l:'Équipements',v:data.length,c:'#7c3aed'},
                 {l:'Actifs',v:actifs.length,c:'#16a34a'},
@@ -85,13 +85,13 @@ export default function TabParcInfo(__props) {
 
             <div style={{border:'1px solid #e2e8f0',overflowX:'auto',minHeight:'50vh'}}>
               <table style={{width:'100%',borderCollapse:'collapse',fontSize:'0.85rem'}}>
-                <thead><tr style={{background:'#f8fafc'}}>
+                <thead><tr style={{background:$bgSub}}>
                   {['ID','Équipement','Catégorie','Marque / Modèle','Affecté à','Filiale','État','Statut','Garantie','Coût'].map(h=><th key={h} style={{position:'relative',padding:'8px 10px',textAlign:'left',fontWeight:800,color:$text,borderBottom:'2px solid #0f172a',borderRight:'1px solid #e2e8f0',fontSize:'0.75rem',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}<div onMouseDown={e=>{e.preventDefault();e.stopPropagation();const th=e.target.closest('th');if(!th)return;const startX=e.clientX,startW=th.offsetWidth;document.body.style.cursor='col-resize';document.body.style.userSelect='none';const ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;cursor:col-resize;z-index:99999;';document.body.appendChild(ov);const mm=ev=>{const w=Math.max(40,startW+ev.clientX-startX);th.style.minWidth=w+'px';th.style.width=w+'px';};const mu=()=>{document.body.style.cursor='';document.body.style.userSelect='';document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);ov.remove();};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);}} onMouseEnter={e=>e.currentTarget.style.background='rgba(128,128,128,0.25)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'} style={{position:'absolute',right:0,top:0,bottom:0,width:8,cursor:'col-resize',background:'transparent',zIndex:3,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{width:2,height:'50%',background:'currentColor',opacity:0.15,borderRadius:1,pointerEvents:'none'}}/></div></th>)}
                 </tr></thead>
                 <tbody>{filtered.map((item,idx)=>{
                   const gd = daysDiff(item.dateGarantie);
                   const fil = item.filialeId==='yilmaz'?{nom:'Yilmaz',icon:'🏛️',couleur:'#8B6F47'}:(FILIALE_FILTER_OPTIONS.find(f=>f.id===item.filialeId)||{});
-                  return <tr key={item.id} onClick={()=>setParcInfoDetail(item)} style={{borderBottom:'1px solid #f1f5f9',background:idx%2===0?'#fff':'#fafbfc',cursor:'pointer',opacity:item.statut!=='actif'?0.5:1}} onMouseOver={e=>e.currentTarget.style.background='#faf5ff'} onMouseOut={e=>e.currentTarget.style.background=idx%2===0?'#fff':'#fafbfc'}>
+                  return <tr key={item.id} onClick={()=>setParcInfoDetail(item)} style={{borderBottom:'1px solid #f1f5f9',background:idx%2===0?$bgCard:$bgSub,cursor:'pointer',opacity:item.statut!=='actif'?0.5:1}} onMouseOver={e=>e.currentTarget.style.background='#faf5ff'} onMouseOut={e=>e.currentTarget.style.background=idx%2===0?'#fff':'#fafbfc'}>
                     <td style={{padding:'6px 10px',fontFamily:'monospace',fontWeight:700,color:'#7c3aed',fontSize:'0.78rem',borderRight:'1px solid #f1f5f9'}}>{item.id}</td>
                     <td style={{padding:'6px 10px',fontWeight:700,borderRight:'1px solid #f1f5f9'}}>{item.nom}</td>
                     <td style={{padding:'6px 10px',borderRight:'1px solid #f1f5f9'}}><Tag label={`${getIcon(PI_CATS,item.categorie)} ${getLbl(PI_CATS,item.categorie)}`} color={getClr(PI_CATS,item.categorie)} s/></td>
@@ -117,10 +117,10 @@ export default function TabParcInfo(__props) {
                     <button onClick={()=>{setParcInfoDetail(null);setParcInfoEdit(null);}} style={{background:'none',border:'none',fontSize:'1.2rem',cursor:'pointer',color:'#94a3b8'}}>✕</button>
                   </div>
                 </div>
-                <div style={{padding:'16px 20px',display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:1,background:'#e2e8f0'}}>
-                  {[{l:'Catégorie',v:`${getIcon(PI_CATS,parcInfoDetail.categorie)} ${getLbl(PI_CATS,parcInfoDetail.categorie)}`},{l:'Marque',v:parcInfoDetail.marque},{l:'Modèle',v:parcInfoDetail.modele},{l:'N° Série',v:parcInfoDetail.numSerie||'—'},{l:'État',v:getLbl(PI_ETATS,parcInfoDetail.etat)},{l:'Statut',v:getLbl(PI_STATUTS,parcInfoDetail.statut)},{l:'Affecté à',v:parcInfoDetail.affecteA?empNom(parcInfoDetail.affecteA):'Non affecté'},{l:'Filiale',v:parcInfoDetail.filialeId==='yilmaz'?'Yilmaz':(FILIALE_FILTER_OPTIONS.find(f=>f.id===parcInfoDetail.filialeId)||{}).nom||'—'},{l:'Date achat',v:parcInfoDetail.dateAchat||'—'},{l:'Garantie',v:parcInfoDetail.dateGarantie||'—'},{l:'Coût',v:parcInfoDetail.cout>0?`${parcInfoDetail.cout}€`:'—'}].map((f,i)=><div key={i} style={{background:'#fff',padding:'8px 12px'}}><div style={{fontSize:'0.7rem',fontWeight:700,color:'#94a3b8',textTransform:'uppercase'}}>{f.l}</div><div style={{fontSize:'0.88rem',fontWeight:700,color:$text}}>{f.v}</div></div>)}
+                <div style={{padding:'16px 20px',display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:1,background:'rgba(226,232,240,0.14)'}}>
+                  {[{l:'Catégorie',v:`${getIcon(PI_CATS,parcInfoDetail.categorie)} ${getLbl(PI_CATS,parcInfoDetail.categorie)}`},{l:'Marque',v:parcInfoDetail.marque},{l:'Modèle',v:parcInfoDetail.modele},{l:'N° Série',v:parcInfoDetail.numSerie||'—'},{l:'État',v:getLbl(PI_ETATS,parcInfoDetail.etat)},{l:'Statut',v:getLbl(PI_STATUTS,parcInfoDetail.statut)},{l:'Affecté à',v:parcInfoDetail.affecteA?empNom(parcInfoDetail.affecteA):'Non affecté'},{l:'Filiale',v:parcInfoDetail.filialeId==='yilmaz'?'Yilmaz':(FILIALE_FILTER_OPTIONS.find(f=>f.id===parcInfoDetail.filialeId)||{}).nom||'—'},{l:'Date achat',v:parcInfoDetail.dateAchat||'—'},{l:'Garantie',v:parcInfoDetail.dateGarantie||'—'},{l:'Coût',v:parcInfoDetail.cout>0?`${parcInfoDetail.cout}€`:'—'}].map((f,i)=><div key={i} style={{background:$bgCard,padding:'8px 12px'}}><div style={{fontSize:'0.7rem',fontWeight:700,color:'#94a3b8',textTransform:'uppercase'}}>{f.l}</div><div style={{fontSize:'0.88rem',fontWeight:700,color:$text}}>{f.v}</div></div>)}
                 </div>
-                {parcInfoDetail.notes&&<div style={{padding:'12px 20px',fontSize:'0.85rem',color:$text,background:'#f8fafc',borderLeft:'3px solid #7c3aed',margin:'16px 20px'}}>{parcInfoDetail.notes}</div>}
+                {parcInfoDetail.notes&&<div style={{padding:'12px 20px',fontSize:'0.85rem',color:$text,background:$bgSub,borderLeft:'3px solid #7c3aed',margin:'16px 20px'}}>{parcInfoDetail.notes}</div>}
               </div>
             </div>}
 

@@ -868,7 +868,7 @@ export default function TabOrganigramme(__props) {
                       </div>
                     </div>
 
-                    <div style={{background:'#f9fafb', userSelect:'none'}}>
+                    <div style={{background:$bgSub, userSelect:'none'}}>
                       <svg ref={orgSocieteRef} width="100%" viewBox={`0 0 ${W} ${H}`}
                         style={{display:'block', height:590, cursor: orgSocieteDrag?'grabbing':orgSocietePanning?'grabbing':'grab'}}
                         onMouseMove={onMM} onMouseUp={onMU} onMouseLeave={onMU}

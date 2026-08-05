@@ -229,15 +229,15 @@ export default function TabKpiDashboard(__props) {
                 const dlLeftDash = (d) => { if(!d) return null; return Math.ceil((new Date(d)-new Date())/86400000); };
                 return (<>
                   {aoUrgDash.length > 0 && (
-                    <div style={{background:'#fef2f2',border:'1px solid #fecaca',borderRadius:crmRd,margin:'0 8px 14px',padding:'12px 14px'}}>
+                    <div style={{background:'rgba(239,68,68,0.10)',border:'1px solid #fecaca',borderRadius:crmRd,margin:'0 8px 14px',padding:'12px 14px'}}>
                       <div style={{fontWeight:700,color:'#dc2626',fontSize:'0.82rem',marginBottom:8}}>🚨 AO urgents — deadline dans les 7 jours ({aoUrgDash.length})</div>
                       <div style={{display:'flex',flexDirection:'column',gap:5}}>
                         {aoUrgDash.map((a,i) => { const dl=dlLeftDash(a.d); const ext=getExt(a.id); const resp=(ext.r||'David LEMAIRE').split(',')[0].trim(); return (
-                          <div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'7px 10px',background:'#fff',borderRadius:crmRd,border:'1px solid #fecaca'}}>
+                          <div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'7px 10px',background:$bgCard,borderRadius:crmRd,border:'1px solid #fecaca'}}>
                             <div style={{fontSize:'0.77rem',fontWeight:600,color:'#111',flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',marginRight:8}}>{a.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,55)}</div>
                             <div style={{display:'flex',alignItems:'center',gap:6,flexShrink:0}}>
                               <span style={{fontSize:'0.68rem',color:'#6b7280',whiteSpace:'nowrap'}}>{resp.split(' ')[1]||resp}</span>
-                              <span style={{fontSize:'0.74rem',fontWeight:700,color:'#dc2626',background:'#fee2e2',padding:'2px 7px',borderRadius:8}}>{dl===0?"Aujourd'hui !":dl+'j'}</span>
+                              <span style={{fontSize:'0.74rem',fontWeight:700,color:'#dc2626',background:'rgba(239,68,68,0.14)',padding:'2px 7px',borderRadius:8}}>{dl===0?"Aujourd'hui !":dl+'j'}</span>
                               <span style={{fontSize:'0.68rem',fontWeight:600,padding:'2px 6px',borderRadius:4,background:'#bca58a22',color:'#64748b'}}>{a.s}</span>
                               {ext.drive && <a href={ext.drive} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.68rem',color:'#1a73e8',textDecoration:'none',padding:'2px 6px',borderRadius:4,background:'#1a73e810',border:'1px solid #1a73e820',whiteSpace:'nowrap'}}>📁 Drive</a>}
                               <a href={"https://ezel-batiment.monday.com/boards/6470581185/views/159052052/item/"+a.id} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:'0.68rem',color:'#0073ea',textDecoration:'none',padding:'2px 6px',borderRadius:4,background:'#0073ea10',border:'1px solid #0073ea20',whiteSpace:'nowrap'}}>↗ Monday</a>
@@ -248,11 +248,11 @@ export default function TabKpiDashboard(__props) {
                     </div>
                   )}
                   {aoSemDash.length > 0 && aoUrgDash.length === 0 && (
-                    <div style={{background:'#fffbeb',border:'1px solid #fde68a',borderRadius:crmRd,margin:'0 8px 14px',padding:'10px 14px'}}>
+                    <div style={{background:'rgba(212,160,48,0.12)',border:'1px solid #fde68a',borderRadius:crmRd,margin:'0 8px 14px',padding:'10px 14px'}}>
                       <div style={{fontWeight:700,color:'#d97706',fontSize:'0.82rem',marginBottom:6}}>⚠️ AO à délai serré — deadline dans les 21 jours ({aoSemDash.length})</div>
                       <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                         {aoSemDash.map((a,i) => { const dl=dlLeftDash(a.d); return (
-                          <div key={i} style={{padding:'4px 8px',background:'#fff',border:'1px solid #fde68a',borderRadius:crmRd,display:'flex',alignItems:'center',gap:5}}>
+                          <div key={i} style={{padding:'4px 8px',background:$bgCard,border:'1px solid #fde68a',borderRadius:crmRd,display:'flex',alignItems:'center',gap:5}}>
                             <span style={{fontSize:'0.74rem',fontWeight:600,color:'#111',maxWidth:160,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{a.n.replace(/^\d{4}\.\d{2}\.\d{2} - /,'').slice(0,35)}</span>
                             <span style={{fontSize:'0.72rem',fontWeight:700,color:'#d97706'}}>{dl}j · {fmtDDash(a.d)}</span>
                           </div>

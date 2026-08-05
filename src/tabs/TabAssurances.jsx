@@ -39,7 +39,7 @@ export default function TabAssurances(__props) {
               >+ Police</button>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10, marginBottom:14}}>
-              {[{l:'Polices actives',v:policesActives,c:'#10b981',bg:'#f0fdf4'},{l:'Primes annuelles',v:fmt(totalPrimes),c:'#8B6F47',bg:'#faf6ef'},{l:'Sinistres ouverts',v:sampleSinistres.filter(s=>s.statut!=='indemnise').length,c:'#f59e0b',bg:'#fffbeb'},{l:'Polices expirées',v:expirees,c: expirees>0?'#ef4444':'#059669',bg: expirees>0?'#fef2f2':'#f0fdf4'}].map((k,i) => (
+              {[{l:'Polices actives',v:policesActives,c:'#10b981',bg:'rgba(34,197,94,0.10)'},{l:'Primes annuelles',v:fmt(totalPrimes),c:'#8B6F47',bg:$bgSub},{l:'Sinistres ouverts',v:sampleSinistres.filter(s=>s.statut!=='indemnise').length,c:'#f59e0b',bg:'rgba(212,160,48,0.12)'},{l:'Polices expirées',v:expirees,c: expirees>0?'#ef4444':'#059669',bg: expirees>0?'rgba(239,68,68,0.10)':'rgba(34,197,94,0.10)'}].map((k,i) => (
                 <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=$border;e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow=$shadow;}}
@@ -52,7 +52,7 @@ export default function TabAssurances(__props) {
             </div>
             <div style={{display:'flex', gap:6, marginBottom:14}}>
               {[{id:'polices',l:'Polices d\'assurance'},{id:'sinistres',l:'Sinistres ('+sampleSinistres.length+')'}].map(t => (
-                <button key={t.id} onClick={()=>setAssTab(t.id)} style={{padding:'6px 14px',borderRadius:crmRd,border: assTab===t.id?`2px solid ${$accent}`:`1px solid ${$border}`,background: assTab===t.id?'#faf6ef':'white',color: assTab===t.id?'#8B6F47':'#6b5d4d',fontWeight:700,fontSize:'0.85rem',cursor:'pointer'}}>{t.l}</button>
+                <button key={t.id} onClick={()=>setAssTab(t.id)} style={{padding:'6px 14px',borderRadius:crmRd,border: assTab===t.id?`2px solid ${$accent}`:`1px solid ${$border}`,background: assTab===t.id?$bgSub:$bgCard,color: assTab===t.id?'#8B6F47':'#6b5d4d',fontWeight:700,fontSize:'0.85rem',cursor:'pointer'}}>{t.l}</button>
               ))}
             </div>
             {assTab === 'polices' && (
@@ -69,7 +69,7 @@ export default function TabAssurances(__props) {
                         <div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>{p.couverture}</div>
                       </div>
                       <div style={{textAlign:'right'}}>
-                        <span style={{padding:'3px 10px',borderRadius:crmRd,background: isExpired?'#fef2f2':'#f0fdf4',color: isExpired?'#dc2626':'#059669',fontWeight:700,fontSize:'0.75rem'}}>{isExpired?'Expirée':'Active'}</span>
+                        <span style={{padding:'3px 10px',borderRadius:crmRd,background: isExpired?'rgba(239,68,68,0.10)':'rgba(34,197,94,0.10)',color: isExpired?'#dc2626':'#059669',fontWeight:700,fontSize:'0.75rem'}}>{isExpired?'Expirée':'Active'}</span>
                         <div style={{fontSize:'1.1rem',fontWeight:800,color:$accent,marginTop:6}}>{fmt(p.primeAnnuelle)}/an</div>
                       </div>
                     </div>

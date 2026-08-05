@@ -29,7 +29,7 @@ export default function TabConformite(__props) {
               <div><h1 style={{fontSize:'1.5rem',fontWeight:700,letterSpacing:'-0.03em',margin:0,color:$text}}>Conformité BTP</h1><div style={{fontSize:'0.82rem',color:$textMut,margin:'4px 0 0'}}>Obligations réglementaires et certifications</div></div>
             </div>
             {(urgents.length > 0 || expires.length > 0) && (
-              <div style={{marginBottom:14, padding:'12px 16px', borderRadius:crmRd, background: expires.length>0?'#fef2f2':'#fefce8', borderLeft:'3px solid '+(expires.length>0?'#dc2626':'#d97706')}}>
+              <div style={{marginBottom:14, padding:'12px 16px', borderRadius:crmRd, background: expires.length>0?'rgba(239,68,68,0.10)':'rgba(212,160,48,0.12)', borderLeft:'3px solid '+(expires.length>0?'#dc2626':'#d97706')}}>
                 <div style={{fontWeight:700, color: expires.length>0?'#991b1b':'#92400e', fontSize:'0.88rem'}}>
                   {expires.length > 0 ? '▲ '+expires.length+' document(s) expiré(s)' : ''} {urgents.length > 0 ? '● '+urgents.length+' échéance(s) dans 60 jours' : ''}
                 </div>
@@ -58,13 +58,13 @@ export default function TabConformite(__props) {
                   {catItems.map(item => {
                     const isUrgent = item.statut === 'urgent' || (item.prochaine && new Date(item.prochaine) < new Date(Date.now()+60*24*3600*1000));
                     const isExpired = item.prochaine && new Date(item.prochaine) < new Date();
-                    return <div key={item.id} style={{background: isExpired?'#fef2f2':isUrgent?'#fefce8':'white',borderRadius:crmRd,padding:'10px 16px',border:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                    return <div key={item.id} style={{background: isExpired?'rgba(239,68,68,0.10)':isUrgent?'rgba(212,160,48,0.12)':$bgCard,borderRadius:crmRd,padding:'10px 16px',border:`1px solid ${$border}`,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                       <div>
                         <div style={{fontWeight:600,fontSize:'0.85rem',color:$text}}>{item.titre}</div>
                         <div style={{fontSize:'0.72rem',color:$textMut,marginTop:2}}>{item.filialeId === 'all' ? 'Toutes filiales' : filNom(item.filialeId)} — Resp: {item.responsableId ? empNom(item.responsableId) : '—'} {item.notes ? '— '+item.notes : ''}</div>
                       </div>
                       <div style={{textAlign:'right',flexShrink:0}}>
-                        <span style={{padding:'2px 8px',borderRadius:crmRd,background: isExpired?'#fecaca':isUrgent?'#fef3c7':'#dcfce7',color: isExpired?'#dc2626':isUrgent?'#a16207':'#15803d',fontWeight:700,fontSize:'0.72rem'}}>{isExpired?'Expiré':isUrgent?'Bientôt':'À jour'}</span>
+                        <span style={{padding:'2px 8px',borderRadius:crmRd,background: isExpired?'rgba(239,68,68,0.22)':isUrgent?'rgba(212,160,48,0.18)':'rgba(34,197,94,0.14)',color: isExpired?'#dc2626':isUrgent?'#a16207':'#15803d',fontWeight:700,fontSize:'0.72rem'}}>{isExpired?'Expiré':isUrgent?'Bientôt':'À jour'}</span>
                         {item.prochaine && <div style={{fontSize:'0.68rem',color:$textMut,marginTop:3}}>Éch: {item.prochaine}</div>}
                         <div style={{fontSize:'0.68rem',color:$textSec}}>MAJ: {item.dateMAJ}</div>
                       </div>

@@ -27,7 +27,7 @@ export default function TabSuiviPresta(__props) {
               >+ Nouvelle mission</button>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10, marginBottom:14}}>
-              {[{l:'Missions actives',v:data.filter(d=>d.statut==='active').length,c:'#10b981',bg:'#f0fdf4'},{l:'Montant engagé',v:fmt(totalMontant),c:'#3b82f6',bg:'#eff6ff'},{l:'Facturé',v:fmt(totalFacture),c:'#8B6F47',bg:'#faf6ef'},{l:'En attente livrable',v:data.filter(d=>d.statut==='en_attente').length,c:'#f59e0b',bg:'#fffbeb'}].map((k,i) => (
+              {[{l:'Missions actives',v:data.filter(d=>d.statut==='active').length,c:'#10b981',bg:'rgba(34,197,94,0.10)'},{l:'Montant engagé',v:fmt(totalMontant),c:'#3b82f6',bg:'rgba(59,130,246,0.10)'},{l:'Facturé',v:fmt(totalFacture),c:'#8B6F47',bg:$bgSub},{l:'En attente livrable',v:data.filter(d=>d.statut==='en_attente').length,c:'#f59e0b',bg:'rgba(212,160,48,0.12)'}].map((k,i) => (
                 <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=$border;e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow=$shadow;}}
@@ -39,7 +39,7 @@ export default function TabSuiviPresta(__props) {
               ))}
             </div>
             <div style={{display:'flex', gap:6, marginBottom:14}}>
-              {[{id:'tous',l:'Tous'},...SP_STATUTS].map(f => <button key={f.id} onClick={()=>setSpFilter(f.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: spFilter===f.id?`2px solid ${$accent}`:`1px solid ${$border}`,background: spFilter===f.id?'#faf6ef':'white',fontWeight:700,fontSize:'0.8rem',color: spFilter===f.id?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>{f.l || f.label}</button>)}
+              {[{id:'tous',l:'Tous'},...SP_STATUTS].map(f => <button key={f.id} onClick={()=>setSpFilter(f.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: spFilter===f.id?`2px solid ${$accent}`:`1px solid ${$border}`,background: spFilter===f.id?$bgSub:$bgCard,fontWeight:700,fontSize:'0.8rem',color: spFilter===f.id?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>{f.l || f.label}</button>)}
             </div>
             <div style={{display:'flex', flexDirection:'column', gap:10}}>
               {filtered.map(sp => {

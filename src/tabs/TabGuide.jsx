@@ -25,7 +25,7 @@ export default function TabGuide(__props) {
             <div style={{display:'flex', gap:8, flexWrap:'wrap', marginBottom:24}}>
               {sections.map(s => (
                 <button key={s.key} onClick={() => setGuideSection(s.key)}
-                  style={{padding:'10px 18px', borderRadius:crmRd, fontSize:'0.92rem', fontWeight:700, border: guideSection === s.key ? 'none' : `1px solid ${$border}`, background: guideSection === s.key ? 'linear-gradient(135deg, #FFC107, #ffab00)' : 'white', color: guideSection === s.key ? '#2d2216' : '#6b5d4d', cursor:'pointer', transition:'all 0.2s'}}
+                  style={{padding:'10px 18px', borderRadius:crmRd, fontSize:'0.92rem', fontWeight:700, border: guideSection === s.key ? 'none' : `1px solid ${$border}`, background: guideSection === s.key ? 'linear-gradient(135deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))' : $bgCard, color: guideSection === s.key ? '#2d2216' : '#6b5d4d', cursor:'pointer', transition:'all 0.2s'}}
                 >{s.label}</button>
               ))}
             </div>
@@ -52,7 +52,7 @@ export default function TabGuide(__props) {
                           <div style={{fontSize:'0.92rem', color:'#059669', fontWeight:600, marginBottom:8}}>{desc.short}</div>
                           <div style={{fontSize:'0.9rem', color:$textSec, lineHeight:1.55, marginBottom:12}}>{desc.detail}</div>
                           <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:'#f8f6f1', fontSize:'0.82rem', fontWeight:600, color:$accent}}>📂 {desc.categorie}</span>
+                            <span style={{padding:'3px 10px', borderRadius:crmRd, background:'rgba(248,246,241,0.14)', fontSize:'0.82rem', fontWeight:600, color:$accent}}>📂 {desc.categorie}</span>
                             <span style={{padding:'3px 10px', borderRadius:crmRd, background:$info+'12', fontSize:'0.82rem', fontWeight:600, color:'#2563eb'}}>🔄 {desc.frequence}</span>
                             <span style={{padding:'3px 10px', borderRadius:crmRd, background:$success+'12', fontSize:'0.82rem', fontWeight:600, color:'#059669'}}>📥 {desc.source}</span>
                           </div>

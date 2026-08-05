@@ -143,15 +143,15 @@ export default function TabDossierRh(__props) {
                           const isExpired = doc.expiration && new Date(doc.expiration) < new Date();
                           const isExpiring = doc.expiration && !isExpired && new Date(doc.expiration) < new Date(Date.now()+90*24*3600*1000);
                           return (
-                            <div key={i} style={{display:'flex', alignItems:'center', gap:10, padding:'8px 10px', borderBottom: i<sel.documents.length-1?`1px solid ${$border}`:'none', background: isExpired?'#fef2f2':isExpiring?'#fefce8':'transparent', marginBottom:2}}>
+                            <div key={i} style={{display:'flex', alignItems:'center', gap:10, padding:'8px 10px', borderBottom: i<sel.documents.length-1?`1px solid ${$border}`:'none', background: isExpired?'rgba(239,68,68,0.10)':isExpiring?'rgba(212,160,48,0.12)':'transparent', marginBottom:2}}>
                               <span style={{width:28,height:28,background:dt.color+'18',display:'flex',alignItems:'center',justifyContent:'center',color:dt.color,fontWeight:700,fontSize:'0.75rem',flexShrink:0}}>{dt.icon}</span>
                               <div style={{flex:1}}>
                                 <div style={{fontWeight:600, fontSize:'0.82rem', color:$text}}>{doc.nom}</div>
                                 <div style={{fontSize:'0.7rem', color:$textMut}}>{dt.label} — {doc.date}{doc.expiration ? ' → Exp: '+doc.expiration : ''}</div>
                               </div>
-                              {isExpired && <span style={{padding:'2px 8px',background:'#fecaca',color:'#dc2626',fontWeight:700,fontSize:'0.7rem'}}>Expiré</span>}
-                              {isExpiring && <span style={{padding:'2px 8px',background:'#fef3c7',color:'#a16207',fontWeight:700,fontSize:'0.7rem'}}>Bientôt</span>}
-                              {!isExpired && !isExpiring && <span style={{padding:'2px 8px',background:'#dcfce7',color:'#15803d',fontWeight:700,fontSize:'0.7rem'}}>Valide</span>}
+                              {isExpired && <span style={{padding:'2px 8px',background:'rgba(239,68,68,0.22)',color:'#dc2626',fontWeight:700,fontSize:'0.7rem'}}>Expiré</span>}
+                              {isExpiring && <span style={{padding:'2px 8px',background:'rgba(212,160,48,0.18)',color:'#a16207',fontWeight:700,fontSize:'0.7rem'}}>Bientôt</span>}
+                              {!isExpired && !isExpiring && <span style={{padding:'2px 8px',background:'rgba(34,197,94,0.14)',color:'#15803d',fontWeight:700,fontSize:'0.7rem'}}>Valide</span>}
                             </div>
                           );
                         })}
@@ -212,7 +212,7 @@ export default function TabDossierRh(__props) {
                           const carteBtp = sel.documents.find(d => d.type === 'carte_btp');
                           return (
                             <div style={{display:'flex',flexDirection:'column',gap:10}}>
-                              <div style={{padding:'12px 14px',border:`1px solid ${$border}`,background: dpaeDoc ? '#ecfdf5' : '#fef2f2'}}>
+                              <div style={{padding:'12px 14px',border:`1px solid ${$border}`,background: dpaeDoc ? 'rgba(34,197,94,0.10)' : 'rgba(239,68,68,0.10)'}}>
                                 <div style={{fontWeight:700,color:dpaeDoc?'#059669':'#dc2626',fontSize:'0.85rem'}}>◰ DPAE (Déclaration Préalable à l'Embauche)</div>
                                 {dpaeDoc ? (
                                   <div style={{fontSize:'0.78rem',color:$textSec,marginTop:4}}>
@@ -224,7 +224,7 @@ export default function TabDossierRh(__props) {
                                   <div style={{fontSize:'0.78rem',color:'#dc2626',fontWeight:600,marginTop:4}}>⚠ DPAE manquante — Obligation avant J1</div>
                                 )}
                               </div>
-                              <div style={{padding:'12px 14px',border:`1px solid ${$border}`,background: carteBtp ? '#ecfdf5' : '#fef2f2'}}>
+                              <div style={{padding:'12px 14px',border:`1px solid ${$border}`,background: carteBtp ? 'rgba(34,197,94,0.10)' : 'rgba(239,68,68,0.10)'}}>
                                 <div style={{fontWeight:700,color:carteBtp?'#059669':'#dc2626',fontSize:'0.85rem'}}>■ Carte BTP (CIBTP)</div>
                                 {carteBtp ? (
                                   <div style={{fontSize:'0.78rem',color:$textSec,marginTop:4}}>

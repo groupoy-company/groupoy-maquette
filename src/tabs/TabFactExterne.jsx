@@ -6,7 +6,7 @@ export default function TabFactExterne(__props) {
   const { $accent, $bgCard, $bgSub, $border, $borderAlt, $danger, $info, $shadowLg, $success, $text, $textMut, $textSec, $warn, CATS_PRESTA, CGV_DEFAULTS, CONDITIONS_PAIEMENT, CONTRAT_STATUTS, CONTRAT_TYPES, DOC_TYPES, MISSION_STATUTS, MODES_FACT, STATUTS_FACTEXT, TACHE_PRIORITES, TACHE_STATUTS, TYPES_PRESTA, ca, confirmRejet, contratEdit, contratView, crmRd, defaultFactColW, defaultPrestaColW, deleteFactExtEntry, deletePresta, expandedTache, factColW, factExtContratModal, factExtData, factExtFilter, factExtForm, factExtPrestaForm, factExtPreview, factExtTab, factExtView, factResizeRef, filiales, filialesEnrichies, missionViewMode, newComment, prestaColW, prestaDetailTab, prestaFilters, prestaNewCompetence, prestaNewContratRecuForm, prestaNewDocForm, prestaNewMissionForm, prestaNewTacheForm, prestaResizeRef, prestaSort, rejetModal, saveFactExtEntry, savePresta, setContratEdit, setContratView, setExpandedTache, setFactColW, setFactExtContratModal, setFactExtFilter, setFactExtForm, setFactExtPrestaForm, setFactExtPreview, setFactExtTab, setFactExtView, setMissionViewMode, setNewComment, setPrestaColW, setPrestaDetailTab, setPrestaFilters, setPrestaNewCompetence, setPrestaNewContratRecuForm, setPrestaNewDocForm, setPrestaNewMissionForm, setPrestaNewTacheForm, setPrestaSort, setRejetModal, setShowCGVEditor, showCGVEditor, updateFactExtStatut } = __props;
         const { prestataires, factures } = factExtData;
         const cardS = {background:$bgCard, borderRadius:crmRd, border:`1px solid ${$border}`, boxShadow:'0 2px 12px rgba(0,0,0,0.04)', overflow:'hidden'};
-        const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:'#fefdfb'};
+        const inS = {width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.9rem', outline:'none', background:$bgCard};
         const lbS = {display:'block', fontSize:'0.72rem', fontWeight:600, color:$textMut, marginBottom:3, textTransform:'uppercase', letterSpacing:'0.03em'};
         const fmt = v => v >= 1000000 ? (v/1000000).toFixed(2)+'M€' : v >= 1000 ? (v/1000).toFixed(1)+'K€' : v.toFixed(0)+'€';
         const btnP = {padding:'8px 18px', borderRadius:crmRd, border:'none', background:'linear-gradient(135deg, #dc2626, #b91c1c)', color:'white', fontWeight:700, fontSize:'0.9rem', cursor:'pointer'};
@@ -46,7 +46,7 @@ export default function TabFactExterne(__props) {
               </div>
               <div style={{display:'flex', gap:6}}>
                 {['dashboard','factures','prestataires'].map(t => (
-                  <button key={t} onClick={() => setFactExtTab(t)} style={{padding:'6px 14px', borderRadius:crmRd, border: factExtTab===t ? '2px solid #dc2626' : `1px solid ${$border}`, background: factExtTab===t ? '#fef2f2' : 'white', color: factExtTab===t ? '#dc2626' : '#6b5d4d', fontWeight:700, fontSize:'0.88rem', cursor:'pointer'}}>
+                  <button key={t} onClick={() => setFactExtTab(t)} style={{padding:'6px 14px', borderRadius:crmRd, border: factExtTab===t ? '2px solid #dc2626' : `1px solid ${$border}`, background: factExtTab===t ? 'rgba(239,68,68,0.10)' : $bgCard, color: factExtTab===t ? '#dc2626' : '#6b5d4d', fontWeight:700, fontSize:'0.88rem', cursor:'pointer'}}>
                     {t==='dashboard'?'📊 Dashboard':t==='factures'?'🧾 Factures':'👥 CRM Prestataires'}
                   </button>
                 ))}
@@ -96,7 +96,7 @@ export default function TabFactExterne(__props) {
                         const barH = Math.max(20, (count / maxCount) * 80);
                         return (
                           <div key={st} style={{flex:1, display:'flex', flexDirection:'column', alignItems:'center', position:'relative'}}>
-                            {i > 0 && <div style={{position:'absolute', left:-8, top:'50%', width:16, height:2, background:'#e8e4de', zIndex:1}}/>}
+                            {i > 0 && <div style={{position:'absolute', left:-8, top:'50%', width:16, height:2, background:$border, zIndex:1}}/>}
                             <div style={{width:'100%', padding:'0 4px', cursor:'pointer', textAlign:'center'}} onClick={() => { setFactExtFilter({...factExtFilter, statut: st}); setFactExtTab('factures'); }}>
                               <div style={{fontSize:'0.52rem', fontWeight:700, color:stInfo.color, textTransform:'uppercase', marginBottom:6, minHeight:24, lineHeight:'12px'}}>{stInfo.label.replace(/^[^ ]+ /,'')}</div>
                               <div style={{margin:'0 auto', width:'60%', height:barH, background:`linear-gradient(180deg, ${stInfo.color}99, ${stInfo.color}33)`, borderRadius:crmRd, display:'flex', alignItems:'center', justifyContent:'center', transition:'height 0.4s', minHeight:20}}>
@@ -111,8 +111,8 @@ export default function TabFactExterne(__props) {
                     {/* Rejetées / Litige mini badges */}
                     {(factures.filter(f=>f.statut==='rejetee').length > 0 || factures.filter(f=>f.statut==='litige').length > 0) && (
                       <div style={{display:'flex', gap:8, marginTop:12, justifyContent:'center'}}>
-                        {factures.filter(f=>f.statut==='rejetee').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fecaca', color:'#991b1b', fontWeight:700}}>❌ {factures.filter(f=>f.statut==='rejetee').length} rejetée(s)</span>}
-                        {factures.filter(f=>f.statut==='litige').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'#fef3c7', color:'#dc2626', fontWeight:700}}>⚠️ {factures.filter(f=>f.statut==='litige').length} litige(s)</span>}
+                        {factures.filter(f=>f.statut==='rejetee').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'rgba(239,68,68,0.22)', color:'#991b1b', fontWeight:700}}>❌ {factures.filter(f=>f.statut==='rejetee').length} rejetée(s)</span>}
+                        {factures.filter(f=>f.statut==='litige').length > 0 && <span style={{fontSize:'0.72rem', padding:'3px 10px', borderRadius:crmRd, background:'rgba(212,160,48,0.18)', color:'#dc2626', fontWeight:700}}>⚠️ {factures.filter(f=>f.statut==='litige').length} litige(s)</span>}
                       </div>
                     )}
                   </div>
@@ -179,7 +179,7 @@ export default function TabFactExterne(__props) {
                       });
                       if (alerts.length === 0) return <div style={{padding:16, textAlign:'center', color:'#059669', fontWeight:600}}>✅ Aucune alerte — Tout est en ordre !</div>;
                       return alerts.map((a,i) => (
-                        <div key={i} style={{padding:'8px 10px', borderRadius:crmRd, background: a.type==='danger'?'#fef2f2':a.type==='warn'?'#fffbeb':'#f8fafc', marginBottom:4, fontSize:'0.84rem', display:'flex', alignItems:'center', gap:6}}>
+                        <div key={i} style={{padding:'8px 10px', borderRadius:crmRd, background: a.type==='danger'?'rgba(239,68,68,0.10)':a.type==='warn'?'rgba(212,160,48,0.12)':$bgSub, marginBottom:4, fontSize:'0.84rem', display:'flex', alignItems:'center', gap:6}}>
                           <span>{a.icon}</span>
                           <span style={{color: a.type==='danger'?'#991b1b':a.type==='warn'?'#92400e':'#374151'}}>{a.text}</span>
                         </div>
@@ -388,7 +388,7 @@ export default function TabFactExterne(__props) {
                         const cat = pr2 ? (CATS_PRESTA[pr2.categorie] || CATS_PRESTA.autre) : CATS_PRESTA.autre;
                         const isOverdue = fa.dateEcheance && new Date(fa.dateEcheance) < new Date() && !['payee','rejetee'].includes(fa.statut);
                         return (
-                          <tr key={fa.id} style={{borderBottom:`1px solid ${$border}`, background: isOverdue ? '#fef2f2' : idx%2===0?'white':'#fefdfb'}}>
+                          <tr key={fa.id} style={{borderBottom:`1px solid ${$border}`, background: isOverdue ? 'rgba(239,68,68,0.10)' : idx%2===0?$bgCard:$bgCard}}>
                             <td style={{width:factColW[0], padding:'10px 12px', fontWeight:700, color:'#dc2626', fontSize:'0.86rem', borderRight:'1px solid #eee8e0'}}>{fa.ref}</td>
                             <td style={{width:factColW[1], padding:'10px 12px', borderRight:'1px solid #eee8e0'}}><div style={{fontWeight:600, fontSize:'0.92rem'}}>{pr2?.nom || fa.prestaNom || '?'}</div><div style={{fontSize:'0.72rem', color:cat.color}}>{cat.icon} {cat.label}</div></td>
                             <td style={{width:factColW[2], padding:'10px 12px', fontSize:'0.86rem', color:$textSec, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', borderRight:'1px solid #eee8e0'}}>{fa.objet}</td>
@@ -434,7 +434,7 @@ export default function TabFactExterne(__props) {
                   <span style={{fontWeight:700, color:$text}}>👥 CRM Prestataires ({prestataires.length})</span>
                   <div style={{display:'flex', border:`1px solid ${$border}`, borderRadius:crmRd, overflow:'hidden'}}>
                     {[{k:'cards',icon:'▦',label:'Cartes'},{k:'list',icon:'☰',label:'Liste'}].map(v => (
-                      <button key={v.k} onClick={() => setFactExtView(v.k)} style={{padding:'4px 10px', border:'none', background: factExtView===v.k ? '#dc2626' : 'white', color: factExtView===v.k ? 'white' : '#6b5d4d', fontWeight:600, fontSize:'0.8rem', cursor:'pointer'}}>{v.icon} {v.label}</button>
+                      <button key={v.k} onClick={() => setFactExtView(v.k)} style={{padding:'4px 10px', border:'none', background: factExtView===v.k ? '#dc2626' : $bgCard, color: factExtView===v.k ? 'white' : '#6b5d4d', fontWeight:600, fontSize:'0.8rem', cursor:'pointer'}}>{v.icon} {v.label}</button>
                     ))}
                   </div>
                 </div>
@@ -534,7 +534,7 @@ export default function TabFactExterne(__props) {
                       <div><label style={lbS}>Fréquence</label><select value={fd.frequence||'ponctuel'} onChange={e => setFd(p=>({...p, frequence:e.target.value}))} style={inS}><option value="ponctuel">Ponctuel</option><option value="hebdomadaire">Hebdomadaire</option><option value="mensuel">Mensuel</option><option value="trimestriel">Trimestriel</option><option value="annuel">Annuel</option></select></div>
                       <div><label style={lbS}>Jours/semaine (si applicable)</label><input type="number" value={fd.joursParSemaine||''} onChange={e => setFd(p=>({...p, joursParSemaine: e.target.value ? Number(e.target.value) : null}))} style={inS} placeholder="Ex: 2"/></div>
                     </div>
-                    {fd.modeFact && <div style={{padding:8, background:'#f3f4f6', borderRadius:crmRd, fontSize:'0.82rem', color:$textSec, marginBottom:12}}>{MODES_FACT[fd.modeFact]?.icon} <em>{MODES_FACT[fd.modeFact]?.desc}</em></div>}
+                    {fd.modeFact && <div style={{padding:8, background:$bgSub, borderRadius:crmRd, fontSize:'0.82rem', color:$textSec, marginBottom:12}}>{MODES_FACT[fd.modeFact]?.icon} <em>{MODES_FACT[fd.modeFact]?.desc}</em></div>}
                     {/* Statut */}
                     <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:10, marginBottom:14}}>
                       <div><label style={lbS}>Statut</label><select value={fd.statut||'prospect'} onChange={e => setFd(p=>({...p, statut:e.target.value}))} style={inS}><option value="actif">● Actif</option><option value="en_veille">● En veille</option><option value="prospect">● Prospect</option><option value="termine">● Terminé</option></select></div>
@@ -587,7 +587,7 @@ export default function TabFactExterne(__props) {
                           {p.ville && <div>📍 {p.ville} {p.cp}</div>}
                           {p.siret && <div>🏛️ {p.siret}</div>}
                         </div>
-                        <div style={{padding:8, background:'#f3f4f6', borderRadius:crmRd, marginBottom:8, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                        <div style={{padding:8, background:$bgSub, borderRadius:crmRd, marginBottom:8, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                           <div style={{fontSize:'0.82rem'}}>{mode.icon} <strong>{mode.label?.split(' (')[0]}</strong></div>
                           <div style={{fontWeight:700, color:'#1e40af'}}>
                             {p.tarifBase > 0 ? p.tarifBase.toLocaleString('fr-FR')+' '+p.tarifUnite : 'Sur devis'}
@@ -667,7 +667,7 @@ export default function TabFactExterne(__props) {
                           const statutTxt = p.statut==='actif'?'Actif':p.statut==='en_veille'?'En veille':p.statut==='prospect'?'Prospect':'Terminé';
                           const bR = '1px solid #eee8e0';
                           return (
-                            <tr key={p.id} style={{borderBottom:`1px solid ${$border}`, background: idx%2===0?'white':'#fefdfb', opacity: p.statut==='termine'?0.5:1, cursor:'pointer'}} onClick={() => setFactExtPreview(p)}>
+                            <tr key={p.id} style={{borderBottom:`1px solid ${$border}`, background: idx%2===0?$bgCard:$bgCard, opacity: p.statut==='termine'?0.5:1, cursor:'pointer'}} onClick={() => setFactExtPreview(p)}>
                               <td style={{padding:'10px 10px', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', borderRight:bR}}>
                                 <div style={{fontWeight:700, fontSize:'0.92rem', color:$text, overflow:'hidden', textOverflow:'ellipsis'}}>{p.nom}</div>
                                 {p.raisonSociale && p.raisonSociale !== p.nom && <div style={{fontSize:'0.72rem', color:$textMut, overflow:'hidden', textOverflow:'ellipsis'}}>{p.raisonSociale}</div>}
@@ -764,7 +764,7 @@ export default function TabFactExterne(__props) {
                       </div>
                       <div style={{display:'flex', gap:6, alignItems:'center', flexShrink:0}}>
                         <span style={{padding:'4px 10px', borderRadius:crmRd, background:'rgba(255,255,255,0.2)', color:'white', fontWeight:700, fontSize:'0.78rem'}}>{tp.icon} {tp.label}</span>
-                        <span style={{padding:'4px 10px', borderRadius:6, background:p.statut==='actif'?'#dcfce7':p.statut==='en_veille'?'#fef3c7':'#f3f4f6', color:p.statut==='actif'?'#166534':p.statut==='en_veille'?'#92400e':'#6b7280', fontWeight:700, fontSize:'0.78rem', display:'inline-flex', alignItems:'center', gap:4}}><span style={{width:6, height:6, borderRadius:'50%', background:p.statut==='actif'?'#059669':p.statut==='en_veille'?'#d97706':p.statut==='prospect'?'#2563eb':'#6b7280'}}/>{p.statut==='actif'?'Actif':p.statut==='en_veille'?'En veille':p.statut==='prospect'?'Prospect':'Terminé'}</span>
+                        <span style={{padding:'4px 10px', borderRadius:6, background:p.statut==='actif'?'rgba(34,197,94,0.14)':p.statut==='en_veille'?'rgba(212,160,48,0.18)':$bgSub, color:p.statut==='actif'?'#166534':p.statut==='en_veille'?'#92400e':'#6b7280', fontWeight:700, fontSize:'0.78rem', display:'inline-flex', alignItems:'center', gap:4}}><span style={{width:6, height:6, borderRadius:'50%', background:p.statut==='actif'?'#059669':p.statut==='en_veille'?'#d97706':p.statut==='prospect'?'#2563eb':'#6b7280'}}/>{p.statut==='actif'?'Actif':p.statut==='en_veille'?'En veille':p.statut==='prospect'?'Prospect':'Terminé'}</span>
                         <button onClick={() => setFactExtPreview(null)} style={{padding:'6px 10px', borderRadius:crmRd, border:'none', background:'rgba(255,255,255,0.25)', color:'white', fontWeight:700, cursor:'pointer', fontSize:'0.9rem'}}>✕</button>
                       </div>
                     </div>
@@ -877,13 +877,13 @@ export default function TabFactExterne(__props) {
                               const dt = DOC_TYPES[d.type] || DOC_TYPES.autre;
                               const isExpired = d.dateExpiration && new Date(d.dateExpiration) < new Date();
                               return (
-                                <div key={d.id} style={{padding:10, borderRadius:crmRd, border: isExpired ? '1px solid #fca5a5' : `1px solid ${$borderAlt}`, background: isExpired ? '#fef2f2' : 'white', marginBottom:6, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                <div key={d.id} style={{padding:10, borderRadius:crmRd, border: isExpired ? '1px solid #fca5a5' : `1px solid ${$borderAlt}`, background: isExpired ? 'rgba(239,68,68,0.10)' : $bgCard, marginBottom:6, display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                   <div>
                                     <div style={{fontSize:'0.88rem', fontWeight:600}}>{dt.icon} {d.nom || dt.label}</div>
                                     <div style={{fontSize:'0.72rem', color:$textSec}}>Ajouté: {d.dateAjout}{d.dateExpiration ? ` · Exp: ${d.dateExpiration}` : ''}</div>
                                   </div>
                                   <div style={{display:'flex', gap:4, alignItems:'center'}}>
-                                    <span style={{fontSize:'0.65rem', padding:'2px 6px', borderRadius:crmRd, background: isExpired ? '#fecaca' : d.statut==='valide' ? '#dcfce7' : '#f3f4f6', color: isExpired ? '#991b1b' : d.statut==='valide' ? '#166534' : '#6b7280', fontWeight:700}}>{isExpired ? '⚠️ Expiré' : d.statut==='valide' ? '✅ Valide' : '📎 Reçu'}</span>
+                                    <span style={{fontSize:'0.65rem', padding:'2px 6px', borderRadius:crmRd, background: isExpired ? 'rgba(239,68,68,0.22)' : d.statut==='valide' ? 'rgba(34,197,94,0.14)' : $bgSub, color: isExpired ? '#991b1b' : d.statut==='valide' ? '#166534' : '#6b7280', fontWeight:700}}>{isExpired ? '⚠️ Expiré' : d.statut==='valide' ? '✅ Valide' : '📎 Reçu'}</span>
                                     <button onClick={() => saveP({...p, documents:docs.filter(x => x.id !== d.id)})} style={{padding:'2px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.65rem', color:'#dc2626'}}>🗑️</button>
                                   </div>
                                 </div>
@@ -950,7 +950,7 @@ export default function TabFactExterne(__props) {
                       {prestaDetailTab === 'contrats' && (<>
                         {/* Dashboard contrats mini */}
                         <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:10, marginBottom:16}}>
-                          <div style={{padding:12, borderRadius:crmRd, background: c.statut==='signe' ? '#f0fdf4' : c.statut==='expire' ? '#fef2f2' : '#fffbeb', textAlign:'center', border:`1px solid ${$borderAlt}`}}>
+                          <div style={{padding:12, borderRadius:crmRd, background: c.statut==='signe' ? 'rgba(34,197,94,0.10)' : c.statut==='expire' ? 'rgba(239,68,68,0.10)' : 'rgba(212,160,48,0.12)', textAlign:'center', border:`1px solid ${$borderAlt}`}}>
                             <div style={{fontSize:'0.65rem', fontWeight:700, color:$textMut, textTransform:'uppercase'}}>Notre contrat</div>
                             <div style={{fontSize:'0.95rem', fontWeight:800, color: c.statut==='signe' ? '#059669' : c.statut==='expire' ? '#dc2626' : '#d97706', marginTop:2}}>{cs.icon} {cs.label}</div>
                           </div>
@@ -958,7 +958,7 @@ export default function TabFactExterne(__props) {
                             <div style={{fontSize:'0.65rem', fontWeight:700, color:$textMut, textTransform:'uppercase'}}>Contrats reçus</div>
                             <div style={{fontSize:'0.95rem', fontWeight:800, color:$text, marginTop:2}}>{contratsRecus.length}</div>
                           </div>
-                          <div style={{padding:12, borderRadius:crmRd, background: (c.dateFin && new Date(c.dateFin) < new Date(Date.now() + 60*86400000)) ? '#fef2f2' : '#f0fdf4', textAlign:'center', border:`1px solid ${$borderAlt}`}}>
+                          <div style={{padding:12, borderRadius:crmRd, background: (c.dateFin && new Date(c.dateFin) < new Date(Date.now() + 60*86400000)) ? 'rgba(239,68,68,0.10)' : 'rgba(34,197,94,0.10)', textAlign:'center', border:`1px solid ${$borderAlt}`}}>
                             <div style={{fontSize:'0.65rem', fontWeight:700, color:$textMut, textTransform:'uppercase'}}>Prochaine expiration</div>
                             <div style={{fontSize:'0.85rem', fontWeight:700, color: (c.dateFin && new Date(c.dateFin) < new Date(Date.now() + 60*86400000)) ? '#dc2626' : '#059669', marginTop:2}}>{c.dateFin || 'Indéterminée'}</div>
                           </div>
@@ -966,14 +966,14 @@ export default function TabFactExterne(__props) {
 
                         {/* Nos contrats */}
                         <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:'#1e40af', fontWeight:700, marginBottom:10}}>▸ Nos contrats (YILMAZ → {p.nom.split(' ')[0]})</div>
-                        <div style={{padding:14, borderRadius:crmRd, border:'1px solid #dbeafe', background:'#f0f7ff', marginBottom:16}}>
+                        <div style={{padding:14, borderRadius:crmRd, border:'1px solid #dbeafe', background:'rgba(240,247,255,0.14)', marginBottom:16}}>
                           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:10}}>
                             <div>
                               <div style={{fontWeight:700, fontSize:'0.98rem'}}>{ct.label}</div>
                               <div style={{fontSize:'0.8rem', color:$textSec}}>Réf: {c.ref || '—'} · {cs.icon} {cs.label}</div>
                             </div>
                             <button onClick={() => { setContratEdit({...c}); setContratView('edit'); setFactExtContratModal({...p}); }} style={{padding:'8px 14px', borderRadius:crmRd, border:'none', background:'#1e40af', color:'white', fontWeight:700, fontSize:'0.82rem', cursor:'pointer'}}>✏️ Gérer</button>
-                            <span style={{fontSize:'0.72rem', padding:'4px 10px', borderRadius:crmRd, background: c.cgv ? '#f0fdf4' : '#fef2f2', color: c.cgv ? '#166534' : '#991b1b', fontWeight:600, border: c.cgv ? '1px solid #bbf7d0' : '1px solid #fecaca'}}>{c.cgv ? '📋 CGV ✅' : '📋 CGV ❌'}</span>
+                            <span style={{fontSize:'0.72rem', padding:'4px 10px', borderRadius:crmRd, background: c.cgv ? 'rgba(34,197,94,0.10)' : 'rgba(239,68,68,0.10)', color: c.cgv ? '#166534' : '#991b1b', fontWeight:600, border: c.cgv ? '1px solid #bbf7d0' : '1px solid #fecaca'}}>{c.cgv ? '📋 CGV ✅' : '📋 CGV ❌'}</span>
                           </div>
                           <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:8, fontSize:'0.84rem'}}>
                             <div style={{padding:8, background:$bgCard, borderRadius:crmRd, textAlign:'center'}}><div style={{fontSize:'0.6rem', color:$textMut, fontWeight:600}}>DÉBUT</div><div style={{fontWeight:700}}>{c.dateDebut || '—'}</div></div>
@@ -986,7 +986,7 @@ export default function TabFactExterne(__props) {
                             <span style={{fontSize:'0.82rem', fontWeight:700, color:$text}}>{(CONDITIONS_PAIEMENT[c.conditionsPaiement] || CONDITIONS_PAIEMENT['30_jours']).label}</span>
                           </div>
                           {c.cgv && (
-                            <div style={{marginTop:8, padding:10, background:'#fffbf5', borderRadius:crmRd, border:'1px solid #e8dcc8'}}>
+                            <div style={{marginTop:8, padding:10, background:'rgba(255,251,245,0.14)', borderRadius:crmRd, border:'1px solid #e8dcc8'}}>
                               <div style={{fontSize:'0.65rem', fontWeight:700, color:$accent, textTransform:'uppercase', marginBottom:4}}>📋 CONDITIONS GÉNÉRALES</div>
                               <div style={{fontSize:'0.72rem', color:$textSec, whiteSpace:'pre-line', lineHeight:1.4, maxHeight:80, overflowY:'auto'}}>{c.cgv.split('\n').slice(0,4).join('\n')}{c.cgv.split('\n').length > 4 ? '\n…' : ''}</div>
                             </div>
@@ -1005,7 +1005,7 @@ export default function TabFactExterne(__props) {
                               <div style={{fontSize:'0.75rem', color:$textSec}}>Signé: {cr.dateSignature || '—'} · Exp: {cr.dateExpiration || '—'}</div>
                             </div>
                             <div style={{display:'flex', gap:4, alignItems:'center'}}>
-                              <span style={{fontSize:'0.7rem', padding:'2px 8px', borderRadius:crmRd, background: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#fecaca' : '#dcfce7', color: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#991b1b' : '#166534', fontWeight:700}}>{cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '⚠️ Expiré' : '✅ Actif'}</span>
+                              <span style={{fontSize:'0.7rem', padding:'2px 8px', borderRadius:crmRd, background: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? 'rgba(239,68,68,0.22)' : 'rgba(34,197,94,0.14)', color: cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '#991b1b' : '#166534', fontWeight:700}}>{cr.dateExpiration && new Date(cr.dateExpiration) < new Date() ? '⚠️ Expiré' : '✅ Actif'}</span>
                               <button onClick={() => saveP({...p, contrats_recus:contratsRecus.filter(x=>x.id!==cr.id)})} style={{padding:'2px 6px', borderRadius:crmRd, border:'1px solid #fecaca', background:$danger+'12', cursor:'pointer', fontSize:'0.65rem', color:'#dc2626'}}>🗑️</button>
                             </div>
                           </div>
@@ -1031,7 +1031,7 @@ export default function TabFactExterne(__props) {
                       {prestaDetailTab === 'factures' && (<>
                         {/* Rapprochement contrat */}
                         {c.ref && pFact.length > 0 && (
-                          <div style={{padding:12, borderRadius:crmRd, border:'1px solid #dbeafe', background:'#f0f7ff', marginBottom:16}}>
+                          <div style={{padding:12, borderRadius:crmRd, border:'1px solid #dbeafe', background:'rgba(240,247,255,0.14)', marginBottom:16}}>
                             <div style={{fontSize:'0.72rem', fontWeight:700, color:'#1e40af', textTransform:'uppercase', marginBottom:6}}>📊 Rapprochement Contrat ↔ Factures</div>
                             <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:10, textAlign:'center'}}>
                               <div><div style={{fontSize:'0.65rem', color:$textMut}}>Contrat ref</div><div style={{fontWeight:700, fontSize:'0.92rem'}}>{c.ref}</div></div>
@@ -1070,7 +1070,7 @@ export default function TabFactExterne(__props) {
                           <div style={{fontSize:'0.75rem', textTransform:'uppercase', color:$textMut, fontWeight:700}}>🎯 Missions ({missions.length}) · Tâches ({allTaches.length}) · {totalHeuresReelles}h réelles / {totalHeures}h prévues</div>
                           <div style={{display:'flex', gap:4}}>
                             {[{k:'list',l:'📋 Liste'},{k:'kanban',l:'📌 Kanban'},{k:'gantt',l:'📊 Gantt'}].map(v => (
-                              <button key={v.k} onClick={() => setMissionViewMode(v.k)} style={{padding:'4px 10px', borderRadius:crmRd, border: missionViewMode===v.k ? `2px solid ${cat.color}` : `1px solid ${$borderAlt}`, background: missionViewMode===v.k ? `${cat.color}10` : 'white', color: missionViewMode===v.k ? cat.color : '#6b5d4d', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>{v.l}</button>
+                              <button key={v.k} onClick={() => setMissionViewMode(v.k)} style={{padding:'4px 10px', borderRadius:crmRd, border: missionViewMode===v.k ? `2px solid ${cat.color}` : `1px solid ${$borderAlt}`, background: missionViewMode===v.k ? `${cat.color}10` : $bgCard, color: missionViewMode===v.k ? cat.color : '#6b5d4d', fontWeight:600, fontSize:'0.78rem', cursor:'pointer'}}>{v.l}</button>
                             ))}
                           </div>
                         </div>
@@ -1132,7 +1132,7 @@ export default function TabFactExterne(__props) {
                                           {/* Commentaires */}
                                           <div style={{fontSize:'0.68rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:4}}>💬 Commentaires ({(t.commentaires||[]).length})</div>
                                           {(t.commentaires||[]).map((cm,ci) => (
-                                            <div key={ci} style={{padding:6, background:'#f8f6f2', borderRadius:crmRd, marginBottom:4, fontSize:'0.8rem'}}>
+                                            <div key={ci} style={{padding:6, background:'rgba(248,246,242,0.14)', borderRadius:crmRd, marginBottom:4, fontSize:'0.8rem'}}>
                                               <span style={{fontWeight:700, color:cat.color}}>{cm.auteur}</span> <span style={{color:$textMut, fontSize:'0.68rem'}}>{cm.date}</span>
                                               <div style={{color:$text, marginTop:2}}>{cm.texte}</div>
                                             </div>
@@ -1404,14 +1404,14 @@ export default function TabFactExterne(__props) {
                       <label style={{display:'block', fontSize:'0.75rem', fontWeight:700, color:$textSec, marginBottom:4}}>Motif du rejet *</label>
                       <div style={{display:'flex', gap:6, flexWrap:'wrap', marginBottom:8}}>
                         {['Montant incorrect','Doublon','Prestation non conforme','Pièces justificatives manquantes','Erreur de TVA','Hors contrat'].map(m => (
-                          <button key={m} onClick={() => setRejetModal(prev => ({...prev, motif: prev.motif ? prev.motif + ' — ' + m : m}))} style={{padding:'4px 10px', borderRadius:crmRd, border:'1px solid #fecaca', background: rejetModal.motif?.includes(m) ? '#fef2f2' : 'white', color:'#991b1b', fontSize:'0.76rem', fontWeight:600, cursor:'pointer'}}>{m}</button>
+                          <button key={m} onClick={() => setRejetModal(prev => ({...prev, motif: prev.motif ? prev.motif + ' — ' + m : m}))} style={{padding:'4px 10px', borderRadius:crmRd, border:'1px solid #fecaca', background: rejetModal.motif?.includes(m) ? 'rgba(239,68,68,0.10)' : $bgCard, color:'#991b1b', fontSize:'0.76rem', fontWeight:600, cursor:'pointer'}}>{m}</button>
                         ))}
                       </div>
                       <textarea value={rejetModal.motif||''} onChange={e => setRejetModal(prev => ({...prev, motif:e.target.value}))} placeholder="Décrivez le motif du rejet en détail..." rows={3} style={{width:'100%', padding:10, borderRadius:crmRd, border:'1px solid #fecaca', fontSize:'0.88rem', resize:'vertical', boxSizing:'border-box', lineHeight:1.6}}/>
                     </div>
                     <div style={{display:'flex', gap:8, marginTop:16, justifyContent:'flex-end'}}>
                       <button onClick={() => setRejetModal(null)} style={{padding:'8px 18px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, background:$bgCard, color:$textSec, fontWeight:600, fontSize:'0.88rem', cursor:'pointer'}}>Annuler</button>
-                      <button onClick={confirmRejet} disabled={!rejetModal.motif?.trim()} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: rejetModal.motif?.trim() ? '#dc2626' : '#e8e4de', color:'white', fontWeight:700, fontSize:'0.88rem', cursor: rejetModal.motif?.trim() ? 'pointer' : 'not-allowed', opacity: rejetModal.motif?.trim() ? 1 : 0.5}}>❌ Confirmer le rejet</button>
+                      <button onClick={confirmRejet} disabled={!rejetModal.motif?.trim()} style={{padding:'8px 18px', borderRadius:crmRd, border:'none', background: rejetModal.motif?.trim() ? '#dc2626' : $border, color:'white', fontWeight:700, fontSize:'0.88rem', cursor: rejetModal.motif?.trim() ? 'pointer' : 'not-allowed', opacity: rejetModal.motif?.trim() ? 1 : 0.5}}>❌ Confirmer le rejet</button>
                     </div>
                   </div>
                 </div>
@@ -1495,34 +1495,34 @@ export default function TabFactExterne(__props) {
                     </div>
                     <div style={{display:'flex', borderBottom:`1px solid ${$border}`}}>
                       {[{k:'edit',label:'✏️ Détails & Édition'},{k:'preview',label:'📄 Aperçu A4'}].map(t => (
-                        <button key={t.k} onClick={() => setContratView(t.k)} style={{flex:1, padding:'10px', border:'none', borderBottom: contratView===t.k ? '2px solid #1e293b' : '2px solid transparent', background: contratView===t.k ? '#f8fafc' : 'white', fontWeight:700, fontSize:'0.88rem', color: contratView===t.k ? '#1e293b' : '#b0a08a', cursor:'pointer'}}>{t.label}</button>
+                        <button key={t.k} onClick={() => setContratView(t.k)} style={{flex:1, padding:'10px', border:'none', borderBottom: contratView===t.k ? '2px solid #1e293b' : '2px solid transparent', background: contratView===t.k ? $bgSub : $bgCard, fontWeight:700, fontSize:'0.88rem', color: contratView===t.k ? '#1e293b' : '#b0a08a', cursor:'pointer'}}>{t.label}</button>
                       ))}
                     </div>
                     <div style={{padding:'20px 24px'}}>
                       {contratView === 'edit' && (<>
                         <div style={{display:'flex', gap:4, marginBottom:16, flexWrap:'wrap'}}>
                           {Object.entries(CONTRAT_STATUTS).map(([k,v]) => (
-                            <button key={k} onClick={() => setContratEdit(prev => ({...prev, statut:k}))} style={{padding:'5px 10px', borderRadius:crmRd, border: cedit.statut===k ? '2px solid '+v.color : `1px solid ${$border}`, background: cedit.statut===k ? v.bg : 'white', color: cedit.statut===k ? v.color : '#6b5d4d', fontWeight: cedit.statut===k ? 700 : 500, fontSize:'0.82rem', cursor:'pointer'}}>{v.icon} {v.label}</button>
+                            <button key={k} onClick={() => setContratEdit(prev => ({...prev, statut:k}))} style={{padding:'5px 10px', borderRadius:crmRd, border: cedit.statut===k ? '2px solid '+v.color : `1px solid ${$border}`, background: cedit.statut===k ? v.bg : $bgCard, color: cedit.statut===k ? v.color : '#6b5d4d', fontWeight: cedit.statut===k ? 700 : 500, fontSize:'0.82rem', cursor:'pointer'}}>{v.icon} {v.label}</button>
                           ))}
                         </div>
                         <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:12, marginBottom:14}}>
                           <div><label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>Type de contrat</label>
-                            <select value={cedit.type} onChange={e => setContratEdit(prev => ({...prev, type:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb'}}>{Object.entries(CONTRAT_TYPES).map(([k,v]) => <option key={k} value={k}>{v.label}</option>)}</select></div>
+                            <select value={cedit.type} onChange={e => setContratEdit(prev => ({...prev, type:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard}}>{Object.entries(CONTRAT_TYPES).map(([k,v]) => <option key={k} value={k}>{v.label}</option>)}</select></div>
                           <div><label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>Référence</label>
-                            <input value={cedit.ref||''} onChange={e => setContratEdit(prev => ({...prev, ref:e.target.value}))} placeholder="Auto si vide" style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb', boxSizing:'border-box'}}/></div>
+                            <input value={cedit.ref||''} onChange={e => setContratEdit(prev => ({...prev, ref:e.target.value}))} placeholder="Auto si vide" style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard, boxSizing:'border-box'}}/></div>
                           <div><label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>Renouvellement</label>
-                            <select value={cedit.renouvellement||'tacite'} onChange={e => setContratEdit(prev => ({...prev, renouvellement:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb'}}>
+                            <select value={cedit.renouvellement||'tacite'} onChange={e => setContratEdit(prev => ({...prev, renouvellement:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard}}>
                               <option value="tacite">Tacite reconduction</option><option value="annuel">Annuel</option><option value="non">Sans renouvellement</option></select></div>
                         </div>
                         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginBottom:16}}>
                           <div><label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>Date début</label>
-                            <input type="date" value={cedit.dateDebut||''} onChange={e => setContratEdit(prev => ({...prev, dateDebut:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb', boxSizing:'border-box'}}/></div>
+                            <input type="date" value={cedit.dateDebut||''} onChange={e => setContratEdit(prev => ({...prev, dateDebut:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard, boxSizing:'border-box'}}/></div>
                           <div><label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>Date fin (optionnel)</label>
-                            <input type="date" value={cedit.dateFin||''} onChange={e => setContratEdit(prev => ({...prev, dateFin:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb', boxSizing:'border-box'}}/></div>
+                            <input type="date" value={cedit.dateFin||''} onChange={e => setContratEdit(prev => ({...prev, dateFin:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard, boxSizing:'border-box'}}/></div>
                         </div>
                         <div style={{marginBottom:14}}>
                           <label style={{display:'block', fontSize:'0.72rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:3}}>💳 Conditions de paiement</label>
-                          <select value={cedit.conditionsPaiement||'30_jours'} onChange={e => setContratEdit(prev => ({...prev, conditionsPaiement:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:'#fefdfb'}}>
+                          <select value={cedit.conditionsPaiement||'30_jours'} onChange={e => setContratEdit(prev => ({...prev, conditionsPaiement:e.target.value}))} style={{width:'100%', padding:'7px 10px', borderRadius:crmRd, border:`1px solid ${$borderAlt}`, fontSize:'0.88rem', background:$bgCard}}>
                             <option value="immediat">Paiement immédiat (à réception)</option>
                             <option value="15_jours">15 jours net</option>
                             <option value="30_jours">30 jours net (défaut)</option>
@@ -1534,7 +1534,7 @@ export default function TabFactExterne(__props) {
                           </select>
                         </div>
                         {/* CGV — Conditions Générales */}
-                        <div style={{marginBottom:14, padding:12, background:'#fffbf5', borderRadius:crmRd, border:`1px solid ${$border}`}}>
+                        <div style={{marginBottom:14, padding:12, background:'rgba(255,251,245,0.14)', borderRadius:crmRd, border:`1px solid ${$border}`}}>
                           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6}}>
                             <div style={{fontSize:'0.7rem', fontWeight:700, color:$accent, textTransform:'uppercase'}}>📋 Conditions Générales (CGV)</div>
                             <div style={{display:'flex', gap:6}}>
@@ -1555,7 +1555,7 @@ export default function TabFactExterne(__props) {
                             <div style={{fontSize:'0.65rem', color:$textMut, marginTop:4}}>💡 Ces conditions seront ajoutées à la fin du contrat A4. Personnalisez librement selon le prestataire.</div>
                           </>)}
                         </div>
-                        <div style={{padding:12, background:'#f8fafc', borderRadius:crmRd, border:'1px solid #e2e8f0', marginBottom:16}}>
+                        <div style={{padding:12, background:$bgSub, borderRadius:crmRd, border:'1px solid #e2e8f0', marginBottom:16}}>
                           <div style={{fontSize:'0.7rem', fontWeight:700, color:$textMut, textTransform:'uppercase', marginBottom:6}}>Récapitulatif prestataire</div>
                           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:4, fontSize:'0.86rem'}}>
                             <div>{'👤'} <strong>{p.nom}</strong> ({tp.label})</div>

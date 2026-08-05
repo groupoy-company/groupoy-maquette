@@ -40,8 +40,8 @@ export default function TabWeb(__props) {
                   <div style={{fontSize:'0.82rem',color:'#3b82f6',marginTop:4}}>{s.url}</div>
                   <div style={{fontSize:'0.72rem',color:$textSec,marginTop:4}}>{s.type} — {s.cms} — {s.hebergeur}</div>
                   <div style={{display:'flex',gap:6,marginTop:8}}>
-                    <span style={{padding:'2px 6px',borderRadius:crmRd,background: s.ssl?'#dcfce7':'#fef2f2',color: s.ssl?'#15803d':'#dc2626',fontSize:'0.65rem',fontWeight:600}}>SSL {s.ssl?'✓':'✕'}</span>
-                    <span style={{padding:'2px 6px',borderRadius:crmRd,background: s.analytics?'#dcfce7':'#fef2f2',color: s.analytics?'#15803d':'#dc2626',fontSize:'0.65rem',fontWeight:600}}>Analytics {s.analytics?'✓':'✕'}</span>
+                    <span style={{padding:'2px 6px',borderRadius:crmRd,background: s.ssl?'rgba(34,197,94,0.14)':'rgba(239,68,68,0.10)',color: s.ssl?'#15803d':'#dc2626',fontSize:'0.65rem',fontWeight:600}}>SSL {s.ssl?'✓':'✕'}</span>
+                    <span style={{padding:'2px 6px',borderRadius:crmRd,background: s.analytics?'rgba(34,197,94,0.14)':'rgba(239,68,68,0.10)',color: s.analytics?'#15803d':'#dc2626',fontSize:'0.65rem',fontWeight:600}}>Analytics {s.analytics?'✓':'✕'}</span>
                   </div>
                   {s.notes && <div style={{fontSize:'0.7rem',color:$textMut,marginTop:6,fontStyle:'italic'}}>{s.notes}</div>}
                 </div>;
@@ -60,7 +60,7 @@ export default function TabWeb(__props) {
                     <span style={{fontSize:'0.72rem',color:$textMut}}>({g.avis} avis)</span>
                   </div>
                   <div style={{display:'flex',justifyContent:'space-between',marginTop:6}}>
-                    <span style={{padding:'2px 6px',borderRadius:crmRd,background:'#dcfce7',color:'#15803d',fontSize:'0.65rem',fontWeight:600}}>Vérifié ✓</span>
+                    <span style={{padding:'2px 6px',borderRadius:crmRd,background:'rgba(34,197,94,0.14)',color:'#15803d',fontSize:'0.65rem',fontWeight:600}}>Vérifié ✓</span>
                     <span style={{fontSize:'0.68rem',color:$textMut}}>MAJ: {g.dateMaj}</span>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ export default function TabWeb(__props) {
                       <div style={{fontWeight:700,fontSize:'0.88rem',color:$text}}>{r.compte}</div>
                       <div style={{fontSize:'0.75rem',color:platColors[r.plateforme]||'#6b5d4d',fontWeight:600}}>{r.plateforme}</div>
                     </div>
-                    <span style={{padding:'2px 8px',borderRadius:crmRd,background: r.statut==='actif'?'#dcfce7':'#fef3c7',color: r.statut==='actif'?'#15803d':'#a16207',fontWeight:700,fontSize:'0.7rem'}}>{r.statut==='actif'?'Actif':'En veille'}</span>
+                    <span style={{padding:'2px 8px',borderRadius:crmRd,background: r.statut==='actif'?'rgba(34,197,94,0.14)':'rgba(212,160,48,0.18)',color: r.statut==='actif'?'#15803d':'#a16207',fontWeight:700,fontSize:'0.7rem'}}>{r.statut==='actif'?'Actif':'En veille'}</span>
                   </div>
                   <div style={{display:'flex',justifyContent:'space-between',marginTop:8,fontSize:'0.75rem',color:$textSec}}>
                     <span>{r.abonnes} abonnés</span>

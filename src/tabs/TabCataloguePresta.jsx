@@ -34,10 +34,10 @@ export default function TabCataloguePresta(__props) {
               </div>
             </div>
             <div style={{display:'flex', gap:6, marginBottom:14, flexWrap:'wrap'}}>
-              <button onClick={()=>setCpFilter('tous')} style={{padding:'5px 12px',borderRadius:crmRd,border: cpFilter==='tous'?`2px solid ${$accent}`:`1px solid ${$border}`,background: cpFilter==='tous'?'#faf6ef':'white',fontWeight:700,fontSize:'0.8rem',color: cpFilter==='tous'?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>Tous</button>
-              {CP_STATUTS.map(s => <button key={s.id} onClick={()=>setCpFilter(s.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: cpFilter===s.id?'2px solid '+s.color:`1px solid ${$border}`,background: cpFilter===s.id?s.color+'12':'white',fontWeight:700,fontSize:'0.8rem',color: cpFilter===s.id?s.color:$textSec,cursor:'pointer'}}>{s.label}</button>)}
+              <button onClick={()=>setCpFilter('tous')} style={{padding:'5px 12px',borderRadius:crmRd,border: cpFilter==='tous'?`2px solid ${$accent}`:`1px solid ${$border}`,background: cpFilter==='tous'?$bgSub:$bgCard,fontWeight:700,fontSize:'0.8rem',color: cpFilter==='tous'?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>Tous</button>
+              {CP_STATUTS.map(s => <button key={s.id} onClick={()=>setCpFilter(s.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: cpFilter===s.id?'2px solid '+s.color:`1px solid ${$border}`,background: cpFilter===s.id?s.color+'12':$bgCard,fontWeight:700,fontSize:'0.8rem',color: cpFilter===s.id?s.color:$textSec,cursor:'pointer'}}>{s.label}</button>)}
               <span style={{borderLeft:`1px solid ${$borderAlt}`, margin:'0 4px'}}/>
-              {CP_DOMAINES.slice(0,6).map(d => <button key={d.id} onClick={()=>setCpFilter(cpFilter===d.id?'tous':d.id)} style={{padding:'5px 10px',borderRadius:crmRd,border: cpFilter===d.id?'2px solid '+d.color:`1px solid ${$border}`,background: cpFilter===d.id?d.color+'12':'white',fontWeight:600,fontSize:'0.75rem',color: cpFilter===d.id?d.color:$textSec,cursor:'pointer'}}>{d.label}</button>)}
+              {CP_DOMAINES.slice(0,6).map(d => <button key={d.id} onClick={()=>setCpFilter(cpFilter===d.id?'tous':d.id)} style={{padding:'5px 10px',borderRadius:crmRd,border: cpFilter===d.id?'2px solid '+d.color:`1px solid ${$border}`,background: cpFilter===d.id?d.color+'12':$bgCard,fontWeight:600,fontSize:'0.75rem',color: cpFilter===d.id?d.color:$textSec,cursor:'pointer'}}>{d.label}</button>)}
             </div>
             <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(300px, 1fr))', gap:12}}>
               {filtered.map(p => {
@@ -53,7 +53,7 @@ export default function TabCataloguePresta(__props) {
                   </div>
                   <div style={{display:'flex',gap:8,marginTop:8,flexWrap:'wrap'}}>
                     <span style={{padding:'2px 8px',borderRadius:crmRd,background:dom.color+'12',color:dom.color,fontWeight:600,fontSize:'0.7rem'}}>{dom.label}</span>
-                    {p.rcPro && <span style={{padding:'2px 8px',borderRadius:crmRd,background:'#dcfce7',color:'#15803d',fontWeight:600,fontSize:'0.7rem'}}>RC Pro ✓</span>}
+                    {p.rcPro && <span style={{padding:'2px 8px',borderRadius:crmRd,background:'rgba(34,197,94,0.14)',color:'#15803d',fontWeight:600,fontSize:'0.7rem'}}>RC Pro ✓</span>}
                     {p.tarifJour > 0 && <span style={{padding:'2px 8px',borderRadius:crmRd,background:$info+'12',color:'#3b82f6',fontWeight:600,fontSize:'0.7rem'}}>{p.tarifJour}€/j</span>}
                     <span style={{padding:'2px 8px',borderRadius:crmRd,background:$bgSub,color:$accent,fontWeight:600,fontSize:'0.7rem'}}>{p.missions} missions</span>
                   </div>

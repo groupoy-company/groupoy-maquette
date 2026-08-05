@@ -27,9 +27,9 @@ export default function TabSvcKpi(__props) {
             const urgentsSK = actifs.filter(a=>a.d&&Math.ceil((new Date(a.d)-todaySK)/86400000)<=7&&Math.ceil((new Date(a.d)-todaySK)/86400000)>=0);
             // Stats par type de marché (using a.tm field)
             const byType = [
-              { label:'Marché public', key:'pub', count: raw.filter(a=>a.tm==='Marché public').length, gagnes: gagnes.filter(a=>a.tm==='Marché public').length, color:'#0055cc', bg:'#e0f0ff', e:'🏛️' },
-              { label:'Marché privé', key:'priv', count: raw.filter(a=>a.tm==='Marché privé').length, gagnes: gagnes.filter(a=>a.tm==='Marché privé').length, color:'#166534', bg:'#dcfce7', e:'🏢' },
-              { label:'Particulier', key:'part', count: raw.filter(a=>a.tm==='Marché particulier').length, gagnes: gagnes.filter(a=>a.tm==='Marché particulier').length, color:'#7c3aed', bg:'#f3e8ff', e:'🏠' }
+              { label:'Marché public', key:'pub', count: raw.filter(a=>a.tm==='Marché public').length, gagnes: gagnes.filter(a=>a.tm==='Marché public').length, color:'#0055cc', bg:'rgba(224,240,255,0.14)', e:'🏛️' },
+              { label:'Marché privé', key:'priv', count: raw.filter(a=>a.tm==='Marché privé').length, gagnes: gagnes.filter(a=>a.tm==='Marché privé').length, color:'#166534', bg:'rgba(34,197,94,0.14)', e:'🏢' },
+              { label:'Particulier', key:'part', count: raw.filter(a=>a.tm==='Marché particulier').length, gagnes: gagnes.filter(a=>a.tm==='Marché particulier').length, color:'#7c3aed', bg:'rgba(139,92,246,0.14)', e:'🏠' }
             ];
             // Distribution par statut (actifs seulement)
             const statutDist = [
@@ -75,7 +75,7 @@ export default function TabSvcKpi(__props) {
                   <h2 style={{margin:0,fontSize:'1.2rem',fontWeight:700,color:$text,display:'flex',alignItems:'center',gap:8}}>📈 Statistiques — Études de Prix</h2>
                   <p style={{margin:'4px 0 0',fontSize:'0.85rem',color:$textMut}}>Analyse de la performance sur {raw.length} AO · Données Monday.com live</p>
                 </div>
-                <span style={{fontSize:'0.75rem',padding:'4px 10px',borderRadius:crmRd,background:'#e0f2fe',color:'#0369a1',fontWeight:600,border:'1px solid #bae6fd'}}>🟢 Monday.com live</span>
+                <span style={{fontSize:'0.75rem',padding:'4px 10px',borderRadius:crmRd,background:'rgba(224,242,254,0.14)',color:'#0369a1',fontWeight:600,border:'1px solid #bae6fd'}}>🟢 Monday.com live</span>
               </div>
               {/* KPI row */}
               <div style={{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:10}}>
@@ -295,8 +295,8 @@ export default function TabSvcKpi(__props) {
                           </tr></thead>
                           <tbody>{grp.items.map(ao => {
                             const phase = AO_PHASES.find(p=>p.id===ao.phase);
-                            const prio = {Haute:{color:'#e74c3c',bg:'#fee2e2'},Moyenne:{color:'#f39c12',bg:'#fef3c7'},Basse:{color:'#3498db',bg:'#dbeafe'}}[ao.priorite]||{color:$textMut,bg:$bgSub};
-                            const typeC = ao.type==='Public'?{color:'#27ae60',bg:'#dcfce7'}:{color:'#8b5cf6',bg:'#f3e8ff'};
+                            const prio = {Haute:{color:'#e74c3c',bg:'rgba(239,68,68,0.14)'},Moyenne:{color:'#f39c12',bg:'rgba(212,160,48,0.18)'},Basse:{color:'#3498db',bg:'rgba(59,130,246,0.14)'}}[ao.priorite]||{color:$textMut,bg:$bgSub};
+                            const typeC = ao.type==='Public'?{color:'#27ae60',bg:'rgba(34,197,94,0.14)'}:{color:'#8b5cf6',bg:'rgba(139,92,246,0.14)'};
                             const pct = ao.tachesTotal>0?Math.round(ao.taches/ao.tachesTotal*100):0;
                             return (<tr key={ao.id} style={{borderBottom:`1px solid ${$borderLight||$border}`}} onMouseEnter={e=>e.currentTarget.style.background=$bgCardHover||$bgSub} onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
                               {aoColOrder.map(colId => {

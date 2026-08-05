@@ -93,7 +93,7 @@ export default function TabOffboarding(__props) {
           <div>
             {/* ── HEADER SHOWCASE ── */}
             <div style={{background:$bgCard,borderRadius:crmRd,border:`1px solid ${$border}`,marginBottom:14,overflow:'hidden',boxShadow:$shadow}}>
-              <div style={{height:3,background:'linear-gradient(90deg,#ef4444 0%,#f97316 50%,#ef4444 100%)'}}/>
+              <div style={{height:3,background:'linear-gradient(90deg, rgba(128,128,128,0.10), rgba(128,128,128,0.04))'}}/>
               <div style={{padding:'14px 20px'}}>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
                   <div style={{display:'flex',alignItems:'center',gap:12}}>

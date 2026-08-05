@@ -28,7 +28,7 @@ export default function TabReceptionFactures(__props) {
               >+ Saisir facture</button>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10, marginBottom:14}}>
-              {[{l:'Total HT',v:fmt(totalHT),c:'#8B6F47',bg:'#faf6ef'},{l:'À traiter',v:aTraiter,c:'#ef4444',bg:'#fef2f2'},{l:'Rapprochées BC',v:data.filter(d=>d.statut==='rapproche').length,c:'#f59e0b',bg:'#fffbeb'},{l:'Exportées Pennylane',v:data.filter(d=>d.statut==='exporte').length,c:'#059669',bg:'#f0fdf4'}].map((k,i) => (
+              {[{l:'Total HT',v:fmt(totalHT),c:'#8B6F47',bg:$bgSub},{l:'À traiter',v:aTraiter,c:'#ef4444',bg:'rgba(239,68,68,0.10)'},{l:'Rapprochées BC',v:data.filter(d=>d.statut==='rapproche').length,c:'#f59e0b',bg:'rgba(212,160,48,0.12)'},{l:'Exportées Pennylane',v:data.filter(d=>d.statut==='exporte').length,c:'#059669',bg:'rgba(34,197,94,0.10)'}].map((k,i) => (
                 <div key={i} style={{background:$bgCard,border:`1px solid ${$border}`,borderRadius:crmRd,padding:'16px 18px',boxShadow:$shadow,position:'relative',overflow:'hidden',transition:'all 0.2s',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.borderColor=k.c;e.currentTarget.style.transform='translateY(-1px)';e.currentTarget.style.boxShadow=$shadowLg;}}
                 onMouseLeave={e=>{e.currentTarget.style.borderColor=$border;e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow=$shadow;}}
@@ -40,7 +40,7 @@ export default function TabReceptionFactures(__props) {
               ))}
             </div>
             <div style={{display:'flex', gap:6, marginBottom:14}}>
-              {[{id:'tous',label:'Toutes'},...RF_STATUTS].map(f => {const n = f.id==='tous'?data.length:data.filter(d=>d.statut===f.id).length; return <button key={f.id} onClick={()=>setRfFilter(f.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: rfFilter===f.id?'2px solid #8B6F47':`1px solid ${$border}`,background: rfFilter===f.id?'#faf6ef':'white',fontWeight:700,fontSize:'0.8rem',color: rfFilter===f.id?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>{f.label} ({n})</button>;})}
+              {[{id:'tous',label:'Toutes'},...RF_STATUTS].map(f => {const n = f.id==='tous'?data.length:data.filter(d=>d.statut===f.id).length; return <button key={f.id} onClick={()=>setRfFilter(f.id)} style={{padding:'5px 12px',borderRadius:crmRd,border: rfFilter===f.id?'2px solid #8B6F47':`1px solid ${$border}`,background: rfFilter===f.id?$bgSub:$bgCard,fontWeight:700,fontSize:'0.8rem',color: rfFilter===f.id?'#8B6F47':'#6b5d4d',cursor:'pointer'}}>{f.label} ({n})</button>;})}
             </div>
             <div style={{overflowX:'auto',borderRadius:crmRd,border:`1px solid ${$border}`,background:$bgCard,boxShadow:$shadow}}>
               <table style={{width:'100%',borderCollapse:'collapse',fontSize:'0.78rem'}}>
@@ -61,7 +61,7 @@ export default function TabReceptionFactures(__props) {
                     <td style={{padding:'8px'}}>
                       {f.statut==='a_traiter' && <button onClick={()=>{const u=data.map(d=>d.id===f.id?{...d,statut:'rapproche'}:d); saveRf(u);}} style={{padding:'3px 8px',borderRadius:crmRd,border:'1px solid #f59e0b',background:$warn+'12',color:'#a16207',fontSize:'0.7rem',fontWeight:600,cursor:'pointer'}}>Rapprocher</button>}
                       {f.statut==='rapproche' && <button onClick={()=>{const u=data.map(d=>d.id===f.id?{...d,statut:'valide'}:d); saveRf(u);}} style={{padding:'3px 8px',borderRadius:crmRd,border:'1px solid #10b981',background:$success+'12',color:'#059669',fontSize:'0.7rem',fontWeight:600,cursor:'pointer'}}>Valider</button>}
-                      {f.statut==='valide' && <button onClick={()=>{const u=data.map(d=>d.id===f.id?{...d,statut:'exporte'}:d); saveRf(u);}} style={{padding:'3px 8px',borderRadius:crmRd,border:'1px solid #059669',background:'#dcfce7',color:'#15803d',fontSize:'0.7rem',fontWeight:600,cursor:'pointer'}}>Export PL</button>}
+                      {f.statut==='valide' && <button onClick={()=>{const u=data.map(d=>d.id===f.id?{...d,statut:'exporte'}:d); saveRf(u);}} style={{padding:'3px 8px',borderRadius:crmRd,border:'1px solid #059669',background:'rgba(34,197,94,0.14)',color:'#15803d',fontSize:'0.7rem',fontWeight:600,cursor:'pointer'}}>Export PL</button>}
                     </td>
                   </tr>;
                 })}</tbody>
