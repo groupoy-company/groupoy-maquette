@@ -3,6 +3,7 @@
 // Utilisé par les cartes de service, la barre latérale et la palette de commandes.
 
 export const MODULES = {
+  aujourdhui: { icon: '🌅', label: "Aujourd'hui", desc: 'Ce qui vous attend : retards, validations, pouls du groupe', color: '#d4a030' },
   documents: { icon: '📁', label: 'Documents', desc: 'Coffre-fort documentaire — plans, contrats, factures, photos', color: '#0891b2' },
   centre_echeances: { icon: '⏰', label: "Centre d'échéances", desc: 'Assurances, CT, leasings, contrats, conformité, AO — toutes les dates clés', color: '#d4a030' },
   crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
