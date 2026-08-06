@@ -28,7 +28,8 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 ### Direction & pilotage
 - **Aujourd'hui** — l'écran d'arrivée. Il répond à « qu'attend-on de moi maintenant ? » : d'abord ce qui est en retard ou arrive à échéance, puis ce qui attend votre validation, puis les chiffres (repliés), et les dernières activités sur le côté. Un bandeau fin en haut donne le pouls du groupe. **Le contenu s'adapte à votre rôle** : la direction voit tout le groupe, la finance voit assurances/contrats/factures, les RH voient la conformité, l'exploitation voit véhicules et chantiers.
 - **Centre d'échéances** — vue transversale de toutes les dates clés (assurances, contrats, contrôles techniques, leasings, conformité, appels d'offres). Ne « possède » rien : c'est une loupe qui lit les dates des autres modules et les liste ensemble (KPI expiré/30j/90j, filtres par source + horizon, recherche). Accessible au niveau **Tableau de Bord / Direction** de chaque entité.
-- **Dashboard**, **KpiDashboard** — vues de synthèse et indicateurs.
+- **Dashboard** — vue de synthèse.
+- **Indicateurs** — les indicateurs du service, en deux onglets : *Vue d'ensemble* (objectifs, chiffres clés) et *Détail du service* (analyses propres au métier : études de prix, études, affaires). Réunit les deux anciens écrans « KPI » et « Statistiques ».
 - **Organigramme**, **Presentation**, **PresentationGroupe** — structure et présentation du groupe.
 - **Identite** — identité / paramètres de l'entité.
 - **EzelTableau**, **DonneesRef** — tableaux de référence.
