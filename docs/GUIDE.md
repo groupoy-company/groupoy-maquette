@@ -18,7 +18,7 @@ Application interne CRM / ERP du groupe (BTP). Un tableau de bord unique qui ras
 
 | Raccourci | Ce que ça fait |
 |---|---|
-| **⌘ K** (Mac) · **Ctrl K** (Windows) | Ouvre la recherche d'écrans, depuis n'importe où. On tape « échéances », « véhicules », « documents »… et on y va directement, sans passer par entité → service → module. **Les accents ne sont pas nécessaires** (« echeance » suffit). Le même raccourci referme la recherche. |
+| **⌘ K** (Mac) · **Ctrl K** (Windows) | Ouvre la recherche, depuis n'importe où. Elle trouve **les fiches autant que les écrans** : tapez « Colmar » et le contrat sort ; tapez une immatriculation (« GJ-110 ») et le véhicule sort ; tapez « échéances » et l'écran sort. En ouvrant une fiche, l'application se place automatiquement dans la bonne société et le bon service. **Les accents ne sont pas nécessaires** (« echeance » suffit). Le même raccourci referme la recherche. |
 | **↑ ↓** | Se déplacer dans les résultats de la recherche |
 | **↵ Entrée** | Ouvrir le résultat sélectionné |
 | **Échap** | Fermer la recherche |
