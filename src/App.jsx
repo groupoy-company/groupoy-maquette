@@ -3057,7 +3057,7 @@ const SimulateurRuches = () => {
           #print-overlay { display: block !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: white; z-index: 99999; overflow: visible; padding: 20px; }
           #print-overlay * { color-adjust: exact; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
-        @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); }
+        @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         @keyframes sweepBack { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         @keyframes wave { 0% { transform: rotate(0deg); } 15% { transform: rotate(14deg); } 30% { transform: rotate(-8deg); } 45% { transform: rotate(14deg); } 60% { transform: rotate(-4deg); } 75% { transform: rotate(10deg); } 100% { transform: rotate(0deg); } }
         .wave-emoji { display:inline-block; animation: wave 1.5s ease-in-out; transform-origin: 70% 70%; }
