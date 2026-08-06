@@ -11,6 +11,7 @@ const sansAccent = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLow
 export default function PaletteCommandes({
   ouverte, onFermer, servicesConfig,
   setOngletActif, setNavEntreprise, setNavService,
+  fiches = [], onOuvrirFiche,
   $bg = '#fff', $bgCard = '#fff', $bgSub = '#f7f7f7', $border = '#e5e5e5',
   $text = '#222', $textMut = '#888', $textSec = '#555', $accent = '#a67c00',
   crmRd = 12, $shadowLg = '0 20px 60px rgba(0,0,0,0.25)',
@@ -50,31 +51,42 @@ export default function PaletteCommandes({
     return out;
   }, [servicesConfig]);
 
-  // Filtrage + classement : les correspondances en début de titre remontent
-  const resultats = useMemo(() => {
+  // Classement commun : une correspondance en début de titre remonte
+  const noter = (element, q, mots) => {
+    if (!mots.every(m => element.recherche.includes(m))) return null;
+    const titre = sansAccent(element.titre);
+    const score = titre.startsWith(q) ? 3 : titre.includes(q) ? 2 : 1;
+    return { ...element, score };
+  };
+
+  // Écrans
+  const resultatsEcrans = useMemo(() => {
     const q = sansAccent(requete.trim());
     if (!q) {
-      // Sans recherche : quelques accès directs utiles
-      const favoris = ['dashboard', 'centre_echeances', 'documents', 'crm_commercial', 'veille_ao', 'collaborateurs', 'parc_automobile', 'contrats'];
-      return favoris
-        .map(id => entrees.find(e => e.idModule === id))
-        .filter(Boolean)
-        .slice(0, 8);
+      const favoris = ['aujourdhui', 'centre_echeances', 'documents', 'dashboard', 'crm_commercial', 'veille_ao'];
+      return favoris.map(id => entrees.find(e => e.idModule === id)).filter(Boolean);
     }
     const mots = q.split(/\s+/).filter(Boolean);
-    return entrees
-      .filter(e => mots.every(m => e.recherche.includes(m)))
-      .map(e => {
-        const titre = sansAccent(e.titre);
-        let score = 0;
-        if (titre.startsWith(q)) score = 3;
-        else if (titre.includes(q)) score = 2;
-        else if (e.recherche.includes(q)) score = 1;
-        return { ...e, score };
-      })
+    return entrees.map(e => noter(e, q, mots)).filter(Boolean)
       .sort((a, b) => b.score - a.score || a.titre.localeCompare(b.titre))
-      .slice(0, 40);
+      .slice(0, 12);
   }, [requete, entrees]);
+
+  // Fiches (chantiers, appels d'offres, collaborateurs, véhicules, contrats…)
+  const resultatsFiches = useMemo(() => {
+    const q = sansAccent(requete.trim());
+    if (!q) return [];
+    const mots = q.split(/\s+/).filter(Boolean);
+    return (fiches || []).map(f => noter(f, q, mots)).filter(Boolean)
+      .sort((a, b) => b.score - a.score || a.titre.localeCompare(b.titre))
+      .slice(0, 25);
+  }, [requete, fiches]);
+
+  // Liste unique pour la navigation au clavier : les fiches d'abord quand on cherche
+  const resultats = useMemo(
+    () => [...resultatsFiches, ...resultatsEcrans],
+    [resultatsFiches, resultatsEcrans]
+  );
 
   // Ouverture : focus et remise à zéro
   useEffect(() => {
@@ -95,6 +107,7 @@ export default function PaletteCommandes({
 
   const aller = (entree) => {
     if (!entree) return;
+    if (entree.cible) { onOuvrirFiche?.(entree); onFermer?.(); return; } // c'est une fiche
     setNavEntreprise?.(entree.idEntreprise);
     setNavService?.(entree.idService);
     setOngletActif?.(entree.idModule);
@@ -136,7 +149,7 @@ export default function PaletteCommandes({
             value={requete}
             onChange={e => setRequete(e.target.value)}
             onKeyDown={auClavier}
-            placeholder="Rechercher un écran… (échéances, véhicules, contrats, documents)"
+            placeholder="Rechercher… un chantier, une affaire, un véhicule, un écran"
             style={{
               flex: 1, border: 'none', outline: 'none', background: 'transparent',
               color: $text, fontSize: '1rem', fontFamily: 'inherit',
@@ -156,14 +169,24 @@ export default function PaletteCommandes({
           )}
           {resultats.length === 0 ? (
             <div style={{ padding: '28px 16px', textAlign: 'center', color: $textMut, fontSize: '0.88rem' }}>
-              Aucun écran ne correspond à « {requete} ».
+              Rien ne correspond à « {requete} ».
             </div>
           ) : resultats.map((r, i) => {
             const actif = i === indexActif;
+            // intertitres : « Fiches » avant la 1re fiche, « Écrans » avant le 1er écran
+            const intertitre =
+              (i === 0 && resultatsFiches.length > 0) ? `Fiches — ${resultatsFiches.length}`
+              : (i === resultatsFiches.length && resultatsEcrans.length > 0 && requete.trim()) ? 'Écrans'
+              : null;
             return (
+              <React.Fragment key={r.cle}>
+              {intertitre && (
+                <div style={{ fontSize: '0.66rem', color: $textMut, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '10px 10px 5px' }}>
+                  {intertitre}
+                </div>
+              )}
               <button
                 type="button"
-                key={r.cle}
                 data-actif={actif ? '1' : '0'}
                 role="option"
                 aria-selected={actif}
@@ -181,7 +204,7 @@ export default function PaletteCommandes({
                     {r.titre}
                   </div>
                   <div style={{ fontSize: '0.72rem', color: $textMut, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {r.chemin}
+                    {r.cible ? [r.type, r.sousTitre].filter(Boolean).join(' · ') : r.chemin}
                   </div>
                 </div>
                 {actif && (
@@ -191,6 +214,7 @@ export default function PaletteCommandes({
                   }}>entrée ↵</kbd>
                 )}
               </button>
+              </React.Fragment>
             );
           })}
         </div>
@@ -203,7 +227,7 @@ export default function PaletteCommandes({
         }}>
           <span>↑ ↓ pour naviguer</span>
           <span>↵ pour ouvrir</span>
-          <span style={{ marginLeft: 'auto' }}>{resultats.length} écran{resultats.length > 1 ? 's' : ''}</span>
+          <span style={{ marginLeft: 'auto' }}>{resultatsFiches.length > 0 ? resultatsFiches.length + ' fiche' + (resultatsFiches.length>1?'s':'') + ' · ' : ''}{resultatsEcrans.length} écran{resultatsEcrans.length > 1 ? 's' : ''}</span>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ import TabDocuments from './tabs/TabDocuments.jsx';
 import TabAujourdhui from './tabs/TabAujourdhui.jsx';
 import TabIndicateurs from './tabs/TabIndicateurs.jsx';
 import { MODULES } from './data/modules.js';
+import { SAMPLE_ASS, SAMPLE_CTR, SAMPLE_AUTO } from './data/echeances.js';
 import PaletteCommandes from './components/PaletteCommandes.jsx';
 import TabSuiviPresta from './tabs/TabSuiviPresta.jsx';
 import TabContrats from './tabs/TabContrats.jsx';
@@ -363,6 +364,7 @@ const SimulateurRuches = () => {
 
   // Palette de commandes : ⌘K (Mac) ou Ctrl+K (Windows) depuis n'importe quel écran.
   const [paletteOuverte, setPaletteOuverte] = useState(false);
+
   React.useEffect(() => {
     const surTouche = (e) => {
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
@@ -2366,6 +2368,90 @@ const SimulateurRuches = () => {
   // Auto-clear highlight after 4 seconds
   useEffect(() => { if (highlightEntity) { const t = setTimeout(clearHighlight, 4000); return () => clearTimeout(t); } }, [highlightEntity]);
   const isHighlighted = (type, id) => highlightEntity?.type === type && highlightEntity?.id === id;
+  // Index de recherche des FICHES (pas seulement des écrans) : taper « Colmar »
+  // ou un numéro d'affaire doit remonter le chantier, le contrat, le véhicule…
+  const fichesRecherche = React.useMemo(() => {
+    const sansAcc = t => (t || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const out = [];
+    const pousser = (o) => { o.recherche = sansAcc(o.mots.filter(Boolean).join(' ')); delete o.mots; out.push(o); };
+
+    (chantiers || []).forEach(c => pousser({
+      cle: 'ch-' + c.id, type: 'Chantier', icone: '🏗️',
+      titre: c.nom, sousTitre: [c.client, c.statut].filter(Boolean).join(' · '),
+      filialeId: c.filialeId, mots: [c.nom, c.client, c.id, c.statut], cible: { onglet: 'dashboard', chantierId: c.id },
+    }));
+
+    (veilleAO || []).forEach(a => pousser({
+      cle: 'ao-' + a.id, type: "Appel d'offres", icone: '📌',
+      titre: a.titre || a.ref, sousTitre: [a.acheteur, a.statut].filter(Boolean).join(' · '),
+      mots: [a.titre, a.ref, a.acheteur, a.id, a.statut], cible: { onglet: 'veille_ao' },
+    }));
+
+    (employes || []).forEach(e => pousser({
+      cle: 'emp-' + e.id, type: 'Collaborateur', icone: '👤',
+      titre: [e.prenom, e.nom].filter(Boolean).join(' '),
+      sousTitre: [e.posteExterne || e.posteInterne, e.service].filter(Boolean).join(' · '),
+      filialeId: e.filialeId, mots: [e.prenom, e.nom, e.posteExterne, e.posteInterne, e.id],
+      cible: { onglet: 'collaborateurs', collabId: e.id },
+    }));
+
+    ((autoData && autoData.length ? autoData : SAMPLE_AUTO) || []).forEach(v => pousser({
+      cle: 'veh-' + v.id, type: 'Véhicule', icone: '🚗',
+      titre: [v.marque, v.modele].filter(Boolean).join(' ') + (v.immat ? ' — ' + v.immat : ''),
+      sousTitre: [v.immat, v.statutAdmin].filter(Boolean).join(' · '),
+      filialeId: v.filialeId, mots: [v.marque, v.modele, v.immat, v.id], cible: { onglet: 'parc_automobile', autoId: v.id },
+    }));
+
+    ((ctrData && ctrData.length ? ctrData : SAMPLE_CTR) || []).forEach(c => pousser({
+      cle: 'ctr-' + c.id, type: 'Contrat', icone: '📄',
+      titre: c.titre, sousTitre: [c.partenaire, c.type].filter(Boolean).join(' · '),
+      filialeId: c.filialeId, mots: [c.titre, c.partenaire, c.id, c.type], cible: { onglet: 'contrats' },
+    }));
+
+    ((assData && assData.length ? assData : SAMPLE_ASS) || []).forEach(a => pousser({
+      cle: 'ass-' + a.id, type: 'Assurance', icone: '🛡️',
+      titre: [a.assureur, a.numPolice].filter(Boolean).join(' — '),
+      sousTitre: a.couverture || '', filialeId: a.filialeId, mots: [a.assureur, a.numPolice, a.id, a.type],
+      cible: { onglet: 'assurances' },
+    }));
+
+    (filialesEnrichies || []).forEach(f => pousser({
+      cle: 'fil-' + f.id, type: 'Société', icone: f.icon || '🏢',
+      titre: f.nom, sousTitre: [f.activite, f.siren].filter(Boolean).join(' · '),
+      mots: [f.nom, f.activite, f.siren, f.holding], cible: { onglet: 'organigramme' },
+    }));
+
+    return out;
+  }, [chantiers, veilleAO, employes, autoData, ctrData, assData, filialesEnrichies]);
+
+  // Ouvre la fiche choisie dans la palette : on va sur le bon écran et,
+  // quand c'est possible, on sélectionne directement l'enregistrement.
+  const ouvrirFiche = (fiche) => {
+    const c = fiche?.cible || {};
+    // 1. se placer dans une entité/service où l'écran visé existe vraiment,
+    //    sinon l'application afficherait l'accueil au lieu de la fiche.
+    if (c.onglet) {
+      const dejaBon = navEntreprise && SERVICES_CONFIG[navEntreprise]?.services
+        ?.some(sv => sv.id === navService && (sv.modules || []).includes(c.onglet));
+      if (!dejaBon) {
+        // entité déduite de la fiche quand c'est possible
+        const parFiliale = { 1: 'roulotte', 2: 'echafaudage', 3: 'ezel', 6: 'etancheite', yilmaz: 'yilmaz', all: 'yilmaz' };
+        const souhaitee = parFiliale[fiche?.filialeId] || navEntreprise;
+        const candidates = souhaitee ? [souhaitee, ...Object.keys(SERVICES_CONFIG)] : Object.keys(SERVICES_CONFIG);
+        for (const ent of candidates) {
+          const svc = SERVICES_CONFIG[ent]?.services?.find(sv => (sv.modules || []).includes(c.onglet));
+          if (svc) { setNavEntreprise(ent); setNavService(svc.id); break; }
+        }
+      }
+    }
+    // 2. sélectionner l'enregistrement lui-même quand l'écran le permet
+    if (c.chantierId) setDashboardChantierId(c.chantierId);
+    if (c.collabId) { setCollabOngletId(c.collabId); setDashboardCollabId(c.collabId); }
+    if (c.autoId) setAutoDetail(c.autoId);
+    if (c.onglet) setOngletActif(c.onglet);
+    setPaletteOuverte(false);
+  };
+
   const highlightStyle = (type, id) => isHighlighted(type, id) ? {boxShadow:'0 0 0 3px #F8DC00, 0 0 20px rgba(248,220,0,0.3)', transition:'box-shadow 0.3s', animation:'pulse-highlight 1.5s ease-in-out 2'} : {};
 
   const navigateToEntity = (type, id) => {
@@ -3990,6 +4076,8 @@ const SimulateurRuches = () => {
           setOngletActif={setOngletActif}
           setNavEntreprise={setNavEntreprise}
           setNavService={setNavService}
+          fiches={fichesRecherche}
+          onOuvrirFiche={ouvrirFiche}
           {...{ $bg, $bgCard, $bgSub, $border, $text, $textMut, $textSec, $accent, crmRd, $shadowLg }}
         />
       )}
