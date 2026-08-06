@@ -7,10 +7,10 @@ export const MODULES = {
   documents: { icon: '📁', label: 'Documents', desc: 'Coffre-fort documentaire — plans, contrats, factures, photos', color: '#0891b2' },
   centre_echeances: { icon: '⏰', label: "Centre d'échéances", desc: 'Assurances, CT, leasings, contrats, conformité, AO — toutes les dates clés', color: '#d4a030' },
   crm_commercial: { icon: '🤝', label: 'CRM Commercial', desc: 'Pipeline, affaires, contacts, entreprises', color: '#007ab5' },
-  kpi_dashboard: { icon: '📊', label: 'KPI / Tableau de Bord', desc: "Objectifs, stats, analyse du service", color: '#059669' },
+  kpi_dashboard: { icon: '📊', label: 'Indicateurs', desc: "Vue d'ensemble + détail du service : objectifs, statistiques, pipeline", color: '#059669' },
   dashboard: { icon: '📊', label: 'Tableau de Bord', desc: "KPI, finances et vue d'ensemble", color: '#e67e22' },
   ezel_tableau: { icon: '🏗️', label: 'Monday · Affaires Live', desc: '81 affaires · Études AO · données temps réel', color: '#007ab5' },
-  suivi_dossiers: { icon: '📋', label: 'Suivi des Dossiers AO', desc: '345 dossiers · filtre statut/marché/délai · Monday live', color: '#dc2626' },
+  suivi_dossiers: { icon: '📋', label: 'Dossiers AO', desc: '345 dossiers · filtre statut/marché/délai · Monday live', color: '#dc2626' },
   svc_kpi: { icon: '📈', label: 'Statistiques', desc: 'Taux de succès · pipeline · analyse par type de marché', color: '#7c3aed' },
   veille_ao: { icon: '🔍', label: 'Veille AO', desc: 'Recherche et import AO publics (SPIGAO / BOAMP)', color: '#3b82f6' },
   planning_gantt: { icon: '📊', label: 'Planning Gantt', desc: 'Vue chronologique des projets', color: '#ea580c' },
@@ -21,9 +21,9 @@ export const MODULES = {
   presentation: { icon: '🐝', label: 'Modèle Ruches', desc: 'Philosophie, niveaux de rémunération, fonctionnement du système ruches', color: '#9b59b6' },
   organigramme: { icon: '🏢', label: 'Organigramme', desc: 'Structure et hiérarchie', color: '#1abc9c' },
   simulateur: { icon: '🧮', label: 'Simulateur', desc: 'Simulation de rémunération', color: '#f39c12' },
-  suivi: { icon: '📈', label: 'Suivi de l\'Essaim', desc: 'Suivi des performances', color: '#e74c3c' },
+  suivi: { icon: '📈', label: 'Performance Essaim', desc: 'Suivi des performances', color: '#e74c3c' },
   admin: { icon: '⚙️', label: 'Administration', desc: 'Gestion des droits et structure', color: '#7f8c8d' },
-  presentation_groupe: { icon: '🌐', label: 'Présentation Group', desc: 'Vitrine interactive du groupe', color: '#8B6F47' },
+  presentation_groupe: { icon: '🌐', label: 'Vitrine Groupe', desc: 'Vitrine interactive du groupe', color: '#8B6F47' },
   // Direction
   roadmap: { icon: '🗺️', label: 'Feuille de Route', desc: 'Vision stratégique 2025-2035', color: '#6366f1' },
   // Finance
@@ -41,7 +41,7 @@ export const MODULES = {
   absences: { icon: '🏖️', label: 'Absences & Congés', desc: 'Congés, arrêts maladie, planning absences', color: '#f97316' },
   // Achats & Prestataires
   bon_commande: { icon: '📝', label: 'Bons de Commande', desc: 'Création et suivi BC vers prestataires/freelances', color: '#0891b2' },
-  suivi_presta: { icon: '👤', label: 'Suivi Prestataires', desc: 'Missions en cours, livrables, évaluation', color: '#7c3aed' },
+  suivi_presta: { icon: '👤', label: 'Missions Prestataires', desc: 'Missions en cours, livrables, évaluation', color: '#7c3aed' },
   reception_factures: { icon: '📥', label: 'Réception Factures', desc: 'Validation, rapprochement BC, export Pennylane', color: '#dc2626' },
   catalogue_presta: { icon: '📇', label: 'Catalogue Prestataires', desc: 'Base freelances, compétences, tarifs, évaluations', color: '#059669' },
   // IT

@@ -14,6 +14,7 @@ import TabConformite from './tabs/TabConformite.jsx';
 import TabCentreEcheances from './tabs/TabCentreEcheances.jsx';
 import TabDocuments from './tabs/TabDocuments.jsx';
 import TabAujourdhui from './tabs/TabAujourdhui.jsx';
+import TabIndicateurs from './tabs/TabIndicateurs.jsx';
 import { MODULES } from './data/modules.js';
 import PaletteCommandes from './components/PaletteCommandes.jsx';
 import TabSuiviPresta from './tabs/TabSuiviPresta.jsx';
@@ -414,14 +415,14 @@ const SimulateurRuches = () => {
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['aujourdhui', 'dashboard', 'centre_echeances', 'documents', 'ezel_tableau'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
-        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
-        { id: 'execution', label: 'Exécution Chantier', icon: '🏗️', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
+        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'veille_ao', 'suivi_dossiers', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
+        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
+        { id: 'execution', label: 'Exécution Chantier', icon: '🏗️', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'calendrier_svc'] },
+        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     },
@@ -430,10 +431,10 @@ const SimulateurRuches = () => {
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['aujourdhui', 'dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'exploitation', label: 'Exploitation & Planification', icon: '🚛', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
+        { id: 'exploitation', label: 'Exploitation & Planification', icon: '🚛', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
@@ -442,10 +443,10 @@ const SimulateurRuches = () => {
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['aujourdhui', 'dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'exploitation', label: 'Exploitation & Montage', icon: '⚙️', modules: ['kpi_dashboard', 'ordres_travail', 'svc_kpi', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
+        { id: 'exploitation', label: 'Exploitation & Montage', icon: '⚙️', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Parc & Matériel', icon: '🔧', modules: ['materiel', 'parc_automobile'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc', 'contrats', 'litiges', 'assurances', 'conformite'] }
       ]
     },
@@ -454,15 +455,15 @@ const SimulateurRuches = () => {
       services: [
         { id: 'tableau', label: 'Tableau de Bord', icon: '📊', modules: ['aujourdhui', 'dashboard', 'centre_echeances', 'documents'] },
         { id: 'crm', label: 'CRM Commercial', icon: '🤝', modules: ['crm_commercial'] },
-        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'svc_kpi', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
-        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'svc_kpi', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
-        { id: 'execution', label: 'Exécution Chantier', icon: '🔨', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'svc_kpi', 'calendrier_svc'] },
-        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'svc_kpi', 'processus_svc', 'calendrier_svc'] },
-        { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc', 'processus_svc'] },
+        { id: 'etudes_prix', label: 'Études de Prix', icon: '📐', modules: ['kpi_dashboard', 'suivi_dossiers', 'veille_ao', 'processus_svc', 'planning_gantt'] },
+        { id: 'preparation', label: 'Préparation Chantier', icon: '📋', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'processus_svc', 'calendrier_svc'] },
+        { id: 'execution', label: 'Exécution Chantier', icon: '🔨', modules: ['kpi_dashboard', 'ordres_travail', 'planning_gantt', 'calendrier_svc'] },
+        { id: 'cloture', label: 'Réception & Clôture', icon: '✅', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] },
+        { id: 'technique', label: 'Bureau Technique', icon: '🛠️', modules: ['kpi_dashboard', 'calendrier_svc', 'processus_svc'] },
         { id: 'logistique', label: 'Logistique & Parc', icon: '🚗', modules: ['parc_automobile', 'materiel'] },
         { id: 'rh', label: 'Ressources Humaines', icon: '👥', modules: ['collaborateurs', 'postes', 'recrutement', 'onboarding', 'offboarding', 'absences', 'formation', 'dossier_rh'] },
         { id: 'juridique', label: 'Juridique & Conformité', icon: '⚖️', modules: ['contrats', 'litiges', 'assurances', 'conformite'] },
-        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'svc_kpi', 'calendrier_svc'] },
+        { id: 'comptabilite', label: 'Comptabilité', icon: '💰', modules: ['kpi_dashboard', 'calendrier_svc'] },
         { id: 'administratif', label: 'Administratif', icon: '🧾', modules: ['kpi_dashboard', 'processus_svc', 'calendrier_svc'] }
       ]
     }
@@ -3099,14 +3100,14 @@ const SimulateurRuches = () => {
                         <>
                           <span style={{color:'#d4d0c8', fontSize:'0.75rem'}}>›</span>
                           <span style={{color:$text, fontWeight:700}}>{
-                            {dashboard:'Tableau de Bord', presentation_groupe:'Présentation Group', presentation:'Modèle Ruches', simulateur:'Simulateur', suivi:'Suivi de l\'Essaim', collaborateurs:'Collaborateurs', organigramme:'Organigramme', postes:'Postes', admin:'Administration',
+                            {dashboard:'Tableau de Bord', presentation_groupe:'Présentation Group', presentation:'Modèle Ruches', simulateur:'Simulateur', suivi:'Performance Essaim', collaborateurs:'Collaborateurs', organigramme:'Organigramme', postes:'Postes', admin:'Administration',
                             roadmap:'Feuille de Route', fact_interne:'Facturation Interne', fact_externe:'Facturation Externe', budget:'Budget Prévisionnel', tresorerie:'Trésorerie', analytique:'Analytique',
                             recrutement:'Recrutement', onboarding:'Onboarding', offboarding:'Offboarding', dossier_rh:'Dossier RH', formation:'Formation', absences:'Absences',
                             bon_commande:'Bons de Commande', suivi_presta:'Suivi Prestataires', reception_factures:'Réception Factures', catalogue_presta:'Catalogue Prestataires',
                             outils:'Outils', tickets:'Tickets', contrats:'Contrats', litiges:'Litiges', assurances:'Assurances', conformite:'Conformité',
                             identite:'Identité Visuelle', supports:'Supports', web:'Présence Web', donnees_ref:'Données de Référence', parc_info:'Parc Informatique',
                             ordres_travail:'Ordres de Travail', parc_automobile:'Parc Automobile', materiel:'Parc Matériel',
-                            kpi_dashboard:'KPI', veille_ao:'Veille AO', svc_kpi:'Réponses AO', planning_gantt:'Planning', calendrier_svc:'Calendrier', processus_svc:'Processus', crm_commercial:'CRM Commercial'}[ongletActif] || ongletActif
+                            kpi_dashboard:'Indicateurs', veille_ao:'Veille AO', svc_kpi:'Réponses AO', planning_gantt:'Planning', calendrier_svc:'Calendrier', processus_svc:'Processus', crm_commercial:'CRM Commercial'}[ongletActif] || ongletActif
                           }</span>
                         </>
                       )}
@@ -3617,7 +3618,7 @@ const SimulateurRuches = () => {
           const currentSvc = services.find(s=>s.id===navService);
           const moduleList = currentSvc ? currentSvc.modules : [];
           const filialeMap = {'groupoy':null,'yilmaz':'yilmaz','ezel':3,'roulotte':1,'echafaudage':2,'etancheite':6};
-          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',svc_kpi:'Indicateurs',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Groupe',suivi_presta:'Suivi presta',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Suivi Dossiers AO',centre_echeances:'Échéances',documents:'Documents',aujourdhui:"Aujourd'hui"};
+          const moduleNames = {dashboard:'Dashboard',kpi_dashboard:'KPI',veille_ao:'Veille AO',planning_gantt:'Planning',calendrier_svc:'Calendrier',processus_svc:'Processus',collaborateurs:'Collaborateurs',postes:'Postes',organigramme:'Organigramme',recrutement:'Recrutement',onboarding:'Onboarding',offboarding:'Offboarding',presentation:'Modèle Ruches',simulateur:'Simulateur',suivi:'Suivi de l\'Essaim',formation:'Formation',absences:'Absences',dossier_rh:'Dossier RH',bon_commande:'Bons de commande',fact_interne:'Fact. interne',fact_externe:'Fact. externe',budget:'Budget',tresorerie:'Trésorerie',analytique:'Analytique',contrats:'Contrats',litiges:'Litiges',assurances:'Assurances',conformite:'Conformité',identite:'Identité',supports:'Supports',web:'Web',outils:'Outils',tickets:'Tickets',parc_info:'Parc info',donnees_ref:'Données ref',ordres_travail:'Ordres travail',parc_automobile:'Parc auto',materiel:'Matériel',admin:'Admin',roadmap:'Roadmap',presentation_groupe:'Vitrine Groupe',suivi_presta:'Missions Prestataires',reception_factures:'Réception fact.',catalogue_presta:'Catalogue',crm_commercial:'CRM Commercial',suivi_dossiers:'Dossiers AO',centre_echeances:'Échéances',documents:'Documents',aujourdhui:"Aujourd'hui"};
 
           return (
             <div style={{position:'fixed',left:0,top:46,bottom:0,width:SIDEBAR_W,background:$bgSub,borderRight:`1px solid ${$border}`,zIndex:9000,display:'flex',flexDirection:'column',overflow:'hidden'}}>
@@ -3650,11 +3651,11 @@ const SimulateurRuches = () => {
                       </div>
                       {isActiveSvc && svcModules.length > 0 && crmSideOpen && (
                         <div style={{padding:'0 0 4px 34px'}}>
-                          {(()=>{const orderKey=navEntreprise+'_'+svc.id;const ordered=moduleOrder[orderKey]||svcModules;const visibleMods=ordered.filter(mid=>svcModules.includes(mid)&&canView(mid));const missing=svcModules.filter(mid=>canView(mid)&&!visibleMods.includes(mid));const allMods=[...visibleMods,...missing];return allMods.map(mid=>(
+                          {(()=>{const orderKey=navEntreprise+'_'+svc.id;const ordered=moduleOrder[orderKey]||svcModules;const visibleMods=ordered.filter(mid=>svcModules.includes(mid)&&canView(mid));const missing=svcModules.filter(mid=>canView(mid)&&!visibleMods.includes(mid));const OUTILS_GEN=['kpi_dashboard','planning_gantt','calendrier_svc','processus_svc'];const _brut=[...visibleMods,...missing];const _metier=_brut.filter(m=>!OUTILS_GEN.includes(m));const _outils=_brut.filter(m=>OUTILS_GEN.includes(m));const allMods=[..._metier,..._outils];return allMods.map((mid,_i)=>(<React.Fragment key={mid}>{_outils.length>0&&_metier.length>0&&_i===_metier.length&&<div style={{fontSize:'0.56rem',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',color:$textMut,opacity:0.6,padding:'10px 10px 4px',marginTop:5,borderTop:`1px solid ${$border}`}}>Outils du service</div>}
                             <div key={mid} draggable onDragStart={()=>setDragModule(mid)} onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();if(dragModule&&dragModule!==mid){const orderKey2=navEntreprise+'_'+svc.id;const curr=moduleOrder[orderKey2]||[...svcModules];const fromIdx=curr.indexOf(dragModule);const toIdx=curr.indexOf(mid);if(fromIdx===-1||toIdx===-1){const newArr=[...allMods];const fi=newArr.indexOf(dragModule);const ti=newArr.indexOf(mid);if(fi!==-1){newArr.splice(fi,1);newArr.splice(ti,0,dragModule);setModuleOrder(p=>({...p,[orderKey2]:newArr}));}}else{const newArr=[...curr];newArr.splice(fromIdx,1);newArr.splice(toIdx,0,dragModule);setModuleOrder(p=>({...p,[orderKey2]:newArr}));}setDragModule(null);}}} onClick={()=>setOngletActif(mid)} style={{padding:'5px 10px',borderRadius:Math.max(crmRd-3,0),cursor:'grab',fontSize:'0.72rem',fontWeight:ongletActif===mid?600:400,color:ongletActif===mid?currentFil.color:$textMut,background:dragModule===mid?$accent+'15':ongletActif===mid?currentFil.color+'08':'transparent',marginBottom:1,transition:'all 0.1s',display:'flex',alignItems:'center',gap:6,borderLeft:dragModule===mid?`2px solid ${$accent}`:'2px solid transparent'}} onMouseEnter={e=>{if(ongletActif!==mid&&dragModule!==mid)e.currentTarget.style.background=$bgCardHover;}} onMouseLeave={e=>{if(ongletActif!==mid&&dragModule!==mid)e.currentTarget.style.background=ongletActif===mid?currentFil.color+'08':'transparent';}}>
                               {moduleNames[mid]||mid}
                             </div>
-                          ));})()}
+                          </React.Fragment>));})()}
                         </div>
                       )}
                     </div>
@@ -3693,9 +3694,9 @@ const SimulateurRuches = () => {
 
         {/* ===== KPI SERVICE FILIALE ===== */}
         {/* ══════ MODULE: KPI DASHBOARD (Service) ══════ */}
-        {ongletActif === 'kpi_dashboard' && navEntreprise && navService && <TabKpiDashboard {...{ $accent, $bgCard, $bgSub, $border, $text, $textMut, $textSec, SERVICES_CONFIG, ca, chantiers, crmRd, navEntreprise, navService, postes, setOngletActif }} />}
+        {ongletActif === 'kpi_dashboard' && navEntreprise && navService && <TabIndicateurs {...{ $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, AO_PHASES, AO_STATUTS, SERVICES_CONFIG, SourceLogo, aoColDragOverIdx, aoColOrder, aoPrioFiltre, aoStatutOrdre, aoSvcColWidths, aoTypeFiltre, appelsOffres, ca, chantiers, crmRd, getAoGrouped, getAoStats, handleAoColDrop, navEntreprise, navService, postes, setAoColDragIdx, setAoColDragOverIdx, setAoPrioFiltre, setAoSvcColWidths, setAoTypeFiltre, setOngletActif, startColResize }} />}
 
-        {ongletActif === 'svc_kpi' && navEntreprise && navService && <TabSvcKpi {...{ $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, AO_PHASES, AO_STATUTS, SERVICES_CONFIG, SourceLogo, aoColDragOverIdx, aoColOrder, aoPrioFiltre, aoStatutOrdre, aoSvcColWidths, aoTypeFiltre, appelsOffres, crmRd, getAoGrouped, getAoStats, handleAoColDrop, navEntreprise, navService, setAoColDragIdx, setAoColDragOverIdx, setAoPrioFiltre, setAoSvcColWidths, setAoTypeFiltre, setOngletActif, startColResize }} />}
+        {ongletActif === 'svc_kpi' && navEntreprise && navService && <TabIndicateurs {...{ $accent, $accentSub, $bgCard, $bgCardHover, $bgSub, $border, $borderLight, $shadow, $shadowLg, $text, $textMut, $textSec, AO_PHASES, AO_STATUTS, SERVICES_CONFIG, SourceLogo, aoColDragOverIdx, aoColOrder, aoPrioFiltre, aoStatutOrdre, aoSvcColWidths, aoTypeFiltre, appelsOffres, ca, chantiers, crmRd, getAoGrouped, getAoStats, handleAoColDrop, navEntreprise, navService, postes, setAoColDragIdx, setAoColDragOverIdx, setAoPrioFiltre, setAoSvcColWidths, setAoTypeFiltre, setOngletActif, startColResize }} />}
 
 
         {/* ═══ MODULE SUIVI DOSSIERS AO ═══ */}
